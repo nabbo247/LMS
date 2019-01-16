@@ -1,0 +1,5 @@
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\bin\Debug\LMSBL.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\bin\Debug\LMSBL.pdb
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojResolveAssemblyReference.cache
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb

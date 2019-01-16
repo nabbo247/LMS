@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMS", "LMS\LMS.csproj", "{919DB262-BD89-4585-9AF9-B25F476FB7FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMSWeb", "LMSWeb\LMSWeb.csproj", "{F3A18FFA-CA0F-4BE5-9080-3E143A796173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMSBL", "LMSBL\LMSBL.csproj", "{037CC453-37B5-4BFB-A39E-90A81120C3DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{919DB262-BD89-4585-9AF9-B25F476FB7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{919DB262-BD89-4585-9AF9-B25F476FB7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{919DB262-BD89-4585-9AF9-B25F476FB7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{919DB262-BD89-4585-9AF9-B25F476FB7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A18FFA-CA0F-4BE5-9080-3E143A796173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A18FFA-CA0F-4BE5-9080-3E143A796173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A18FFA-CA0F-4BE5-9080-3E143A796173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A18FFA-CA0F-4BE5-9080-3E143A796173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037CC453-37B5-4BFB-A39E-90A81120C3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037CC453-37B5-4BFB-A39E-90A81120C3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037CC453-37B5-4BFB-A39E-90A81120C3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037CC453-37B5-4BFB-A39E-90A81120C3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
