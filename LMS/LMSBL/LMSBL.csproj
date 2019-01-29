@@ -61,7 +61,10 @@
     <Compile Include="DBModels\tblTenant.cs" />
     <Compile Include="DBModels\tblUser.cs" />
     <Compile Include="DBModels\tblUserRole.cs" />
+    <Compile Include="ExecuteSPs.cs" />
+    <Compile Include="Param.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
