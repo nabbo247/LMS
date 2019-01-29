@@ -15,6 +15,9 @@ C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\LMSWeb.dll.config
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\LMSWeb.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\LMSWeb.pdb
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Antlr3.Runtime.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\LMSBL.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -33,6 +36,9 @@ C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\System.Web.WebPages.
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\System.Web.WebPages.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\System.Web.WebPages.Razor.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\WebGrease.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\LMSBL.pdb
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.xml
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Microsoft.AI.Web.xml
@@ -51,7 +57,3 @@ C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Newtonsoft.Json.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.csprojResolveAssemblyReference.cache
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.pdb
-C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.dll
-C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.dll
-C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.xml
-C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.xml

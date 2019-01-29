@@ -11,6 +11,7 @@ namespace LMSBL
     {
         public string ResponseText { get; set; }
         public bool ResponseStatus { get; set; }
+        public tblTenant tblTenant { get; set; }
         public List<tblTenant> lstTenants { get; set; }
         public List<tblUser> lstUsers { get; set; }
         public List<tblUserRole> lstUserRoles { get; set; }

@@ -34,7 +34,11 @@ namespace LMSBL
                 switch (ModelType)
                 {
                     case "tblTenant":
-                        response.lstTenants = BindTenantData(rdr);
+                        response.tblTenant = BindTenantData(rdr);
+                        if(response.lstTenants.Count>0)
+                        {
+                            response.ResponseStatus = true;
+                        }
                         break;                    
 
                 }
@@ -49,12 +53,12 @@ namespace LMSBL
             }
             return response;
         }
-        public static List<tblTenant> BindTenantData(SqlDataReader dr)
+        public static tblTenant BindTenantData(SqlDataReader dr)
         {
-            List<tblTenant> lstTenants = new List<tblTenant>();
+            tblTenant objTenant = new tblTenant();
             while (dr.Read())
             {
-                tblTenant objTenant = new tblTenant();
+                
                 objTenant.tenantId = Convert.ToInt32(dr["tenantId"]);
                 objTenant.tenantName = Convert.ToString(dr["tenantName"]);
                 objTenant.tenantDomain = Convert.ToString(dr["tenantDomain"]);
@@ -64,9 +68,9 @@ namespace LMSBL
                 objTenant.createdBy = Convert.ToInt32(dr["createdBy"]);
                 objTenant.createdOn = Convert.ToDateTime(dr["createdOn"]);
                 objTenant.noOfUserAllowed = Convert.ToInt32(dr["noOfUserAllowed"]);
-                lstTenants.Add(objTenant);
+                
             }
-            return lstTenants;
+            return objTenant;
         }
     }
 }
