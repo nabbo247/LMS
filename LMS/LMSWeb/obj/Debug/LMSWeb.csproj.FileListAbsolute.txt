@@ -51,3 +51,7 @@ C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\Newtonsoft.Json.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.csprojResolveAssemblyReference.cache
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.pdb
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.dll
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.xml
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSWeb\bin\EntityFramework.SqlServer.xml
