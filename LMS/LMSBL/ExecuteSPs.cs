@@ -10,7 +10,7 @@ namespace LMSBL
 {
     public class ExecuteSPs
     {
-        static string ConnectionString = "";
+        static string ConnectionString = "";//take from Web.Config
         SqlConnection con = new SqlConnection(ConnectionString);
         public ExecuteSPs()
         {
