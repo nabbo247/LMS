@@ -43,6 +43,7 @@ namespace LMSBL
 
             return lstTanents;
         }
+
         public List<tblTenant> GetAllInActiveTenants()
         {
             Response response = new Response();

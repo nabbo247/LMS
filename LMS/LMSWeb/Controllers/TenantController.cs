@@ -1,7 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LMSBL;
 using LMSBL.DBModels;
@@ -32,6 +30,16 @@ namespace LMSWeb.Controllers
 
             List<tblTenant> lstAllActiveTenants = new List<tblTenant>();
             lstAllActiveTenants = BL.GetAllActiveTenants();
+
+            return View();
+        }
+
+        public ActionResult GetAllInActiveTenants()
+        {
+            BusinessLogic BL = new BusinessLogic();
+
+            List<tblTenant> lstAllActiveTenants = new List<tblTenant>();
+            lstAllActiveTenants = BL.GetAllInActiveTenants();
 
             return View();
         }
