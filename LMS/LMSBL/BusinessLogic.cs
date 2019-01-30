@@ -10,7 +10,7 @@ namespace LMSBL
 {
     public class BusinessLogic
     {
-        public List<tblTenant> GetTenantById(int tenantId)
+        public tblTenant GetTenantById(int tenantId)
         {
             Response response = new Response();
             ExecuteSPs executeSPs = new ExecuteSPs();
@@ -21,12 +21,40 @@ namespace LMSBL
             param.Value = tenantId.ToString();
             lstParam.Add(param);
 
-            List<tblTenant> lstTanent = new List<tblTenant>();
+            tblTenant tanentDetails = new  tblTenant();
             response = executeSPs.ExecuteGetSp("TenantGetById", lstParam, "tblTenant");
             if (response.ResponseStatus)
-                lstTanent = response.lstTenants;
+                tanentDetails = response.tblTenant;
 
-            return lstTanent;
+            return tanentDetails;
+        }
+
+        public List<tblTenant> GetAllActiveTenants()
+        {
+            Response response = new Response();
+            ExecuteSPs executeSPs = new ExecuteSPs();
+            List<Param> lstParam = new List<Param>();
+           
+
+            List<tblTenant> lstTanents = new List<tblTenant>();
+            response = executeSPs.ExecuteGetSp("TenantGetAll", lstParam, "ListActiveTenant");
+            if (response.ResponseStatus)
+                lstTanents = response.lstTenants;
+
+            return lstTanents;
+        }
+        public List<tblTenant> GetAllInActiveTenants()
+        {
+            Response response = new Response();
+            ExecuteSPs executeSPs = new ExecuteSPs();
+            List<Param> lstParam = new List<Param>();
+            
+            List<tblTenant> lstTanents = new List<tblTenant>();
+            response = executeSPs.ExecuteGetSp("TenantGetAllInactive", lstParam, "ListInActiveTenant");
+            if (response.ResponseStatus)
+                lstTanents = response.lstTenants;
+
+            return lstTanents;
         }
     }
 }

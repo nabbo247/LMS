@@ -8,6 +8,7 @@ using LMSBL.DBModels;
 
 namespace LMSWeb.Controllers
 {
+    
     public class TenantController : Controller
     {
         // GET: Tenant
@@ -19,8 +20,19 @@ namespace LMSWeb.Controllers
         public ActionResult GetTenantDetails()
         {
             BusinessLogic BL = new BusinessLogic();
-            List<tblTenant> lstTanent = new List<tblTenant>();
-            lstTanent = BL.GetTenantById(1);
+            
+            tblTenant tenantDetails = new tblTenant();
+            tenantDetails = BL.GetTenantById(1);
+            return View();
+        }
+
+        public ActionResult GetAllActiveTenants()
+        {
+            BusinessLogic BL = new BusinessLogic();
+
+            List<tblTenant> lstAllActiveTenants = new List<tblTenant>();
+            lstAllActiveTenants = BL.GetAllActiveTenants();
+
             return View();
         }
     }
