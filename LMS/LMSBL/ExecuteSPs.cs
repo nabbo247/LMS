@@ -19,6 +19,7 @@ namespace LMSBL
         public Response ExecuteGetSp(string SPName, List<Param> Params, string ModelType)
         {
             Response response = new Response();
+            response.ResponseStatus = false;
             try
             {
                 SqlDataReader rdr = null;
@@ -35,11 +36,19 @@ namespace LMSBL
                 {
                     case "tblTenant":
                         response.tblTenant = BindTenantData(rdr);
+                        if(response.tblTenant!=null)                        
+                            response.ResponseStatus = true;                        
+                        break;
+                    case "ListActiveTenant":
+                        response.lstTenants = BindAllActiveInActiveTenantData(rdr);
                         if(response.lstTenants.Count>0)
-                        {
                             response.ResponseStatus = true;
-                        }
-                        break;                    
+                        break;
+                    case "ListInActiveTenant":
+                        response.lstTenants = BindAllActiveInActiveTenantData(rdr);
+                        if (response.lstTenants.Count > 0)
+                            response.ResponseStatus = true;
+                        break;
 
                 }
             }
@@ -71,6 +80,28 @@ namespace LMSBL
                 
             }
             return objTenant;
+        }
+
+        public List<tblTenant> BindAllActiveInActiveTenantData(SqlDataReader dr)
+        {
+            List<tblTenant> lstTenants = new List<tblTenant>();
+            while (dr.Read())
+            {
+                tblTenant objTenant = new tblTenant();
+                objTenant.tenantId = Convert.ToInt32(dr["tenantId"]);
+                objTenant.tenantName = Convert.ToString(dr["tenantName"]);
+                objTenant.tenantDomain = Convert.ToString(dr["tenantDomain"]);
+                objTenant.activationFrom = Convert.ToDateTime(dr["activationFrom"]);
+                objTenant.activationTo = Convert.ToDateTime(dr["activationTo"]);
+                objTenant.isActive = Convert.ToBoolean(dr["isActive"]);
+                objTenant.createdBy = Convert.ToInt32(dr["createdBy"]);
+                objTenant.createdOn = Convert.ToDateTime(dr["createdOn"]);
+                objTenant.noOfUserAllowed = Convert.ToInt32(dr["noOfUserAllowed"]);
+
+                lstTenants.Add(objTenant);
+
+            }
+            return lstTenants;
         }
     }
 }
