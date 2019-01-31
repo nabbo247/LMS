@@ -10,7 +10,7 @@ namespace LMSBL
 {
     public class ExecuteSPs
     {
-        static string ConnectionString = "";//take from Web.Config
+        static string ConnectionString = "Data Source=.;Initial Catalog=LMSDB;Integrated Security=True";//take from Web.Config
         SqlConnection con = new SqlConnection(ConnectionString);
         public ExecuteSPs()
         {
@@ -53,7 +53,7 @@ namespace LMSBL
             }
             return response;
         }
-        public static tblTenant BindTenantData(SqlDataReader dr)
+        public tblTenant BindTenantData(SqlDataReader dr)
         {
             tblTenant objTenant = new tblTenant();
             while (dr.Read())
