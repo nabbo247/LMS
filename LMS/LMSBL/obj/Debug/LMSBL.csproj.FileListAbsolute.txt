@@ -7,6 +7,7 @@ C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\bin\Debug\EntityFramework
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
 C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb
+<<<<<<< HEAD
 D:\Work_\LMS\LMS\LMS\LMSBL\bin\Debug\LMSBL.dll.config
 D:\Work_\LMS\LMS\LMS\LMSBL\bin\Debug\LMSBL.dll
 D:\Work_\LMS\LMS\LMS\LMSBL\bin\Debug\LMSBL.pdb
@@ -17,3 +18,6 @@ D:\Work_\LMS\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
 D:\Work_\LMS\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojResolveAssemblyReference.cache
 D:\Work_\LMS\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
 D:\Work_\LMS\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb
+=======
+C:\Users\dinesh.gabhane\Documents\GitHub\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojResolveAssemblyReference.cache
+>>>>>>> 58dbd6af6e443ff31bb967e6ef8255a9f2f46a3a
