@@ -37,7 +37,7 @@ namespace LMSWeb.Controllers
             List<tblTenant> lstAllActiveTenants = new List<tblTenant>();
             lstAllActiveTenants = tr.GetAllActiveTenants();
 
-            return View();
+            return View(lstAllActiveTenants);
         }
 
         public ActionResult GetAllInActiveTenants()
