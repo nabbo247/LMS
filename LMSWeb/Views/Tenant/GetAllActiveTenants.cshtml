@@ -1,0 +1,71 @@
+﻿@model List<LMSBL.DBModels.TblTenant>
+@{
+    ViewBag.Title = "GetAllActiveTenants";
+}
+<body>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Get All Active Tenants</h2>
+                <p class="pageheader-text">Get data of all active tenants.</p>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">GetAllActiveTenants</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Domain</th>
+                                <th scope="col">Activation From</th>
+                                <th scope="col">Activation To</th>
+                                <th scope="col">Is Active</th>
+                                <th scope="col" colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tenent in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@tenent.TenantId</th>
+                                    <td>@tenent.TenantName</td>
+                                    <td>@tenent.TenantDomain</td>
+                                    <td>@tenent.ActivationFrom</td>
+                                    <td>@tenent.ActivationTo</td>
+                                    <td style="color:green;text-align:center"><i class="fas fa-fw fa-check"></i></td>
+                                    <td>
+                                        <a href="@Url.Action("EditTenant", "Tenant",new { id=tenent.TenantId})">
+                                            <i class="fas fa-fw fa-edit" title="Edit Tenant"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("DeleteTenant", "Tenant",new { id=tenent.TenantId})">
+                                            <i class="fas fa-fw fa-trash" title="Deactivate Tenant"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+

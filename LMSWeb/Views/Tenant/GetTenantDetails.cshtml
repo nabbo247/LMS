@@ -1,0 +1,60 @@
+﻿@model List<LMSBL.DBModels.TblTenant> 
+    @{
+        ViewBag.Title = "GetTenantDetails";
+        //Layout = "~/Views/_ViewStart.cshtml";
+    }
+<body>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Get Tenant Details</h2>
+                <p class="pageheader-text">To get Tenant Details.</p>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">GetTenantDetails</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">Get Tenant Details</h5>
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Domain</th>
+                                <th scope="col">Is Active</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tenent in Model)
+                            {
+                            <tr>
+                                <th scope="row">@tenent.TenantId</th>
+                                <td>@tenent.TenantName</td>
+                                <td>@tenent.TenantDomain</td>
+                                <td>@tenent.ActivationFrom</td>
+                                <td>@tenent.ActivationTo</td>
+                            </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
