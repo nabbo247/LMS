@@ -16,14 +16,6 @@ namespace LMSWeb.Controllers
             return View();
         }
 
-        public ActionResult GetTenantDetails()
-        {
-            List<TblTenant> tenantDetails = new List<TblTenant>();
-            tenantDetails = tr.GetTenantById(1);
-
-            return View(tenantDetails);
-        }
-
         public ActionResult GetAllActiveTenants()
         {
             List<TblTenant> lstAllActiveTenants = new List<TblTenant>();
@@ -62,6 +54,7 @@ namespace LMSWeb.Controllers
             }
             return View(objTenant);
         }
+
         public ActionResult EditTenant(int id)
         {
             List<TblTenant> tenantDetails = new List<TblTenant>();
@@ -89,8 +82,9 @@ namespace LMSWeb.Controllers
             return View(objTenant);
         }
 
-        public ActionResult DeleteTenant(int id)
+        public ActionResult DeleteTenant(int id,bool isActive)
         {
+            ViewBag.isActive = isActive;
             List<TblTenant> tenantDetails = new List<TblTenant>();
             tenantDetails = tr.GetTenantById(id);
             TblTenant objEditData = new TblTenant();

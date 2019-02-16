@@ -12,11 +12,11 @@ namespace LMSBL.DBModels
         [Key]
         public int TenantId { get; set; }
 
-        [Required]
+        
         [StringLength(50)]
         public string TenantName { get; set; }
 
-        [Required]
+       
         [StringLength(50)]
         public string TenantDomain { get; set; }
 

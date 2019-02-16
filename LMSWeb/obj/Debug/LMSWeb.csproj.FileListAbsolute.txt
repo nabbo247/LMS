@@ -1,0 +1,340 @@
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSWeb.dll.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSWeb.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSWeb.pdb
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csc.exe
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csc.exe.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csc.rsp
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csi.exe
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csi.exe.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\csi.rsp
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.Managed.Core.targets
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.AppContext.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Collections.Immutable.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Console.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.IO.Compression.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.IO.FileSystem.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.IO.Pipes.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Reflection.Metadata.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.AccessControl.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Claims.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Security.Principal.Windows.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.ValueTuple.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Xml.XmlDocument.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Xml.XPath.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\vbc.exe
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\vbc.exe.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\vbc.rsp
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Antlr3.Runtime.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSBL.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Newtonsoft.Json.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Helpers.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Mvc.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Optimization.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Razor.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.Deployment.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.Razor.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\WebGrease.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\EntityFramework.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSBL.pdb
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\LMSBL.dll.config
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Helpers.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Mvc.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Optimization.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.Razor.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.Deployment.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Web.WebPages.Razor.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Newtonsoft.Json.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Antlr3.Runtime.pdb
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\bin\EntityFramework.xml
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\obj\Debug\LMSWeb.csprojAssemblyReference.cache
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\obj\Debug\LMSWeb.csproj.CoreCompileInputs.cache
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\obj\Debug\LMSWeb.csproj.CopyComplete
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\obj\Debug\LMSWeb.dll
+D:\softwares n work\Angular2 notes\LMS\LMSWeb\obj\Debug\LMSWeb.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSWeb.dll.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSWeb.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSWeb.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csc.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csc.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csc.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csi.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csi.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\csi.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.Managed.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.AppContext.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Collections.Immutable.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Console.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.IO.Compression.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.IO.FileSystem.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.IO.Pipes.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Reflection.Metadata.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.AccessControl.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Claims.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Security.Principal.Windows.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.ValueTuple.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Xml.XmlDocument.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Xml.XPath.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\vbc.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\vbc.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\vbc.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\VBCSCompiler.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Antlr3.Runtime.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSBL.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Newtonsoft.Json.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Helpers.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Mvc.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Optimization.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Razor.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.Deployment.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.Razor.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\WebGrease.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\EntityFramework.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSBL.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\LMSBL.dll.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Helpers.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Mvc.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Optimization.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.Razor.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.Deployment.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Web.WebPages.Razor.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Newtonsoft.Json.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Antlr3.Runtime.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\System.Diagnostics.DiagnosticSource.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\bin\EntityFramework.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\obj\Debug\LMSWeb.csprojAssemblyReference.cache
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\obj\Debug\LMSWeb.csproj.CoreCompileInputs.cache
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\obj\Debug\LMSWeb.csproj.CopyComplete
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\obj\Debug\LMSWeb.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS(addEdit)\LMSWeb\obj\Debug\LMSWeb.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSWeb.dll.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSWeb.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSWeb.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csc.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csc.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csc.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csi.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csi.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\csi.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.Managed.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.AppContext.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Collections.Immutable.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Console.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.IO.Compression.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.IO.FileSystem.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.IO.Pipes.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Reflection.Metadata.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.AccessControl.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Claims.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Security.Principal.Windows.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.ValueTuple.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Xml.XmlDocument.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Xml.XPath.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\vbc.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\vbc.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\vbc.rsp
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\VBCSCompiler.exe
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Antlr3.Runtime.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSBL.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Newtonsoft.Json.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Helpers.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Mvc.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Optimization.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Razor.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.Deployment.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.Razor.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\WebGrease.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\EntityFramework.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSBL.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\LMSBL.dll.config
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Helpers.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Mvc.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Optimization.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.Razor.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.Deployment.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Web.WebPages.Razor.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Newtonsoft.Json.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Antlr3.Runtime.pdb
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\System.Diagnostics.DiagnosticSource.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\bin\EntityFramework.xml
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\obj\Debug\LMSWeb.csprojAssemblyReference.cache
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\obj\Debug\LMSWeb.csproj.CoreCompileInputs.cache
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\obj\Debug\LMSWeb.csproj.CopyComplete
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\obj\Debug\LMSWeb.dll
+D:\softwares n work\Angular2 notes\Clones LMS\Latest\LMS-latest working\LMSWeb\obj\Debug\LMSWeb.pdb
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSWeb.dll.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSWeb.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSWeb.pdb
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csc.exe
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csc.exe.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csc.rsp
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csi.exe
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csi.exe.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\csi.rsp
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.Managed.Core.targets
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.AppContext.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Collections.Immutable.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Console.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.IO.Compression.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.IO.FileSystem.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.IO.Pipes.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Reflection.Metadata.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.AccessControl.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Claims.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Security.Principal.Windows.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.ValueTuple.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Xml.XmlDocument.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Xml.XPath.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\vbc.exe
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\vbc.exe.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\vbc.rsp
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Antlr3.Runtime.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSBL.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Newtonsoft.Json.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Helpers.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Mvc.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Optimization.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Razor.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.Deployment.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.Razor.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\WebGrease.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\EntityFramework.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSBL.pdb
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSBL.dll.config
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Helpers.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Mvc.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Optimization.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Razor.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.Deployment.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.WebPages.Razor.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Newtonsoft.Json.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Antlr3.Runtime.pdb
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\EntityFramework.xml
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.csprojAssemblyReference.cache
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.csproj.CoreCompileInputs.cache
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.csproj.CopyComplete
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\obj\Debug\LMSWeb.pdb

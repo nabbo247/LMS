@@ -27,6 +27,7 @@ namespace LMSBL.DBModels
         public string Password { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DOB { get; set; }
 
         [StringLength(50)]
@@ -43,6 +44,12 @@ namespace LMSBL.DBModels
 
         public int? RoleId { get; set; }
 
-        public virtual TblUserRole TblUserRole { get; set; }
+        public string  TenantName { get; set; }
+
+        public string RoleName { get; set; }
+
+        public List<TblUserRole> UserRoles { get; set; }
+
+        public List<TblTenant> Tenants { get; set; }
     }
 }

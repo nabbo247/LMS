@@ -66,7 +66,7 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

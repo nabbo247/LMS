@@ -49,13 +49,8 @@
                                 <td>@tenent.ActivationFrom</td>
                                 <td>@tenent.ActivationTo</td>
                                 <td style="color:red;text-align:center"><i class="fas fa-fw fa-times"></i></td>
-                                <td>
-                                    <a href="@Url.Action("EditTenant", "Tenant",new { id=tenent.TenantId})">
-                                        <i class="fas fa-fw fa-edit" title="Edit Tenant"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("DeleteTenant", "Tenant",new { id=tenent.TenantId})">
+                                <td align="center">
+                                    <a href="@Url.Action("DeleteTenant", "Tenant",new { id=tenent.TenantId,isActive=false})">
                                         <i class="fas fa-fw fa-trash" title="Activate Tenant"></i>
                                     </a>
                                 </td>

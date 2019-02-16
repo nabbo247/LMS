@@ -1,0 +1,80 @@
+﻿@model List<LMSBL.DBModels.TblUser>
+@{
+    ViewBag.Title = "GetAllActiveUsers";
+}
+<body>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Get All Active Users</h2>
+                <p class="pageheader-text">Get data of all active users.</p>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">GetAllActiveUsers</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">DOB</th>
+                                <th scope="col">Conatct No</th>
+                                <th scope="col">IsActive</th>
+                                <th scope="col">Tenant Name</th>
+                                <th scope="col">Role Name</th>
+                                <th scope="col" colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                            <tr>
+                                <th scope="row">@user.UserId</th>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.EmailId</td>
+                                <td>@user.Password</td>
+                                <td>@user.DOB</td>
+                                <td>@user.ContactNo</td>
+                                <td style="color:green;text-align:center"><i class="fas fa-fw fa-check"></i></td>
+                                <td>@user.TenantName</td>
+                                <td>@user.RoleName</td>
+
+                                <td>
+                                    <a href="@Url.Action("EditUser", "User",new { id=user.UserId})">
+                                        <i class="fas fa-fw fa-edit" title="Edit User"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("DeleteUser", "User",new { id=user.UserId,isActive=true})">
+                                        <i class="fas fa-fw fa-trash" title="Deactivate User"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+

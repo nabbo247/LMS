@@ -63,10 +63,18 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default btn-success" />
-                @Html.ActionLink("Back to List", "Index")
-            </div>
+        <div class="form-actions no-color">
+            @if (ViewBag.isActive == true)
+            {
+                <input type="submit" value="Deactivate" class="btn btn-default btn-success" />
+
+            }
+            else
+            {
+                <input type="submit" value="Activate" class="btn btn-default btn-success" />
+            }
+            @Html.ActionLink("Back to List", "Index")
+        </div>
         }
     </div>
 </body>
