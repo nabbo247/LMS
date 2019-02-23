@@ -119,6 +119,14 @@ namespace LMSWeb.Controllers
             }
             return View(objTenant);
         }
+
+        public ActionResult VerifyTenantDomain(string Domain)
+        {
+            //string isAvailable = string.Empty;
+            int isAvailable= tr.VerifyTenantDomain(Domain);
+
+            return Json(isAvailable, JsonRequestBehavior.AllowGet);
+        }
     }
 
 

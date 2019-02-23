@@ -120,5 +120,20 @@ namespace LMSBL.Repository
                 throw ex;
             }
         }
+
+        public int VerifyTenantDomain(string DomainName)
+        {
+            try
+            {
+                db = new DataRepository();
+                db.AddParameter("@tenantDomain", SqlDbType.VarChar, DomainName);
+                
+                return db.ExecuteQuery("SP_VerifyTenant");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
