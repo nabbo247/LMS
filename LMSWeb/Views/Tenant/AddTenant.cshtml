@@ -31,8 +31,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control" ,@id="txtdomainName"} })
                     @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
+                    <input type="button" id="txtTenantDomainName" value="verify"/>
                 </div>
             </div>
 
@@ -74,9 +75,29 @@
         $(document).ready(function () {
             $('input[type=datetime]').datepicker({
                 dateFormat: "yy-mm-dd",
-                showWeek:true
+                showWeek: true
             });
+
+            $("#txtTenantDomainName").click(function () {
+                VerifyTenantDomain($('#txtdomainName').val());
+            })
         });
+
+
+        function VerifyTenantDomain(DominName) {
+            $.ajax({
+                url: "/Tenant/VerifyTenantDomain?Domain=" + DominName,
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    alert(result);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
     </script>
 </body>
 </html>
