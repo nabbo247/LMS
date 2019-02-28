@@ -1,37 +1,44 @@
 namespace LMSBL.DBModels
 {
     using System;
+    using System.Web;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("tblCourses")]
     public partial class TblCourse
     {
         [Key]
-        public int courseId { get; set; }
+        public int CourseId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string courseName { get; set; }
+        public string CourseName { get; set; }
 
         [StringLength(250)]
-        public string courseDetails { get; set; }
+        public string CourseDetails { get; set; }
 
         [StringLength(50)]
-        public string courseCategory { get; set; }
+        public string CourseCategory { get; set; }
 
         [StringLength(250)]
-        public string coursePath { get; set; }
+        public string CoursePath { get; set; }
 
-        public bool? isActive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public int? createdBy { get; set; }
+        public int? CreatedBy { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? createdOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
-        public int tenantId { get; set; }
+        public int TenantId { get; set; }
+
+        public string TenantName { get; set; }
+
+       
+        public HttpPostedFileBase ZipFile { get; set; }
+
+        public List<TblTenant> Tenants { get; set; }
     }
 }

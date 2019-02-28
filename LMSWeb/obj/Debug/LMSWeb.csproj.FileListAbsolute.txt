@@ -307,8 +307,12 @@ D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\LMSBL.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Microsoft.Web.Mvc.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\Newtonsoft.Json.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.IO.Compression.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.IO.Compression.FileSystem.dll
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Shim.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Helpers.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Mvc.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSWeb\bin\System.Web.Optimization.dll

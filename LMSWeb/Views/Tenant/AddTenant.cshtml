@@ -31,9 +31,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control" ,@id="txtdomainName"} })
+                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control", @id = "txtdomainName" } })
                     @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
-                    <input type="button" id="txtTenantDomainName" value="verify"/>
+                    <input type="button" id="txtTenantDomainName" value="verify" />
                 </div>
             </div>
 

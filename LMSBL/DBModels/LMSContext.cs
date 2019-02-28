@@ -12,13 +12,13 @@ namespace LMSBL.DBModels
         {
         }
 
-        public virtual DbSet<TblAssignmentAndTracking> tblAssignmentAndTrackings { get; set; }
-        public virtual DbSet<TblCourse> tblCourses { get; set; }
-        public virtual DbSet<TblNotificationTemplate> tblNotificationTemplates { get; set; }
-        public virtual DbSet<TblStatus> tblStatus { get; set; }
+        public virtual DbSet<TblAssignmentAndTracking> TblAssignmentAndTrackings { get; set; }
+        public virtual DbSet<TblCourse> TblCourses { get; set; }
+        public virtual DbSet<TblNotificationTemplate> TblNotificationTemplates { get; set; }
+        public virtual DbSet<TblStatus> TblStatus { get; set; }
         public virtual DbSet<TblTenant> tblTenants { get; set; }
-        public virtual DbSet<TblUser> tblUsers { get; set; }
-        public virtual DbSet<TblUserRole> tblUserRoles { get; set; }
+        public virtual DbSet<TblUser> TblUsers { get; set; }
+        public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
