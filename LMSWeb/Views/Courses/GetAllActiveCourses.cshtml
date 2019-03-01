@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Get All Active Courses</h2>
+                <h2 class="pageheader-title">Active Courses</h2>
                 <p class="pageheader-text">Get data of all active courses.</p>
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">GetAllActiveCourses</li>
+                            <li class="breadcrumb-item active" aria-current="page">ActiveCourses</li>
                         </ol>
                     </nav>
                 </div>
@@ -35,7 +35,7 @@
                                 <th scope="col">Course Category</th>
                                 <th scope="col">Course Path</th>
                                 <th scope="col">IsActive</th>
-                                <th scope="col">Tenant Name</th>
+                                @*<th scope="col">Tenant Name</th>*@
                                 <th scope="col" colspan="2">Actions</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
                                     <td>@course.CourseCategory</td>
                                     <td>@course.CoursePath</td>
                                     <td style="color:green;text-align:center"><i class="fas fa-fw fa-check"></i></td>
-                                    <td>@course.TenantName</td>
+                                   @* <td>@course.TenantName</td>*@
                                     <td>
                                         <a href="@Url.Action("DeleteCourse", "Courses",new { id=course.CourseId,isActive=true})">
                                             <i class="fas fa-fw fa-trash" title="Deactivate User"></i>

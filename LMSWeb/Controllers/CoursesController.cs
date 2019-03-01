@@ -22,6 +22,7 @@ namespace LMSWeb.Controllers
         public ActionResult GetCourseDetails()
         {
             List<TblCourse> courseDetails = new List<TblCourse>();
+            TblUser sessionUser = (TblUser)Session["UserSession"];
             courseDetails = cc.GetCourseById(1);
 
             return View(courseDetails);
@@ -30,7 +31,8 @@ namespace LMSWeb.Controllers
         public ActionResult GetAllActiveCourses()
         {
             List<TblCourse> listActiveCourses = new List<TblCourse>();
-            listActiveCourses = cc.GetAllActiveCourses(1);
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            listActiveCourses = cc.GetAllActiveCourses(sessionUser.TenantId);
 
             return PartialView(listActiveCourses);
         }
@@ -39,7 +41,8 @@ namespace LMSWeb.Controllers
         {
 
             List<TblCourse> listInActiveCourses = new List<TblCourse>();
-            listInActiveCourses = cc.GetAllInActiveCourses(1);
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            listInActiveCourses = cc.GetAllInActiveCourses(sessionUser.TenantId);
 
             return PartialView(listInActiveCourses);
         }

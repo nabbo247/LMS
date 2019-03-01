@@ -21,24 +21,26 @@ namespace LMSWeb.Controllers
         public ActionResult GetUserDetails()
         {
             List<TblUser> userDetails = new List<TblUser>();
-            userDetails = ur.GetUserById(1);
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            userDetails = ur.GetUserById(sessionUser.TenantId);
 
             return View(userDetails);
         }
 
         public ActionResult GetAllActiveUsers()
         {
+            TblUser sessionUser = (TblUser)Session["UserSession"];
             List<TblUser> lstAllActiveUsers = new List<TblUser>();
-            lstAllActiveUsers = ur.GetAllActiveUsers(1);
+            lstAllActiveUsers = ur.GetAllActiveUsers(sessionUser.TenantId);
 
             return PartialView(lstAllActiveUsers);
         }
 
         public ActionResult GetAllInActiveUsers()
         {
-            
+            TblUser sessionUser = (TblUser)Session["UserSession"];
             List<TblUser> lstAllInActiveUsers = new List<TblUser>();
-            lstAllInActiveUsers = ur.GetAllInActiveUsers(1);
+            lstAllInActiveUsers = ur.GetAllInActiveUsers(sessionUser.TenantId);
             return PartialView(lstAllInActiveUsers);
         }
 
@@ -57,6 +59,10 @@ namespace LMSWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                objUser.TenantId = sessionUser.TenantId;
+                objUser.CreatedBy = sessionUser.UserId;
+                objUser.IsActive = true;
                 int rows = ur.AddUser(objUser);
                 if (rows != 0)
                 {

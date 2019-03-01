@@ -51,13 +51,10 @@
                             <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="VerifyUser()">Sign in</button>
                 </form>
             </div>
             <div class="card-footer bg-white p-0  ">
-                <div class="card-footer-item card-footer-item-bordered">
-                    <a href="#" class="footer-link">Create An Account</a>
-                </div>
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="#" class="footer-link">Forgot Password</a>
                 </div>
@@ -67,5 +64,30 @@
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap/bootstrap.bundle.js"></script>
+
+    <script>
+        function VerifyUser() {
+            $.ajax({
+                url: "/Login/UserAuthentication?UserName=" + $('#username').val() + "&Password=" + $('#password').val(),
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    var baseUrl="/Home/Index";
+                    if (result == 1)
+                    {
+                        window.location.href = baseUrl
+                    }
+                    else
+                    {
+                        alert('wrong info');
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -77,5 +77,38 @@ namespace LMSBL.Repository
             }
         }
 
+        public int ExecuteReader(string cmdText)
+        {
+            SqlConnection con = new SqlConnection(constr);
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(cmdText, con);
+                SqlDataReader dr;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddRange(parameters.ToArray());
+                dr = cmd.ExecuteReader();
+                if(dr.HasRows)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (con.State != ConnectionState.Closed)
+                {
+                    con.Close();
+                }
+            }
+        }
+
     }
 }

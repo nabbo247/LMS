@@ -69,17 +69,17 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(x => Model.Tenants[0].TenantName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownListFor(x => Model.Tenants[0].TenantId, new SelectList(Model.Tenants, "TenantId", "TenantName"), htmlAttributes: new { @class = "form-control", id = "Tenants" })
                     @Html.ValidationMessageFor(x => Model.Tenants[0].TenantId, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
-                @Html.LabelFor(x => Model.UserRoles[0].RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(x => Model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.DropDownListFor(x => Model.UserRoles[0].RoleId, new SelectList(Model.UserRoles, "RoleId", "RoleName"), htmlAttributes: new { @class = "form-control", id = "UserRoles" })
+                    @Html.DropDownListFor(x => Model.RoleId, new SelectList(Model.UserRoles, "RoleId", "RoleName"), htmlAttributes: new { @class = "form-control", id = "UserRoles" })
                     @Html.ValidationMessageFor(x => Model.UserRoles[0].RoleId, "", new { @class = "text-danger" })
                 </div>
             </div>

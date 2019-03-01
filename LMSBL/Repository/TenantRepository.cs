@@ -20,6 +20,7 @@ namespace LMSBL.Repository
                 TenantId = Convert.ToInt32(dr["tenantId"]),
                 TenantName = Convert.ToString(dr["tenantName"]),
                 TenantDomain = Convert.ToString(dr["tenantDomain"]),
+                domainUrl = Convert.ToString(dr["domainUrl"]),
                 ActivationFrom = Convert.ToDateTime(dr["activationFrom"]),
                 ActivationTo = Convert.ToDateTime(dr["activationTo"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
@@ -39,6 +40,7 @@ namespace LMSBL.Repository
                 TenantId = Convert.ToInt32(dr["tenantId"]),
                 TenantName = Convert.ToString(dr["tenantName"]),
                 TenantDomain = Convert.ToString(dr["tenantDomain"]),
+                domainUrl = Convert.ToString(dr["domainUrl"]),
                 ActivationFrom = Convert.ToDateTime(dr["activationFrom"]),
                 ActivationTo = Convert.ToDateTime(dr["activationTo"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
@@ -58,6 +60,7 @@ namespace LMSBL.Repository
                 TenantId = Convert.ToInt32(dr["tenantId"]),
                 TenantName = Convert.ToString(dr["tenantName"]),
                 TenantDomain = Convert.ToString(dr["tenantDomain"]),
+                domainUrl = Convert.ToString(dr["domainUrl"]),
                 ActivationFrom = Convert.ToDateTime(dr["activationFrom"]),
                 ActivationTo = Convert.ToDateTime(dr["activationTo"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
@@ -80,6 +83,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@activationTo", SqlDbType.DateTime, obj.ActivationTo);
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@noOfUserAllowed", SqlDbType.Int, obj.NoOfUserAllowed);
+                db.AddParameter("@domainURL", SqlDbType.Int, obj.domainUrl);
                 return db.ExecuteQuery("TenantAdd");
             }
             catch (Exception ex)
@@ -128,7 +132,7 @@ namespace LMSBL.Repository
                 db = new DataRepository();
                 db.AddParameter("@tenantDomain", SqlDbType.VarChar, DomainName);
                 
-                return db.ExecuteQuery("SP_VerifyTenant");
+                return db.ExecuteReader("SP_VerifyTenant");
             }
             catch (Exception ex)
             {

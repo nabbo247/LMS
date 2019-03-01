@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using LMSBL.DBModels;
+using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class UserRepository
     {
         DataRepository db = new DataRepository();
-
+        Commonfunctions common;
         public List<TblUser> GetUserById(int userId)
         {
 
@@ -17,17 +18,17 @@ namespace LMSBL.Repository
             DataSet ds = db.FillData("UserGetById");
             List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
             {
-                UserId=Convert.ToInt32(dr["userId"]),
-                FirstName=Convert.ToString(dr["firstName"]),
-                LastName= Convert.ToString(dr["lastName"]),
-                EmailId=Convert.ToString(dr["emailId"]),
-                Password=Convert.ToString(dr["password"]),
-                DOB=Convert.ToDateTime(dr["DOB"]),
-                ContactNo=Convert.ToString(dr["contactNo"]),
+                UserId = Convert.ToInt32(dr["userId"]),
+                FirstName = Convert.ToString(dr["firstName"]),
+                LastName = Convert.ToString(dr["lastName"]),
+                EmailId = Convert.ToString(dr["emailId"]),
+                Password = Convert.ToString(dr["password"]),
+                DOB = Convert.ToDateTime(dr["DOB"]),
+                ContactNo = Convert.ToString(dr["contactNo"]),
                 TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName=Convert.ToString(dr["tenantName"]),
-                RoleId=Convert.ToInt32(dr["roleId"]),
-                RoleName=Convert.ToString(dr["roleName"]),
+                //TenantName=Convert.ToString(dr["tenantName"]),
+                RoleId = Convert.ToInt32(dr["roleId"]),
+                RoleName= Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
                 CreatedBy = Convert.ToInt32(dr["createdBy"]),
                 CreatedOn = Convert.ToDateTime(dr["createdOn"])
@@ -40,7 +41,6 @@ namespace LMSBL.Repository
         {
             try
             {
-                tenantId = 5;//logged in user id
                 db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
                 DataSet ds = db.FillData("UserGetAll");
                 List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
@@ -53,9 +53,9 @@ namespace LMSBL.Repository
                     DOB = Convert.ToDateTime(dr["DOB"]),
                     ContactNo = Convert.ToString(dr["contactNo"]),
                     TenantId = Convert.ToInt32(dr["tenantId"]),
-                    TenantName = Convert.ToString(dr["tenantName"]),
+                    //TenantName = Convert.ToString(dr["tenantName"]),
                     RoleId = Convert.ToInt32(dr["roleId"]),
-                    RoleName = Convert.ToString(dr["roleName"]),
+                    RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
                     IsActive = Convert.ToBoolean(dr["isActive"]),
                     CreatedBy = Convert.ToInt32(dr["createdBy"]),
                     CreatedOn = Convert.ToDateTime(dr["createdOn"])
@@ -63,16 +63,15 @@ namespace LMSBL.Repository
                 }).ToList();
                 return userDetails;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
 
         public List<TblUser> GetAllInActiveUsers(int tenantId)
         {
-            tenantId = 5;//logged in user id
             db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
 
             DataSet ds = db.FillData("UserGetAllInactive");
@@ -86,9 +85,9 @@ namespace LMSBL.Repository
                 DOB = Convert.ToDateTime(dr["DOB"]),
                 ContactNo = Convert.ToString(dr["contactNo"]),
                 TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"]),
+                //TenantName = Convert.ToString(dr["tenantName"]),
                 RoleId = Convert.ToInt32(dr["roleId"]),
-                RoleName = Convert.ToString(dr["roleName"]),
+                RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
                 CreatedBy = Convert.ToInt32(dr["createdBy"]),
                 CreatedOn = Convert.ToDateTime(dr["createdOn"])
@@ -100,7 +99,6 @@ namespace LMSBL.Repository
         {
             try
             {
-                obj.CreatedBy = 1;//hardcoded put loginid here
                 db.AddParameter("@firstName", SqlDbType.Text, obj.FirstName);
                 db.AddParameter("@lastName", SqlDbType.Text, obj.LastName);
                 db.AddParameter("@emailId", SqlDbType.Text, obj.EmailId);
@@ -108,8 +106,9 @@ namespace LMSBL.Repository
                 db.AddParameter("@DOB", SqlDbType.DateTime, obj.DOB);
                 db.AddParameter("@contactNo", SqlDbType.Text, obj.ContactNo);
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
-                db.AddParameter("@tenantId", SqlDbType.Int, obj.Tenants[0].TenantId);
-                db.AddParameter("@roleId", SqlDbType.Int, obj.UserRoles[0].RoleId);
+                db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
+                db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
+                db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
                 return db.ExecuteQuery("UserAdd");
             }
             catch (Exception ex)
@@ -155,6 +154,25 @@ namespace LMSBL.Repository
             }
         }
 
+        public TblUser IsValidUser(string Username, string Password)
+        {
+            try
+            {
+                common = new Commonfunctions();
 
+                DataSet ds = new DataSet();
+                db = new DataRepository();
+                db.AddParameter("@EmailId", SqlDbType.NVarChar, Username);
+                db.AddParameter("@Password", SqlDbType.NVarChar, Password);
+                ds = db.FillData("Login");
+                var tblUser = common.UserMapping(ds);
+
+                return tblUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

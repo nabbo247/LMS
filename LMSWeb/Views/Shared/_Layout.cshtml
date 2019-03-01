@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,6 +16,9 @@
     <script src="~/Scripts/bootstrap/bootstrap.bundle.js"></script>
 </head>
 <body>
+    @{  LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
+        model = (LMSBL.DBModels.TblUser)Session["UserSession"];
+    }
     <div class="dashboard-main-wrapper">
 
         <div class="dashboard-header">
@@ -147,39 +151,44 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse"
-                                   aria-expanded="false" data-target="#submenu-1"
-                                   aria-controls="submenu-1">
-                                    <i class="fa fa-fw fa-user-circle"></i>
+                                <a class="nav-link active" href="..\Home\Index">
+                                    <i class="fa fa-tachometer-alt"></i>
                                     Dashboard
                                 </a>
-                                <div id="submenu-1" class="collapse submenu">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            @Html.ActionLink("Manage Tenants", "Index", "Tenant", null, new { @class = "page-scroll" })
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a style="padding-left:0%" class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">
-                                                <i class="fa fa-fw fa-user"></i>
-                                                Users
-                                            </a>
-
-                                            <div id="submenu-1-2" class="collapse submenu" style="">
-                                                <ul class="nav flex-column">
-                                                    <li class="nav-item">
-                                                        @Html.ActionLink("Manage Users", "Index", "User", null, new { @class = "page-scroll" })
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        @Html.ActionLink("Manage User Courses", "Index", "Courses", null, new { @class = "page-scroll" })
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div>
                             </li>
+                            @if (model.RoleId == 1)
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="..\Tenant\Index">
+                                        <i class="fa fa-address-card"></i>
+                                        Tenants
+                                    </a>
+                                </li>
+                            }
+                            @if (model.RoleId == 2)
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="..\User\Index">
+                                        <i class="fa fa-fw fa-user-circle"></i>
+                                        Users
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="..\Courses\Index">
+                                        <i class="fa fa-book-open"></i>
+                                        Courses
+                                    </a>
+                                </li>
+                            }
+                            @if (model.RoleId == 1 || model.RoleId == 2)
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="..\Reports\Index">
+                                        <i class="fa fa-book-open"></i>
+                                        Reports
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </nav>

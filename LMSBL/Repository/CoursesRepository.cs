@@ -18,12 +18,18 @@ namespace LMSBL.Repository
             byte[] data;
             using (Stream inputStream = zip.InputStream)
             {
-                if (!(inputStream is MemoryStream memoryStream))
+                using(MemoryStream ms=new MemoryStream())
                 {
-                    memoryStream = new MemoryStream();
-                    inputStream.CopyTo(memoryStream);
+                    inputStream.CopyTo(ms);
+                    data = ms.ToArray();
                 }
-                data = memoryStream.ToArray();
+               
+                //if (!(inputStream is MemoryStream memoryStream))
+                //{
+                //    memoryStream = new MemoryStream();
+                //    inputStream.CopyTo(memoryStream);
+                //}
+               // data = memoryStream.ToArray();
                 System.IO.File.WriteAllBytes(Path.Combine(path, zip.FileName), data);
 
             }
@@ -53,7 +59,6 @@ namespace LMSBL.Repository
 
         public List<TblCourse> GetAllActiveCourses(int TenantId)
         {
-            TenantId = 6;//logged in user id
             db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
             DataSet ds = db.FillData("CoursesGetAll");
             List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
@@ -73,7 +78,6 @@ namespace LMSBL.Repository
 
         public List<TblCourse> GetAllInActiveCourses(int TenantId)
         {
-            TenantId = 6;//logged in user id
             db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
             DataSet ds = db.FillData("CourseGetAllInactive");
             List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse

@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\Response.cs" />
     <Compile Include="DBModels\LMSContext.cs" />
     <Compile Include="DBModels\TblAssignmentAndTracking.cs" />
     <Compile Include="DBModels\TblCourse.cs" />

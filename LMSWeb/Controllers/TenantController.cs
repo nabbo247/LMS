@@ -42,6 +42,7 @@ namespace LMSWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                objTenant.TenantDomain = "http://"+objTenant.TenantDomain + "." + Request.Url.Host;
                 int rows = tr.AddTenant(objTenant);
                 if (rows != 0)
                 {

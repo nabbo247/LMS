@@ -17,7 +17,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Add new Tenant</h4>
+            <h4>Add New Tenant</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -33,7 +33,8 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control", @id = "txtdomainName" } })
                     @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
-                    <input type="button" id="txtTenantDomainName" value="verify" />
+                    <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success"/>
+                    <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
                 </div>
             </div>
 
@@ -78,7 +79,11 @@
                 showWeek: true
             });
 
-            $("#txtTenantDomainName").click(function () {
+            $("#txtdomainName").keypress(function () {
+                $("#lblerrorDomain").hide()
+            });
+
+            $("#btnTenantDomainName").click(function () {
                 VerifyTenantDomain($('#txtdomainName').val());
             })
         });
@@ -90,8 +95,18 @@
                 type: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
-                success: function (result) {
-                    alert(result);
+                success: function (result) {                    
+                    if(result==1)
+                    {
+                        $("#lblerrorDomain").html("Domain Name is not Available !!!");
+                        $("#lblerrorDomain").css("color", "Red");
+                    }
+                    else
+                    {
+                        $("#lblerrorDomain").html("Domain Name is Available !!!");
+                        $("#lblerrorDomain").css("color", "Green");
+                    }
+                    $("#lblerrorDomain").show();
                 },
                 error: function (errormessage) {
                     alert(errormessage.responseText);

@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Get All Inactive Users</h2>
+                <h2 class="pageheader-title">Inactive Users</h2>
                 <p class="pageheader-text">Get data of all Inactive users.</p>
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">GetAllInActiveUsers</li>
+                            <li class="breadcrumb-item active" aria-current="page">InActiveUsers</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,12 +33,12 @@
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Password</th>
+                                @*<th scope="col">Password</th>*@
                                 <th scope="col">DOB</th>
                                 <th scope="col">Conatct No</th>
-                                <th scope="col">IsActive</th>
-                                <th scope="col">Tenant Name</th>
+                                @*<th scope="col">Tenant Name</th>*@
                                 <th scope="col">Role Name</th>
+                                <th scope="col">IsActive</th>
                                 <th scope="col" colspan="2">Actions</th>
                             </tr>
                         </thead>
@@ -50,12 +50,12 @@
                                     <td>@user.FirstName</td>
                                     <td>@user.LastName</td>
                                     <td>@user.EmailId</td>
-                                    <td>@user.Password</td>
-                                    <td>@user.DOB</td>
+                                    @*<td>@user.Password</td>*@
+                                    <td>@user.DOB.Value.ToString("dd-MMM-yyyy")</td>
                                     <td>@user.ContactNo</td>
-                                    <td style="color:red;text-align:center"><i class="fas fa-fw fa-times"></i></td>
-                                    <td>@user.TenantName</td>
+                                    @*<td>@user.TenantName</td>*@
                                     <td>@user.RoleName</td>
+                                    <td style="color:red;text-align:center"><i class="fas fa-fw fa-times"></i></td>
                                     <td align="center">
                                         <a href="@Url.Action("DeleteUser", "User",new { id=user.UserId,isActive=false})">
                                             <i class="fas fa-fw fa-trash" title="Deactivate User"></i>

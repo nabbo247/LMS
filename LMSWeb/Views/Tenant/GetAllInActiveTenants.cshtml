@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Get All InActive Tenants</h2>
+                <h2 class="pageheader-title">InActive Tenants</h2>
                 <p class="pageheader-text">Get data of all Inactive tenants.</p>
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">GetAllInActiveTenants</li>
+                            <li class="breadcrumb-item active" aria-current="page">InActive Tenants</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,9 +45,9 @@
                             <tr>
                                 <th scope="row">@tenent.TenantId</th>
                                 <td>@tenent.TenantName</td>
-                                <td>@tenent.TenantDomain</td>
-                                <td>@tenent.ActivationFrom</td>
-                                <td>@tenent.ActivationTo</td>
+                                <td><a href="@tenent.TenantDomain" target="_blank">@tenent.TenantDomain</a></td>
+                                <td>@tenent.ActivationFrom.Value.ToString("dd-MM-yyyy")</td>
+                                <td>@tenent.ActivationTo.Value.ToString("dd-MMM-yyyy")</td>
                                 <td style="color:red;text-align:center"><i class="fas fa-fw fa-times"></i></td>
                                 <td align="center">
                                     <a href="@Url.Action("DeleteTenant", "Tenant",new { id=tenent.TenantId,isActive=false})">
