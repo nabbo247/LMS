@@ -36,5 +36,11 @@ namespace LMSWeb.Controllers
             
             return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Logout()
+        {
+            Session.Remove("UserSession");
+            return RedirectToAction("Index");
+        }
     }
 }
