@@ -40,8 +40,8 @@ D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\bin\Debug\EntityFramework.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\bin\Debug\EntityFramework.xml
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
-D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CoreCompileInputs.cache
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb
+D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache

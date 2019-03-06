@@ -12,9 +12,12 @@ namespace LMSBL.DBModels
         [Key]
         public int UserId { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
 
+
+        [Required]
         [StringLength(50)]
         public string LastName { get; set; }
 
@@ -39,6 +42,7 @@ namespace LMSBL.DBModels
 
         [Column(TypeName = "date")]
         public DateTime? CreatedOn { get; set; }
+
 
         public int TenantId { get; set; }
 

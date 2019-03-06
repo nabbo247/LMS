@@ -22,6 +22,8 @@ namespace LMSBL.DBModels
         [StringLength(50)]
         public string CourseCategory { get; set; }
 
+
+        [Required]
         [StringLength(250)]
         public string CoursePath { get; set; }
 
@@ -36,7 +38,7 @@ namespace LMSBL.DBModels
 
         public string TenantName { get; set; }
 
-       
+       [Required]
         public HttpPostedFileBase ZipFile { get; set; }
 
         public List<TblTenant> Tenants { get; set; }

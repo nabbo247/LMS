@@ -13,17 +13,21 @@ namespace LMSBL.DBModels
         [Key]
         public int TenantId { get; set; }
 
-        
+        [Required]
         [StringLength(50)]
         [DisplayName("Tenant Name")]
         public string TenantName { get; set; }
 
        
+        [Required]
         [StringLength(50)]
         [DisplayName("Tenant Domain")]
         public string TenantDomain { get; set; }
 
-        public string domainUrl { get; set; }
+
+        [Required]
+        public string DomainUrl { get; set; }
+
 
         [Column(TypeName = "date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]

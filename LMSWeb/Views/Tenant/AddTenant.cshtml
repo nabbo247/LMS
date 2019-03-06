@@ -23,7 +23,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.TenantName, new { htmlAttributes = new { @class = "" } })
                     @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "form-control", @id = "txtdomainName" } })
+                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "", @id = "txtdomainName" } })
                     @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
                     <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success"/>
                     <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
@@ -41,7 +41,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivationFrom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ActivationFrom, new { htmlAttributes = new { @class = "" } })
                     @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -49,14 +49,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivationTo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ActivationTo, new { htmlAttributes = new { @class = "" } })
                     @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.NoOfUserAllowed, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.NoOfUserAllowed, new { htmlAttributes = new { @class = "" } })
                     @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
                 </div>
             </div>
