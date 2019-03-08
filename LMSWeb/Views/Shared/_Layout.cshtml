@@ -124,13 +124,13 @@
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">
-                                        John Abraham
+                                        Omkar
                                     </h5>
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="/Account/Index"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="/Login/Logout" ><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="/Login/Logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -180,15 +180,21 @@
                                     </a>
                                 </li>
                             }
-                            @if (model.RoleId == 1 || model.RoleId == 2)
+                            @if (model.RoleId == 3)
                             {
                                 <li class="nav-item ">
-                                    <a class="nav-link active" href="..\Reports\Index">
-                                        <i class="fa fa-book-open"></i>
-                                        Reports
+                                    <a class="nav-link active" href="..\Assignment\MyAssignments">
+                                        <i class="fa fa-fw fa-user-circle"></i>
+                                        My Assignments
                                     </a>
                                 </li>
                             }
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="..\Reports\Index">
+                                    <i class="fa fa-book-open"></i>
+                                    Reports
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>

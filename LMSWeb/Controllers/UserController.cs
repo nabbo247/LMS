@@ -62,6 +62,7 @@ namespace LMSWeb.Controllers
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 objUser.TenantId = sessionUser.TenantId;
                 objUser.CreatedBy = sessionUser.UserId;
+               // objUser.DOB = objUser.DOB;
                 objUser.IsActive = true;
                 int rows = ur.AddUser(objUser);
                 if (rows != 0)
