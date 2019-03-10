@@ -8,8 +8,8 @@ namespace LMSBL.Repository
 {
     public class DataRepository
     {
-        //private static string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        private static string constr = "Data Source=.;Initial Catalog=LMSDB;Integrated Security=True";//take from Web.Config:
+        private static string constr = ConfigurationManager.ConnectionStrings["LMSContext"].ConnectionString;
+        //private static string constr = "Data Source=.;Initial Catalog=LMSDB;Integrated Security=True";//take from Web.Config:
         public List<SqlParameter> parameters = new List<SqlParameter>();
 
         public void AddParameter(string parameterName, SqlDbType dbType, object value)
