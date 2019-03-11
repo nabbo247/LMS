@@ -22,8 +22,6 @@ namespace LMSBL.DBModels
         [StringLength(50)]
         public string CourseCategory { get; set; }
 
-
-        [Required]
         [StringLength(250)]
         public string CoursePath { get; set; }
 

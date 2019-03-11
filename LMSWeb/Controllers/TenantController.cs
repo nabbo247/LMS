@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
 
@@ -83,19 +84,20 @@ namespace LMSWeb.Controllers
             return View(objTenant);
         }
 
-        public ActionResult DeleteTenant(int id,bool isActive)
-        {
-            ViewBag.isActive = isActive;
-            List<TblTenant> tenantDetails = new List<TblTenant>();
-            tenantDetails = tr.GetTenantById(id);
-            TblTenant objEditData = new TblTenant();
-            objEditData = tenantDetails[0];
-            return View(objEditData);
-        }
+        //public ActionResult DeleteTenant(int id,bool isActive)
+        //{
+        //    ViewBag.isActive = isActive;
+        //    List<TblTenant> tenantDetails = new List<TblTenant>();
+        //    tenantDetails = tr.GetTenantById(id);
+        //    TblTenant objEditData = new TblTenant();
+        //    objEditData = tenantDetails[0];
+        //    return View(objEditData);
+        //}
 
         [HttpPost,ActionName("DeleteTenant")]
         public ActionResult DeleteConfirmTenant(int id)
         {
+            Response response = new Response();
             List<TblTenant> objTenantList = tr.GetTenantById(id);
             TblTenant objTenant = objTenantList[0];
             if (ModelState.IsValid)
@@ -111,14 +113,17 @@ namespace LMSWeb.Controllers
                 int rows = tr.DeleteTenants(objTenant);
                 if (rows != 0)
                 {
-                    return RedirectToAction("Index");
+                    response.StatusCode = 1;
+                    //return RedirectToAction("Index");
                 }
                 else
                 {
-                    return View(objTenant);
+                    response.StatusCode = 0;
+                    //return View(objTenant);
                 }
             }
-            return View(objTenant);
+            //return View(objTenant);
+            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult VerifyTenantDomain(string Domain)

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
 
@@ -75,19 +76,20 @@ namespace LMSWeb.Controllers
         }
 
 
-        public ActionResult DeleteCourse(int id, bool isActive)
-        {
-            ViewBag.isActive = isActive;
-            List<TblCourse> CourseDetails = new List<TblCourse>();
-            CourseDetails = cc.GetCourseById(id);
-            TblCourse objEditData = new TblCourse();
-            objEditData = CourseDetails[0];
-            return View(objEditData);
-        }
+        //public ActionResult DeleteCourse(int id, bool isActive)
+        //{
+        //    ViewBag.isActive = isActive;
+        //    List<TblCourse> CourseDetails = new List<TblCourse>();
+        //    CourseDetails = cc.GetCourseById(id);
+        //    TblCourse objEditData = new TblCourse();
+        //    objEditData = CourseDetails[0];
+        //    return View(objEditData);
+        //}
 
         [HttpPost, ActionName("DeleteCourse")]
         public ActionResult DeleteConfirmCourse(int id)
         {
+            Response response = new Response();
             List<TblCourse> objCourseList = cc.GetCourseById(id);
             TblCourse objCourse = objCourseList[0];
             if (ModelState.IsValid)
@@ -103,14 +105,17 @@ namespace LMSWeb.Controllers
                 int rows = cc.DeleteCourse(objCourse);
                 if (rows != 0)
                 {
-                    return RedirectToAction("Index");
+                    response.StatusCode = 1;
+                    //return RedirectToAction("Index");
                 }
                 else
                 {
-                    return View(objCourse);
+                    response.StatusCode = 0;
+                    //return View(objCourse);
                 }
             }
-            return View(objCourse);
+            //return View(objTenant);
+            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
         }
 
 

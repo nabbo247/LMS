@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
 
@@ -106,19 +107,20 @@ namespace LMSWeb.Controllers
             return View(objUser);
         }
 
-        public ActionResult DeleteUser(int id,bool isActive)
-        {
-            ViewBag.isActive = isActive;
-            List<TblUser> userDetails = new List<TblUser>();
-            userDetails = ur.GetUserById(id);
-            TblUser objEditData = new TblUser();
-            objEditData = userDetails[0];
-            return View(objEditData);
-        }
+        //public ActionResult DeleteUser(int id,bool isActive)
+        //{
+        //    ViewBag.isActive = isActive;
+        //    List<TblUser> userDetails = new List<TblUser>();
+        //    userDetails = ur.GetUserById(id);
+        //    TblUser objEditData = new TblUser();
+        //    objEditData = userDetails[0];
+        //    return View(objEditData);
+        //}
 
         [HttpPost, ActionName("DeleteUser")]
         public ActionResult DeleteConfirmUser(int id)
         {
+            Response response = new Response();
             List<TblUser> objUserList = ur.GetUserById(id);
             TblUser objUser = objUserList[0];
             if (ModelState.IsValid)
@@ -134,14 +136,17 @@ namespace LMSWeb.Controllers
                 int rows = ur.DeleteUser(objUser);
                 if (rows != 0)
                 {
-                    return RedirectToAction("Index");
+                    response.StatusCode = 1;
+                    //return RedirectToAction("Index");
                 }
                 else
                 {
-                    return View(objUser);
+                    response.StatusCode = 0;
+                    //return View(objUser);
                 }
             }
-            return View(objUser);
+            //return View(objTenant);
+            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
         }
     }
 }
