@@ -7,31 +7,95 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+
     <title>Index</title>
 
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/CSS/lib/style.css" rel="stylesheet" />
-    <link href="~/assets/vendor/fonts/circular-std/style.css" rel="stylesheet" />
-    <link href="~/CSS/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
+    @* <meta name="viewport" content="width=device-width" />
+            <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/CSS/lib/styleNew.css" rel="stylesheet" />
+        <link href="~/assets/vendor/fonts/circular-std/style.css" rel="stylesheet" />
+        <link href="~/CSS/fontawesome/css/fontawesome-all.css" rel="stylesheet" />*@
 
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/CSS/lib/styleNew.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-        body {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-align: center;
-            align-items: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-    </style>
+    @*<style>
+            html,
+            body {
+                height: 100%;
+            }
+
+            body {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+        </style>*@
 </head>
+
 <body>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div class="sidenav">
+        <!--  <div class="login-main-text">
+            <h2>Application<br> Login Page</h2>
+            <p>Login or register from here to access.</p>
+         </div> -->
+    </div>
+    <div class="main">
+        <div class="corner-logo">
+            <img src="~/assets/images/logo.png" />
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <h1 class="main-h">LOGIN</h1>
+                <h1 class="main-h3">GET STARTED WITH US</h1>
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" id="password" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group">
+                        <span><small>Forgot password</small></span>
+                        <span style="    float: right;">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <small>Remember me</small>
+                        </span>
+                    </div>
+                    <button type="button" onclick="VerifyUser()" class="btn btn-black">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<!-- OLD BODY-->
+<div style="display:none;">
     <div class="splash-container">
         <div class="card ">
             <div class="card-header text-center">
@@ -89,5 +153,7 @@
             });
         }
     </script>
-</body>
+</div>
+
+<!-- END OLD BODY-->
 </html>

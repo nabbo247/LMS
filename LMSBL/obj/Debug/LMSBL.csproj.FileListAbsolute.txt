@@ -44,3 +44,15 @@ D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CoreCom
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
 D:\softwares n work\Work\Git Folder\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\LMSBL.dll.config
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\LMSBL.dll
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\LMSBL.pdb
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\EntityFramework.dll
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.dll
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\EntityFramework.xml
+D:\_Work\LMS\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
+D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache
+D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CoreCompileInputs.cache
+D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
+D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
+D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb

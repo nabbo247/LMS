@@ -175,6 +175,7 @@
     <Content Include="assets\images\error-img.png" />
     <Content Include="assets\images\github.png" />
     <Content Include="assets\images\loader.svg" />
+    <Content Include="assets\images\loginpage.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\mail_chimp.png" />
     <Content Include="assets\images\product-pic-2.jpg" />
@@ -553,6 +554,7 @@
     <Content Include="CSS\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="CSS\jquery-ui.min.css" />
     <Content Include="CSS\lib\style.css" />
+    <Content Include="CSS\lib\styleNew.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
