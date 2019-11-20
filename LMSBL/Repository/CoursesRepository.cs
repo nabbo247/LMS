@@ -57,10 +57,10 @@ namespace LMSBL.Repository
             return coursesDetails;
         }
 
-        public List<TblCourse> GetAllActiveCourses(int TenantId)
+        public List<TblCourse> GetAllCourses(int TenantId)
         {
             db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
-            DataSet ds = db.FillData("CoursesGetAll");
+            DataSet ds = db.FillData("sp_CoursesGet");
             List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
             {
                 CourseId = Convert.ToInt32(dr["courseId"]),
@@ -69,6 +69,8 @@ namespace LMSBL.Repository
                 CourseCategory = Convert.ToString(dr["courseCategory"]),
                 CoursePath = Convert.ToString(dr["coursePath"]),
                 IsActive = Convert.ToBoolean(dr["isActive"]),
+                CreatedBy=Convert.ToInt32(dr["createdBy"]),
+                CreatedOn=Convert.ToDateTime(dr["createdOn"]),
                 TenantId = Convert.ToInt32(dr["tenantId"]),
                 TenantName = Convert.ToString(dr["tenantName"])
 
@@ -76,24 +78,7 @@ namespace LMSBL.Repository
             return coursesDetails;
         }
 
-        public List<TblCourse> GetAllInActiveCourses(int TenantId)
-        {
-            db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
-            DataSet ds = db.FillData("CourseGetAllInactive");
-            List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
-            {
-                CourseId = Convert.ToInt32(dr["courseId"]),
-                CourseName = Convert.ToString(dr["courseName"]),
-                CourseDetails = Convert.ToString(dr["courseDetails"]),
-                CourseCategory = Convert.ToString(dr["courseCategory"]),
-                CoursePath = Convert.ToString(dr["coursePath"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"])
-
-            }).ToList();
-            return coursesDetails;
-        }
+        
 
         public int AddCourse(TblCourse obj)
         {
