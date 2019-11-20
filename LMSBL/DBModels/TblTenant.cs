@@ -25,7 +25,7 @@ namespace LMSBL.DBModels
         public string TenantDomain { get; set; }
 
 
-        [Required]
+        
         public string DomainUrl { get; set; }
 
 
