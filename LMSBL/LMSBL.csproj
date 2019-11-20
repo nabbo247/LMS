@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\Exceptions.cs" />
     <Compile Include="Common\Response.cs" />
     <Compile Include="DBModels\LMSContext.cs" />
     <Compile Include="DBModels\TblAssignmentAndTracking.cs" />
