@@ -33,7 +33,8 @@ label.col-4.p-0 {
     justify-content: left!important;
 }
 i.col-2 {
-    background: url(./assets/img/info-icon.png) no-repeat;
+    background: url('../../assets/images/info-icon.png') no-repeat;
+    /*background: url(./assets/img/info-icon.png) no-repeat;*/
     margin-left: 7px;
     cursor: pointer;
 }
@@ -74,7 +75,7 @@ label.btn-bs-file.btn.btn-lg.btn-primary-outline {
     border: 1px solid #ced4da;
 }
 i.col-2.trash-icon {
-    background: url(./assets/img/trash.png) no-repeat;
+    background: url('../../assets/images/trash.png') no-repeat;
     margin-left: 7px;
     cursor: pointer;
 }

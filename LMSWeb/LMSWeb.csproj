@@ -174,7 +174,10 @@
     <Content Include="assets\images\eco-slider-img-3.png" />
     <Content Include="assets\images\error-img.png" />
     <Content Include="assets\images\github.png" />
+    <Content Include="assets\images\imagplaceholder.png" />
+    <Content Include="assets\images\info-icon.png" />
     <Content Include="assets\images\loader.svg" />
+    <Content Include="assets\images\Login Cognition.png" />
     <Content Include="assets\images\loginpage.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\mail_chimp.png" />
@@ -184,6 +187,7 @@
     <Content Include="assets\images\product-pic.jpg" />
     <Content Include="assets\images\slack.png" />
     <Content Include="assets\images\switch.png" />
+    <Content Include="assets\images\trash.png" />
     <Content Include="assets\libs\css\style.css" />
     <Content Include="assets\libs\js\dashboard-ecommerce.js" />
     <Content Include="assets\libs\js\dashboard-finance.js" />
