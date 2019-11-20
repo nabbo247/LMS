@@ -8,10 +8,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>AddTenant</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 <body>
     @using (Html.BeginForm())
@@ -20,6 +17,53 @@
     <div class="main-container container mt-5">
         <h4>Add Client</h4>
         <form class="form-inline">
+            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row col-12">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.TenantName, new { @class = "col-6 form-control ml-0", @id="txtTenantName" })
+                    @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.TenantDomain, new { @class = "col-6 form-control ml-0", @id = "txtdomainName" })
+                    @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
+                    <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success" />
+                    <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
+                </div>
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12 mb-4">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.ActivationFrom, new { @class = "col-6 ml-0 form-control", @id="DtActivitionFrom", @autocomplete = "off" } )
+                    @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.ActivationTo, new { @class = "col-6 ml-0 form-control", @id= "DtActivitionTo", @autocomplete = "off" } )
+                    @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
+                </div>
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.NoOfUserAllowed, new { @class = "col-6 ml-0 form-control",@id="txtNoOfUsers" } )
+                    @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @*<label class="col-3 p-0">Instruction Color</label>
+                <select class="col-6 ml-0 form-control" id="exampleFormControlSelect1">
+                    <option>Select Instruction color</option>
+                </select>
+                <i class="col-2">&nbsp;</i>*@
+                </div>
+                <hr class="form-divider">
+            </div>
             <div class="row col-12">
                 <div class="form-group col-6 pl-0">
                     <label class="col-3 p-0">Upload Logo</label>
@@ -43,58 +87,6 @@
                 </div>
                 <hr class="form-divider">
             </div>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row col-12">
-                <div class="form-group col-6 pl-0">
-                    @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "col-3 p-0" })
-                    @Html.EditorFor(model => model.TenantName, new { htmlAttributes = new { @class = "col-6 form-control ml-0" } })
-                    @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
-                    <i data-toggle="tooltip" title="Hooray!" class="col-2">&nbsp;</i>
-                </div>
-                <div class="form-group col-6 pl-0">
-                    @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "col-3 p-0" })
-                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "col-6 form-control ml-0", @id = "txtdomainName" } })
-                    @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
-                    <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success" />
-                    <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
-                    <i class="col-2">&nbsp;</i>
-                </div>
-                <hr class="form-divider">
-            </div>
-
-            <div class="row col-12 mb-4">
-                <div class="form-group col-6 pl-0">
-                    @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "col-3 p-0" })
-                    @Html.EditorFor(model => model.ActivationFrom, new { htmlAttributes = new { @class = "col-6 ml-0 form-control" } })
-                    @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
-                    <i class="col-2">&nbsp;</i>
-                </div>
-                <div class="form-group col-6 pl-0">
-                    @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "col-3 p-0" })
-                    @Html.EditorFor(model => model.ActivationTo, new { htmlAttributes = new { @class = "col-6 ml-0 form-control" } })
-                    @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
-                    <i class="col-2">&nbsp;</i>
-                </div>
-                <hr class="form-divider">
-            </div>
-
-            <div class="row col-12">
-                <div class="form-group col-6 pl-0">
-                    @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "col-3 p-0" })
-                    @Html.EditorFor(model => model.NoOfUserAllowed, new { htmlAttributes = new { @class = "col-6 ml-0 form-control" } })
-                    @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
-                    <i class="col-2">&nbsp;</i>
-                </div>
-                <div class="form-group col-6 pl-0">
-                    @*<label class="col-3 p-0">Instruction Color</label>
-                <select class="col-6 ml-0 form-control" id="exampleFormControlSelect1">
-                    <option>Select Instruction color</option>
-                </select>
-                <i class="col-2">&nbsp;</i>*@
-                </div>
-                <hr class="form-divider">
-            </div>
-
             @*<div class="row col-12">
             <div class="form-group col-6 pl-0">
                 <label class="col-3 p-0">Icon Style</label>
@@ -135,10 +127,10 @@
         </div>*@
             <div class="row col-12" style="margin-bottom: 34px;">
                 <div class="col-8">
-                    <button type="button" class="btn btn-outline-secondary"><b>Clear All</b></button>
+                    <button type="button" class="btn btn-outline-secondary" id="btnClearAll"><b>Clear All</b></button>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btn btn-outline-secondary"><b>Cancel</b></button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="" ><b>Cancel</b></button>
                     <button type="submit" value="Create" class="btn btn-outline-secondary"><b>Submit</b></button>
                 </div>
             </div>
@@ -203,10 +195,20 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('input[type=datetime]').datepicker({
-                    dateFormat: "yy-mm-dd",
-                    showWeek: true
+                console.log('Ready..!');
+
+                $('#DtActivitionFrom').datepicker({
+                    dateFormat: "yy-MM-dd",
+                    showWeek: true,
+                    startDate: new Date()
                 });
+
+                $('#DtActivitionTo').datepicker({
+                    dateFormat: "yy-MM-dd",
+                    showWeek: true,
+                    startDate: new Date()
+                });
+                
 
                 $("#txtdomainName").keypress(function () {
                     $("#lblerrorDomain").hide()
@@ -214,6 +216,15 @@
 
                 $("#btnTenantDomainName").click(function () {
                     VerifyTenantDomain($('#txtdomainName').val());
+                })
+
+                $('#btnClearAll').click(function () {
+
+                    $('#txtTenantName').val('');
+                    $('#txtdomainName').val('');
+                    $('#DtActivitionFrom').val('');
+                    $('#DtActivitionTo').val('');
+                    $('#txtNoOfUsers').val('');
                 })
             });
 
