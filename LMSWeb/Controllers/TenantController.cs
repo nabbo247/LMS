@@ -4,9 +4,11 @@ using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
 
+
 namespace LMSWeb.Controllers
 {
 
+    
     public class TenantController : Controller
     {
         TenantRepository tr = new TenantRepository();
