@@ -4,73 +4,99 @@
     ViewBag.Title = "AddCourse";
     //Layout = "~/Views/_ViewStart.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AddCourse</title>
-</head>
-<body>
-    @using (Html.BeginForm("AddCourse", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" })) 
-    {
-        @Html.AntiForgeryToken()
-        
-    <div class="form-horizontal">
-        <h4>AddCourse</h4>
-        <hr />
+@using (Html.BeginForm("AddCourse", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h1>Add New Course</h1>
+    <div class="row col-12">
+        <hr class="form-divider">
+    </div>
+    <form class="form-inline">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "" } })
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseName, new { htmlAttributes = new { @class = "col-6 ml-0 form-control" } })
                 @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseDetails, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseDetails, new { htmlAttributes = new { @class = "" } })
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseDetails, htmlAttributes: new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseDetails, new { htmlAttributes = new { @class = "col-6 form-control ml-0" } })
                 @Html.ValidationMessageFor(model => model.CourseDetails, "", new { @class = "text-danger" })
             </div>
+            <hr class="form-divider">
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseCategory, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseCategory, new { htmlAttributes = new { @class = "" } })
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseCategory, htmlAttributes: new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseCategory, new { htmlAttributes = new { @class = "col-6 ml-0 form-control" } })
                 @Html.ValidationMessageFor(model => model.CourseCategory, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model=>model.ZipFile, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ZipFile, new { type = "file" })
-                @Html.ValidationMessageFor(model => model.ZipFile, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(x => Model.Tenants[0].TenantName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownListFor(x => Model.Tenants[0].TenantId, new SelectList(Model.Tenants, "TenantId", "TenantName"), htmlAttributes: new { @class = "", id = "Tenants" })
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(x => Model.Tenants[0].TenantName, htmlAttributes: new { @class = "col-3 p-0" })
+                @Html.DropDownListFor(x => Model.Tenants[0].TenantId, new SelectList(Model.Tenants, "TenantId", "TenantName"),
+                htmlAttributes: new { @class = "col-6 ml-0 form-control", id = "Tenants" })
                 @Html.ValidationMessageFor(x => Model.Tenants[0].TenantId, "", new { @class = "text-danger" })
             </div>
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.ZipFile, htmlAttributes: new { @class = "col-3 p-0" })
+                <label class="btn-bs-file btn btn-lg btn-primary-outline">
+                    Browse<input type="file" onchange="readURL(this);" />
+                </label>
+                @Html.ValidationMessageFor(model => model.ZipFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-6 pl-0">
+                <img class="browse-img" id="blah" src="~/assets/images/imagplaceholder.png">
+                <div class="col-6 ml-0">
+                    <span>File Name: <span id="browse-img-name"> - </span></span> <br>
+                    <small>File Size: <span id="browse-img-size"> - </span>KB</small>
+                </div>
+                <i onclick="deleteImage()" class="col-2 fa fa-trash"></i>
+            </div>
+
+            <hr class="form-divider">
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default btn-success" />
+        <div class="row col-12" style="margin-bottom: 34px;">
+            <div class="col-8">
+
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-outline-secondary"><b>Cancel</b></button>
+                <button type="submit" class="btn btn-outline-secondary"><b>Create</b></button>
             </div>
         </div>
-    </div>
+    </form>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+            console.log(input.files[0]);
+            var filename = input.files[0].name;
+            console.log(filename);
+            $('#browse-img-name').text(filename);
+            $('#browse-img-size').text(input.files[0].size);
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
-</html>
+
+    function deleteImage() {
+        $('#browse-img-name').text('-');
+        $('#browse-img-size').text('-');
+        $('#blah').attr('src', '~/assets/images/imagplaceholder.png');
+    }
+</script>

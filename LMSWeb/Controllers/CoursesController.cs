@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -16,7 +13,11 @@ namespace LMSWeb.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View();
+            List<TblCourse> listInActiveCourses = new List<TblCourse>();
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            listInActiveCourses = cc.GetAllCourses(sessionUser.TenantId);
+
+            return View(listInActiveCourses);
         }
 
 
@@ -27,25 +28,6 @@ namespace LMSWeb.Controllers
             courseDetails = cc.GetCourseById(1);
 
             return View(courseDetails);
-        }
-
-        public ActionResult GetAllActiveCourses()
-        {
-            List<TblCourse> listActiveCourses = new List<TblCourse>();
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            listActiveCourses = cc.GetAllActiveCourses(sessionUser.TenantId);
-
-            return PartialView(listActiveCourses);
-        }
-
-        public ActionResult GetAllInActiveCourses()
-        {
-
-            List<TblCourse> listInActiveCourses = new List<TblCourse>();
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            listInActiveCourses = cc.GetAllInActiveCourses(sessionUser.TenantId);
-
-            return PartialView(listInActiveCourses);
         }
 
         public ActionResult AddCourse()
