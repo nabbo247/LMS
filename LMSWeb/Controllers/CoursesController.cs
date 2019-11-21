@@ -56,6 +56,41 @@ namespace LMSWeb.Controllers
             }
             return View(objCourse);
         }
+        public ActionResult EditCourse(int id)
+        {
+            List<TblCourse> CourseDetails = new List<TblCourse>();
+            CourseDetails = cc.GetCourseById(id);
+            TblCourse objEditData = new TblCourse
+            {
+                Tenants = tr.GetAllActiveTenants()
+            };
+            CourseDetails[0].Tenants = objEditData.Tenants;
+            objEditData = CourseDetails[0];
+            if (CourseDetails[0].CoursePath != null) {
+                ViewBag.JavaScriptFunction = string.Format("showFileName('{0}');", CourseDetails[0].CoursePath);
+            }
+            
+            return View(objEditData);
+        }
+
+        [HttpPost]
+        public ActionResult EditCourse(TblCourse objCourse)
+        {
+            if (ModelState.IsValid)
+            {
+                int rows = cc.EditCourse(objCourse);
+                if (rows != 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(objCourse);
+                }
+            }
+            return View(objCourse);
+        }
+
 
 
         //public ActionResult DeleteCourse(int id, bool isActive)

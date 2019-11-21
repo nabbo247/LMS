@@ -81,12 +81,12 @@
                     @Html.DisplayFor(modelItem => item.TenantName)
                 </td>
                 <td>
-                    <button type="button" onclick="location.href='@Url.Action("AddCourse", "Courses",new { id = item.CourseId })';return false;"
+                    <button type="button" onclick="location.href='@Url.Action("EditCourse", "Courses",new { id = item.CourseId })';return false;"
                             class="btn text-center btn-warning">
                         Edit
                     </button>
-                    <button type="button" onclick="location.href='@Url.Action("AddCourse", "Courses",new { id = item.CourseId })';return false;"
-                            class="btn  text-center btn-warning">
+                    <button type="button" class="btn  text-center btn-warning"
+                        onclick="ConfirmationAlert('@item.CourseName','@item.CourseId',true)">
                         Delete
                     </button>
                 </td>
@@ -96,4 +96,57 @@
 
 </table>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Courses').DataTable();
+    });
+    function ConfirmationAlert(Name, Id, IsActive) {
+        debugger;
+        var data = {
+            id: Id
+        }
+        var strDelete = "";
+        if (IsActive == true) {
+            strDelete = "Deactivate";
+        }
+        else {
+            strDelete = "Activate";
+        }
+        swal({
+            title: "Are you sure you want to " + strDelete + " Course " + Name + " ?",
+            text: "You are going to " + strDelete + " the tenant",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: strDelete,
+            cancelButtonText: "Cancel",
 
+        }).then((isConfirm) => {
+            if (isConfirm.value == true) {
+                $.ajax({
+                    url: "/Courses/DeleteCourse",
+                    type: "POST",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        var baseUrl = "/Courses/Index";
+                        if (result == 1) {
+                            window.location.href = baseUrl
+                        }
+                        else {
+                            alert('Something went wrong');
+                        }
+
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+
+            } else {
+                swal("Cancelled", "Cancelled", "error");
+            }
+        });
+    }
+</script>

@@ -9,10 +9,8 @@ namespace LMSBL.DBModels
     [Table("tblCourses")]
     public partial class TblCourse
     {
-        [Key]
         public int CourseId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string CourseName { get; set; }
 
@@ -36,7 +34,6 @@ namespace LMSBL.DBModels
 
         public string TenantName { get; set; }
 
-       [Required]
         public HttpPostedFileBase ZipFile { get; set; }
 
         public List<TblTenant> Tenants { get; set; }
