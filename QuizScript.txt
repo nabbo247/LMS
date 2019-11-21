@@ -1,0 +1,168 @@
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblQuiz]    Script Date: 11/21/2019 6:05:35 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblQuiz](
+	[QuizId] [int] IDENTITY(1,1) NOT NULL,
+	[QuizName] [nvarchar](500) NOT NULL,
+	[QuizDescription] [ntext] NULL,
+ CONSTRAINT [PK_tblQuiz] PRIMARY KEY CLUSTERED 
+(
+	[QuizId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblQuestionType]    Script Date: 11/21/2019 6:06:05 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblQuestionType](
+	[QuestionTypeID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionTypeText] [nvarchar](250) NOT NULL,
+ CONSTRAINT [PK_tblQuestionType] PRIMARY KEY CLUSTERED 
+(
+	[QuestionTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblQuestion]    Script Date: 11/21/2019 6:06:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblQuestion](
+	[QuestionId] [int] IDENTITY(1,1) NOT NULL,
+	[QuizId] [int] NOT NULL,
+	[QuestionTypeId] [int] NOT NULL,
+	[QuestionText] [ntext] NOT NULL,
+ CONSTRAINT [PK_tblQuestion] PRIMARY KEY CLUSTERED 
+(
+	[QuestionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblQuestion]  WITH CHECK ADD  CONSTRAINT [FK_tblQuestion_tblQuestion] FOREIGN KEY([QuizId])
+REFERENCES [dbo].[tblQuiz] ([QuizId])
+GO
+
+ALTER TABLE [dbo].[tblQuestion] CHECK CONSTRAINT [FK_tblQuestion_tblQuestion]
+GO
+
+ALTER TABLE [dbo].[tblQuestion]  WITH CHECK ADD  CONSTRAINT [FK_tblQuestion_tblQuestionType] FOREIGN KEY([QuestionTypeId])
+REFERENCES [dbo].[tblQuestionType] ([QuestionTypeID])
+GO
+
+ALTER TABLE [dbo].[tblQuestion] CHECK CONSTRAINT [FK_tblQuestion_tblQuestionType]
+GO
+
+
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblQuestionOption]    Script Date: 11/21/2019 6:07:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblQuestionOption](
+	[OptionId] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionId] [int] NOT NULL,
+	[OptionText] [nvarchar](max) NOT NULL,
+	[CorrectOption] [bit] NULL,
+ CONSTRAINT [PK_tblQuestionOption] PRIMARY KEY CLUSTERED 
+(
+	[OptionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblQuestionOption]  WITH CHECK ADD  CONSTRAINT [FK_tblQuestionOption_tblQuestion] FOREIGN KEY([QuestionId])
+REFERENCES [dbo].[tblQuestion] ([QuestionId])
+GO
+
+ALTER TABLE [dbo].[tblQuestionOption] CHECK CONSTRAINT [FK_tblQuestionOption_tblQuestion]
+GO
+
+
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblResponses]    Script Date: 11/21/2019 6:07:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblResponses](
+	[ResponseId] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionId] [int] NOT NULL,
+	[OptionIds] [nvarchar](100) NOT NULL,
+	[QuestionFeedback] [ntext] NULL,
+	[UserId] [numeric](18, 0) NULL,
+	[QuizId] [int] NOT NULL,
+ CONSTRAINT [PK_tblResponses] PRIMARY KEY CLUSTERED 
+(
+	[ResponseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblResponses]  WITH CHECK ADD  CONSTRAINT [FK_tblResponses_tblQuestion] FOREIGN KEY([QuestionId])
+REFERENCES [dbo].[tblQuestion] ([QuestionId])
+GO
+
+ALTER TABLE [dbo].[tblResponses] CHECK CONSTRAINT [FK_tblResponses_tblQuestion]
+GO
+
+ALTER TABLE [dbo].[tblResponses]  WITH CHECK ADD  CONSTRAINT [FK_tblResponses_tblQuiz] FOREIGN KEY([QuizId])
+REFERENCES [dbo].[tblQuiz] ([QuizId])
+GO
+
+ALTER TABLE [dbo].[tblResponses] CHECK CONSTRAINT [FK_tblResponses_tblQuiz]
+GO
+
+
+USE [LMSDB]
+GO
+
+/****** Object:  Table [dbo].[tblQuizScore]    Script Date: 11/21/2019 6:08:01 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblQuizScore](
+	[QuizId] [int] NOT NULL,
+	[UserId] [nvarchar](100) NOT NULL,
+	[Score] [numeric](18, 0) NOT NULL,
+	[AttemptedDate] [datetime] NOT NULL
+) ON [PRIMARY]
+GO
+
+
