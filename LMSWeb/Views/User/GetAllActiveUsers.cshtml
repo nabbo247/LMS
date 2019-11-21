@@ -42,32 +42,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var user in Model)
+                            @if (Model != null)
                             {
-                                <tr>
-                                    <th scope="row">@user.UserId</th>
-                                    <td>@user.FirstName</td>
-                                    <td>@user.LastName</td>
-                                    <td>@user.EmailId</td>
-                                    <td>@user.DOB.Value.ToString("dd-MMM-yyyy")</td>
-                                    <td>@user.ContactNo</td>
-                                    @*<td>@user.TenantName</td>*@
-                                    <td>@user.RoleName</td>
-                                    <td style="color:green;text-align:center"><i class="fas fa-fw fa-check"></i></td>
-                                    <td>
-                                        <a href="@Url.Action("EditUser", "User",new { id=user.UserId})">
-                                            <i class="fas fa-fw fa-edit" title="Edit User"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @*<a href="@Url.Action("DeleteUser", "User",new { id=user.UserId,isActive=true})">
-                                                <i class="fas fa-fw fa-trash" title="Deactivate User"></i>
-                                            </a>*@
-                                        <button type="submit" class="btn btn-link" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)">
-                                            <i class="fas fa-fw fa-trash" title="Deactivate Tenant"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@user.UserId</th>
+                                        <td>@user.FirstName</td>
+                                        <td>@user.LastName</td>
+                                        <td>@user.EmailId</td>
+                                        <td>@user.DOB.Value.ToString("dd-MMM-yyyy")</td>
+                                        <td>@user.ContactNo</td>
+                                        @*<td>@user.TenantName</td>*@
+                                        <td>@user.RoleName</td>
+                                        <td style="color:green;text-align:center"><i class="fas fa-fw fa-check"></i></td>
+                                        <td>
+                                            <a href="@Url.Action("EditUser", "User", new { id = user.UserId })">
+                                                <i class="fas fa-fw fa-edit" title="Edit User"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @*<a href="@Url.Action("DeleteUser", "User",new { id=user.UserId,isActive=true})">
+                                                    <i class="fas fa-fw fa-trash" title="Deactivate User"></i>
+                                                </a>*@
+                                            <button type="submit" class="btn btn-link" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)">
+                                                <i class="fas fa-fw fa-trash" title="Deactivate Tenant"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
