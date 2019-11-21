@@ -10,16 +10,13 @@ namespace LMSBL.DBModels
     [Table("TblTenant")]
     public partial class TblTenant
     {
-        [Key]
         public int TenantId { get; set; }
 
-        [Required]
         [StringLength(50)]
         [DisplayName("Tenant Name")]
         public string TenantName { get; set; }
 
        
-        [Required]
         [StringLength(50)]
         [DisplayName("Tenant Domain")]
         public string TenantDomain { get; set; }
