@@ -16,7 +16,11 @@ namespace LMSWeb.Controllers
         // GET: Tenant
         public ActionResult Index()
         {
-            return View();
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            List<TblUser> lstAllUsers = new List<TblUser>();
+            lstAllUsers = ur.GetAllActiveUsers(sessionUser.TenantId);
+
+            return View(lstAllUsers);
         }
 
         public ActionResult GetUserDetails()

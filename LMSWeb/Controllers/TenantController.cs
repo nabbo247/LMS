@@ -16,7 +16,9 @@ namespace LMSWeb.Controllers
         // GET: Tenant
         public ActionResult Index()
         {
-            return View();
+            List<TblTenant> lstAllTenants = new List<TblTenant>();
+            lstAllTenants = tr.GetAllActiveTenants();
+            return View(lstAllTenants);
         }
 
         public ActionResult GetAllActiveTenants()
