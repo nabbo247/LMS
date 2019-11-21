@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
+using LMSBL.Common;
 using LMSBL.DBModels;
 
 namespace LMSBL.Repository
@@ -12,24 +13,25 @@ namespace LMSBL.Repository
     public class CoursesRepository
     {
         DataRepository db = new DataRepository();
+        Exceptions newException = new Exceptions();
         public string UploadFile(HttpPostedFileBase zip)
         {
             var path = ConfigurationManager.AppSettings["DestinationPath"].ToString();
             byte[] data;
             using (Stream inputStream = zip.InputStream)
             {
-                using(MemoryStream ms=new MemoryStream())
+                using (MemoryStream ms = new MemoryStream())
                 {
                     inputStream.CopyTo(ms);
                     data = ms.ToArray();
                 }
-               
+
                 //if (!(inputStream is MemoryStream memoryStream))
                 //{
                 //    memoryStream = new MemoryStream();
                 //    inputStream.CopyTo(memoryStream);
                 //}
-               // data = memoryStream.ToArray();
+                // data = memoryStream.ToArray();
                 System.IO.File.WriteAllBytes(Path.Combine(path, zip.FileName), data);
 
             }
@@ -39,46 +41,61 @@ namespace LMSBL.Repository
 
         public List<TblCourse> GetCourseById(int CourseId)
         {
-
-            db.AddParameter("@courseId", SqlDbType.Int, CourseId);
-            DataSet ds = db.FillData("CourseGetById");
-            List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+            try
             {
-                CourseId = Convert.ToInt32(dr["courseId"]),
-                CourseName = Convert.ToString(dr["courseName"]),
-                CourseDetails = Convert.ToString(dr["courseDetails"]),
-                CourseCategory = Convert.ToString(dr["courseCategory"]),
-                CoursePath = Convert.ToString(dr["coursePath"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"])
+                db.AddParameter("@courseId", SqlDbType.Int, CourseId);
+                DataSet ds = db.FillData("CourseGetById");
+                List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+                {
+                    CourseId = Convert.ToInt32(dr["courseId"]),
+                    CourseName = Convert.ToString(dr["courseName"]),
+                    CourseDetails = Convert.ToString(dr["courseDetails"]),
+                    CourseCategory = Convert.ToString(dr["courseCategory"]),
+                    CoursePath = Convert.ToString(dr["coursePath"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    TenantName = Convert.ToString(dr["tenantName"])
 
-            }).ToList();
-            return coursesDetails;
+                }).ToList();
+                return coursesDetails;
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
 
         public List<TblCourse> GetAllCourses(int TenantId)
         {
-            db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
-            DataSet ds = db.FillData("sp_CoursesGet");
-            List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+            try
             {
-                CourseId = Convert.ToInt32(dr["courseId"]),
-                CourseName = Convert.ToString(dr["courseName"]),
-                CourseDetails = Convert.ToString(dr["courseDetails"]),
-                CourseCategory = Convert.ToString(dr["courseCategory"]),
-                CoursePath = Convert.ToString(dr["coursePath"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                CreatedBy=Convert.ToInt32(dr["createdBy"]),
-                CreatedOn=Convert.ToDateTime(dr["createdOn"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"])
+                db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
+                DataSet ds = db.FillData("sp_CoursesGet");
+                List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+                {
+                    CourseId = Convert.ToInt32(dr["courseId"]),
+                    CourseName = Convert.ToString(dr["courseName"]),
+                    CourseDetails = Convert.ToString(dr["courseDetails"]),
+                    CourseCategory = Convert.ToString(dr["courseCategory"]),
+                    CoursePath = Convert.ToString(dr["coursePath"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    TenantName = Convert.ToString(dr["tenantName"])
 
-            }).ToList();
-            return coursesDetails;
+                }).ToList();
+                return coursesDetails;
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
 
-        
+
 
         public int AddCourse(TblCourse obj)
         {
@@ -96,7 +113,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
         }
 
@@ -111,7 +129,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
         }
 
