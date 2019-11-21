@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using LMSBL.DBModels;
 using System.Data;
+using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class LoginRepository
     {
         DataRepository db = new DataRepository();
+        Exceptions newException = new Exceptions();
 
         public List<TblUser> Login(TblLogin objLogin)
         {
@@ -42,7 +44,8 @@ namespace LMSBL.Repository
             }
             catch(Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
             }
         }
     }

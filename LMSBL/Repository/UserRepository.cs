@@ -10,31 +10,39 @@ namespace LMSBL.Repository
     public class UserRepository
     {
         DataRepository db = new DataRepository();
+        Exceptions newException = new Exceptions();
         Commonfunctions common;
         public List<TblUser> GetUserById(int userId)
         {
-
-            db.AddParameter("@userId", SqlDbType.Int, userId);
-            DataSet ds = db.FillData("UserGetById");
-            List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
+            try
             {
-                UserId = Convert.ToInt32(dr["userId"]),
-                FirstName = Convert.ToString(dr["firstName"]),
-                LastName = Convert.ToString(dr["lastName"]),
-                EmailId = Convert.ToString(dr["emailId"]),
-                Password = Convert.ToString(dr["password"]),
-                DOB = Convert.ToDateTime(dr["DOB"]),
-                ContactNo = Convert.ToString(dr["contactNo"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                //TenantName=Convert.ToString(dr["tenantName"]),
-                RoleId = Convert.ToInt32(dr["roleId"]),
-                RoleName= Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                CreatedBy = Convert.ToInt32(dr["createdBy"]),
-                CreatedOn = Convert.ToDateTime(dr["createdOn"])
+                db.AddParameter("@userId", SqlDbType.Int, userId);
+                DataSet ds = db.FillData("UserGetById");
+                List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
+                {
+                    UserId = Convert.ToInt32(dr["userId"]),
+                    FirstName = Convert.ToString(dr["firstName"]),
+                    LastName = Convert.ToString(dr["lastName"]),
+                    EmailId = Convert.ToString(dr["emailId"]),
+                    Password = Convert.ToString(dr["password"]),
+                    DOB = Convert.ToDateTime(dr["DOB"]),
+                    ContactNo = Convert.ToString(dr["contactNo"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    //TenantName=Convert.ToString(dr["tenantName"]),
+                    RoleId = Convert.ToInt32(dr["roleId"]),
+                    RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"])
 
-            }).ToList();
-            return userDetails;
+                }).ToList();
+                return userDetails;
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
 
         public List<TblUser> GetAllActiveUsers(int tenantId)
@@ -65,34 +73,43 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
             }
 
         }
 
         public List<TblUser> GetAllInActiveUsers(int tenantId)
         {
-            db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
-
-            DataSet ds = db.FillData("UserGetAllInactive");
-            List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
+            try
             {
-                UserId = Convert.ToInt32(dr["userId"]),
-                FirstName = Convert.ToString(dr["firstName"]),
-                LastName = Convert.ToString(dr["lastName"]),
-                EmailId = Convert.ToString(dr["emailId"]),
-                Password = Convert.ToString(dr["password"]),
-                DOB = Convert.ToDateTime(dr["DOB"]),
-                ContactNo = Convert.ToString(dr["contactNo"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                //TenantName = Convert.ToString(dr["tenantName"]),
-                RoleId = Convert.ToInt32(dr["roleId"]),
-                RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                CreatedBy = Convert.ToInt32(dr["createdBy"]),
-                CreatedOn = Convert.ToDateTime(dr["createdOn"])
-            }).ToList();
-            return userDetails;
+                db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
+
+                DataSet ds = db.FillData("UserGetAllInactive");
+                List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
+                {
+                    UserId = Convert.ToInt32(dr["userId"]),
+                    FirstName = Convert.ToString(dr["firstName"]),
+                    LastName = Convert.ToString(dr["lastName"]),
+                    EmailId = Convert.ToString(dr["emailId"]),
+                    Password = Convert.ToString(dr["password"]),
+                    DOB = Convert.ToDateTime(dr["DOB"]),
+                    ContactNo = Convert.ToString(dr["contactNo"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    //TenantName = Convert.ToString(dr["tenantName"]),
+                    RoleId = Convert.ToInt32(dr["roleId"]),
+                    RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"])
+                }).ToList();
+                return userDetails;
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
 
         public int AddUser(TblUser obj)
@@ -113,7 +130,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
         }
 
@@ -135,7 +153,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
         }
 
@@ -150,7 +169,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
         }
 
@@ -171,7 +191,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
             }
         }
     }

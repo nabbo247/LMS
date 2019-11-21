@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class DataRepository
     {
+        Exceptions newException = new Exceptions();
         private static string constr = ConfigurationManager.ConnectionStrings["LMSContext"].ConnectionString;
         //private static string constr = "Data Source=.;Initial Catalog=LMSDB;Integrated Security=True";//take from Web.Config:
         public List<SqlParameter> parameters = new List<SqlParameter>();
@@ -42,7 +44,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return null;
             }
             finally
             {
@@ -66,7 +69,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
             finally
             {
@@ -99,7 +103,8 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw ex;
+                newException.AddException(ex.Message, ex.StackTrace);
+                return 0;
             }
             finally
             {
