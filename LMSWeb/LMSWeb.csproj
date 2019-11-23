@@ -677,6 +677,8 @@
     <Content Include="Views\Assignment\MyAssignments.cshtml" />
     <Content Include="Views\Quiz\Index.cshtml" />
     <Content Include="Views\Quiz\AddQuiz.cshtml" />
+    <Content Include="Views\Quiz\EditQuiz.cshtml" />
+    <Content Include="Views\Quiz\ViewQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

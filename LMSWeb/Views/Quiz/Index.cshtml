@@ -29,7 +29,7 @@
                 <tr>
                     <th scope="col">Quiz Id</th>
                     <th scope="col">Quiz Name</th>
-                    <th scope="col">Quiz Description</th>                  
+                    <th scope="col">Quiz Description</th>
                     <th scope="col" colspan="2">Actions</th>
                 </tr>
             </thead>
@@ -42,16 +42,18 @@
                             <th scope="row">@quiz.QuizId</th>
                             <td>@quiz.QuizName</td>
                             <td>@quiz.QuizDescription</td>
-                                                        
+
                             <td>
-                                <button type="button" onclick="location.href(@Url.Action("EditUser", "User", new { id = quiz.QuizId }))"
-                                        class="btn text-center btn-warning">
-                                    Edit
-                                </button>
-                                <button type="button" onclick="location.href(@Url.Action("EditUser", "User", new { id = quiz.QuizId }))"
-                                        class="btn text-center btn-warning">
-                                    View
-                                </button>
+                                <a href="@Url.Action("EditQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        Edit
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("ViewQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        View
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     }

@@ -29,5 +29,14 @@ namespace LMSWeb.Controllers
 
             return View(objQuiz);
         }
+        public ActionResult EditQuiz(tblQuiz objQuiz)
+        {
+            return View(objQuiz);
+        }
+
+        public ActionResult ViewQuiz(tblQuiz objQuiz)
+        {
+            return View(objQuiz);
+        }
     }
 }
