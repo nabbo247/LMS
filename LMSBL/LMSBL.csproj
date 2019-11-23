@@ -62,6 +62,12 @@
     <Compile Include="DBModels\TblCourse.cs" />
     <Compile Include="DBModels\TblLogin.cs" />
     <Compile Include="DBModels\TblNotificationTemplate.cs" />
+    <Compile Include="DBModels\tblQuestion.cs" />
+    <Compile Include="DBModels\tblQuestionOption.cs" />
+    <Compile Include="DBModels\tblQuestionType.cs" />
+    <Compile Include="DBModels\tblQuiz.cs" />
+    <Compile Include="DBModels\tblQuizScore.cs" />
+    <Compile Include="DBModels\tblRespons.cs" />
     <Compile Include="DBModels\TblStatus.cs" />
     <Compile Include="DBModels\TblTenant.cs" />
     <Compile Include="DBModels\TblUser.cs" />
@@ -72,6 +78,7 @@
     <Compile Include="Repository\CoursesRepository.cs" />
     <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
+    <Compile Include="Repository\QuizRepository.cs" />
     <Compile Include="Repository\RolesRepository.cs" />
     <Compile Include="Repository\TenantRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
