@@ -8,19 +8,15 @@ namespace LMSBL.DBModels
 
     public partial class TblNotificationTemplate
     {
-        [Key]
         public int TemplateId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string TemplateName { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string TemplateSubject { get; set; }
 
         [Column(TypeName = "ntext")]
-        [Required]
         public string TemplateDescription { get; set; }
 
         public bool? IsActive { get; set; }

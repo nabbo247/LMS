@@ -6,15 +6,13 @@ namespace LMSBL.DBModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tblResponses")]
-    public partial class tblRespons
+    [Table("TblResponses")]
+    public partial class TblRespons
     {
-        [Key]
         public int ResponseId { get; set; }
 
         public int QuestionId { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string OptionIds { get; set; }
 
@@ -26,8 +24,8 @@ namespace LMSBL.DBModels
 
         public int QuizId { get; set; }
 
-        public virtual tblQuestion tblQuestion { get; set; }
+        public virtual TblQuestion TblQuestion { get; set; }
 
-        public virtual tblQuiz tblQuiz { get; set; }
+        public virtual TblQuiz TblQuiz { get; set; }
     }
 }

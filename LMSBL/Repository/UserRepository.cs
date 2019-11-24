@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using LMSBL.DBModels;
 using LMSBL.Common;
+using LMSBL.DBModels;
 
 namespace LMSBL.Repository
 {
@@ -17,7 +17,7 @@ namespace LMSBL.Repository
             try
             {
                 db.AddParameter("@userId", SqlDbType.Int, userId);
-                DataSet ds = db.FillData("UserGetById");
+                DataSet ds = db.FillData("sp_UserGetById");
                 List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
                 {
                     UserId = Convert.ToInt32(dr["userId"]),
@@ -38,19 +38,18 @@ namespace LMSBL.Repository
                 }).ToList();
                 return userDetails;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
         }
 
-        public List<TblUser> GetAllActiveUsers(int tenantId)
+        public List<TblUser> GetAllUsers(int tenantId)
         {
             try
             {
                 db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
-                DataSet ds = db.FillData("UserGetAll");
+                DataSet ds = db.FillData("sp_UserGet");
                 List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
                 {
                     UserId = Convert.ToInt32(dr["userId"]),
@@ -71,45 +70,11 @@ namespace LMSBL.Repository
                 }).ToList();
                 return userDetails;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
 
-        }
-
-        public List<TblUser> GetAllInActiveUsers(int tenantId)
-        {
-            try
-            {
-                db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
-
-                DataSet ds = db.FillData("UserGetAllInactive");
-                List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
-                {
-                    UserId = Convert.ToInt32(dr["userId"]),
-                    FirstName = Convert.ToString(dr["firstName"]),
-                    LastName = Convert.ToString(dr["lastName"]),
-                    EmailId = Convert.ToString(dr["emailId"]),
-                    Password = Convert.ToString(dr["password"]),
-                    DOB = Convert.ToDateTime(dr["DOB"]),
-                    ContactNo = Convert.ToString(dr["contactNo"]),
-                    TenantId = Convert.ToInt32(dr["tenantId"]),
-                    //TenantName = Convert.ToString(dr["tenantName"]),
-                    RoleId = Convert.ToInt32(dr["roleId"]),
-                    RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
-                    IsActive = Convert.ToBoolean(dr["isActive"]),
-                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
-                    CreatedOn = Convert.ToDateTime(dr["createdOn"])
-                }).ToList();
-                return userDetails;
-            }
-            catch (Exception ex)
-            {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
-            }
         }
 
         public int AddUser(TblUser obj)
@@ -126,12 +91,11 @@ namespace LMSBL.Repository
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
                 db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
-                return db.ExecuteQuery("UserAdd");
+                return db.ExecuteQuery("sp_UserAdd");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return 0;
+                throw;
             }
         }
 
@@ -149,12 +113,11 @@ namespace LMSBL.Repository
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.Tenants[0].TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.UserRoles[0].RoleId);
-                return db.ExecuteQuery("UserUpdate");
+                return db.ExecuteQuery("sp_UserUpdate");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return 0;
+                throw;
             }
         }
 
@@ -165,12 +128,11 @@ namespace LMSBL.Repository
                 db = new DataRepository();
                 db.AddParameter("@userId", SqlDbType.Int, obj.UserId);
                 db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
-                return db.ExecuteQuery("UserActivateDeactivate");
+                return db.ExecuteQuery("sp_UserActivateDeactivate");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return 0;
+                throw;
             }
         }
 
@@ -184,15 +146,14 @@ namespace LMSBL.Repository
                 db = new DataRepository();
                 db.AddParameter("@EmailId", SqlDbType.NVarChar, Username);
                 db.AddParameter("@Password", SqlDbType.NVarChar, Password);
-                ds = db.FillData("Login");
+                ds = db.FillData("sp_Login");
                 var tblUser = common.UserMapping(ds);
 
                 return tblUser;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
         }
     }

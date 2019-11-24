@@ -14,81 +14,89 @@ namespace LMSBL.Repository
         DataRepository db = new DataRepository();
         public string UploadFile(HttpPostedFileBase zip, string CourseName)
         {
-            var path = ConfigurationManager.AppSettings["DestinationPath"].ToString();
-            byte[] data;
-            string FileName = "";
-            if (zip != null)
+            try
             {
-                using (Stream inputStream = zip.InputStream)
+                var path = ConfigurationManager.AppSettings["DestinationPath"].ToString();
+                byte[] data;
+                string FileName = "";
+                if (zip != null)
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    using (Stream inputStream = zip.InputStream)
                     {
-                        inputStream.CopyTo(ms);
-                        data = ms.ToArray();
-                    }
-                    FileName = CourseName + "_" + new Guid().ToString() + "." + zip.FileName.Split('.')[1];
-                    System.IO.File.WriteAllBytes(Path.Combine(path, FileName), data);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            inputStream.CopyTo(ms);
+                            data = ms.ToArray();
+                        }
+                        FileName = CourseName + "_" + new Guid().ToString() + "." + zip.FileName.Split('.')[1];
+                        System.IO.File.WriteAllBytes(Path.Combine(path, FileName), data);
 
+                    }
+                    return Path.Combine(path, FileName);
                 }
-                return Path.Combine(path, FileName);
+                else
+                {
+                    return "";
+                }
             }
-            else
-            {
-                return "";
-            }
+            catch (Exception) { throw; }
 
 
         }
 
         public List<TblCourse> GetCourseById(int CourseId)
         {
-
-            db.AddParameter("@courseId", SqlDbType.Int, CourseId);
-            DataSet ds = db.FillData("sp_CourseGetById");
-            List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+            try
             {
-                CourseId = Convert.ToInt32(dr["courseId"]),
-                CourseName = Convert.ToString(dr["courseName"]),
-                CourseDetails = Convert.ToString(dr["courseDetails"]),
-                CourseCategory = Convert.ToString(dr["courseCategory"]),
-                CoursePath = Convert.ToString(dr["coursePath"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"])
+                db.AddParameter("@courseId", SqlDbType.Int, CourseId);
+                DataSet ds = db.FillData("sp_CourseGetById");
+                List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+                {
+                    CourseId = Convert.ToInt32(dr["courseId"]),
+                    CourseName = Convert.ToString(dr["courseName"]),
+                    CourseDetails = Convert.ToString(dr["courseDetails"]),
+                    CourseCategory = Convert.ToString(dr["courseCategory"]),
+                    CoursePath = Convert.ToString(dr["coursePath"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    TenantName = Convert.ToString(dr["tenantName"])
 
-            }).ToList();
-            return coursesDetails;
+                }).ToList();
+                return coursesDetails;
+            }
+            catch (Exception) { throw; }
         }
 
         public List<TblCourse> GetAllCourses(int TenantId)
         {
-            db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
-            DataSet ds = db.FillData("sp_CoursesGet");
-            List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+            try
             {
-                CourseId = Convert.ToInt32(dr["courseId"]),
-                CourseName = Convert.ToString(dr["courseName"]),
-                CourseDetails = Convert.ToString(dr["courseDetails"]),
-                CourseCategory = Convert.ToString(dr["courseCategory"]),
-                CoursePath = Convert.ToString(dr["coursePath"]),
-                IsActive = Convert.ToBoolean(dr["isActive"]),
-                CreatedBy = Convert.ToInt32(dr["createdBy"]),
-                CreatedOn = Convert.ToDateTime(dr["createdOn"]),
-                TenantId = Convert.ToInt32(dr["tenantId"]),
-                TenantName = Convert.ToString(dr["tenantName"])
+                db.AddParameter("@tenantId", SqlDbType.Int, TenantId);
+                DataSet ds = db.FillData("sp_CoursesGet");
+                List<TblCourse> coursesDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblCourse
+                {
+                    CourseId = Convert.ToInt32(dr["courseId"]),
+                    CourseName = Convert.ToString(dr["courseName"]),
+                    CourseDetails = Convert.ToString(dr["courseDetails"]),
+                    CourseCategory = Convert.ToString(dr["courseCategory"]),
+                    CoursePath = Convert.ToString(dr["coursePath"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"]),
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    TenantName = Convert.ToString(dr["tenantName"])
 
-            }).ToList();
-            return coursesDetails;
+                }).ToList();
+                return coursesDetails;
+            }
+            catch (Exception) { throw; }
         }
-
-
 
         public int AddCourse(TblCourse obj)
         {
             try
             {
                 string returnPath = UploadFile(obj.ZipFile, obj.CourseName);
-                obj.CreatedBy = 1;//hardcoded put loginid here
                 db.AddParameter("@courseName", SqlDbType.Text, obj.CourseName);
                 db.AddParameter("@courseDetails", SqlDbType.Text, obj.CourseDetails);
                 db.AddParameter("@courseCategory", SqlDbType.Text, obj.CourseCategory);
@@ -108,7 +116,6 @@ namespace LMSBL.Repository
             try
             {
                 string returnPath = UploadFile(obj.ZipFile, obj.CourseName);
-                obj.CreatedBy = 1;//hardcoded put loginid here
                 db.AddParameter("@courseId", SqlDbType.Int, obj.CourseId);
                 db.AddParameter("@courseName", SqlDbType.Text, obj.CourseName);
                 db.AddParameter("@courseDetails", SqlDbType.Text, obj.CourseDetails);
@@ -123,6 +130,7 @@ namespace LMSBL.Repository
                 throw ex;
             }
         }
+
         public int DeleteCourse(TblCourse obj)
         {
             try

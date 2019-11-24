@@ -11,32 +11,64 @@ namespace LMSWeb.Controllers
     public class QuizController : Controller
     {
         QuizRepository quizRepository = new QuizRepository();
-        RolesRepository rr = new RolesRepository();
-        TenantRepository tr = new TenantRepository();
+        Exceptions newException = new Exceptions();
         // GET: Quiz
         public ActionResult Index()
         {
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            List<tblQuiz> lstAllQuiz = new List<tblQuiz>();
-            lstAllQuiz = quizRepository.GetAllQuiz(sessionUser.TenantId);
+            try
+            {
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
+                lstAllQuiz = quizRepository.GetAllQuiz(sessionUser.TenantId);
 
-            return View(lstAllQuiz);
+                return View(lstAllQuiz);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
         public ActionResult AddQuiz()
         {
-            tblQuiz objQuiz = new tblQuiz();
+            try
+            {
+                TblQuiz objQuiz = new TblQuiz();
 
-            return View(objQuiz);
-        }
-        public ActionResult EditQuiz(tblQuiz objQuiz)
-        {
-            return View(objQuiz);
+                return View(objQuiz);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
-        public ActionResult ViewQuiz(tblQuiz objQuiz)
+        public ActionResult EditQuiz(TblQuiz objQuiz)
         {
-            return View(objQuiz);
+            try
+            {
+                return View(objQuiz);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
+        }
+
+        public ActionResult ViewQuiz(TblQuiz objQuiz)
+        {
+            try
+            {
+                return View(objQuiz);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
     }
 }

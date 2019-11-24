@@ -1,46 +1,68 @@
-﻿using LMSBL.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
-using LMSBL.DBModels;
 using LMSBL.Common;
+using LMSBL.DBModels;
+using LMSBL.Repository;
 
 namespace LMSWeb.Controllers
 {
     public class LoginController : Controller
     {
         UserRepository ur = new UserRepository();
+        Exceptions newException = new Exceptions();
         // GET: Login
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
         public ActionResult UserAuthentication(string UserName, string Password)
         {
-            Response response = new Response();
-            TblUser tblUser = ur.IsValidUser(UserName, Password);
-            
-            if (tblUser!=null)
+            try
             {
-                response.StatusCode = 1;
-                //set User object to session
-                Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
+                Response response = new Response();
+                TblUser tblUser = ur.IsValidUser(UserName, Password);
+
+                if (tblUser != null)
+                {
+                    response.StatusCode = 1;
+                    //set User object to session
+                    Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
+                }
+                else
+                {
+                    response.StatusCode = 0;
+                }
+
+                return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
-            else
+            catch (Exception ex)
             {
-                response.StatusCode = 0;
+                newException.AddException(ex);
+                return View();
             }
-            
-            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout()
         {
-            Session.Remove("UserSession");
-            return RedirectToAction("Index");
+            try
+            {
+                Session.Remove("UserSession");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
     }
 }

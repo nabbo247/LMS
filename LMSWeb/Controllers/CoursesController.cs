@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
+
 
 namespace LMSWeb.Controllers
 {
@@ -10,129 +12,181 @@ namespace LMSWeb.Controllers
     {
         CoursesRepository cc = new CoursesRepository();
         TenantRepository tr = new TenantRepository();
+        Exceptions newException = new Exceptions();
         // GET: Courses
         public ActionResult Index()
         {
-            List<TblCourse> listInActiveCourses = new List<TblCourse>();
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            listInActiveCourses = cc.GetAllCourses(sessionUser.TenantId);
+            try
+            {
+                List<TblCourse> listInActiveCourses = new List<TblCourse>();
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                listInActiveCourses = cc.GetAllCourses(sessionUser.TenantId);
 
-            return View(listInActiveCourses);
+                return View(listInActiveCourses);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
 
         public ActionResult GetCourseDetails()
         {
-            List<TblCourse> courseDetails = new List<TblCourse>();
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            courseDetails = cc.GetCourseById(1);
+            try
+            {
+                List<TblCourse> courseDetails = new List<TblCourse>();
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                courseDetails = cc.GetCourseById(1);
 
-            return View(courseDetails);
+                return View(courseDetails);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
         public ActionResult AddCourse()
         {
-            TblCourse objEditData = new TblCourse
+            try
             {
-                Tenants = tr.GetAllActiveTenants()
-            };
-            return View(objEditData);
+                TblCourse objEditData = new TblCourse
+                {
+                    Tenants = tr.GetAllTenants()
+                };
+                return View(objEditData);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
         [HttpPost]
         public ActionResult AddCourse(TblCourse objCourse)
         {
-            if (ModelState.IsValid)
+            try
             {
-                int rows = cc.AddCourse(objCourse);
-                if (rows != 0)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    TblUser sessionUser = (TblUser)Session["UserSession"];
+                    objCourse.CreatedBy = sessionUser.UserId;
+                    int rows = cc.AddCourse(objCourse);
+                    if (rows != 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(objCourse);
+                    }
                 }
-                else
-                {
-                    return View(objCourse);
-                }
+                return View(objCourse);
             }
-            return View(objCourse);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
+
         public ActionResult EditCourse(int id)
         {
-            List<TblCourse> CourseDetails = new List<TblCourse>();
-            CourseDetails = cc.GetCourseById(id);
-            TblCourse objEditData = new TblCourse
+            try
             {
-                Tenants = tr.GetAllActiveTenants()
-            };
-            CourseDetails[0].Tenants = objEditData.Tenants;
-            objEditData = CourseDetails[0];
-            if (CourseDetails[0].CoursePath != null) {
-                ViewBag.JavaScriptFunction = string.Format("showFileName('{0}');", CourseDetails[0].CoursePath);
+                List<TblCourse> CourseDetails = new List<TblCourse>();
+                CourseDetails = cc.GetCourseById(id);
+                TblCourse objEditData = new TblCourse
+                {
+                    Tenants = tr.GetAllTenants()
+                };
+                CourseDetails[0].Tenants = objEditData.Tenants;
+                objEditData = CourseDetails[0];
+                if (CourseDetails[0].CoursePath != null)
+                {
+                    ViewBag.JavaScriptFunction = string.Format("showFileName('{0}');", CourseDetails[0].CoursePath);
+                }
+
+                return View(objEditData);
             }
-            
-            return View(objEditData);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
+
         }
 
         [HttpPost]
         public ActionResult EditCourse(TblCourse objCourse)
         {
-            if (ModelState.IsValid)
+            try
             {
-                int rows = cc.EditCourse(objCourse);
-                if (rows != 0)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    TblUser sessionUser = (TblUser)Session["UserSession"];
+                    objCourse.CreatedBy = sessionUser.UserId;
+                    int rows = cc.EditCourse(objCourse);
+                    if (rows != 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(objCourse);
+                    }
                 }
-                else
-                {
-                    return View(objCourse);
-                }
+                return View(objCourse);
             }
-            return View(objCourse);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
-
-
-
-        //public ActionResult DeleteCourse(int id, bool isActive)
-        //{
-        //    ViewBag.isActive = isActive;
-        //    List<TblCourse> CourseDetails = new List<TblCourse>();
-        //    CourseDetails = cc.GetCourseById(id);
-        //    TblCourse objEditData = new TblCourse();
-        //    objEditData = CourseDetails[0];
-        //    return View(objEditData);
-        //}
 
         [HttpPost, ActionName("DeleteCourse")]
         public ActionResult DeleteConfirmCourse(int id)
         {
-            Response response = new Response();
-            List<TblCourse> objCourseList = cc.GetCourseById(id);
-            TblCourse objCourse = objCourseList[0];
-            if (ModelState.IsValid)
+            try
             {
-                if (objCourse.IsActive == true)
+                Response response = new Response();
+                List<TblCourse> objCourseList = cc.GetCourseById(id);
+                TblCourse objCourse = objCourseList[0];
+                if (ModelState.IsValid)
                 {
-                    objCourse.IsActive = false;
+                    if (objCourse.IsActive == true)
+                    {
+                        objCourse.IsActive = false;
+                    }
+                    else
+                    {
+                        objCourse.IsActive = true;
+                    }
+                    int rows = cc.DeleteCourse(objCourse);
+                    if (rows != 0)
+                    {
+                        response.StatusCode = 1;
+                        //return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        response.StatusCode = 0;
+                        //return View(objCourse);
+                    }
                 }
-                else
-                {
-                    objCourse.IsActive = true;
-                }
-                int rows = cc.DeleteCourse(objCourse);
-                if (rows != 0)
-                {
-                    response.StatusCode = 1;
-                    //return RedirectToAction("Index");
-                }
-                else
-                {
-                    response.StatusCode = 0;
-                    //return View(objCourse);
-                }
+                //return View(objTenant);
+                return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
-            //return View(objTenant);
-            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
 

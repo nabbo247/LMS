@@ -20,11 +20,11 @@ namespace LMSBL.DBModels
         public virtual DbSet<TblUser> TblUsers { get; set; }
         public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
         public virtual DbSet<tblQuestion> tblQuestions { get; set; }
-        public virtual DbSet<tblQuestionOption> tblQuestionOptions { get; set; }
-        public virtual DbSet<tblQuestionType> tblQuestionTypes { get; set; }
-        public virtual DbSet<tblQuiz> tblQuizs { get; set; }
-        public virtual DbSet<tblRespons> tblResponses { get; set; }
-        public virtual DbSet<tblQuizScore> tblQuizScores { get; set; }
+        public virtual DbSet<TblQuestionOption> tblQuestionOptions { get; set; }
+        public virtual DbSet<TblQuestionType> tblQuestionTypes { get; set; }
+        public virtual DbSet<TblQuiz> tblQuizs { get; set; }
+        public virtual DbSet<TblRespons> tblResponses { get; set; }
+        public virtual DbSet<TblQuizScore> tblQuizScores { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

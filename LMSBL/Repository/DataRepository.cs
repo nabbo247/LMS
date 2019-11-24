@@ -3,29 +3,41 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class DataRepository
     {
-        Exceptions newException = new Exceptions();
         private static string constr = ConfigurationManager.ConnectionStrings["LMSContext"].ConnectionString;
-        //private static string constr = "Data Source=.;Initial Catalog=LMSDB;Integrated Security=True";//take from Web.Config:
+
         public List<SqlParameter> parameters = new List<SqlParameter>();
 
         public void AddParameter(string parameterName, SqlDbType dbType, object value)
         {
-            SqlParameter param = new SqlParameter(parameterName, dbType);
-            param.Value = value;
-            parameters.Add(param);
+            try
+            {
+                SqlParameter param = new SqlParameter(parameterName, dbType);
+                param.Value = value;
+                parameters.Add(param);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void AddParameter(string parameterName, SqlDbType dbType, ParameterDirection direction)
         {
-            SqlParameter param = new SqlParameter(parameterName, dbType);
-            param.Direction = direction;
-            parameters.Add(param);
+            try
+            {
+                SqlParameter param = new SqlParameter(parameterName, dbType);
+                param.Direction = direction;
+                parameters.Add(param);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public DataSet FillData(string cmdText)
@@ -42,10 +54,9 @@ namespace LMSBL.Repository
                 da.Fill(ds);
                 return ds;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
             finally
             {
@@ -67,10 +78,9 @@ namespace LMSBL.Repository
                 cmd.Parameters.AddRange(parameters.ToArray());
                 return cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return 0;
+                throw;
             }
             finally
             {
@@ -92,7 +102,7 @@ namespace LMSBL.Repository
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddRange(parameters.ToArray());
                 dr = cmd.ExecuteReader();
-                if(dr.HasRows)
+                if (dr.HasRows)
                 {
                     return 1;
                 }
@@ -101,10 +111,9 @@ namespace LMSBL.Repository
                     return 0;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return 0;
+                throw;
             }
             finally
             {

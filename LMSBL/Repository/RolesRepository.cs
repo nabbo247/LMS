@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using LMSBL.DBModels;
-using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class RolesRepository
     {
         DataRepository db = new DataRepository();
-        Exceptions newException = new Exceptions();
         public List<TblUserRole> GetAllRoles()
         {
             try
             {
-                DataSet ds = db.FillData("RolesGetAll");
+                DataSet ds = db.FillData("sp_RolesGetAll");
                 List<TblUserRole> roleDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUserRole
                 {
                     RoleId = Convert.ToInt32(dr["roleId"]),
@@ -23,10 +21,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return roleDetails;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
         }
     }

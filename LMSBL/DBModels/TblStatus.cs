@@ -14,11 +14,9 @@ namespace LMSBL.DBModels
             TblAssignmentAndTrackings = new HashSet<TblAssignmentAndTracking>();
         }
 
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StatusId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string StatusName { get; set; }
 

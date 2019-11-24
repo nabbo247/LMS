@@ -6,23 +6,21 @@ namespace LMSBL.DBModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tblQuestionType")]
-    public partial class tblQuestionType
+    [Table("TblQuestionType")]
+    public partial class TblQuestionType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblQuestionType()
+        public TblQuestionType()
         {
-            tblQuestions = new HashSet<tblQuestion>();
+            TblQuestions = new HashSet<TblQuestion>();
         }
 
-        [Key]
         public int QuestionTypeID { get; set; }
 
-        [Required]
         [StringLength(250)]
         public string QuestionTypeText { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblQuestion> tblQuestions { get; set; }
+        public virtual ICollection<TblQuestion> TblQuestions { get; set; }
     }
 }

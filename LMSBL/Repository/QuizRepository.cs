@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LMSBL.DBModels;
 using System.Data;
-using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class QuizRepository
     {
         DataRepository db = new DataRepository();
-        Exceptions newException = new Exceptions();
 
-
-        public List<tblQuiz> GetAllQuiz(int tenantId)
+        public List<TblQuiz> GetAllQuiz(int tenantId)
         {
             try
             {
                 db.AddParameter("@tenantId", SqlDbType.Int, tenantId);
 
-                DataSet ds = db.FillData("GetAllQuiz");
-                List<tblQuiz> quizDetails = ds.Tables[0].AsEnumerable().Select(dr => new tblQuiz
+                DataSet ds = db.FillData("sp_GetQuizAll");
+                List<TblQuiz> quizDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblQuiz
                 {
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
@@ -30,10 +25,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizDetails;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                newException.AddException(ex.Message, ex.StackTrace);
-                return null;
+                throw;
             }
         }
     }

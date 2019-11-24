@@ -14,7 +14,6 @@ namespace LMSBL.DBModels
             TblUsers = new HashSet<TblUser>();
         }
 
-        [Key]
         public int RoleId { get; set; }
 
        

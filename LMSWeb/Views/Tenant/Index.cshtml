@@ -3,11 +3,9 @@
     ViewBag.Title = "Index";
     //Layout = "~/Views/_ViewStart.cshtml";
 }
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<body>
-    <div class="main-container container">
-        <div class="row pt-3" style="float:right;">
-            @*<div class="col-6 col-sm-6 col-md-6">
+<div class="main-container container">
+    <div class="row pt-3" style="float:right;">
+        @*<div class="col-6 col-sm-6 col-md-6">
                 <i class="fa fa-search" aria-hidden="true"></i> <input class="search-box" type="text" placeholder="Search">
             </div>
             <div class="form-inline form-group col-4 col-sm-4 col-md-4">
@@ -16,28 +14,28 @@
                     <option>Select Company</option>
                 </select>
             </div>*@
-            <div class="form-group col-2 col-sm-2 col-md-2">
-                <a href="@Url.Action("AddTenant", "Tenant")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
-            </div>
+        <div class="form-group col-2 col-sm-2 col-md-2">
+            <a href="@Url.Action("AddTenant", "Tenant")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
         </div>
+    </div>
 
-        <table id="example" class="table table-striped table-bordered">
-            <thead>
+    <table id="example" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Domain</th>
+                <th>Activation From</th>
+                <th>Activation To</th>
+                <th>Is Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tenent in Model)
+            {
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Domain</th>
-                    <th scope="col">Activation From</th>
-                    <th scope="col">Activation To</th>
-                    <th scope="col">Is Active</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var tenent in Model)
-                {
-                <tr>
-                    <th scope="row">@tenent.TenantId</th>
+                    <th>@tenent.TenantId</th>
                     <td>@tenent.TenantName</td>
                     <td><a style="color:blue;" href="@tenent.DomainUrl" target="_blank">@tenent.TenantDomain</a></td>
                     <td>@tenent.ActivationFrom.Value.ToString("dd-MMM-yyyy")</td>
@@ -61,29 +59,12 @@
                             Edit
                         </button>
                         @*<button type="button" onclick="location.href='@Url.Action("AddCourse", "Courses",new { id = item.CourseId })';return false;"
-                                class="btn  text-center btn-warning">
-                            Delete
-                        </button>*@
+                                    class="btn  text-center btn-warning">
+                                Delete
+                            </button>*@
                     </td>
-
-                    @*<td>
-                        <a href="@Url.Action("EditTenant", "Tenant",new { id=tenent.TenantId})">
-                            <i class="fas fa-fw fa-edit" title="Edit Tenant"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-link" onclick="ConfirmationAlert('@tenent.TenantName',@tenent.TenantId,true)">
-                            <i class="fas fa-fw fa-trash" title="Deactivate Tenant"></i>
-                        </button>
-                    </td>*@
                 </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    </body>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-</script>
+            }
+        </tbody>
+    </table>
+</div>

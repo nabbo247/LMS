@@ -6,17 +6,15 @@ namespace LMSBL.DBModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tblQuestion")]
-    public partial class tblQuestion
+    [Table("TblQuestion")]
+    public partial class TblQuestion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblQuestion()
+        public TblQuestion()
         {
-            tblQuestionOptions = new HashSet<tblQuestionOption>();
-            tblResponses = new HashSet<tblRespons>();
+            TblQuestionOptions = new HashSet<TblQuestionOption>();
+            TblResponses = new HashSet<TblRespons>();
         }
-
-        [Key]
         public int QuestionId { get; set; }
 
         public int QuizId { get; set; }
@@ -24,17 +22,16 @@ namespace LMSBL.DBModels
         public int QuestionTypeId { get; set; }
 
         [Column(TypeName = "ntext")]
-        [Required]
         public string QuestionText { get; set; }
 
-        public virtual tblQuiz tblQuiz { get; set; }
+        public virtual TblQuiz TblQuiz { get; set; }
 
-        public virtual tblQuestionType tblQuestionType { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblQuestionOption> tblQuestionOptions { get; set; }
+        public virtual TblQuestionType TblQuestionType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblRespons> tblResponses { get; set; }
+        public virtual ICollection<TblQuestionOption> TblQuestionOptions { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblRespons> TblResponses { get; set; }
     }
 }

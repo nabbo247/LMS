@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -8,135 +9,170 @@ using LMSBL.Repository;
 namespace LMSWeb.Controllers
 {
 
-    
+
     public class TenantController : Controller
     {
         TenantRepository tr = new TenantRepository();
-
+        Exceptions newException = new Exceptions();
         // GET: Tenant
         public ActionResult Index()
         {
-            List<TblTenant> lstAllTenants = new List<TblTenant>();
-            lstAllTenants = tr.GetAllActiveTenants();
-            return View(lstAllTenants);
-        }
+            try
+            {
+                List<TblTenant> lstAllTenants = new List<TblTenant>();
+                lstAllTenants = tr.GetAllTenants();
+                return View(lstAllTenants);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
 
-        public ActionResult GetAllActiveTenants()
-        {
-            List<TblTenant> lstAllActiveTenants = new List<TblTenant>();
-            lstAllActiveTenants = tr.GetAllActiveTenants();
-
-            return PartialView(lstAllActiveTenants);
-        }
-
-        public ActionResult GetAllInActiveTenants()
-        {
-            List<TblTenant> lstAllInActiveTenants = new List<TblTenant>();
-            lstAllInActiveTenants = tr.GetAllInActiveTenants();
-            return PartialView(lstAllInActiveTenants);
+            }
         }
 
         public ActionResult AddTenant()
         {
-            TblTenant objEditData = new TblTenant();
-            return View(objEditData);
+            try
+            {
+                TblTenant objEditData = new TblTenant();
+                return View(objEditData);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
 
         [HttpPost]
         public ActionResult AddTenant(TblTenant objTenant)
         {
-            if (ModelState.IsValid)
+            try
             {
-                objTenant.TenantDomain = "http://"+objTenant.TenantDomain + "." + Request.Url.Host;
-                int rows = tr.AddTenant(objTenant);
-                if (rows != 0)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
+                    int rows = tr.AddTenant(objTenant);
+                    if (rows != 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(objTenant);
+                    }
                 }
-                else
-                {
-                    return View(objTenant);
-                }
+                return View(objTenant);
             }
-            return View(objTenant);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
 
         public ActionResult EditTenant(int id)
         {
-            List<TblTenant> tenantDetails = new List<TblTenant>();
-            tenantDetails = tr.GetTenantById(id);
-            TblTenant objEditData = new TblTenant();
-            objEditData = tenantDetails[0];
-            return View(objEditData);
+            try
+            {
+                List<TblTenant> tenantDetails = new List<TblTenant>();
+                tenantDetails = tr.GetTenantById(id);
+                TblTenant objEditData = new TblTenant();
+                objEditData = tenantDetails[0];
+                return View(objEditData);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
 
         [HttpPost]
         public ActionResult EditTenant(TblTenant objTenant)
         {
-            if (ModelState.IsValid)
+            try
             {
-                int rows = tr.EditTenants(objTenant);
-                if (rows != 0)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    int rows = tr.EditTenants(objTenant);
+                    if (rows != 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(objTenant);
+                    }
                 }
-                else
-                {
-                    return View(objTenant);
-                }
+                return View(objTenant);
             }
-            return View(objTenant);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
 
-        //public ActionResult DeleteTenant(int id,bool isActive)
-        //{
-        //    ViewBag.isActive = isActive;
-        //    List<TblTenant> tenantDetails = new List<TblTenant>();
-        //    tenantDetails = tr.GetTenantById(id);
-        //    TblTenant objEditData = new TblTenant();
-        //    objEditData = tenantDetails[0];
-        //    return View(objEditData);
-        //}
-
-        [HttpPost,ActionName("DeleteTenant")]
+        [HttpPost, ActionName("DeleteTenant")]
         public ActionResult DeleteConfirmTenant(int id)
         {
-            Response response = new Response();
-            List<TblTenant> objTenantList = tr.GetTenantById(id);
-            TblTenant objTenant = objTenantList[0];
-            if (ModelState.IsValid)
+            try
             {
-                if (objTenant.IsActive == true)
+                Response response = new Response();
+                List<TblTenant> objTenantList = tr.GetTenantById(id);
+                TblTenant objTenant = objTenantList[0];
+                if (ModelState.IsValid)
                 {
-                    objTenant.IsActive = false;
+                    if (objTenant.IsActive == true)
+                    {
+                        objTenant.IsActive = false;
+                    }
+                    else
+                    {
+                        objTenant.IsActive = true;
+                    }
+                    int rows = tr.DeleteTenants(objTenant);
+                    if (rows != 0)
+                    {
+                        response.StatusCode = 1;
+                    }
+                    else
+                    {
+                        response.StatusCode = 0;
+                    }
                 }
-                else
-                {
-                    objTenant.IsActive = true;
-                }
-                int rows = tr.DeleteTenants(objTenant);
-                if (rows != 0)
-                {
-                    response.StatusCode = 1;
-                    //return RedirectToAction("Index");
-                }
-                else
-                {
-                    response.StatusCode = 0;
-                    //return View(objTenant);
-                }
+                return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
-            //return View(objTenant);
-            return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
 
         public ActionResult VerifyTenantDomain(string Domain)
         {
-            //string isAvailable = string.Empty;
-            int isAvailable= tr.VerifyTenantDomain(Domain);
+            try
+            {
+                int isAvailable = tr.VerifyTenantDomain(Domain);
 
-            return Json(isAvailable, JsonRequestBehavior.AllowGet);
+                return Json(isAvailable, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+
+            }
         }
+
     }
 
 
