@@ -19,7 +19,7 @@ namespace LMSBL.DBModels
         public virtual DbSet<TblTenant> tblTenants { get; set; }
         public virtual DbSet<TblUser> TblUsers { get; set; }
         public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
-        public virtual DbSet<tblQuestion> tblQuestions { get; set; }
+        public virtual DbSet<TblQuestion> tblQuestions { get; set; }
         public virtual DbSet<TblQuestionOption> tblQuestionOptions { get; set; }
         public virtual DbSet<TblQuestionType> tblQuestionTypes { get; set; }
         public virtual DbSet<TblQuiz> tblQuizs { get; set; }
