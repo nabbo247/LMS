@@ -2,6 +2,7 @@ namespace LMSBL.DBModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -18,9 +19,11 @@ namespace LMSBL.DBModels
 
         public int QuizId { get; set; }
 
+        [DisplayName("Quiz Name")]
         [StringLength(500)]
         public string QuizName { get; set; }
 
+        [DisplayName("Quiz Description")]
         [Column(TypeName = "ntext")]
         public string QuizDescription { get; set; }
 

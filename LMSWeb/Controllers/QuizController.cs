@@ -45,16 +45,58 @@ namespace LMSWeb.Controllers
             }
         }
 
-        public ActionResult EditQuiz(TblQuiz objQuiz)
+        [HttpPost]
+        public ActionResult AddQuiz(TblQuiz objQuiz)
         {
             try
             {
+                if (ModelState.IsValid)
+                {
+                    TblUser sessionUser = (TblUser)Session["UserSession"];
+
+                    if (sessionUser != null)
+                    {
+                        objQuiz.TenantId = sessionUser.TenantId;
+                        int rows = 0;
+                        if (objQuiz.QuizId == 0)
+                        {
+                            rows = quizRepository.CreateQuiz(objQuiz);
+                        }
+                        else
+                        {
+                            rows = quizRepository.UpdateQuiz(objQuiz);
+                        }
+                        if (rows != 0)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            return View(objQuiz);
+                        }
+                    }
+                }
                 return View(objQuiz);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
                 return View();
+            }
+        }
+        public ActionResult EditQuiz(int id)
+        {
+            List<TblQuiz> objQuiz = new List<TblQuiz>();
+            try
+            {
+                
+                objQuiz = quizRepository.GetQuizByID(id);
+                return View("AddQuiz", objQuiz[0]);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View("AddQuiz", null);
             }
         }
 
