@@ -62,27 +62,28 @@
                         </td>
                     }
 
-                        <td>
-                            <button type="button" onclick="location.href(@Url.Action("EditUser", "User", new { id = user.UserId }))"
-                                    class="btn text-center btn-warning">
-                                Edit
-                            </button>
+                <td>
+                    <a href="@Url.Action("EditUser", "User", new { id = user.UserId })">
+                        <button type="button" class="btn text-center btn-warning">
+                            Edit
+                        </button>
+                    </a>
 
-                            @if (user.IsActive == true)
-                            {
-                                <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
-                                        class="btn text-center btn-warning">
-                                    Deactive
-                                </button>
-                            }
-                            else
-                            {
-                                <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
-                                        class="btn text-center btn-warning">
-                                    Active
-                                </button>
-                            }
-                        </td>
+                        @if (user.IsActive == true)
+                        {
+                            <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
+                                    class="btn text-center btn-warning">
+                                Deactive
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
+                                    class="btn text-center btn-warning">
+                                Active
+                            </button>
+                        }
+                </td>
                     </tr>
                     }
                 }
