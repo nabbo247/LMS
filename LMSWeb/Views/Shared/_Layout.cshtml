@@ -47,6 +47,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="@baseURL\Home\Index">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
+                @if (model == null)
+                {
+                    Response.Redirect("~/Login/Logout");
+                }
                 @if (model.RoleId == 1)
                 {
                     <li class="nav-item">
@@ -92,9 +96,11 @@
                     <a class="nav-link" href="@baseURL\Reports\Index">
                         Reports
                     </a>
-                </li>                
+                </li>
             </ul>
         </div>
+        
+        <div id="dvMessage">@TempData["Message"]</div>
         <a href="@Url.Action("Logout", "Login")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">Logout</button></a>
     </nav>
     <div class="main-container container">

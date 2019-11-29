@@ -90,7 +90,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
-                db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
+                //db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
                 return db.ExecuteQuery("sp_UserAdd");
             }
             catch (Exception)

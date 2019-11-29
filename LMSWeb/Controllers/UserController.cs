@@ -98,10 +98,12 @@ namespace LMSWeb.Controllers
                     int rows = ur.AddUser(objUser);
                     if (rows != 0)
                     {
+                        TempData["Message"] = "Saved Successfully";
                         return RedirectToAction("Index");
                     }
                     else
                     {
+                        TempData["Message"] = "Not Saved Successfully";
                         return View(objUser);
                     }
                 }
