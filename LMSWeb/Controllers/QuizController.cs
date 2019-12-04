@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
@@ -48,6 +49,9 @@ namespace LMSWeb.Controllers
         [HttpPost]
         public ActionResult AddQuiz(TblQuiz objQuiz)
         {
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            object[] objTblQue = (object[])json_serializer.DeserializeObject(objQuiz.hdnData);
+            objQuiz.questionObject = objTblQue;
             try
             {
                 if (ModelState.IsValid)

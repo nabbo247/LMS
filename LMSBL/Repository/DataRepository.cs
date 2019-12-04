@@ -17,7 +17,7 @@ namespace LMSBL.Repository
             try
             {
                 SqlParameter param = new SqlParameter(parameterName, dbType);
-                param.Value = value;
+                param.Value = value;                
                 parameters.Add(param);
             }
             catch (Exception)

@@ -56,3 +56,14 @@ D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CoreCompileInputs.cache
 D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
 D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.dll
 D:\_Work\LMS\LMS\LMSBL\obj\Debug\LMSBL.pdb
+E:\Projects\LMS\LMSBL\bin\Debug\LMSBL.dll.config
+E:\Projects\LMS\LMSBL\bin\Debug\LMSBL.dll
+E:\Projects\LMS\LMSBL\bin\Debug\LMSBL.pdb
+E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.dll
+E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.xml
+E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
+E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.dll
+E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.pdb
+E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache

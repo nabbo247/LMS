@@ -27,6 +27,12 @@ namespace LMSBL.DBModels
         [Column(TypeName = "ntext")]
         public string QuizDescription { get; set; }
 
+        [NotMapped]
+        public string hdnData { get; set; }
+
+        [NotMapped]
+        public object[] questionObject { get; set; }
+
         public int TenantId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

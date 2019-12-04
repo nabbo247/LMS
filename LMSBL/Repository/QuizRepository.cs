@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LMSBL.DBModels;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace LMSBL.Repository
 {
@@ -21,7 +22,7 @@ namespace LMSBL.Repository
                 {
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
-                    QuizDescription = Convert.ToString(dr["QuizDescription"])                    
+                    QuizDescription = Convert.ToString(dr["QuizDescription"])
                 }).ToList();
                 return quizDetails;
             }
@@ -50,35 +51,74 @@ namespace LMSBL.Repository
             {
                 throw;
             }
+
         }
         public int CreateQuiz(TblQuiz obj)
         {
+            int status = 0;
             try
-            {               
+            {
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);                
+                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
-                return db.ExecuteQuery("sp_QuizAdd");
+                db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
+                status = db.ExecuteQuery("sp_QuizAdd");
+                if (Convert.ToInt32(db.parameters[3].Value) > 0)
+                {
+                    int quizId = Convert.ToInt32(db.parameters[3].Value);
+                    foreach (Dictionary<string, object> item in obj.questionObject)
+                    {
+                        int queId = 0;
+                        db.parameters.Clear();
+                        db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                        db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
+                        db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
+                        db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
+                        queId = db.ExecuteQuery("sp_QuestionAdd");
+                        if (Convert.ToInt32(db.parameters[3].Value) > 0)
+                        {
+                            queId = Convert.ToInt32(db.parameters[3].Value);
+                            foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
+                            {
+                                int optionId = 0;
+                                db.parameters.Clear();
+                                db.AddParameter("@QuestionId", SqlDbType.Int, queId);
+                                db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
+                                db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
+                                db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
+                                optionId = db.ExecuteQuery("sp_OptionAdd");
+                                if (Convert.ToInt32(db.parameters[3].Value) > 0)
+                                {
+
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return status;
         }
 
         public int UpdateQuiz(TblQuiz obj)
         {
+            int status = 0;
             try
             {
                 db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);                
-                return db.ExecuteQuery("sp_QuizUpdate");
+                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                status = db.ExecuteQuery("sp_QuizUpdate");
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return status;
         }
     }
 }
