@@ -17,6 +17,9 @@ namespace LMSBL.DBModels
 
         public bool? CorrectOption { get; set; }
 
+        [NotMapped]
+        public bool SelectedAnswer { get; set; }
+
         public virtual TblQuestion TblQuestion { get; set; }
     }
 }

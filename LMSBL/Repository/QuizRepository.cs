@@ -108,10 +108,11 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
+                db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                 db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
-                status = db.ExecuteQuery("sp_QuizUpdate");
+                status = db.ExecuteQuery("sp_QuizUpdate");              
 
             }
             catch (Exception ex)
@@ -119,6 +120,103 @@ namespace LMSBL.Repository
                 throw ex;
             }
             return status;
+        }
+
+        public int AssignQuiz(int QuizId,int UserId)
+        {
+            int status = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
+                db.AddParameter("@UserId", SqlDbType.Int, UserId);
+                db.AddParameter("@status", SqlDbType.Int, ParameterDirection.Output);
+                status = db.ExecuteQuery("sp_QuizAssign");
+                status = Convert.ToInt32(db.parameters[2].Value);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public List<TblQuiz> GetQuizByUserID(int UserId)
+        {
+            try
+            {
+                db.AddParameter("@UserId", SqlDbType.Int, UserId);
+
+                DataSet ds = db.FillData("sp_QuizGetByUserId");
+                List<TblQuiz> quizDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblQuiz
+                {
+                    QuizId = Convert.ToInt32(dr["QuizId"]),
+                    QuizName = Convert.ToString(dr["QuizName"]),
+                    QuizDescription = Convert.ToString(dr["QuizDescription"])
+                }).ToList();
+                return quizDetails;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public List<TblQuiz> GetQuizForLaunch(int QuizId,int UserId)
+        {
+            try
+            {
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
+                db.AddParameter("@UserId", SqlDbType.Int, UserId);
+
+                DataSet ds = db.FillData("sp_QuizGetAllDetails");
+                List<TblQuiz> quizDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblQuiz
+                {
+                    QuizId = Convert.ToInt32(dr["QuizId"]),
+                    QuizName = Convert.ToString(dr["QuizName"]),
+                    QuizDescription = Convert.ToString(dr["QuizDescription"])
+                }).ToList();
+
+                List<TblQuestion> questionsDetails = ds.Tables[1].AsEnumerable().Select(dr => new TblQuestion
+                {
+                    QuizId = Convert.ToInt32(dr["QuizId"]),
+                    QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                    QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
+                    QuestionText = Convert.ToString(dr["QuestionText"])
+                }).ToList();
+                quizDetails[0].TblQuestions = questionsDetails;
+                foreach(var question in questionsDetails)
+                {                 
+
+                    List<TblQuestionOption> optionDetails = ds.Tables[2].AsEnumerable().Select(dr => new TblQuestionOption
+                    {
+                        OptionId = Convert.ToInt32(dr["OptionId"]),
+                        QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                        OptionText = Convert.ToString(dr["OptionText"]),
+                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
+                    }).Where(c => c.QuestionId == question.QuestionId).ToList();
+
+                    question.TblQuestionOptions = optionDetails;
+                }
+
+                //List<TblQuestionOption> optionDetails = ds.Tables[2].Where(c => c.QuestionId == p_ID).Select(dr => new TblQuestionOption
+                //{
+                //    OptionId = Convert.ToInt32(dr["OptionId"]),
+                //    QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                //    OptionText = Convert.ToString(dr["OptionText"]),
+                //    CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
+                //}).ToList();
+
+                
+                return quizDetails;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

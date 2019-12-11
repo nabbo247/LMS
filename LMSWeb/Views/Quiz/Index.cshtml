@@ -4,13 +4,22 @@
     ViewBag.Title = "Quiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
 
+    if (!string.IsNullOrEmpty(Convert.ToString(TempData["Message"])))
+    {
+        <script>
+            $("#dvMessage").show();
+            setTimeout(function () { $("#dvMessage").hide(); }, 3000);
+        </script>
+    }
+}
 <h4>Index</h4>
 
 <body>
     <div class="main-container container">
         <div class="row pt-3" style="float:right;">
-            
+
             <div class="form-group col-2 col-sm-2 col-md-2">
                 <a href="@Url.Action("AddQuiz", "Quiz")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
             </div>
@@ -44,6 +53,11 @@
                                 <a href="@Url.Action("ViewQuiz", "Quiz", new { id = quiz.QuizId })">
                                     <button type="button" class="btn text-center btn-warning">
                                         View
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("AssignQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        Assign
                                     </button>
                                 </a>
                             </td>

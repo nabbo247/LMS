@@ -24,6 +24,10 @@ namespace LMSBL.DBModels
         [Column(TypeName = "ntext")]
         public string QuestionText { get; set; }
 
+        [NotMapped]
+        [Column(TypeName = "ntext")]
+        public string QuestionFeedback { get; set; }
+
         public virtual TblQuiz TblQuiz { get; set; }
 
         public virtual TblQuestionType TblQuestionType { get; set; }

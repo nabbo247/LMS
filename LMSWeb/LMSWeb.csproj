@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\QuizAssignViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <Content Include="assets\images\card-img-2.jpg" />
     <Content Include="assets\images\card-img-3.jpg" />
     <Content Include="assets\images\card-img.jpg" />
+    <Content Include="assets\images\down-arrow.jpg" />
     <Content Include="assets\images\down-arrow.png" />
     <Content Include="assets\images\drag-indicator.png" />
     <Content Include="assets\images\dribbble.png" />
@@ -190,6 +192,7 @@
     <Content Include="assets\images\slack.png" />
     <Content Include="assets\images\switch.png" />
     <Content Include="assets\images\trash.png" />
+    <Content Include="assets\images\up-arrow.jpg" />
     <Content Include="assets\libs\css\style.css" />
     <Content Include="assets\libs\js\dashboard-ecommerce.js" />
     <Content Include="assets\libs\js\dashboard-finance.js" />
@@ -681,6 +684,8 @@
     <Content Include="Views\Quiz\AddQuiz.cshtml" />
     <Content Include="Views\Quiz\EditQuiz.cshtml" />
     <Content Include="Views\Quiz\ViewQuiz.cshtml" />
+    <Content Include="Views\Quiz\AssignQuiz.cshtml" />
+    <Content Include="Views\Assignment\LaunchQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

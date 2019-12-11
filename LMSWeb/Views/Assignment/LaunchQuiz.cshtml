@@ -1,0 +1,79 @@
+﻿@model LMSBL.DBModels.TblQuiz
+@{
+    ViewBag.Title = "LaunchQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Launch Quiz</h4>
+
+@using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row col-12">
+        <hr class="form-divider">
+    </div>
+
+    <form class="form-inline">
+        @Html.HiddenFor(model => model.QuizId)
+        <div class="row col-12">
+            <div class="row col-12">
+                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
+                    @Model.QuizName
+                </div>
+            </div>
+            <div class="row col-12">
+                <label class="col-3 p-0">Quiz Description :  </label>
+                <div class="col-6 ml-0">@Model.QuizDescription</div>
+            </div>
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @if (Model != null)
+            {
+                foreach (var question in Model.TblQuestions)
+                {
+                    <div class="row col-12" id="que+@question.QuestionId">
+                        <div class="row col-10">
+                            @question.QuestionText
+                            @if (question.QuestionTypeId == 1)
+                            {
+                                foreach (var option in question.TblQuestionOptions)
+                                {
+                                    @Html.RadioButtonFor(d => option.SelectedAnswer, new {@id="queOption"+option.OptionId  }) @option.OptionText
+                                }
+                            }
+                            else
+                            {
+                                foreach (var option in question.TblQuestionOptions)
+                                {
+                                    @Html.CheckBoxFor(m => option.SelectedAnswer, new {@id="queOption"+option.OptionId  }) @option.OptionText
+                                }
+                            }
+
+                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
+                            @Html.TextBoxFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control", @id="queFeedback"+question.QuestionId })
+                            <hr class="form-divider">
+                        </div>
+                    </div>
+                }
+            }
+
+
+
+            <hr class="form-divider">
+        </div>
+
+        <div class="row col-12" style="margin-bottom: 34px;">
+            <div class="col-8">
+
+            </div>
+            <div class="col-4">
+                <button type="submit" onclick="location.href='@Url.Action("MyAssignments", "Assignment")';return false;"
+                        class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+                <button type="submit" id="btnQuizSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+            </div>
+        </div>
+    </form>
+}

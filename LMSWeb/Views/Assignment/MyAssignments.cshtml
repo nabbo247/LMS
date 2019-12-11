@@ -1,8 +1,46 @@
-﻿
+﻿@model List<LMSBL.DBModels.TblQuiz>
 @{
     ViewBag.Title = "MyAssignments";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MyAssignments</h2>
+<h4>My Assignments</h4>
 
+<body>
+    <div class="main-container container">
+        
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Quiz Name</th>
+                    <th scope="col">Quiz Description</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var quiz in Model)
+                    {
+                        <tr>
+                            <th scope="row">@quiz.QuizId</th>
+                            <td>@quiz.QuizName</td>
+                            <td>@quiz.QuizDescription</td>
+
+                            <td>                               
+                                <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        Launch
+                                    </button>
+                                </a>                                
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
