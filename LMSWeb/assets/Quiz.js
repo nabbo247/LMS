@@ -25,6 +25,11 @@ $(document).ready(function () {
     });
 
 
+    $('#btnResponseSubmit').on("click", function () {
+        var status = SaveResponse();
+        return status;
+    });
+
 
 });
 
@@ -154,6 +159,33 @@ function SaveQuiz() {
         questionObj.push(item);
     });
     $("#hdnData").val(JSON.stringify(questionObj));
+
+    return returnStatus;
+}
+
+function SaveResponse() {   
+   
+    var IDs = $("#dvQuestions div[id^='que+']");
+    var questionObj = [];
+    
+    $.each(IDs, function (index, value) {
+        var id = value.id.substring(4, value.id.length);
+        alert(id);
+
+        var optionIDs = $("#que+" + id + " input[id^='que" + id + "Option']");
+        console.log(optionIDs);
+
+        $.each(optionIDs, function (index, value) {
+            //var id = value.id.substring(4, value.id.length);
+            alert(value); alert(value.id);
+
+            
+
+        });
+
+    });
+
+    var returnStatus = false;
 
     return returnStatus;
 }

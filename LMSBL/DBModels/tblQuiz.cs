@@ -31,6 +31,9 @@ namespace LMSBL.DBModels
         public string hdnData { get; set; }
 
         [NotMapped]
+        public string hdnResponseData { get; set; }
+
+        [NotMapped]
         public object[] questionObject { get; set; }
 
         public int TenantId { get; set; }

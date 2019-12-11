@@ -15,6 +15,7 @@
 
     <form class="form-inline">
         @Html.HiddenFor(model => model.QuizId)
+        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
         <div class="row col-12">
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
@@ -27,7 +28,7 @@
             </div>
             <hr class="form-divider">
         </div>
-        <div class="row col-12">
+        <div class="row col-12" id="dvQuestions">
             @if (Model != null)
             {
                 foreach (var question in Model.TblQuestions)
@@ -39,19 +40,19 @@
                             {
                                 foreach (var option in question.TblQuestionOptions)
                                 {
-                                    @Html.RadioButtonFor(d => option.SelectedAnswer, new {@id="queOption"+option.OptionId  }) @option.OptionText
+                                    @Html.RadioButtonFor(d => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId }) @option.OptionText
                                 }
                             }
                             else
                             {
                                 foreach (var option in question.TblQuestionOptions)
                                 {
-                                    @Html.CheckBoxFor(m => option.SelectedAnswer, new {@id="queOption"+option.OptionId  }) @option.OptionText
+                                    @Html.CheckBoxFor(m => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId }) @option.OptionText
                                 }
                             }
 
                             @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
-                            @Html.TextBoxFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control", @id="queFeedback"+question.QuestionId })
+                            @Html.TextBoxFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control", @id = "queFeedback" + question.QuestionId })
                             <hr class="form-divider">
                         </div>
                     </div>
@@ -72,8 +73,10 @@
                         class="btn btn-outline-secondary">
                     <b>Cancel</b>
                 </button>
-                <button type="submit" id="btnQuizSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+                <button type="submit" id="btnResponseSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
             </div>
         </div>
     </form>
 }
+
+<script src="~/assets/Quiz.js"></script>
