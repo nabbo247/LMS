@@ -3,9 +3,12 @@ var optionCount = 2;
 
 
 $(document).ready(function () {
-
+    //$('.textarea-editor').summernote();
     if ($("#hdnResponseData").val() != null) {
         SetResponses($("#hdnResponseData").val());
+    }
+    else {
+        SetResponses(111);
     }
 
     $('#btnAddQuestion').on("click", function () {
@@ -90,6 +93,8 @@ function AddQuestion() {
 
     $('#dvQuestions').append(queHTML);
 
+    $('#que' + count).summernote();
+
 }
 
 function addOption(queCount) {
@@ -169,7 +174,8 @@ function SaveQuiz() {
     return returnStatus;
 }
 
-function SaveResponse() {   
+function SaveResponse() {
+   
     var returnStatus = true;
     var IDs = $("#dvQuestions div[id^='dvQue']");
     var questionObj = [];
@@ -202,27 +208,31 @@ function SaveResponse() {
             return false;
         }
         questionObj.push(optionObj);
-    });
-
+    });    
     $("#hdnResponseData").val(JSON.stringify(questionObj));
 
     return returnStatus;
 }
 
-function SetResponses(data) {   
-    var responses = JSON.parse(data);
-    console.log(responses);
+function SetResponses(data) {    
+    if (data == 111) {
 
-    $.each(responses, function (index, value) {        
-        if (value.OptionIds.indexOf(',')>0) {
-            var res = value.OptionIds.split(',');            
-            $.each(res, function (index, value1) {                
-                $('#que' + value.QuestionId + 'rbtnOption' + value1).attr('checked', true);
-            });
-        }
-        else {           
-            $('#que' + value.QuestionId + 'rbtnOption' + value.OptionIds).attr('checked', true);
-        }
-        $('#queFeedback' + value.QuestionId).val(value.QuestionFeedback);
-    });
+    }
+    else {        
+        var responses = JSON.parse(data);
+        console.log(responses);
+
+        $.each(responses, function (index, value) {
+            if (value.OptionIds.indexOf(',') > 0) {
+                var res = value.OptionIds.split(',');
+                $.each(res, function (index, value1) {
+                    $('#que' + value.QuestionId + 'rbtnOption' + value1).attr('checked', true);
+                });
+            }
+            else {
+                $('#que' + value.QuestionId + 'rbtnOption' + value.OptionIds).attr('checked', true);
+            }
+            $('#queFeedback' + value.QuestionId).html(value.QuestionFeedback);
+        });
+    }
 }

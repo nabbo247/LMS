@@ -1,5 +1,6 @@
 namespace LMSBL.DBModels
 {
+    using System.Web.Mvc;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -27,9 +28,12 @@ namespace LMSBL.DBModels
         [Column(TypeName = "ntext")]
         public string QuizDescription { get; set; }
 
+        
+        [AllowHtml]
         [NotMapped]
         public string hdnData { get; set; }
 
+        [AllowHtml]
         [NotMapped]
         public string hdnResponseData { get; set; }
 

@@ -32,9 +32,10 @@
             foreach (var question in Model.TblQuestions)
             {
                 var queId = "dvQue" + question.QuestionId;
+                var questionText = @question.QuestionText;
                 <div class="row col-12" id="@{@queId}">
                     <div class="row col-10">
-                        @question.QuestionText
+                        @Html.Raw(questionText)
                     </div>
                     <div class="row col-10">
 

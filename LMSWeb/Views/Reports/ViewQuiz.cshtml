@@ -32,9 +32,10 @@
             foreach (var question in Model.TblQuestions)
             {
                 var queId = "dvQue" + question.QuestionId;
+                var questionText = @question.QuestionText;
                 <div class="row col-12" id="@{@queId}">
                     <div class="row col-10">
-                        @question.QuestionText
+                        @Html.Raw(questionText)
                     </div>
                     <div class="row col-10">
 
@@ -73,7 +74,7 @@
                         </div>
                         <div class="row col-9">
                             @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
-                            @Html.TextAreaFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control textarea-editor note-toolbar panel-heading", @readonly = "readonly", @id = "queFeedback" + question.QuestionId })
+                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0", @id = "queFeedback" + question.QuestionId })
                         </div>
                         <hr class="form-divider">
                     </div>

@@ -120,6 +120,9 @@ namespace LMSWeb.Controllers
             {
 
                 objQuiz = quizRepository.GetQuizByID(id);
+                JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+
+                objQuiz[0].hdnData = json_serializer.Serialize(objQuiz[0]);
                 return View("AddQuiz", objQuiz[0]);
             }
             catch (Exception ex)
