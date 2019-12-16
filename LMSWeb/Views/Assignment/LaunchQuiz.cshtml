@@ -33,26 +33,41 @@
             {
                 foreach (var question in Model.TblQuestions)
                 {
-                    <div class="row col-12" id="que+@question.QuestionId">
+                    var queId = "dvQue" + question.QuestionId;
+                    <div class="row col-12" id="@{@queId}">
                         <div class="row col-10">
                             @question.QuestionText
-                            @if (question.QuestionTypeId == 1)
-                            {
-                                foreach (var option in question.TblQuestionOptions)
-                                {
-                                    @Html.RadioButtonFor(d => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId }) @option.OptionText
-                                }
-                            }
-                            else
-                            {
-                                foreach (var option in question.TblQuestionOptions)
-                                {
-                                    @Html.CheckBoxFor(m => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId }) @option.OptionText
-                                }
-                            }
+                        </div>
+                        <div class="row col-10">
+                            <div class="row col-3">
 
-                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
-                            @Html.TextBoxFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control", @id = "queFeedback" + question.QuestionId })
+                            </div>
+                            <div class="row col-9">
+                                @if (question.QuestionTypeId == 1)
+                                {
+                                    foreach (var option in question.TblQuestionOptions)
+                                    {
+                                        var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                        //@Html.RadioButtonFor(d => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId })
+                                        <input type="radio" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
+
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var option in question.TblQuestionOptions)
+                                    {
+                                        var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                        <input type="checkbox" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
+                                    }
+                                }
+
+
+                            </div>
+                            <div class="row col-9">
+                                @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
+                                @Html.TextAreaFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control textarea-editor note-toolbar panel-heading", @id = "queFeedback" + question.QuestionId })
+                            </div>
                             <hr class="form-divider">
                         </div>
                     </div>
@@ -78,5 +93,4 @@
         </div>
     </form>
 }
-
 <script src="~/assets/Quiz.js"></script>

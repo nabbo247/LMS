@@ -58,6 +58,8 @@
     <Compile Include="Common\Exceptions.cs" />
     <Compile Include="Common\Response.cs" />
     <Compile Include="DBModels\LMSContext.cs" />
+    <Compile Include="DBModels\QuizResponse.cs" />
+    <Compile Include="DBModels\ReportModel.cs" />
     <Compile Include="DBModels\TblAssignmentAndTracking.cs" />
     <Compile Include="DBModels\TblCourse.cs" />
     <Compile Include="DBModels\TblLogin.cs" />

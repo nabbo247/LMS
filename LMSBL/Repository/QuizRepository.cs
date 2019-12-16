@@ -5,6 +5,7 @@ using LMSBL.DBModels;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace LMSBL.Repository
 {
     public class QuizRepository
@@ -45,6 +46,28 @@ namespace LMSBL.Repository
                     QuizName = Convert.ToString(dr["QuizName"]),
                     QuizDescription = Convert.ToString(dr["QuizDescription"])
                 }).ToList();
+
+                List<TblQuestion> questionsDetails = ds.Tables[1].AsEnumerable().Select(dr => new TblQuestion
+                {
+                    QuizId = Convert.ToInt32(dr["QuizId"]),
+                    QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                    QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
+                    QuestionText = Convert.ToString(dr["QuestionText"])
+                }).ToList();
+                quizDetails[0].TblQuestions = questionsDetails;
+                foreach (var question in questionsDetails)
+                {
+
+                    List<TblQuestionOption> optionDetails = ds.Tables[2].AsEnumerable().Select(dr => new TblQuestionOption
+                    {
+                        OptionId = Convert.ToInt32(dr["OptionId"]),
+                        QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                        OptionText = Convert.ToString(dr["OptionText"]),
+                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
+                    }).Where(c => c.QuestionId == question.QuestionId).ToList();
+
+                    question.TblQuestionOptions = optionDetails;
+                }
                 return quizDetails;
             }
             catch (Exception ex)
@@ -112,7 +135,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                 db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
-                status = db.ExecuteQuery("sp_QuizUpdate");              
+                status = db.ExecuteQuery("sp_QuizUpdate");
 
             }
             catch (Exception ex)
@@ -122,7 +145,7 @@ namespace LMSBL.Repository
             return status;
         }
 
-        public int AssignQuiz(int QuizId,int UserId)
+        public int AssignQuiz(int QuizId, int UserId)
         {
             int status = 0;
             try
@@ -164,10 +187,11 @@ namespace LMSBL.Repository
 
         }
 
-        public List<TblQuiz> GetQuizForLaunch(int QuizId,int UserId)
+        public List<TblQuiz> GetQuizForLaunch(int QuizId, int UserId)
         {
             try
             {
+                db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
                 db.AddParameter("@UserId", SqlDbType.Int, UserId);
 
@@ -187,8 +211,8 @@ namespace LMSBL.Repository
                     QuestionText = Convert.ToString(dr["QuestionText"])
                 }).ToList();
                 quizDetails[0].TblQuestions = questionsDetails;
-                foreach(var question in questionsDetails)
-                {                 
+                foreach (var question in questionsDetails)
+                {
 
                     List<TblQuestionOption> optionDetails = ds.Tables[2].AsEnumerable().Select(dr => new TblQuestionOption
                     {
@@ -201,15 +225,6 @@ namespace LMSBL.Repository
                     question.TblQuestionOptions = optionDetails;
                 }
 
-                //List<TblQuestionOption> optionDetails = ds.Tables[2].Where(c => c.QuestionId == p_ID).Select(dr => new TblQuestionOption
-                //{
-                //    OptionId = Convert.ToInt32(dr["OptionId"]),
-                //    QuestionId = Convert.ToInt32(dr["QuestionId"]),
-                //    OptionText = Convert.ToString(dr["OptionText"]),
-                //    CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
-                //}).ToList();
-
-                
                 return quizDetails;
             }
             catch (Exception ex)
@@ -218,5 +233,101 @@ namespace LMSBL.Repository
             }
 
         }
+
+        public int CaptureResponses(QuizResponse obj)
+        {
+            int status = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuestionId", SqlDbType.Int, obj.QuestionId);
+                db.AddParameter("@OptionIds", SqlDbType.Text, obj.OptionIds);
+                db.AddParameter("@QuestionFeedback", SqlDbType.Text, obj.QuestionFeedback);
+                db.AddParameter("@UserId", SqlDbType.Int, obj.UserId);
+                db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
+                status = db.ExecuteQuery("sp_ResponseAdd");
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public int CaptureScore(int quizId,int userId,int score)
+        {
+            int status = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                db.AddParameter("@UserId", SqlDbType.Int, userId);
+                db.AddParameter("@Score", SqlDbType.Int, score);               
+                status = db.ExecuteQuery("sp_QuizScoreAdd");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+
+        public List<ReportModel> GetQuizReportByUserID(int TenantId)
+        {
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@TenantId", SqlDbType.Int, TenantId);
+
+                DataSet ds = db.FillData("sp_GetUserAssignment");
+                List<ReportModel> quizReportDetails = ds.Tables[0].AsEnumerable().Select(dr => new ReportModel
+                {
+                    quizId = Convert.ToInt32(dr["quizId"]),
+                    UserId = Convert.ToInt32(dr["UserId"]),
+                    QuizName = Convert.ToString(dr["QuizName"]),
+                    Name = Convert.ToString(dr["Name"]),
+                    Score = Convert.ToInt32(dr["Score"])
+
+                }).ToList();
+                return quizReportDetails;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public List<TblRespons> GetQuizResponsesByUserID(int quizId,int userId)
+        {
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                db.AddParameter("@UserId", SqlDbType.Int, userId);
+
+                DataSet ds = db.FillData("sp_GetUserQuizResponses");
+                List<TblRespons> quizResponseDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblRespons
+                {
+                    ResponseId = Convert.ToInt32(dr["ResponseId"]),
+                    QuestionId = Convert.ToInt32(dr["QuestionId"]),
+                    OptionIds = Convert.ToString(dr["OptionIds"]),
+                    QuestionFeedback = Convert.ToString(dr["QuestionFeedback"]),
+                    UserId = Convert.ToInt32(dr["UserId"]),
+                    QuizId = Convert.ToInt32(dr["QuizId"])
+
+                }).ToList();
+                return quizResponseDetails;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
     }
 }

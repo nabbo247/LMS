@@ -148,11 +148,14 @@ namespace LMSWeb.Controllers
             TempData["Message"] = message;
             return RedirectToAction("Index");
         }
-        public ActionResult ViewQuiz(TblQuiz objQuiz)
+        public ActionResult ViewQuiz(int id)
         {
             try
             {
-                return View(objQuiz);
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
+                lstAllQuiz = quizRepository.GetQuizByID(id);
+                return View(lstAllQuiz[0]);
             }
             catch (Exception ex)
             {

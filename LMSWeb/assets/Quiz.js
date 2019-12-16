@@ -1,8 +1,15 @@
 ﻿var count = 0;
 var optionCount = 2;
 
+
 $(document).ready(function () {
+
+    if ($("#hdnResponseData").val() != null) {
+        SetResponses($("#hdnResponseData").val());
+    }
+
     $('#btnAddQuestion').on("click", function () {
+
         AddQuestion();
 
         $(".expandableCollapsibleDiv > img").on("click", function (e) {
@@ -29,8 +36,7 @@ $(document).ready(function () {
         var status = SaveResponse();
         return status;
     });
-
-
+   
 });
 
 function ChangeType(id) {
@@ -131,7 +137,7 @@ function SaveQuiz() {
         }
 
         var OptionCheck = false;
-        var optionIDs = $("#dvQue" + id + "Options input[id^='que" + id + "rbtnOption']");
+        var optionIDs = $("#dvQue" + id + "Options input[id^='que" + id + "rbtnOption']"); //que1rbtnOption1. dvQue1Options
         var optionObj = [];
         $.each(optionIDs, function (index, value) {
             var optionId = value.id.substring(value.id.length - 1, value.id.length);
@@ -164,28 +170,59 @@ function SaveQuiz() {
 }
 
 function SaveResponse() {   
-   
-    var IDs = $("#dvQuestions div[id^='que+']");
+    var returnStatus = true;
+    var IDs = $("#dvQuestions div[id^='dvQue']");
     var questionObj = [];
     
     $.each(IDs, function (index, value) {
-        var id = value.id.substring(4, value.id.length);
-        alert(id);
-
-        var optionIDs = $("#que+" + id + " input[id^='que" + id + "Option']");
-        console.log(optionIDs);
-
+        var id = value.id.substring(5, value.id.length);  
+        var optionIDs = $("#dvQue" + id + " input[id^='que" + id + "rbtnOption']");
+        var OptionCheck = false;
+        var optionObj = [];
+        item = {}
+        
         $.each(optionIDs, function (index, value) {
             //var id = value.id.substring(4, value.id.length);
-            alert(value); alert(value.id);
-
+            optionItem = {}           
             
+            if ($('#' + value.id).is(':checked')) {//que1rbtnOption1
+                var optionIndex = value.id.indexOf("Option");
+                var actualIndex = value.id.substring(optionIndex + 6, value.id.length);
+                optionItem["questionId"] = id;
+                optionItem["optionId"] = actualIndex;   
+                optionItem["queFeedback"] = $("#queFeedback" + id).val();
+                OptionCheck = true;
+                optionObj.push(optionItem);
+            }                    
 
         });
-
+        if (!OptionCheck) {
+            returnStatus = false;
+            alert("Please select Answer");
+            return false;
+        }
+        questionObj.push(optionObj);
     });
 
-    var returnStatus = false;
+    $("#hdnResponseData").val(JSON.stringify(questionObj));
 
     return returnStatus;
+}
+
+function SetResponses(data) {   
+    var responses = JSON.parse(data);
+    console.log(responses);
+
+    $.each(responses, function (index, value) {        
+        if (value.OptionIds.indexOf(',')>0) {
+            var res = value.OptionIds.split(',');            
+            $.each(res, function (index, value1) {                
+                $('#que' + value.QuestionId + 'rbtnOption' + value1).attr('checked', true);
+            });
+        }
+        else {           
+            $('#que' + value.QuestionId + 'rbtnOption' + value.OptionIds).attr('checked', true);
+        }
+        $('#queFeedback' + value.QuestionId).val(value.QuestionFeedback);
+    });
 }

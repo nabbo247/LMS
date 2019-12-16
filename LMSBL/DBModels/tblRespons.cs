@@ -19,8 +19,8 @@ namespace LMSBL.DBModels
         [Column(TypeName = "ntext")]
         public string QuestionFeedback { get; set; }
 
-        [Column(TypeName = "numeric")]
-        public decimal? UserId { get; set; }
+        
+        public int UserId { get; set; }
 
         public int QuizId { get; set; }
 

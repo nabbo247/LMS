@@ -44,4 +44,11 @@ namespace LMSBL.DBModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblRespons> TblResponses { get; set; }
     }
+
+    public partial class QueOptions
+    {
+        public int QuestionId { get; set; }
+
+        public string OptionsIds { get; set; }
+    }
 }
