@@ -1,0 +1,256 @@
+﻿@model LMSBL.DBModels.TblTenant
+@{
+    ViewBag.Title = "AddTenant";
+    //Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AddTenant</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div class="main-container container mt-5">
+        <h4>Add Client</h4>
+        <form class="form-inline">
+            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row col-12">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.TenantName, new { @class = "col-6 form-control ml-0", @id="txtTenantName" })
+                    @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.TenantDomain, new { @class = "col-6 form-control ml-0", @id = "txtdomainName" })
+                    @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
+                    <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success" />
+                    <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
+                </div>
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12 mb-4">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.ActivationFrom, new { @class = "col-6 ml-0 form-control", @id="DtActivitionFrom", @autocomplete = "off" } )
+                    @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.ActivationTo, new { @class = "col-6 ml-0 form-control", @id= "DtActivitionTo", @autocomplete = "off" } )
+                    @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
+                </div>
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                <div class="form-group col-6 pl-0">
+                    @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "col-3 p-0" })
+                    @Html.TextBoxFor(model => model.NoOfUserAllowed, new { @class = "col-6 ml-0 form-control",@id="txtNoOfUsers" } )
+                    @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-6 pl-0">
+                    @*<label class="col-3 p-0">Instruction Color</label>
+                <select class="col-6 ml-0 form-control" id="exampleFormControlSelect1">
+                    <option>Select Instruction color</option>
+                </select>
+                <i class="col-2">&nbsp;</i>*@
+                </div>
+                <hr class="form-divider">
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-6 pl-0">
+                    <label class="col-3 p-0">Upload Logo</label>
+                    <!-- <input type="text" class="col-6 form-control ml-0"> -->
+                    <label class="btn-bs-file btn btn-lg btn-primary-outline">
+                        Browse<input type="file" onchange="readURL(this);" />
+                    </label><br>
+                    <div class="small-wrap">
+                        <small>(Max. Logo file 2, each file should not exide 1 MB)</small>
+                    </div>
+                </div>
+                <div class="form-group col-6 pl-0">
+                    <!-- <label class="col-3 p-0">Email address:</label> -->
+                    <img class="browse-img" id="blah" src="~/assets/images/imagplaceholder.png" />
+                    <div class="col-6 ml-0">
+                        <span>File Name: <span id="browse-img-name"> - </span></span> <br>
+                        <small>File Size: <span id="browse-img-size"> - </span>KB</small>
+                    </div>
+                    <!-- <input type="text" class="col-6 form-control ml-0"> -->
+                    <i onclick="deleteImage()" class="col-2 trash-icon">&nbsp;</i>
+                </div>
+                <hr class="form-divider">
+            </div>
+            @*<div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                <label class="col-3 p-0">Icon Style</label>
+                <select class="col-6 ml-0 form-control" id="exampleFormControlSelect1">
+                    <option>Select Icon style</option>
+                </select>
+                <i class="col-2">&nbsp;</i>
+            </div>
+            <div class="form-group col-6 pl-0">
+                <label class="col-3 p-0">Icon Color</label>
+                <div class="col-6 ml-0 form-control">
+                    <div class="dropdown" style="top: -6px;">
+                        <button class="btn _select_color dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Green
+                            <span _text_display="Green" class="color green"></span>
+                        </button>
+                        <ul class="dropdown-menu _select_color_drop" aria-labelledby="dropdownMenu1">
+                            <li><span _text_display="Green" class="color green"></span></li>
+                            <li><span _text_display="Red" class="color red"></span></li>
+                            <li><span _text_display="Yellow" class="color yellow"></span></li>
+                            <li><span _text_display="Brown" class="color brown"></span></li>
+                            <li><span _text_display="Orange" class="color orange"></span></li>
+                            <li><span _text_display="Pink" class="color pink"></span></li>
+                            <li><span _text_display="Silver" class="color silver"></span></li>
+                            <li><span _text_display="Bule" class="color blue"></span></li>
+                            <li><span _text_display="TEAL" class="color TEAL"></span></li>
+                            <li><span _text_display="NAVY" class="color NAVY"></span></li>
+                            <li><span _text_display="PURPLE" class="color PURPLE"></span></li>
+                            <li><span _text_display="OLIVE" class="color OLIVE"></span></li>
+                            <li><span _text_display="LIME" class="color LIME"></span></li>
+                            <input type="hidden" name="_color" value="Green">
+                        </ul>
+                    </div>
+                </div>
+                <i class="col-2">&nbsp;</i>
+            </div>
+            <hr class="form-divider">
+        </div>*@
+            <div class="row col-12" style="margin-bottom: 34px;">
+                <div class="col-8">
+                    <button type="button" class="btn btn-outline-secondary" id="btnClearAll"><b>Clear All</b></button>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-outline-secondary" onclick="" ><b>Cancel</b></button>
+                    <button type="submit" value="Create" class="btn btn-outline-secondary"><b>Submit</b></button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+        <div class="form-horizontal" style="display:none;">
+            <h4>Add New Tenant</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenantName, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @class = "", @id = "txtdomainName" } })
+                    @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
+                    <input type="button" id="btnTenantDomainName" value="verify" class="btn btn-default btn-success" />
+                    <label id="lblerrorDomain" style="display:none">Domain Name Already Exists</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ActivationFrom, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ActivationTo, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NoOfUserAllowed, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default btn-success" />
+                </div>
+            </div>
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log('Ready..!');
+
+                $('#DtActivitionFrom').datepicker({
+                    format: 'dd-mm-yyyy',
+                    showWeek: true,
+                    startDate: new Date()
+                });
+
+                $('#DtActivitionTo').datepicker({
+                    format: 'dd-mm-yyyy',
+                    showWeek: true,
+                    startDate: new Date()
+                });
+                
+
+                $("#txtdomainName").keypress(function () {
+                    $("#lblerrorDomain").hide()
+                });
+
+                $("#btnTenantDomainName").click(function () {
+                    VerifyTenantDomain($('#txtdomainName').val());
+                })
+
+                $('#btnClearAll').click(function () {
+
+                    $('#txtTenantName').val('');
+                    $('#txtdomainName').val('');
+                    $('#DtActivitionFrom').val('');
+                    $('#DtActivitionTo').val('');
+                    $('#txtNoOfUsers').val('');
+                })
+            });
+
+
+            function VerifyTenantDomain(DominName) {
+                $.ajax({
+                    url: "/Tenant/VerifyTenantDomain?Domain=" + DominName,
+                    type: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result == 1) {
+                            $("#lblerrorDomain").html("Domain Name is not Available !!!");
+                            $("#lblerrorDomain").css("color", "Red");
+                        }
+                        else {
+                            $("#lblerrorDomain").html("Domain Name is Available !!!");
+                            $("#lblerrorDomain").css("color", "Green");
+                        }
+                        $("#lblerrorDomain").show();
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

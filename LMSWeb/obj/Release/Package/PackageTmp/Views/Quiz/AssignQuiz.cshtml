@@ -1,0 +1,56 @@
+﻿@model LMSWeb.ViewModel.QuizAssignViewModel
+@{
+    ViewBag.Title = "AssignQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>AssignQuiz</h4>
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+      rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
+
+@using (Html.BeginForm("AssignQuizToUsers", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row col-12">
+        <hr class="form-divider">
+    </div>
+
+    <form class="form-inline">
+        @Html.HiddenFor(model => model.quiz.QuizId)
+        <div class="row col-12">
+            <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
+                @Model.quiz.QuizName
+            </div>
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            <label class="col-3 p-0">Assign Users :  </label>
+            <div class="col-6 ml-0">@Html.ListBoxFor(m => m.userIds, Model.usetList, new { @class = "listbox" })</div>
+        </div>
+        <hr class="form-divider">
+        <div class="row col-12" style="margin-bottom: 34px;">
+            <div class="col-8">
+
+            </div>
+            <div class="col-4">
+                <button type="submit" onclick="location.href='@Url.Action("Index", "Quiz")';return false;"
+                        class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+                <button type="submit" id="btnQuizSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+            </div>
+        </div>
+    </form>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('.listbox').multiselect({
+            includeSelectAllOption: true
+        });
+    });
+</script>

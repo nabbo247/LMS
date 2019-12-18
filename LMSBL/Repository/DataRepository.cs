@@ -54,7 +54,7 @@ namespace LMSBL.Repository
                 da.Fill(ds);
                 return ds;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -78,7 +78,7 @@ namespace LMSBL.Repository
                 cmd.Parameters.AddRange(parameters.ToArray());
                 return cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -111,7 +111,7 @@ namespace LMSBL.Repository
                     return 0;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

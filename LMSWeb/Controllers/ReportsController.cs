@@ -29,7 +29,7 @@ namespace LMSWeb.Controllers
             lstAllQuiz = quizRepository.GetQuizForLaunch(quizId, userId);
             List<TblRespons> quizResponses = new List<TblRespons>();
             quizResponses = quizRepository.GetQuizResponsesByUserID(quizId, userId);
-
+            lstAllQuiz[0].TblResponses = quizResponses;
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
             lstAllQuiz[0].hdnResponseData = json_serializer.Serialize(quizResponses);

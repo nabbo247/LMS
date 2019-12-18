@@ -111,11 +111,11 @@ namespace LMSBL.Repository
                 db.AddParameter("@DOB", SqlDbType.DateTime, obj.DOB);
                 db.AddParameter("@contactNo", SqlDbType.Text, obj.ContactNo);
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
-                db.AddParameter("@tenantId", SqlDbType.Int, obj.Tenants[0].TenantId);
-                db.AddParameter("@roleId", SqlDbType.Int, obj.UserRoles[0].RoleId);
+                db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
+                db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
                 return db.ExecuteQuery("sp_UserUpdate");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

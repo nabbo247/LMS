@@ -1,0 +1,72 @@
+﻿@model List<LMSBL.DBModels.TblQuiz>
+
+@{
+    ViewBag.Title = "Quiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+
+    if (!string.IsNullOrEmpty(Convert.ToString(TempData["Message"])))
+    {
+        <script>
+            $("#dvMessage").show();
+            setTimeout(function () { $("#dvMessage").hide(); }, 3000);
+        </script>
+    }
+}
+<h4>Index</h4>
+
+<body>
+    <div class="main-container container">
+        <div class="row pt-3" style="float:right;">
+
+            <div class="form-group col-2 col-sm-2 col-md-2">
+                <a href="@Url.Action("AddQuiz", "Quiz")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Quiz Name</th>
+                    <th scope="col">Quiz Description</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var quiz in Model)
+                    {
+                        <tr>
+                            <th scope="row">@quiz.QuizId</th>
+                            <td>@quiz.QuizName</td>
+                            <td>@quiz.QuizDescription</td>
+
+                            <td>
+                                <a href="@Url.Action("EditQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        Edit
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("ViewQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        View
+                                    </button>
+                                </a>
+                                <a href="@Url.Action("AssignQuiz", "Quiz", new { id = quiz.QuizId })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        Assign
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
+

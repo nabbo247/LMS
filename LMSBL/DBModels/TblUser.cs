@@ -2,6 +2,7 @@ namespace LMSBL.DBModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -11,22 +12,27 @@ namespace LMSBL.DBModels
     {
         public int UserId { get; set; }
 
+        [DisplayName("First Name")]
         [StringLength(50)]
         public string FirstName { get; set; }
 
+        [DisplayName("Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
 
+        [DisplayName("Email Id")]
         [StringLength(50)]
         public string EmailId { get; set; }
 
         [StringLength(50)]
         public string Password { get; set; }
 
+        [DisplayName("Date Of Birth")]
         [Column(TypeName = "date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DOB { get; set; }
 
+        [DisplayName("Contact No")]
         [StringLength(50)]
         public string ContactNo { get; set; }
 
@@ -44,6 +50,7 @@ namespace LMSBL.DBModels
 
         public string  TenantName { get; set; }
 
+        [DisplayName("Role")]
         public string RoleName { get; set; }
 
         public List<TblUserRole> UserRoles { get; set; }

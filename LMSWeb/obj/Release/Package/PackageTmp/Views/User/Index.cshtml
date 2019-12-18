@@ -1,0 +1,126 @@
+﻿@model List<LMSBL.DBModels.TblUser>
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/_ViewStart.cshtml";
+}
+<body>
+    <div class="main-container container">
+        <div class="row pt-3" style="float:right;">
+            @*<div class="col-6 col-sm-6 col-md-6">
+                <i class="fa fa-search" aria-hidden="true"></i> <input class="search-box" type="text" placeholder="Search">
+            </div>
+            <div class="form-inline form-group col-4 col-sm-4 col-md-4">
+                <label class="">Company</label>
+                <select class="form-control ml-5" id="exampleFormControlSelect1">
+                    <option>Select Company</option>
+                </select>
+            </div>*@
+            <div class="form-group col-2 col-sm-2 col-md-2">
+                <a href="@Url.Action("AddUser", "User")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Conatct No</th>
+                    @*<th scope="col">Tenant Name</th>*@
+                    <th scope="col">Role Name</th>
+                    <th scope="col">IsActive</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var user in Model)
+                    {
+                <tr>
+                    <th scope="row">@user.UserId</th>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.EmailId</td>
+                    <td>@user.DOB.Value.ToString("dd-MMM-yyyy")</td>
+                    <td>@user.ContactNo</td>
+                    @*<td>@user.TenantName</td>*@
+                    <td>@user.RoleName</td>
+                    @if (user.IsActive == true)
+                    {
+                        <td>
+                            <i class="fa fa-check" aria-hidden="true" style="color:lightgreen;"></i>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <i class="fa fa-times" aria-hidden="true" style="color:red;"></i>
+                        </td>
+                    }
+
+                <td>
+                    <a href="@Url.Action("EditUser", "User", new { id = user.UserId })">
+                        <button type="button" class="btn text-center btn-warning">
+                            Edit
+                        </button>
+                    </a>
+
+                        @if (user.IsActive == true)
+                        {
+                            <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
+                                    class="btn text-center btn-warning">
+                                Deactive
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
+                                    class="btn text-center btn-warning">
+                                Active
+                            </button>
+                        }
+                </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+    @*<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5" style="display:none">
+        <div class="section-block">
+            <h5 class="section-title">Manage Users</h5>
+        </div>
+        <div class="col-sm-12" style="text-align:right;">
+            <a href="@Url.Action("AddUser", "User")">
+                <i class="fas fa-fw fa-plus" style="font-size:16pt" title="Add Tenant"></i>
+            </a>
+        </div>
+        <div class="tab-outline">
+            <ul class="nav nav-tabs" id="TenantTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="activetab" data-toggle="tab" href="#activeuser" role="tab" aria-controls="home" aria-selected="true">Active Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="inactivetab" data-toggle="tab" href="#inactiveuser" role="tab" aria-controls="profile" aria-selected="false">Inactive Users</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" id="TenantTabContent">
+                <div class="tab-pane fade show active" id="activeuser" role="tabpanel" aria-labelledby="activetab">
+                    @Html.Action("GetAllUsers", "User")
+                </div>
+                <div class="tab-pane fade" id="inactiveuser" role="tabpanel" aria-labelledby="inactivetab">
+                    @Html.Action("GetAllInActiveUsers", "User")
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+</body>

@@ -1,0 +1,50 @@
+﻿@model List<LMSBL.DBModels.ReportModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Reports</h4>
+
+<body>
+    <div class="main-container container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Quiz Name</th>
+                    <th scope="col">User Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Score</th>
+                    <th scope="col" colspan="2">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var quiz in Model)
+                    {
+                        <tr>
+                            <th scope="row">@quiz.quizId</th>
+                            <td>@quiz.QuizName</td>
+                            <td>@quiz.UserId</td>
+                            <td>@quiz.Name</td>
+                            <td>@quiz.Score</td>
+
+                            <td>
+                                <a href="@Url.Action("ViewQuiz", "Reports", new { quizId = quiz.quizId,userId = quiz.UserId  })">
+                                    <button type="button" class="btn text-center btn-warning">
+                                        View
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
+

@@ -1,0 +1,95 @@
+﻿@model LMSBL.DBModels.TblQuiz
+@{
+    ViewBag.Title = "ViewQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>View Quiz Responses</h4>
+
+@Html.AntiForgeryToken()
+<div class="row col-12">
+    <hr class="form-divider">
+</div>
+
+<form class="form-inline">
+    @Html.HiddenFor(model => model.QuizId)
+    @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
+    <div class="row col-12">
+        <div class="row col-12">
+            <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
+                @Model.QuizName
+            </div>
+        </div>
+        <div class="row col-12">
+            <label class="col-3 p-0">Quiz Description :  </label>
+            <div class="col-6 ml-0">@Model.QuizDescription</div>
+        </div>
+        <hr class="form-divider">
+    </div>
+    <div class="row col-12" id="dvQuestions">
+        @if (Model != null)
+        {
+            foreach (var question in Model.TblQuestions)
+            {
+                var queId = "dvQue" + question.QuestionId;
+                var questionText = @question.QuestionText;
+                var feedbackText = @question.QuestionFeedback;
+                <div class="row col-12" id="@{@queId}">
+                    <div class="row col-10">
+                        @Html.Raw(questionText)
+                    </div>
+                    <div class="row col-10">
+
+                        <div class="row col-3">
+
+                        </div>
+                        <div class="row col-9">
+                            @if (question.QuestionTypeId == 1)
+                            {
+                                foreach (var option in question.TblQuestionOptions)
+                                {
+                                    var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                    string optionText = option.OptionText;
+                                    if (option.CorrectOption == true)
+                                    {
+                                        optionText = "<b>" + optionText + "</b>";
+                                    }
+                                    <input type="radio" name="Options+@question.QuestionId" id="@{@optionId}" disabled /> @Html.Raw(optionText)
+
+                                }
+                            }
+                            else
+                            {
+                                foreach (var option in question.TblQuestionOptions)
+                                {
+                                    var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                    string optionText = option.OptionText;
+                                    if (option.CorrectOption == true)
+                                    {
+                                        optionText = "<b>" + optionText + "</b>";
+                                    }
+                                    <input type="checkbox" name="Options+@question.QuestionId" id="@{@optionId}" disabled /> @Html.Raw(optionText)
+                                }
+                            }
+
+                        </div>
+                        <div class="row col-9">
+                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
+                            
+                            @Html.Raw(feedbackText)
+
+                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0", @id = "queFeedback" + question.QuestionId })
+                        </div>
+                        <hr class="form-divider">
+                    </div>
+                </div>
+            }
+        }
+
+
+
+        <hr class="form-divider">
+    </div>
+
+</form>
+<script src="~/assets/Quiz.js"></script>

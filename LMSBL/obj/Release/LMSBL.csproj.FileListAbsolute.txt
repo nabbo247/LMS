@@ -1,0 +1,13 @@
+E:\Projects\LMS\LMSBL\bin\Release\LMSBL.dll.config
+E:\Projects\LMS\LMSBL\bin\Release\LMSBL.dll
+E:\Projects\LMS\LMSBL\bin\Release\LMSBL.pdb
+E:\Projects\LMS\LMSBL\bin\Release\EntityFramework.dll
+E:\Projects\LMS\LMSBL\bin\Release\EntityFramework.SqlServer.dll
+E:\Projects\LMS\LMSBL\bin\Release\System.Web.Mvc.dll
+E:\Projects\LMS\LMSBL\bin\Release\EntityFramework.xml
+E:\Projects\LMS\LMSBL\bin\Release\EntityFramework.SqlServer.xml
+E:\Projects\LMS\LMSBL\bin\Release\System.Web.Mvc.xml
+E:\Projects\LMS\LMSBL\obj\Release\LMSBL.csprojAssemblyReference.cache
+E:\Projects\LMS\LMSBL\obj\Release\LMSBL.csproj.CopyComplete
+E:\Projects\LMS\LMSBL\obj\Release\LMSBL.dll
+E:\Projects\LMS\LMSBL\obj\Release\LMSBL.pdb

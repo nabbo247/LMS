@@ -17,6 +17,8 @@ namespace LMSBL.DBModels
 
         public bool? CorrectOption { get; set; }
 
+        public string OptionFeedback { get; set; }
+
         [NotMapped]
         public bool SelectedAnswer { get; set; }
 

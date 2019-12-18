@@ -122,13 +122,13 @@ namespace LMSWeb.Controllers
                 objQuiz = quizRepository.GetQuizByID(id);
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
-                objQuiz[0].hdnData = json_serializer.Serialize(objQuiz[0]);
-                return View("AddQuiz", objQuiz[0]);
+                objQuiz[0].hdnEditData = json_serializer.Serialize(objQuiz[0]);
+                return View("EditQuiz", objQuiz[0]);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View("AddQuiz", null);
+                return View("EditQuiz", null);
             }
         }
         [HttpPost]

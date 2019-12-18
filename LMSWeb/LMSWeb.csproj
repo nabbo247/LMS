@@ -204,6 +204,7 @@
     <Content Include="assets\libs\js\jvectormap.custom.js" />
     <Content Include="assets\libs\js\main-js.js" />
     <Content Include="assets\Quiz.js" />
+    <Content Include="assets\Validations.js" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.css" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.min.js" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.png" />
@@ -622,6 +623,7 @@
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.ttf" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.woff" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap\bootstrap.bundle.js" />
     <Content Include="Scripts\custom-js\jquery.multi-select.html" />
@@ -675,8 +677,6 @@
     <Content Include="Views\User\EditUser.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
-    <Content Include="Views\Courses\GetAllActiveCourses.cshtml" />
-    <Content Include="Views\Courses\GetAllInActiveCourses.cshtml" />
     <Content Include="Views\Courses\AddCourse.cshtml" />
     <Content Include="Views\Courses\DeleteCourse.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
@@ -689,6 +689,7 @@
     <Content Include="Views\Assignment\LaunchQuiz.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\ViewQuiz.cshtml" />
+    <Content Include="Views\Courses\EditCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

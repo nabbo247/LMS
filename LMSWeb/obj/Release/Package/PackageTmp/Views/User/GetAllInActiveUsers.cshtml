@@ -1,0 +1,130 @@
+﻿@model List<LMSBL.DBModels.TblUser>
+@{
+    ViewBag.Title = "GetAllInActiveUsers";
+}
+<body>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Inactive Users</h2>
+                <p class="pageheader-text">Get data of all Inactive users.</p>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">InActiveUsers</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                @*<th scope="col">Password</th>*@
+                                <th scope="col">DOB</th>
+                                <th scope="col">Conatct No</th>
+                                @*<th scope="col">Tenant Name</th>*@
+                                <th scope="col">Role Name</th>
+                                <th scope="col">IsActive</th>
+                                <th scope="col" colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@user.UserId</th>
+                                    <td>@user.FirstName</td>
+                                    <td>@user.LastName</td>
+                                    <td>@user.EmailId</td>
+                                    @*<td>@user.Password</td>*@
+                                    <td>@user.DOB.Value.ToString("dd-MMM-yyyy")</td>
+                                    <td>@user.ContactNo</td>
+                                    @*<td>@user.TenantName</td>*@
+                                    <td>@user.RoleName</td>
+                                    <td style="color:red;text-align:center"><i class="fas fa-fw fa-times"></i></td>
+                                    <td align="center">
+                                        @*<a href="@Url.Action("DeleteUser", "User",new { id=user.UserId,isActive=false})">
+                                                <i class="fas fa-fw fa-trash" title="Deactivate User"></i>
+                                            </a>*@
+                                        <button type="submit" class="btn btn-link" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,false)">
+                                            <i class="fas fa-fw fa-trash" title="Deactivate Tenant"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+
+
+        function ConfirmationAlert(Name, Id, IsActive) {
+            debugger;
+            var data = {
+                id: Id
+            }
+            var strDelete = "";
+            if (IsActive == true) {
+                strDelete = "Deactivate";
+            }
+            else {
+                strDelete = "Activate";
+            }
+            swal({
+                title: "Are you sure you want to " + strDelete + " Tenant " + Name + " ?",
+                text: "You are going to " + strDelete + " the user",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: strDelete,
+                cancelButtonText: "Cancel",
+
+            }).then((isConfirm) => {
+                if (isConfirm.value == true) {
+                    $.ajax({
+                        url: "/User/DeleteUser",
+                        type: "POST",
+                        contentType: "application/json;charset=UTF-8",
+                        dataType: "json",
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            var baseUrl = "/User/Index";
+                            if (result == 1) {
+                                window.location.href = baseUrl
+                            }
+                            else {
+                                alert('Something went wrong');
+                            }
+
+                        },
+                        error: function (errormessage) {
+                            alert(errormessage.responseText);
+                        }
+                    });
+
+                } else {
+                    swal("Cancelled", "Cancelled", "error");
+                }
+            });
+        }
+    </script>
+</body>
+

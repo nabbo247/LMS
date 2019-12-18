@@ -27,7 +27,7 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizDetails;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -108,12 +108,9 @@ namespace LMSBL.Repository
                                 db.AddParameter("@QuestionId", SqlDbType.Int, queId);
                                 db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
                                 db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
+                                db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
                                 db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
-                                optionId = db.ExecuteQuery("sp_OptionAdd");
-                                if (Convert.ToInt32(db.parameters[3].Value) > 0)
-                                {
-
-                                }
+                                optionId = db.ExecuteQuery("sp_OptionAdd");                                
                             }
                         }
                     }

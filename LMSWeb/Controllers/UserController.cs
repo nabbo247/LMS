@@ -95,7 +95,11 @@ namespace LMSWeb.Controllers
                     objUser.CreatedBy = sessionUser.UserId;
                     // objUser.DOB = objUser.DOB;
                     objUser.IsActive = true;
-                    int rows = ur.AddUser(objUser);
+                    int rows = 0;
+                    if (objUser.UserId == 0)
+                        rows = ur.AddUser(objUser);
+                    else
+                        rows = ur.EditUser(objUser);
                     if (rows != 0)
                     {
                         TempData["Message"] = "Saved Successfully";
@@ -126,7 +130,7 @@ namespace LMSWeb.Controllers
                 objEditData = userDetails[0];
                 objEditData.UserRoles = rr.GetAllRoles();
                 objEditData.Tenants = tr.GetAllTenants();
-                return View(objEditData);
+                return View("AddUser", objEditData);
             }
             catch (Exception ex)
             {

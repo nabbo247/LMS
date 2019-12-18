@@ -37,6 +37,10 @@ namespace LMSBL.DBModels
         [NotMapped]
         public string hdnResponseData { get; set; }
 
+        [AllowHtml]
+        [NotMapped]
+        public string hdnEditData { get; set; }
+
         [NotMapped]
         public object[] questionObject { get; set; }
 

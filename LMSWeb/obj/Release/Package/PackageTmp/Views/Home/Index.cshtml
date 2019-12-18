@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<!-- table-responsive -->
+<div class="main-container container">
+    <div class="row pt-3" style="display:none;">
+        <div class="col-6 col-sm-6 col-md-6">
+            <i class="fa fa-search" aria-hidden="true"></i> <input class="search-box" type="text" placeholder="Search">
+        </div>
+        <div class="form-inline form-group col-4 col-sm-4 col-md-4">
+            <label class="">Company</label>
+            <select class="form-control ml-5" id="exampleFormControlSelect1">
+                <option>Select Company</option>
+            </select>
+        </div>
+        @*<div class="form-group col-2 col-sm-2 col-md-2">
+            <button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">Admin</button>
+        </div>*@
+    </div>
+    <div class="row py-2">
+        <div class="col-md-6 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Admins (#####)</h4>
+                    <canvas id="chDonut1"></canvas>
+                    <div class="col-12 counter">2024</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Users (#####)</h4>
+                    <canvas id="chDonut2"></canvas>
+                    <div class="col-12 counter">100</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut3"></canvas>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="row py-2">
+        <div class="card col-md-12">
+            <div class="card-body">
+                <h4 class="card-title">Courses (######)</h4>
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <canvas id="chBar" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+/* chart.js chart examples */
+
+// chart colors
+var colors = ['#007bff','#9aa4b8','#f6f6f6','#c3e6cb','#8ed451','#6c757d'];
+
+/* 3 donut charts */
+var donutOptions = {
+  cutoutPercentage: 85,
+  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}}
+};
+
+// donut 1
+var chDonutData1 = {
+    labels: ['Bootstrap', 'Popper', 'Other'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,3),
+        borderWidth: 0,
+        data: [74, 11, 40]
+      }
+    ]
+};
+
+var chDonut1 = document.getElementById("chDonut1");
+if (chDonut1) {
+  new Chart(chDonut1, {
+      type: 'pie',
+      data: chDonutData1,
+      options: donutOptions
+  });
+}
+
+// donut 2
+var chDonutData2 = {
+    labels: ['Wips', 'Pops', 'Dags'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,3),
+        borderWidth: 0,
+        data: [40, 45, 30]
+      }
+    ]
+};
+var chDonut2 = document.getElementById("chDonut2");
+if (chDonut2) {
+  new Chart(chDonut2, {
+      type: 'pie',
+      data: chDonutData2,
+      options: donutOptions
+  });
+}
+
+// donut 3
+var chDonutData3 = {
+    labels: ['Angular', 'React', 'Other'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,3),
+        borderWidth: 0,
+        data: [21, 45, 55, 33]
+      }
+    ]
+};
+var chDonut3 = document.getElementById("chDonut3");
+if (chDonut3) {
+  new Chart(chDonut3, {
+      type: 'pie',
+      data: chDonutData3,
+      options: donutOptions
+  });
+}
+
+
+
+var chBar = document.getElementById("chBar");
+var chartData = {
+  labels: ["Education", "Pharma", "Lifescience", "Banking", "Accounting", "Aviation", "IT"],
+  datasets: [{
+    data: [589, 445, 483, 503, 689, 692, 634],
+    backgroundColor: colors[0]
+  },
+  {
+    data: [209, 245, 383, 403, 589, 692, 580],
+    backgroundColor: colors[1]
+  },
+  {
+    data: [489, 135, 483, 290, 189, 603, 600],
+    backgroundColor: colors[2]
+  },
+  {
+    data: [639, 465, 493, 478, 589, 632, 674],
+    backgroundColor: colors[4]
+  }]
+};
+
+if (chBar) {
+  new Chart(chBar, {
+  type: 'bar',
+  data: chartData,
+  options: {
+    scales: {
+      xAxes: [{
+        barPercentage: 0.4,
+        categoryPercentage: 0.5
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: false
+        }
+      }]
+    },
+    legend: {
+      display: false
+    }
+  }
+  });
+}
+
+</script>

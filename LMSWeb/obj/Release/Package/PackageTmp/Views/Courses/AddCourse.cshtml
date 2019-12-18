@@ -1,0 +1,81 @@
+﻿@model LMSBL.DBModels.TblCourse
+
+@{
+    ViewBag.Title = "AddCourse";
+    //Layout = "~/Views/_ViewStart.cshtml";
+}
+@using (Html.BeginForm("AddCourse", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h1>Add New Course</h1>
+    <div class="row col-12">
+        <hr class="form-divider">
+    </div>
+    <form class="form-inline">
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseName, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseName, new { @class = "col-6 ml-0 form-control" })
+
+            </div>
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseDetails, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseDetails, new { @class = "col-6 form-control ml-0" })
+
+
+            </div>
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.CourseCategory, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.CourseCategory, new { @class = "col-6 ml-0 form-control" })
+
+            </div>
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(x => Model.Tenants[0].TenantName, new { @class = "col-3 p-0" })
+                @Html.DropDownListFor(x => Model.Tenants[0].TenantId, new SelectList(Model.Tenants, "TenantId", "TenantName"),
+                new { @class = "col-6 ml-0 form-control", id = "Tenants" })
+
+            </div>
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            <div class="form-group col-6 pl-0">
+                @Html.LabelFor(model => model.ZipFile, htmlAttributes: new { @class = "col-3 p-0" })
+                <label class="btn-bs-file btn btn-lg btn-primary-outline">
+                    Browse @Html.TextBoxFor(m => m.ZipFile, new { type = "file", onchange = "readURL(this)" })
+                </label>
+
+            </div>
+            <div class="col-6 ml-0">
+                <span>File Name: <span id="browse-img-name"> - </span></span> <br>
+                <small>File Size: <span id="browse-img-size"> - </span>KB</small>
+            </div>
+            <hr class="form-divider">
+        </div>
+
+        <div class="row col-12" style="margin-bottom: 34px;">
+            <div class="col-8">
+
+            </div>
+            <div class="col-4">
+                <button type="submit" onclick="location.href='@Url.Action("Index", "Courses")';return false;"
+                        class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+                <button type="submit" class="btn btn-outline-secondary"><b>Submit</b></button>
+            </div>
+        </div>
+    </form>
+}
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var filename = input.files[0].name;
+            $('#browse-img-name').text(filename);
+            $('#browse-img-size').text(input.files[0].size);
+        }
+    }
+</script>
