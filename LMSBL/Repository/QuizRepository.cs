@@ -27,7 +27,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
@@ -70,7 +72,9 @@ namespace LMSBL.Repository
                 }
                 return quizDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
@@ -177,7 +181,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
@@ -224,7 +230,9 @@ namespace LMSBL.Repository
 
                 return quizDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
@@ -291,7 +299,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizReportDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
@@ -319,7 +329,9 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizResponseDetails;
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }

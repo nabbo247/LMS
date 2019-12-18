@@ -115,7 +115,9 @@ namespace LMSBL.Repository
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
                 return db.ExecuteQuery("sp_UserUpdate");
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 throw;
             }
