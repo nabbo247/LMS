@@ -65,7 +65,8 @@ namespace LMSBL.Repository
                         OptionId = Convert.ToInt32(dr["OptionId"]),
                         QuestionId = Convert.ToInt32(dr["QuestionId"]),
                         OptionText = Convert.ToString(dr["OptionText"]),
-                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
+                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"]),
+                        OptionFeedback= Convert.ToString(dr["OptionFeedback"])
                     }).Where(c => c.QuestionId == question.QuestionId).ToList();
 
                     question.TblQuestionOptions = optionDetails;
@@ -85,6 +86,7 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
+                db.parameters.Clear();
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                 db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
@@ -133,10 +135,10 @@ namespace LMSBL.Repository
             try
             {
                 db.parameters.Clear();
-                db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
-                db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
-                status = db.ExecuteQuery("sp_QuizUpdate");
+                db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);                
+                status = db.ExecuteQuery("sp_QuizDelete");
+
+                status = CreateQuiz(obj);
 
             }
             catch (Exception ex)
