@@ -119,7 +119,8 @@ namespace LMSBL.Repository
             catch (Exception ex)
 #pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
         }
 

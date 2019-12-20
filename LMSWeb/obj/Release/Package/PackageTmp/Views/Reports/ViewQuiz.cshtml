@@ -33,7 +33,7 @@
             {
                 var queId = "dvQue" + question.QuestionId;
                 var questionText = @question.QuestionText;
-                var feedbackText = @question.QuestionFeedback;
+               
                 <div class="row col-12" id="@{@queId}">
                     <div class="row col-10">
                         @Html.Raw(questionText)
@@ -73,10 +73,9 @@
                             }
 
                         </div>
-                        <div class="row col-9">
-                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
+                        <div class="row col-12">
+                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })                          
                             
-                            @Html.Raw(feedbackText)
 
                             @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0", @id = "queFeedback" + question.QuestionId })
                         </div>
@@ -92,4 +91,5 @@
     </div>
 
 </form>
+
 <script src="~/assets/Quiz.js"></script>

@@ -2,6 +2,18 @@ body {
     background-color: #fafafb !important;
 }
 
+.radio-margin {
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+}
+.que-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-left: 5px !important;
+}
+
 a#example_previous, a#example_next {
     border: 1px solid #dee2e6;
     padding: 0px 6px 2px 7px;
@@ -505,3 +517,4 @@ body {
     padding-bottom: 10px;
     display: none;
 }
+

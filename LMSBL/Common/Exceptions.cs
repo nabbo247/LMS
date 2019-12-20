@@ -15,7 +15,7 @@ namespace LMSBL.Common
             db.AddParameter("@ExceptionMsg", SqlDbType.Text, ex.Message.ToString());
             db.AddParameter("@ExceptionType", SqlDbType.Text, ex.GetType().Name.ToString());
             db.AddParameter("@ExceptionURL", SqlDbType.Text, exepurl);
-            db.AddParameter("@ExceptionSource", SqlDbType.Text, ex.StackTrace.ToString());
+            db.AddParameter("@ExceptionSource", SqlDbType.Text, ex.InnerException.Message.ToString());
             db.ExecuteQuery("sp_AddError");
         }
     }

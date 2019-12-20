@@ -29,7 +29,7 @@ namespace LMSBL.DBModels
 
         [DisplayName("Date Of Birth")]
         [Column(TypeName = "date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? DOB { get; set; }
 
         [DisplayName("Contact No")]

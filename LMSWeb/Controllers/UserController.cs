@@ -116,7 +116,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View(objUser);
             }
         }
 

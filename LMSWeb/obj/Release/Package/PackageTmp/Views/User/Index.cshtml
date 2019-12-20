@@ -27,11 +27,11 @@
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">DOB</th>
+                    <th scope="col">Date Of Birth</th>
                     <th scope="col">Conatct No</th>
                     @*<th scope="col">Tenant Name</th>*@
                     <th scope="col">Role Name</th>
-                    <th scope="col">IsActive</th>
+                    @*<th scope="col">IsActive</th>*@
                     <th scope="col" colspan="2">Actions</th>
                 </tr>
             </thead>
@@ -49,7 +49,7 @@
                     <td>@user.ContactNo</td>
                     @*<td>@user.TenantName</td>*@
                     <td>@user.RoleName</td>
-                    @if (user.IsActive == true)
+                    @*@if (user.IsActive == true)
                     {
                         <td>
                             <i class="fa fa-check" aria-hidden="true" style="color:lightgreen;"></i>
@@ -60,7 +60,7 @@
                         <td>
                             <i class="fa fa-times" aria-hidden="true" style="color:red;"></i>
                         </td>
-                    }
+                    }*@
 
                 <td>
                     <a href="@Url.Action("EditUser", "User", new { id = user.UserId })">
@@ -69,7 +69,7 @@
                         </button>
                     </a>
 
-                        @if (user.IsActive == true)
+                        @*@if (user.IsActive == true)
                         {
                             <button type="button" onclick="ConfirmationAlert('@user.FirstName'+' @user.LastName',@user.UserId,true)"
                                     class="btn text-center btn-warning">
@@ -82,7 +82,7 @@
                                     class="btn text-center btn-warning">
                                 Active
                             </button>
-                        }
+                        }*@
                 </td>
                     </tr>
                     }

@@ -45,7 +45,7 @@
         </div>
         <div class="row col-12">
             @Html.LabelFor(model => model.DOB, new { @class = "col-3 p-0" })
-            @Html.TextBoxFor(model => model.DOB, "{0:dd-MM-yyyy}", new { @class = "col-6 ml-0 form-control datepicker", @id = "dtDOB", @readonly = "readonly", @autocomplete = "off" })
+            @Html.TextBoxFor(model => model.DOB, "{0:MM/dd/yyyy}", new { @class = "col-6 ml-0 form-control datepicker", @id = "dtDOB", @readonly = "readonly", @autocomplete = "off" })
             @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
 
             <hr class="form-divider">
@@ -85,7 +85,7 @@
     $(document).ready(function () {
 
         $('#dtDOB').datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'mm/dd/yyyy',
             showWeek: true            
         });
     });
