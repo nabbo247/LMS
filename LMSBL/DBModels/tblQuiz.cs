@@ -35,6 +35,10 @@ namespace LMSBL.DBModels
 
         [AllowHtml]
         [NotMapped]
+        public string hdnLaunchData { get; set; }
+
+        [AllowHtml]
+        [NotMapped]
         public string hdnResponseData { get; set; }
 
         [AllowHtml]

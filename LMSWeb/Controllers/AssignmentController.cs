@@ -38,6 +38,9 @@ namespace LMSWeb.Controllers
             TblUser sessionUser = (TblUser)Session["UserSession"];
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
             lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
+
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            lstAllQuiz[0].hdnLaunchData = json_serializer.Serialize(lstAllQuiz[0]);
             return View(lstAllQuiz[0]);
         }
 
@@ -115,9 +118,9 @@ namespace LMSWeb.Controllers
                     {
 
                         if (option.CorrectOption == true)
-                        {
-                            correctCount++;
+                        {                            
                             Ids[correctCount] = option.OptionId;
+                            correctCount++;
                         }
                     }
                     foreach (var item in lstQueOptions)
@@ -154,5 +157,8 @@ namespace LMSWeb.Controllers
             return RedirectToAction("MyAssignments");
 
         }
+    
+
+    
     }
 }

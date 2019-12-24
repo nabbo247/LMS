@@ -246,13 +246,16 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
-                db.parameters.Clear();
-                db.AddParameter("@QuestionId", SqlDbType.Int, obj.QuestionId);
-                db.AddParameter("@OptionIds", SqlDbType.Text, obj.OptionIds);
-                db.AddParameter("@QuestionFeedback", SqlDbType.Text, obj.QuestionFeedback);
-                db.AddParameter("@UserId", SqlDbType.Int, obj.UserId);
-                db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
-                status = db.ExecuteQuery("sp_ResponseAdd");
+                if (obj.OptionIds != null)
+                {
+                    db.parameters.Clear();
+                    db.AddParameter("@QuestionId", SqlDbType.Int, obj.QuestionId);
+                    db.AddParameter("@OptionIds", SqlDbType.Text, obj.OptionIds);
+                    db.AddParameter("@QuestionFeedback", SqlDbType.Text, obj.QuestionFeedback);
+                    db.AddParameter("@UserId", SqlDbType.Int, obj.UserId);
+                    db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
+                    status = db.ExecuteQuery("sp_ResponseAdd");
+                }
                 
             }
             catch (Exception ex)

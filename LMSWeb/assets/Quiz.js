@@ -1,15 +1,17 @@
 ﻿var count = 0;
 var optionCount = 2;
+var quizQueIds = [];
+var currentIndex = 0;
 
 
 $(document).ready(function () {
     $(".textarea-editor").summernote();
-    //alert($("#hdnResponseData").val())
-    if ($("#hdnResponseData").val() != null) {
+
+    if ($("#hdnResponseData").val() != null && $("#hdnResponseData").val() != '') {
         SetResponses($("#hdnResponseData").val());
     }
     else {
-        SetResponses(111);
+        //SetResponses(111);
     }
 
     $('#btnAddQuestion').on("click", function () {
@@ -46,9 +48,21 @@ $(document).ready(function () {
         $("#hdnEditData").val("");        
         LoadQuestionsForEdit(QuizData);
     }
-    else {
-
+    if ($("#hdnLaunchData").val() != null) {
+        //Edit Questions Population
+        var QuizLaunchData = JSON.parse($("#hdnLaunchData").val());
+        $("#hdnLaunchData").val("");
+        LaunchQuiz(QuizLaunchData);
     }
+
+    // Highlight selected option
+    $('.option-container > input[type="radio"]:selected').parent().addClass('selected-ans');
+    $('.option-container > input[type="radio"]').on('click', (e) => {
+        if (e.target.checked) {
+            $('.option-container').removeClass('selected-ans');
+            e.target.parentNode.classList.add('selected-ans');
+        }
+    });
 
 });
 
@@ -70,7 +84,7 @@ function ChangeType(id) {
 function AddQuestion() {
     count++;
     optionCount = 2;
-    var queHTML = "<div class=\"row col-12 que-container\" id=queContainer" + count + ">";
+    var queHTML = "<div class=\"row col-12 que-container \" id=queContainer" + count + ">";
     queHTML += "<div class=\"row col-12\" >";
     queHTML += "<div class=\"btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + count + ">Question</div>";
     queHTML += "<div class=\"btn btn-danger offset-10\" onclick=\"deleteQuestion(" + count + ")\" >Delete</div>";
@@ -89,7 +103,7 @@ function AddQuestion() {
     queHTML += "</div>";
 
     queHTML += "<div class=\"row col-12\" id=dvQue" + count + "Options>";
-    queHTML += "<label class=\"col-3 p-0 hello\">Options </label>";
+    queHTML += "<label class=\"col-3 p-0 \">Options </label>";
     queHTML += "<div class=\"row col-12\">";
     queHTML += "<label class=\"col-3 p-0\"></label>";
     queHTML += "<input type=\"radio\" class=\"radio-margin\" value=1 name=Options" + count + " id=que" + count + "rbtnOption1 name=que" + count + "rbtnOption1 /><input type=text class=\"col-6 ml-0 form-control\"   id=que" + count + "optionText1></input>";
@@ -277,11 +291,11 @@ function SaveResponse() {
             }
 
         });
-        if (!OptionCheck) {
-            returnStatus = false;
-            alert("Please select Answer");
-            return false;
-        }
+        //if (!OptionCheck) {
+        //    returnStatus = false;
+        //    alert("Please select Answer");
+        //    return false;
+        //}
         questionObj.push(optionObj);
     });
     $("#hdnResponseData").val(JSON.stringify(questionObj));
@@ -295,6 +309,7 @@ function SetResponses(data) {
     }
     else {
         var responses = JSON.parse(data);
+        console.log(responses)
         $.each(responses, function (index, value) {
             if (value.OptionIds.indexOf(',') > 0) {
                 var res = value.OptionIds.split(',');
@@ -318,6 +333,7 @@ function LoadQuestionsForEdit(QuizData) {
         var queHTML = "<div class=\"row col-12 que-container\" id=queContainer" + value.QuestionId + ">";
         queHTML += "<div class=\"row col-12\" >";
         queHTML += "<div class=\"btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + value.QuestionId + ">Question</div>";
+        //queHTML += "<div class=\"row col-9\">" + value.QuestionText + "</div>";
         queHTML += "<div class=\"btn btn-danger offset-10\" onclick=\"deleteQuestion(" + value.QuestionId + ")\" >Delete</div>";
         queHTML += "</div>";
 
@@ -338,8 +354,7 @@ function LoadQuestionsForEdit(QuizData) {
         queHTML += "<div class=\"row col-12\" style=margin-top:5px; id=dvQue" + value.QuestionId + "Options>";  
         $.each(value.TblQuestionOptions, function (indexOption, valueOption) {            
                       
-            queHTML += "<div class=\"row col-12\" style=margin-top:5px; id=dvQue" + value.QuestionId + "Option" + valueOption.OptionId + ">";
-            //queHTML += "<div class=\"row col-12\">";
+            queHTML += "<div class=\"row col-12\" style=margin-top:5px; id=dvQue" + value.QuestionId + "Option" + valueOption.OptionId + ">";            
             queHTML += "<label class=\"col-3 p-0\"></label>";
             if (indexOption == 0) {
                 if (value.QuestionTypeId == 1) {
@@ -371,26 +386,19 @@ function LoadQuestionsForEdit(QuizData) {
                     queHTML += "<button onclick=\"removeOption(" + value.QuestionId + "," + valueOption.OptionId + ")\" id=que" + value.QuestionId + "btnOption" + valueOption.OptionId + " type=\"button\" class=\"btn pl-4 pr-4 text-center btn-warning pull-right\" style=\"margin-left: 5px;\"> - </button>";
                 }
             }
-            //queHTML += "</div>";
-
-
-            //queHTML += "<div class=\"row col-12\" style=margin-top:5px;>";           
+                   
             queHTML += "<div class=\"col-9 offset-3 p-0\" style=margin-top:5px;>";
             queHTML += "<label class=\"col-3 p-0\">Option Feedback</label>";
             queHTML += "<textarea class=\"col-6 ml-0 form-control\"   id=que" + value.QuestionId + "option" + valueOption.OptionId + "Feedback></textarea>";
             queHTML += "</div>";
             
             queHTML += "</div>";
-
-
-
         });
         queHTML += "</div>";
         queHTML += "</div>";
         queHTML += "</div>";
 
-        queHTML += "</div>";
-        //queHTML += "<hr class=\"form-divider\">";
+        queHTML += "</div>";        
         queHTML += "</div>";
         $('#dvQuestions').append(queHTML);
 
@@ -411,6 +419,105 @@ function LoadQuestionsForEdit(QuizData) {
         });
 
         count = value.QuestionId;
-    });
+    }); 
+}
+
+
+function LaunchQuiz(QuizLaunchData) {
+    console.log('QuizLaunchData : ', QuizLaunchData);
+    var queHTML = `<div class="container-fluid  que-container mt-3">`;
+    $.each(QuizLaunchData.TblQuestions, function (index, value) {
+        item = {}
+        item["QuestionId"] = value.QuestionId;
         
+        quizQueIds.push(item);
+        queHTML += "<div class=\"row question-div\" id=dvQue" + value.QuestionId + ">";
+        queHTML += "<div class=\"col-12 px-4 py-4\" >";
+        queHTML += "<label>" + value.QuestionText+" </label>";
+        queHTML += "</div>";
+
+        if (value.QuestionTypeId == 1) {
+            $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
+                queHTML += `<div class="col-12 option-container">`;
+                queHTML += "<input type=\"radio\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+                queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
+                queHTML += "</div>";
+            });
+        }
+        else {
+            $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
+                queHTML += `<div class="col-12 option-container">`;
+                queHTML += "<input type=\"checkbox\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+                queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
+                queHTML += "</div>";
+            });
+        }
+
+        queHTML += "<div class=\"col-12 border-top que-feedback\">";
+        queHTML += "<label class=\"col-3 p-0\">Question Feedback</label>";
+        queHTML += "<textarea class=\"col-6 ml-0 form-control\"   id=queFeedback" + value.QuestionId+"></textarea>";
+        queHTML += "</div>";
+        queHTML += "</div>";
+
+        // append paginator list
+        const paginatorHtml = ` <li data-queid='dvQue${value.QuestionId}'>${index + 1}</li>`; 
+        $('#paginator-list').append(paginatorHtml);
+    });
+    queHTML += "</div>";
+    $('#dvQuestions').append(queHTML);
+    //$('#dvQues' + quizQueIds[0].QuestionId).hide();
+
+    // click handler for paginator
+    $('#paginator-list > li').on('click', function () {
+        $('#paginator-list > li').removeClass('active-paginator');
+        $(this).addClass('active-paginator');
+        const getCurrQueId = $(this).attr('data-queid');
+        $('.question-div').hide();
+        $('#' + getCurrQueId).show();        
+    });
+
+
+
+    $.each(quizQueIds, function (indexQue, valueQue) {
+        $('#queFeedback' + valueQue.QuestionId).summernote();
+        if (indexQue == 0) {
+            $('#dvQue' + valueQue.QuestionId).show();
+        }
+        else {
+            $('#dvQue' + valueQue.QuestionId).hide();
+        }
+    });
+
+    $('#btnPrev').on("click", function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            NextPrevQuestion();
+           
+        }
+    });
+
+    $('#btnNext').on("click", function () {
+        if (currentIndex != (quizQueIds.length-1)) {
+            currentIndex++;
+            NextPrevQuestion();
+        }
+    });
+}
+
+function NextPrevQuestion() {    
+        $.each(quizQueIds, function (indexQue, valueQue) {            
+            if (indexQue == currentIndex) {                
+                $('#dvQue' + valueQue.QuestionId).show();
+                const id = valueQue.QuestionId;
+                console.log('id:', id);
+                const p = $('[data-queid=dvQue'+id+']');
+                $(p).addClass('active-paginator');
+                console.log('p : ', p);
+            }
+            else {                
+                $('#dvQue' + valueQue.QuestionId).hide();
+            }
+            $('#paginator-list > li').removeClass('active-paginator');
+        });   
+
 }
