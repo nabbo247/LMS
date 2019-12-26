@@ -515,7 +515,10 @@ function LoadQuestionsForEdit(QuizData) {
         $('#que' + value.QuestionId + 'CorrectFeedback').summernote();
         $('#que' + value.QuestionId + 'InCorrectFeedback').val(value.InCorrectFeedback);
         $('#que' + value.QuestionId + 'InCorrectFeedback').summernote();
-
+        if (value.QuestionTypeId == 1) {
+            $('#que' + value.QuestionId + 'CorrectFeedbackDiv').hide();
+            $('#que' + value.QuestionId + 'InCorrectFeedbackDiv').hide();
+        }
         $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
             $('#que' + value.QuestionId + 'optionText' + valueOption.OptionId).val(valueOption.OptionText);
 
@@ -534,7 +537,8 @@ function LoadQuestionsForEdit(QuizData) {
                 console.log(value.QuestionId)
                 console.log(valueOption.OptionId)
                 $('#que' + value.QuestionId + 'option' + valueOption.OptionId + 'Feedback').summernote();
-                $('#que' + value.QuestionId + 'option' + valueOption.OptionId + 'FeedbackDiv').hide(); //que1042option1076FeedbackDiv
+                $('#que' + value.QuestionId + 'option' + valueOption.OptionId + 'FeedbackDiv').hide(); //que1042option1076FeedbackDiv                
+                //que2047InCorrectFeedbackDiv
             }
             optionCount = valueOption.OptionId;
         });
