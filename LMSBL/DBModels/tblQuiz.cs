@@ -45,9 +45,15 @@ namespace LMSBL.DBModels
         [NotMapped]
         public string hdnEditData { get; set; }
 
+        [AllowHtml]
+        [NotMapped]
+        public string hdnReviewData { get; set; }
+
         [NotMapped]
         public object[] questionObject { get; set; }
 
+        [NotMapped]
+        public int Score { get; set; }
         public int TenantId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

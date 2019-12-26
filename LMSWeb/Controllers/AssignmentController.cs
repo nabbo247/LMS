@@ -154,11 +154,27 @@ namespace LMSWeb.Controllers
             var scoreResult = quizRepository.CaptureScore(objQuiz.QuizId, sessionUser.UserId, score);
 
             TempData["Message"] = "Responses Saved Successfully";
-            return RedirectToAction("MyAssignments");
+            return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId });
 
         }
-    
 
-    
+
+        public ActionResult ReviewQuiz(int QuizId)
+        {
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
+            lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
+
+            List<TblRespons> quizResponses = new List<TblRespons>();
+            quizResponses = quizRepository.GetQuizResponsesByUserID(QuizId, sessionUser.UserId);
+            lstAllQuiz[0].TblResponses = quizResponses;
+
+            var score = quizRepository.GetQuizScoreByUserID(QuizId, sessionUser.UserId);
+            lstAllQuiz[0].Score = score;
+
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            lstAllQuiz[0].hdnReviewData = json_serializer.Serialize(lstAllQuiz[0]);
+            return View(lstAllQuiz[0]);
+        }
     }
 }

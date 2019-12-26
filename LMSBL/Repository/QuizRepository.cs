@@ -54,7 +54,9 @@ namespace LMSBL.Repository
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuestionId = Convert.ToInt32(dr["QuestionId"]),
                     QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
-                    QuestionText = Convert.ToString(dr["QuestionText"])
+                    QuestionText = Convert.ToString(dr["QuestionText"]),
+                    CorrectFeedback = Convert.ToString(dr["CorrectFeedback"]),
+                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"])
                 }).ToList();
                 quizDetails[0].TblQuestions = questionsDetails;
                 foreach (var question in questionsDetails)
@@ -102,11 +104,13 @@ namespace LMSBL.Repository
                         db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                         db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
                         db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
+                        db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
+                        db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
                         db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
                         queId = db.ExecuteQuery("sp_QuestionAdd");
-                        if (Convert.ToInt32(db.parameters[3].Value) > 0)
+                        if (Convert.ToInt32(db.parameters[5].Value) > 0)
                         {
-                            queId = Convert.ToInt32(db.parameters[3].Value);
+                            queId = Convert.ToInt32(db.parameters[5].Value);
                             foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
                             {
                                 int optionId = 0;
@@ -213,7 +217,9 @@ namespace LMSBL.Repository
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuestionId = Convert.ToInt32(dr["QuestionId"]),
                     QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
-                    QuestionText = Convert.ToString(dr["QuestionText"])
+                    QuestionText = Convert.ToString(dr["QuestionText"]),
+                    CorrectFeedback = Convert.ToString(dr["CorrectFeedback"]),
+                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"])
                 }).ToList();
                 quizDetails[0].TblQuestions = questionsDetails;
                 foreach (var question in questionsDetails)
@@ -224,7 +230,8 @@ namespace LMSBL.Repository
                         OptionId = Convert.ToInt32(dr["OptionId"]),
                         QuestionId = Convert.ToInt32(dr["QuestionId"]),
                         OptionText = Convert.ToString(dr["OptionText"]),
-                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"])
+                        CorrectOption = Convert.ToBoolean(dr["CorrectOption"]),
+                        OptionFeedback = Convert.ToString(dr["OptionFeedback"])
                     }).Where(c => c.QuestionId == question.QuestionId).ToList();
 
                     question.TblQuestionOptions = optionDetails;
@@ -343,5 +350,28 @@ namespace LMSBL.Repository
 
         }
 
+
+        public int GetQuizScoreByUserID(int quizId, int userId)
+        {
+            int score = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                db.AddParameter("@UserId", SqlDbType.Int, userId);
+
+                DataSet ds = db.FillData("sp_QuizScoreGet");
+               if(ds.Tables.Count>0)
+                {
+                    score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                }
+                return score;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 }

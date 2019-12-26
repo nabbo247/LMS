@@ -690,6 +690,7 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\ViewQuiz.cshtml" />
     <Content Include="Views\Courses\EditCourse.cshtml" />
+    <Content Include="Views\Assignment\ReviewQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

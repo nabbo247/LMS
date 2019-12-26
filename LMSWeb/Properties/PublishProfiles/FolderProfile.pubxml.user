@@ -154,10 +154,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="assets/Quiz.js">
-      <publishTime>12/17/2019 16:00:24</publishTime>
+      <publishTime>12/20/2019 14:12:29</publishTime>
     </File>
     <File Include="assets/Validations.js">
-      <publishTime>12/16/2019 18:10:56</publishTime>
+      <publishTime>12/18/2019 17:56:29</publishTime>
     </File>
     <File Include="assets/vendor/bootstrap-colorpicker/%40claviska/jquery-minicolors/jquery.minicolors.css">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1315,19 +1315,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:36</publishTime>
     </File>
     <File Include="bin/LMSBL.dll">
-      <publishTime>12/17/2019 17:44:50</publishTime>
+      <publishTime>12/20/2019 16:03:14</publishTime>
     </File>
     <File Include="bin/LMSBL.dll.config">
       <publishTime>11/23/2019 11:45:36</publishTime>
     </File>
     <File Include="bin/LMSBL.pdb">
-      <publishTime>12/17/2019 17:44:50</publishTime>
+      <publishTime>12/20/2019 16:03:14</publishTime>
     </File>
     <File Include="bin/LMSWeb.dll">
-      <publishTime>12/17/2019 17:44:50</publishTime>
+      <publishTime>12/20/2019 16:11:16</publishTime>
     </File>
     <File Include="bin/LMSWeb.pdb">
-      <publishTime>12/17/2019 17:44:50</publishTime>
+      <publishTime>12/20/2019 16:11:16</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>11/23/2019 10:39:36</publishTime>
@@ -1615,7 +1615,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="CSS/lib/style.css">
-      <publishTime>12/04/2019 18:57:36</publishTime>
+      <publishTime>12/20/2019 14:07:19</publishTime>
     </File>
     <File Include="CSS/lib/styleold.css">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1741,10 +1741,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/23/2019 10:39:33</publishTime>
+      <publishTime>12/19/2019 23:41:54</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>12/17/2019 17:42:30</publishTime>
+      <publishTime>12/17/2019 18:52:10</publishTime>
     </File>
     <File Include="Views/Quiz/AddQuiz.cshtml">
       <publishTime>12/16/2019 15:49:04</publishTime>
@@ -1753,25 +1753,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2019 22:05:28</publishTime>
     </File>
     <File Include="Views/Quiz/EditQuiz.cshtml">
-      <publishTime>12/17/2019 13:34:19</publishTime>
+      <publishTime>12/19/2019 23:41:52</publishTime>
     </File>
     <File Include="Views/Quiz/Index.cshtml">
       <publishTime>12/08/2019 18:45:11</publishTime>
     </File>
     <File Include="Views/Quiz/ViewQuiz.cshtml">
-      <publishTime>12/16/2019 16:06:27</publishTime>
+      <publishTime>12/18/2019 17:58:16</publishTime>
     </File>
     <File Include="Views/Reports/Index.cshtml">
       <publishTime>12/15/2019 13:15:54</publishTime>
     </File>
     <File Include="Views/Reports/ViewQuiz.cshtml">
-      <publishTime>12/17/2019 16:05:55</publishTime>
+      <publishTime>12/17/2019 18:46:18</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/13/2019 14:23:27</publishTime>
+      <publishTime>12/18/2019 18:19:27</publishTime>
     </File>
     <File Include="Views/Tenant/AddTenant.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1792,7 +1792,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/28/2019 14:24:50</publishTime>
     </File>
     <File Include="Views/User/AddUser.cshtml">
-      <publishTime>12/16/2019 18:11:51</publishTime>
+      <publishTime>12/20/2019 16:09:41</publishTime>
     </File>
     <File Include="Views/User/DeleteUser.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1807,7 +1807,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>11/29/2019 17:03:13</publishTime>
+      <publishTime>12/18/2019 18:05:17</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/23/2019 10:39:33</publishTime>

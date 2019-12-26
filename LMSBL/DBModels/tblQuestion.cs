@@ -30,6 +30,12 @@ namespace LMSBL.DBModels
         [Column(TypeName = "ntext")]
         public string QuestionFeedback { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string CorrectFeedback { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string InCorrectFeedback { get; set; }
+
         public virtual TblQuiz TblQuiz { get; set; }
 
         public virtual TblQuestionType TblQuestionType { get; set; }
