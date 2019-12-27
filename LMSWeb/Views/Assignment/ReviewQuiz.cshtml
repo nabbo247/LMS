@@ -27,80 +27,9 @@
                 <label class="col-3 p-0">Quiz Score :  </label>
                 <div class="col-6 ml-0">@Model.Score</div>
             </div>
-        </div>
-        @*<div class="row col-12" id="dvQuestions">
-                @if (Model != null)
-                {
-                    foreach (var question in Model.TblQuestions)
-                    {
-                        var queId = "dvQue" + question.QuestionId;
-                        var questionText = @question.QuestionText;
-                        <div class="row col-12" id="@{@queId}">
-                            <div class="row col-10">
-                                @Html.Raw(questionText)
-                            </div>
-                            <div class="row col-10">
-                                <div class="row col-3">
+        </div>       
 
-                                </div>
-                                <div class="row col-9">
-                                    @if (question.QuestionTypeId == 1)
-                                    {
-                                        foreach (var option in question.TblQuestionOptions)
-                                        {
-                                            var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
-                                            //@Html.RadioButtonFor(d => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId })
-                                            <input type="radio" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        foreach (var option in question.TblQuestionOptions)
-                                        {
-                                            var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
-                                            <input type="checkbox" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
-                                        }
-                                    }
-
-
-                                </div>
-                                <div class="row col-9">
-                                    @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
-                                    @Html.TextAreaFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control textarea-editor note-toolbar panel-heading", @id = "queFeedback" + question.QuestionId })
-                                </div>
-                                <hr class="form-divider">
-                            </div>
-                        </div>
-                    }
-                }
-
-
-
-                <hr class="form-divider">
-
-            </div>*@
-
-        <div id="dvQuestions"></div>
-        @*<div class="row clearfix">
-            <div class="paginator col">
-                <ul id="paginator-list">
-                </ul>
-            </div>
-            <div class="col">
-                <button type="button" id="btnNext" class="btn btn-secondary pull-right ml-3"><b>Next</b></button>
-                <button type="button" id="btnPrev" class="btn btn-secondary pull-right"><b>Prev</b></button>
-            </div>
-        </div>
-
-        <div class="col-12 clearfix mt-5 p-0 text-center">
-            <button type="submit"
-                    onclick="location.href='@Url.Action("MyAssignments", "Assignment")';return false;"
-                    class="btn btn-outline-secondary">
-                <b>Cancel</b>
-            </button>
-            <button type="submit" id="btnResponseSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
-        </div>*@
+        <div id="dvQuestions"></div>        
     </form>
 }
 

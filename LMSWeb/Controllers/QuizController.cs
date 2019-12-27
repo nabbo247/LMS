@@ -158,6 +158,10 @@ namespace LMSWeb.Controllers
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
                 lstAllQuiz = quizRepository.GetQuizByID(id);
+
+                JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+                lstAllQuiz[0].hdnLaunchData = json_serializer.Serialize(lstAllQuiz[0]);
+
                 return View(lstAllQuiz[0]);
             }
             catch (Exception ex)

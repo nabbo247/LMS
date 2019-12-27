@@ -58,6 +58,7 @@ $(document).ready(function () {
     if ($("#hdnReviewData").val() != null) {
         //Edit Questions Population
         var QuizReviewData = JSON.parse($("#hdnReviewData").val());
+        console.log(QuizReviewData);
         $("#hdnReviewData").val("");
         ReviewQuiz(QuizReviewData);
     }

@@ -4,95 +4,102 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>View Quiz Details</h4>
+<h4 class="launch-label">View Quiz</h4>
 
-@Html.AntiForgeryToken()
-<div class="row col-12">
-    <hr class="form-divider">
-</div>
-
-<form class="form-inline">
-    @Html.HiddenFor(model => model.QuizId)
-    @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
-    <div class="row col-12">
+@using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <form class="form-inline">
+        @Html.HiddenFor(model => model.QuizId)
+        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
+        @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
         <div class="row col-12">
-            <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
-                @Model.QuizName
+            <div class="row col-12">
+                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
+                    @Model.QuizName
+                </div>
+            </div>
+            <div class="row col-12">
+                <label class="col-3 p-0">Quiz Description :  </label>
+                <div class="col-6 ml-0">@Model.QuizDescription</div>
             </div>
         </div>
-        <div class="row col-12">
-            <label class="col-3 p-0">Quiz Description :  </label>
-            <div class="col-6 ml-0">@Model.QuizDescription</div>
+        @*<div class="row col-12" id="dvQuestions">
+                @if (Model != null)
+                {
+                    foreach (var question in Model.TblQuestions)
+                    {
+                        var queId = "dvQue" + question.QuestionId;
+                        var questionText = @question.QuestionText;
+                        <div class="row col-12" id="@{@queId}">
+                            <div class="row col-10">
+                                @Html.Raw(questionText)
+                            </div>
+                            <div class="row col-10">
+                                <div class="row col-3">
+
+                                </div>
+                                <div class="row col-9">
+                                    @if (question.QuestionTypeId == 1)
+                                    {
+                                        foreach (var option in question.TblQuestionOptions)
+                                        {
+                                            var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                            //@Html.RadioButtonFor(d => option.SelectedAnswer, new { @id = "que" + question.QuestionId + "Option" + option.OptionId })
+                                            <input type="radio" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var option in question.TblQuestionOptions)
+                                        {
+                                            var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
+                                            <input type="checkbox" name="Options+@question.QuestionId" id="@{@optionId}" /> @option.OptionText
+                                        }
+                                    }
+
+
+                                </div>
+                                <div class="row col-9">
+                                    @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
+                                    @Html.TextAreaFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control textarea-editor note-toolbar panel-heading", @id = "queFeedback" + question.QuestionId })
+                                </div>
+                                <hr class="form-divider">
+                            </div>
+                        </div>
+                    }
+                }
+
+
+
+                <hr class="form-divider">
+
+            </div>*@
+
+        <div id="dvQuestions"></div>
+        <div class="row clearfix">
+            <div class="paginator col">
+                <ul id="paginator-list">
+                </ul>
+            </div>
+            <div class="col">
+                <button type="button" id="btnNext" class="btn btn-secondary pull-right ml-3"><b>Next</b></button>
+                <button type="button" id="btnPrev" class="btn btn-secondary pull-right"><b>Prev</b></button>
+            </div>
         </div>
-        <hr class="form-divider">
-    </div>
-    <div class="row col-12" id="dvQuestions">
-        @if (Model != null)
-        {
-            foreach (var question in Model.TblQuestions)
-            {
-                var queId = "dvQue" + question.QuestionId;
-                var questionText = @question.QuestionText;
-                <div class="row col-12" id="@{@queId}">
-                    <div class="row col-10">
-                        @Html.Raw(questionText)
-                    </div>
-                    <div class="row col-10">
 
-                        <div class="row col-3">
-
-                        </div>
-                        <div class="row col-9">
-                            @if (question.QuestionTypeId == 1)
-                            {
-                                foreach (var option in question.TblQuestionOptions)
-                                {
-                                    var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
-                                    string optionText = option.OptionText;
-                                    if (option.CorrectOption == true)
-                                    {
-                                        optionText = "<b>" + optionText + "</b>";
-                                    }
-                                    <input type="radio" name="Options+@question.QuestionId" id="@{@optionId}" disabled /> @Html.Raw(optionText)
-
-                                }
-                            }
-                            else
-                            {
-                                foreach (var option in question.TblQuestionOptions)
-                                {
-                                    var optionId = "que" + question.QuestionId + "rbtnOption" + option.OptionId;
-                                    string optionText = option.OptionText;
-                                    if (option.CorrectOption == true)
-                                    {
-                                        optionText = "<b>" + optionText + "</b>";
-                                    }
-                                    <input type="checkbox" name="Options+@question.QuestionId" id="@{@optionId}" disabled /> @Html.Raw(optionText)
-                                }
-                            }
-
-                        </div>
-                        <div class="row col-9">
-                            @Html.LabelFor(model => question.QuestionFeedback, new { @class = "col-3 p-0" })
-                            @Html.TextAreaFor(model => question.QuestionFeedback, new { @class = "col-6 ml-0 form-control textarea-editor note-toolbar panel-heading", @readonly = "readonly", @id = "queFeedback" + question.QuestionId })
-                        </div>
-                        <hr class="form-divider">
-                    </div>
-                </div>
-            }
-        }
-
-
-
-        <hr class="form-divider">
-    </div>
-
-</form>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+        <div class="col-12 clearfix mt-5 p-0 text-center">
+            <button type="submit"
+                    onclick="location.href='@Url.Action("Index", "Quiz")';return false;"
+                    class="btn btn-outline-secondary">
+                <b>Cancel</b>
+            </button>            
+        </div>
+    </form>
+}
 
 <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="~/assets/Quiz.js"></script>

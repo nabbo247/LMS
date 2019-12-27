@@ -27,14 +27,18 @@ namespace LMSWeb.Controllers
             
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
             lstAllQuiz = quizRepository.GetQuizForLaunch(quizId, userId);
+
             List<TblRespons> quizResponses = new List<TblRespons>();
             quizResponses = quizRepository.GetQuizResponsesByUserID(quizId, userId);
             lstAllQuiz[0].TblResponses = quizResponses;
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
-            lstAllQuiz[0].hdnResponseData = json_serializer.Serialize(quizResponses);
+            var score = quizRepository.GetQuizScoreByUserID(quizId, userId);
+            lstAllQuiz[0].Score = score;
+
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            lstAllQuiz[0].hdnReviewData = json_serializer.Serialize(lstAllQuiz[0]);
             return View(lstAllQuiz[0]);
-            
+
         }
 
     }
