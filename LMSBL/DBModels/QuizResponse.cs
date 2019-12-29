@@ -19,5 +19,7 @@ namespace LMSBL.DBModels
         public string OptionIds { get; set; }
 
         public string QuestionFeedback { get; set; }
+
+        public int Attempt { get; set; }
     }
 }

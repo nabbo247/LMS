@@ -19,20 +19,23 @@ namespace LMSWeb.Controllers
         public ActionResult Index()
         {
             TblUser sessionUser = (TblUser)Session["UserSession"];
-            var ReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId);
-            return View(ReportModel);
+            List<ReportModel> objReportModel = new List<ReportModel>();
+            if (sessionUser.RoleId == 3)
+                objReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId, sessionUser.UserId);
+            else
+                objReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId, 0);
+            return View(objReportModel);
         }
-        public ActionResult ViewQuiz(int quizId, int userId)
-        {
-            
+        public ActionResult ViewQuiz(int quizId, int userId, int attempt)
+        {            
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
             lstAllQuiz = quizRepository.GetQuizForLaunch(quizId, userId);
 
             List<TblRespons> quizResponses = new List<TblRespons>();
-            quizResponses = quizRepository.GetQuizResponsesByUserID(quizId, userId);
+            quizResponses = quizRepository.GetQuizResponsesByUserID(quizId, userId, attempt);
             lstAllQuiz[0].TblResponses = quizResponses;
 
-            var score = quizRepository.GetQuizScoreByUserID(quizId, userId);
+            var score = quizRepository.GetQuizScoreByUserID(quizId, userId, attempt);
             lstAllQuiz[0].Score = score;
 
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();

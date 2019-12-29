@@ -24,6 +24,10 @@ namespace LMSBL.DBModels
 
         public int QuizId { get; set; }
 
+        public DateTime DateCreated { get; set; }
+
+        public int Attempt { get; set; }
+
         public virtual TblQuestion TblQuestion { get; set; }
 
         public virtual TblQuiz TblQuiz { get; set; }

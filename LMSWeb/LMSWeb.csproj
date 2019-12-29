@@ -186,6 +186,8 @@
     <Content Include="assets\images\loginpage.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\mail_chimp.png" />
+    <Content Include="assets\images\orange.jpg" />
+    <Content Include="assets\images\orange1.jpg" />
     <Content Include="assets\images\product-pic-2.jpg" />
     <Content Include="assets\images\product-pic-3.jpg" />
     <Content Include="assets\images\product-pic-4.jpg" />

@@ -261,6 +261,7 @@ namespace LMSBL.Repository
                     db.AddParameter("@QuestionFeedback", SqlDbType.Text, obj.QuestionFeedback);
                     db.AddParameter("@UserId", SqlDbType.Int, obj.UserId);
                     db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
+                    db.AddParameter("@Attempt", SqlDbType.Int, obj.Attempt);
                     status = db.ExecuteQuery("sp_ResponseAdd");
                 }
                 
@@ -272,7 +273,7 @@ namespace LMSBL.Repository
             return status;
         }
 
-        public int CaptureScore(int quizId,int userId,int score)
+        public int CaptureScore(int quizId,int userId,int score,int attempt)
         {
             int status = 0;
             try
@@ -280,7 +281,8 @@ namespace LMSBL.Repository
                 db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                 db.AddParameter("@UserId", SqlDbType.Int, userId);
-                db.AddParameter("@Score", SqlDbType.Int, score);               
+                db.AddParameter("@Score", SqlDbType.Int, score);
+                db.AddParameter("@Attempt", SqlDbType.Int, attempt);
                 status = db.ExecuteQuery("sp_QuizScoreAdd");
 
             }
@@ -292,12 +294,14 @@ namespace LMSBL.Repository
         }
 
 
-        public List<ReportModel> GetQuizReportByUserID(int TenantId)
+        public List<ReportModel> GetQuizReportByUserID(int TenantId, int UserId)
         {
             try
             {
                 db.parameters.Clear();
                 db.AddParameter("@TenantId", SqlDbType.Int, TenantId);
+                db.AddParameter("@UserId", SqlDbType.Int, UserId);
+
 
                 DataSet ds = db.FillData("sp_GetUserAssignment");
                 List<ReportModel> quizReportDetails = ds.Tables[0].AsEnumerable().Select(dr => new ReportModel
@@ -306,7 +310,9 @@ namespace LMSBL.Repository
                     UserId = Convert.ToInt32(dr["UserId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
                     Name = Convert.ToString(dr["Name"]),
-                    Score = Convert.ToInt32(dr["Score"])
+                    Score = Convert.ToInt32(dr["Score"]),
+                    AttemptedDate = Convert.ToDateTime(dr["AttemptedDate"]),
+                    Attempt = Convert.ToInt32(dr["Attempt"])
 
                 }).ToList();
                 return quizReportDetails;
@@ -320,13 +326,14 @@ namespace LMSBL.Repository
 
         }
 
-        public List<TblRespons> GetQuizResponsesByUserID(int quizId,int userId)
+        public List<TblRespons> GetQuizResponsesByUserID(int quizId,int userId,int attempt)
         {
             try
             {
                 db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                 db.AddParameter("@UserId", SqlDbType.Int, userId);
+                db.AddParameter("@Attempt", SqlDbType.Int, attempt);
 
                 DataSet ds = db.FillData("sp_GetUserQuizResponses");
                 List<TblRespons> quizResponseDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblRespons
@@ -351,7 +358,7 @@ namespace LMSBL.Repository
         }
 
 
-        public int GetQuizScoreByUserID(int quizId, int userId)
+        public int GetQuizScoreByUserID(int quizId, int userId, int attempt)
         {
             int score = 0;
             try
@@ -359,6 +366,7 @@ namespace LMSBL.Repository
                 db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                 db.AddParameter("@UserId", SqlDbType.Int, userId);
+                db.AddParameter("@Attempt", SqlDbType.Int, attempt);
 
                 DataSet ds = db.FillData("sp_QuizScoreGet");
                if(ds.Tables.Count>0)
@@ -366,6 +374,34 @@ namespace LMSBL.Repository
                     score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
                 }
                 return score;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public int GetQuizAttemptByUserID(int quizId, int userId)
+        {
+            int attempt = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                db.AddParameter("@UserId", SqlDbType.Int, userId);
+
+                DataSet ds = db.FillData("sp_QuizAttemptGet");
+                if (ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        attempt = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                    }
+                    else
+                        attempt = 0;
+                }
+                return attempt;
             }
             catch (Exception ex)
             {

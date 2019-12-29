@@ -61,11 +61,13 @@ namespace LMSWeb.Controllers
 
             List<QueOptions> lstQueOptions = new List<QueOptions>();
             object[] objQueResponse = (object[])json_serializer.DeserializeObject(objQuiz.hdnResponseData);
+            var attempt = quizRepository.GetQuizAttemptByUserID(objQuiz.QuizId, sessionUser.UserId);
             foreach (var item in objQueResponse)
             {
                 QuizResponse quizResponse = new QuizResponse();
                 quizResponse.QuizId = objQuiz.QuizId;
                 quizResponse.UserId = sessionUser.UserId;
+                quizResponse.Attempt = attempt+1;
 
                 foreach (Dictionary<string, object> newItem in (object[])item)
                 {
@@ -151,7 +153,7 @@ namespace LMSWeb.Controllers
                 }
             }
 
-            var scoreResult = quizRepository.CaptureScore(objQuiz.QuizId, sessionUser.UserId, score);
+            var scoreResult = quizRepository.CaptureScore(objQuiz.QuizId, sessionUser.UserId, score, attempt+1);
 
             TempData["Message"] = "Responses Saved Successfully";
             return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId });
@@ -164,12 +166,12 @@ namespace LMSWeb.Controllers
             TblUser sessionUser = (TblUser)Session["UserSession"];
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
             lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
-
+            var attempt = quizRepository.GetQuizAttemptByUserID(QuizId, sessionUser.UserId);
             List<TblRespons> quizResponses = new List<TblRespons>();
-            quizResponses = quizRepository.GetQuizResponsesByUserID(QuizId, sessionUser.UserId);
+            quizResponses = quizRepository.GetQuizResponsesByUserID(QuizId, sessionUser.UserId, attempt);
             lstAllQuiz[0].TblResponses = quizResponses;
 
-            var score = quizRepository.GetQuizScoreByUserID(QuizId, sessionUser.UserId);
+            var score = quizRepository.GetQuizScoreByUserID(QuizId, sessionUser.UserId, attempt);
             lstAllQuiz[0].Score = score;
 
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();

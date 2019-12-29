@@ -11,11 +11,12 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Sr No.</th>
                     <th scope="col">Quiz Name</th>
-                    <th scope="col">User Id</th>
+                    @*<th scope="col">User Id</th>*@
                     <th scope="col">User Name</th>
                     <th scope="col">Score</th>
+                    <th scope="col">Attempted Date</th>
                     <th scope="col" colspan="2">Actions</th>
 
                 </tr>
@@ -23,23 +24,26 @@
             <tbody>
                 @if (Model != null)
                 {
+                    var index = 0;
                     foreach (var quiz in Model)
                     {
-                        <tr>
-                            <th scope="row">@quiz.quizId</th>
-                            <td>@quiz.QuizName</td>
-                            <td>@quiz.UserId</td>
-                            <td>@quiz.Name</td>
-                            <td>@quiz.Score</td>
+                        index++;
+                <tr>
+                    <th scope="row">@index</th>
+                    <td>@quiz.QuizName</td>
+                    @*<td>@quiz.UserId</td>*@
+                    <td>@quiz.Name</td>
+                    <td>@quiz.Score</td>
+                    <td>@quiz.AttemptedDate</td>
 
-                            <td>
-                                <a href="@Url.Action("ViewQuiz", "Reports", new { quizId = quiz.quizId,userId = quiz.UserId  })">
-                                    <button type="button" class="btn text-center btn-warning">
-                                        View
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                    <td>
+                        <a href="@Url.Action("ViewQuiz", "Reports", new { quizId = quiz.quizId,userId = quiz.UserId, attempt=quiz.Attempt  })">
+                            <button type="button" class="btn text-center btn-warning">
+                                View
+                            </button>
+                        </a>
+                    </td>
+                </tr>
                     }
                 }
             </tbody>
