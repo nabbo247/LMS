@@ -13,16 +13,19 @@ namespace LMSBL.DBModels
         public int TenantId { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Tenant Name")]
+        [DisplayName("Client Name")]
         public string TenantName { get; set; }
 
        
         [StringLength(50)]
-        [DisplayName("Tenant Domain")]
+        [DisplayName("Client Domain")]
         public string TenantDomain { get; set; }
 
+        [DisplayName("Upload Logo")]
+        public string Logo { get; set; }
 
-        
+
+
         public string DomainUrl { get; set; }
 
 

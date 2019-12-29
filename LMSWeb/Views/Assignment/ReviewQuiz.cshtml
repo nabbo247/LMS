@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h4 class="launch-label">Review Quiz</h4>
+<h4 class="launch-label">Review Quiz</h4>
 
 @using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -15,8 +15,8 @@
         @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
         <div class="row col-12">
             <div class="row col-12">
-                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
-                    @Model.QuizName
+                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0" style="font-size:20px;color:#00bf6f;">
+                                                                  <b>  @Model.QuizName</b>
                 </div>
             </div>
             <div class="row col-12">
@@ -25,11 +25,15 @@
             </div>
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Score :  </label>
-                <div class="col-6 ml-0">@Model.Score</div>
-            </div>
-        </div>       
+                @{
+                    var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count) ;
 
-        <div id="dvQuestions"></div>        
+                    <div class="col-9 ml-0" style="font-size:20px;"><b> @Model.Score/@Model.TblQuestions.Count </b>- <span style="color:#00bf6f;"><b> You scored @ScorePercentage% of the questions correctly</b></span></div>
+                }
+            </div>
+        </div>
+
+        <div id="dvQuestions"></div>
     </form>
 }
 

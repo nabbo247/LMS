@@ -11,8 +11,8 @@
     @Html.AntiForgeryToken()
     <form class="form-inline">
         @Html.HiddenFor(model => model.QuizId)
-        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
-        @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
+        @*@Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })*@
+        @Html.HiddenFor(model => model.hdnViewData, new { @id = "hdnViewData" })
         <div class="row col-12">
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
