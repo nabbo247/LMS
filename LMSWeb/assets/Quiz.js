@@ -797,11 +797,17 @@ function ReviewQuiz(QuizReviewData) {
                 queHTML += "</div>";
             });
             if (attemptedFeedback != "") {
-                if (correctPoint==0)
+                if (correctPoint == 0)
                     queHTML += "<div class=\"col-12\"><span class=\"option-text\">0/1 point</span></div>";
                 else
                     queHTML += "<div class=\"col-12\"><span class=\"option-text\">1/1 point</span></div>";
                 queHTML += "<div class=\"col-12\"><span class=\"option-text\">" + attemptedFeedback + " </span></div>";
+            }
+            else {
+                if (correctPoint == 0)
+                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">0/1 point</span></div>";
+                else
+                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">1/1 point</span></div>";
             }
             //queHTML += "</div>";
             
