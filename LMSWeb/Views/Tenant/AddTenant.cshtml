@@ -27,7 +27,7 @@
                 @Html.TextBoxFor(model => model.TenantDomain, new { @class = "col-6 ml-0 form-control" })
 
                 <input type="button" id="btnTenantDomainName" style="margin-left:10px;" value="verify" class="btn btn-default btn-success" />
-                <label id="lblerrorDomain" style="display:none;margin-left:263px;">Domain Name Already Exists</label>
+                <label id="lblerrorDomain" style="display:none;margin-left:263px;"></label>
                 <hr class="form-divider">
             </div>
 
@@ -65,7 +65,7 @@
                 <hr class="form-divider">
             </div>
 
-            
+
             <div class="row col-12" style="margin-bottom: 34px;">
                 <div class="col-8">
 
@@ -107,7 +107,13 @@
         });
 
         $("#btnTenantDomainName").click(function () {
-            VerifyTenantDomain($('#txtdomainName').val());
+            if ($('#TenantDomain').val() == "") {                
+                alert("Please enter Client Domain");
+                return false;
+            }
+            else {
+                VerifyTenantDomain($('#TenantDomain').val());
+            }
         })
 
 
@@ -129,12 +135,13 @@
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             success: function (result) {
+                console.log(result)
                 if (result == 1) {
                     $("#lblerrorDomain").val("Domain Name is not Available !!!");
                     $("#lblerrorDomain").css("color", "Red");
                 }
                 else {
-                    $("#lblerrorDomain").val("Domain Name is Available !!!");
+                    $("#lblerrorDomain").text("Domain Name is Available !!!");
                     $("#lblerrorDomain").css("color", "Green");
                 }
                 $("#lblerrorDomain").show();

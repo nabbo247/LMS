@@ -4,13 +4,14 @@ using System.Linq;
 using LMSBL.DBModels;
 using System.Data;
 using System.Data.SqlClient;
-
+using LMSBL.Common;
 
 namespace LMSBL.Repository
 {
     public class QuizRepository
     {
         DataRepository db = new DataRepository();
+        Exceptions newException = new Exceptions();
 
         public List<TblQuiz> GetAllQuiz(int tenantId)
         {
@@ -317,11 +318,11 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizReportDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                return null;
+                //throw ex;
             }
 
         }

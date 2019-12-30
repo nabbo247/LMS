@@ -27,7 +27,6 @@ namespace LMSWeb.Controllers
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
@@ -42,7 +41,6 @@ namespace LMSWeb.Controllers
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
@@ -53,7 +51,7 @@ namespace LMSWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
+                    //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
                     int rows = tr.AddTenant(objTenant);
                     if (rows != 0)
                     {
@@ -70,7 +68,6 @@ namespace LMSWeb.Controllers
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
@@ -88,7 +85,6 @@ namespace LMSWeb.Controllers
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
@@ -115,7 +111,6 @@ namespace LMSWeb.Controllers
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
@@ -162,18 +157,14 @@ namespace LMSWeb.Controllers
             try
             {
                 int isAvailable = tr.VerifyTenantDomain(Domain);
-
                 return Json(isAvailable, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
                 return View();
-
             }
         }
 
     }
-
-
 }

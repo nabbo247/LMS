@@ -15,8 +15,8 @@
         @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
         <div class="row col-12">
             <div class="row col-12">
-                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0">
-                    @Model.QuizName
+                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0" style="font-size:20px;color:#00bf6f;">
+                    <b>  @Model.QuizName</b>
                 </div>
             </div>
             <div class="row col-12">
@@ -25,7 +25,11 @@
             </div>
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Score :  </label>
-                <div class="col-6 ml-0">@Model.Score</div>
+                @{
+                    var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count);
+
+                    <div class="col-9 ml-0" style="font-size:20px;"><b> @Model.Score/@Model.TblQuestions.Count </b>- <span style="color:#00bf6f;"><b> Scored @ScorePercentage% of the questions correctly</b></span></div>
+                }
             </div>
         </div>       
 
