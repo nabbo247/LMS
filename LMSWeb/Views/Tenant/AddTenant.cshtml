@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddTenant", "Tenant", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="main-container container mt-5">
@@ -90,13 +90,13 @@
         console.log('Ready..!');
 
         $('#DtActivitionFrom').datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'mm/dd/yyyy',
             showWeek: true,
             startDate: new Date()
         });
 
         $('#DtActivitionTo').datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'mm/dd/yyyy',
             showWeek: true,
             startDate: new Date()
         });
@@ -137,7 +137,7 @@
             success: function (result) {
                 console.log(result)
                 if (result == 1) {
-                    $("#lblerrorDomain").val("Domain Name is not Available !!!");
+                    $("#lblerrorDomain").text("Domain Name is not Available !!!");
                     $("#lblerrorDomain").css("color", "Red");
                 }
                 else {

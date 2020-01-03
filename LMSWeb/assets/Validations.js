@@ -54,5 +54,20 @@ function TenantValidation() {
         alert("Please enter Client Domain");
         return false;
     }
+
+    if ($("#DtActivitionFrom").val() == "") {
+        alert("Please enter Activation From Date");
+        return false;
+    }
+
+    if ($("#DtActivitionTo").val() == "") {
+        alert("Please enter Activation To Date");
+        return false;
+    }
+
+    if ($("#NoOfUserAllowed").val() == "") {
+        alert("Please enter Number of User");
+        return false;
+    }
     return true;
 }

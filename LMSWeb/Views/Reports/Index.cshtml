@@ -2,53 +2,77 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    LMSBL.DBModels.TblUser userModel = new LMSBL.DBModels.TblUser();
+    userModel = (LMSBL.DBModels.TblUser)Session["UserSession"];
 }
 
 <h4>Reports</h4>
 
-<body>
-    <div class="main-container container">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Sr No.</th>
-                    <th scope="col">Quiz Name</th>
-                    @*<th scope="col">User Id</th>*@
-                    <th scope="col">User Name</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Attempted Date</th>
-                    <th scope="col" colspan="2">Actions</th>
+<div class="main-container container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">Quiz Name</th>
+                @*<th scope="col">User Id</th>*@
+                <th scope="col">User Name</th>
+                <th scope="col">Score</th>
+                <th scope="col">Attempted Date</th>
+                <th scope="col" colspan="2">Actions</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null)
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                var index = 0;
+                foreach (var quiz in Model)
                 {
-                    var index = 0;
-                    foreach (var quiz in Model)
-                    {
-                        index++;
-                <tr>
-                    <th scope="row">@index</th>
-                    <td>@quiz.QuizName</td>
-                    @*<td>@quiz.UserId</td>*@
-                    <td>@quiz.Name</td>
-                    <td>@quiz.Score</td>
-                    <td>@quiz.AttemptedDate</td>
+                    index++;
+                    <tr>
+                        <th scope="row">@index</th>
+                        <td>@quiz.QuizName</td>
+                        @*<td>@quiz.UserId</td>*@
+                        <td>@quiz.Name</td>
+                        <td>@quiz.Score</td>
+                        <td>@quiz.AttemptedDate</td>
 
-                    <td>
-                        <a href="@Url.Action("ViewQuiz", "Reports", new { quizId = quiz.quizId,userId = quiz.UserId, attempt=quiz.Attempt  })">
-                            <button type="button" class="btn text-center btn-warning">
-                                View
-                            </button>
-                        </a>
-                    </td>
-                </tr>
-                    }
+                        <td>
+                            <a href="@Url.Action("ViewQuiz", "Reports", new { quizId = quiz.quizId,userId = quiz.UserId, attempt=quiz.Attempt  })">
+                                <button type="button" class="btn text-center btn-warning">
+                                    View
+                                </button>
+                            </a>
+                            @if (userModel.RoleId == 2)
+                            {
+                                <a href="@Url.Action("DeleteQuiz", "Reports", new { quizId = quiz.quizId, userId = quiz.UserId, attempt = quiz.Attempt })">
+                                    <button type="submit" id="btnDelete" class="btn text-center btn-warning" onclick="return confirmDelete()">
+                                        Delete
+                                    </button>
+                                </a>
+                            }
+                        </td>
+                    </tr>
                 }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 
-    </div>
-</body>
+</div>
+<script src="~/assets/Quiz.js"></script>
 
+<script type="text/javascript">
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this Response?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+
+</script>

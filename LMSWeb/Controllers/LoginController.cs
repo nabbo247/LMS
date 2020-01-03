@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -8,11 +9,15 @@ namespace LMSWeb.Controllers
 {
     public class LoginController : Controller
     {
+        TenantRepository tr = new TenantRepository();
         UserRepository ur = new UserRepository();
         Exceptions newException = new Exceptions();
         // GET: Login
         public ActionResult Index()
         {
+            var subDomain = Request.Url;
+            List<TblTenant> tenantDetails = new List<TblTenant>();
+            //tenantDetails = tr.GetTenantById(subDomain);
             try
             {
                 return View();

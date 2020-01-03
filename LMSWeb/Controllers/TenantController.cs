@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -45,22 +47,52 @@ namespace LMSWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTenant(TblTenant objTenant)
+        public ActionResult AddTenant(TblTenant objTenant, HttpPostedFileBase file)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
-                    int rows = tr.AddTenant(objTenant);
-                    if (rows != 0)
+                    if (objTenant.TenantId == 0)
                     {
-                        return RedirectToAction("Index");
+                        var result = tr.GetTenantByName(objTenant.TenantName);
+                        if (!result)
+                        {
+                            TempData["Message"] = "Tenant Already Exist";
+                            return View(objTenant);
+                        }
                     }
-                    else
-                    {
-                        return View(objTenant);
-                    }
+                    if (file != null)
+                        {
+                            var logoURL = System.Configuration.ConfigurationManager.AppSettings["LogoURL"];
+                            var logoPhysicalURL = System.Configuration.ConfigurationManager.AppSettings["logoPhysicalURL"];
+                            string pic = System.IO.Path.GetFileName(file.FileName);
+                            string path = System.IO.Path.Combine(logoURL + "\\" + pic);
+                            string physicalPath = System.IO.Path.Combine(logoPhysicalURL + "\\" + pic);
+
+                            file.SaveAs(physicalPath);
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                file.InputStream.CopyTo(ms);
+                                byte[] array = ms.GetBuffer();
+                            }
+                            objTenant.Logo = path;
+                        }
+                        //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
+                        int rows = 0;
+                        if (objTenant.TenantId == 0)
+                            rows = tr.AddTenant(objTenant);
+                        else
+                            rows = tr.EditTenants(objTenant);
+                        if (rows != 0)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {                            
+                            return View(objTenant);
+                        }
+                    
                 }
                 return View(objTenant);
             }

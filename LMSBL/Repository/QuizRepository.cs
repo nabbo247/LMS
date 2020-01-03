@@ -40,6 +40,7 @@ namespace LMSBL.Repository
         {
             try
             {
+                db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
 
                 DataSet ds = db.FillData("sp_GetQuizByID");
@@ -84,6 +85,22 @@ namespace LMSBL.Repository
             }
 
         }
+
+        public DataSet GetAssignedQuizUsers(int QuizId)
+        {
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
+                DataSet ds = db.FillData("sp_GetAssignedUsers");                
+                return ds;
+            } 
+            catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
+
         public int CreateQuiz(TblQuiz obj)
         {
             int status = 0;
@@ -153,6 +170,40 @@ namespace LMSBL.Repository
             return status;
         }
 
+        public int DeleteResponse(int QuizId, int UserId,int Attempt)
+        {
+            int status = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
+                db.AddParameter("@UserId", SqlDbType.Int, UserId);
+                db.AddParameter("@Attempt", SqlDbType.Int, Attempt);
+                status = db.ExecuteQuery("sp_ResponseDelete");               
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public int DeleteAssignedUser(int QuizId)
+        {
+            int status = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);                
+                status = db.ExecuteQuery("sp_DeleteAssignedUsers");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
         public int AssignQuiz(int QuizId, int UserId)
         {
             int status = 0;

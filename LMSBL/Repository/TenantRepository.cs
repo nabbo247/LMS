@@ -27,13 +27,62 @@ namespace LMSBL.Repository
                     IsActive = Convert.ToBoolean(dr["isActive"]),
                     CreatedBy = Convert.ToInt32(dr["createdBy"]),
                     CreatedOn = Convert.ToDateTime(dr["createdOn"]),
-                    NoOfUserAllowed = Convert.ToInt32(dr["noOfUserAllowed"])
+                    NoOfUserAllowed = Convert.ToInt32(dr["noOfUserAllowed"]),
+                    Logo = Convert.ToString(dr["Logo"])
 
                 }).ToList();
                 return tanentDetails;
 
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public bool GetTenantByName(string tenantName)
+        {
+            Boolean result = true;
+            try
+            {
+                db.AddParameter("@tenantName", SqlDbType.Text, tenantName);
+                DataSet ds = db.FillData("sp_TenantGetByName");
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if(ds.Tables[0].Rows.Count>0)
+                        {
+                            result = false;
+                        }
+                    }
+                }
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public int VerifyTenent(string TenantName)
+        {
+            int score = 0;
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@tenantName", SqlDbType.Int, TenantName);
+                DataSet ds = db.FillData("sp_TenantGetByName");
+                if (ds.Tables.Count > 0)
+                {
+                    score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                }
+                return score;
+            }
+            catch (Exception ex)
             {
                 throw;
             }
@@ -78,7 +127,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@activationTo", SqlDbType.DateTime, obj.ActivationTo);
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@noOfUserAllowed", SqlDbType.Int, obj.NoOfUserAllowed);
-                //db.AddParameter("@domainURL", SqlDbType.Int, obj.DomainUrl);
+                db.AddParameter("@logo", SqlDbType.Text, obj.Logo);
                 return db.ExecuteQuery("sp_TenantAdd");
             }
             catch (Exception)
@@ -96,14 +145,16 @@ namespace LMSBL.Repository
                 db.AddParameter("@tenantDomain", SqlDbType.Text, obj.TenantDomain);
                 db.AddParameter("@activationFrom", SqlDbType.DateTime, obj.ActivationFrom);
                 db.AddParameter("@activationTo", SqlDbType.DateTime, obj.ActivationTo);
+                //db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@noOfUserAllowed", SqlDbType.Int, obj.NoOfUserAllowed);
+                db.AddParameter("@logo", SqlDbType.Text, obj.Logo);
                 return db.ExecuteQuery("sp_TenantUpdate");
-            }            
+            }
             catch (Exception)
             {
                 throw;
             }
-}
+        }
 
         public int DeleteTenants(TblTenant obj)
         {

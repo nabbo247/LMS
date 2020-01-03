@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     <form class="form-inline">
         @Html.HiddenFor(model => model.QuizId)
-        @*@Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })*@
+        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
         @Html.HiddenFor(model => model.hdnViewData, new { @id = "hdnViewData" })
         <div class="row col-12">
             <div class="row col-12">
@@ -32,18 +32,19 @@
                 </ul>
             </div>
             <div class="col">
+                <button type="submit" id="btnResponseSubmit" class="btn btn-secondary pull-right ml-3"><b>Submit</b></button>
                 <button type="button" id="btnNext" class="btn btn-secondary pull-right ml-3"><b>Next</b></button>
-                <button type="button" id="btnPrev" class="btn btn-secondary pull-right"><b>Prev</b></button>
+                <button type="button" id="btnPrev" class="btn btn-secondary pull-right ml-3"><b>Prev</b></button>
+                <button type="button" id="btnCancel" class="btn btn-secondary pull-right"><b>Cancel</b></button>
+
             </div>
         </div>
 
-        <div class="col-12 clearfix mt-5 p-0 text-center">
-            <button type="submit"
-                    onclick="location.href='@Url.Action("Index", "Quiz")';return false;"
-                    class="btn btn-outline-secondary">
+        @*<div class="col-12 clearfix mt-5 p-0 text-center">
+            <button type="button" id="btnCancel" class="btn btn-outline-secondary">
                 <b>Cancel</b>
-            </button>            
-        </div>
+            </button>
+        </div>*@
     </form>
 }
 

@@ -6,7 +6,7 @@ using LMSWeb.ViewModel;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
-
+using System.Data;
 
 namespace LMSWeb.Controllers
 {
@@ -63,6 +63,25 @@ namespace LMSWeb.Controllers
                     Text = Convert.ToString(user.FirstName),
                     Value = Convert.ToString(user.UserId)
                 });
+
+            }
+            DataSet ds = quizRepository.GetAssignedQuizUsers(id);
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (var item in userItems)
+                        {
+                            DataRow[] foundUsers = ds.Tables[0].Select("UserId = " + item.Value + "");
+                            if (foundUsers.Length != 0)
+                            {
+                                item.Selected = true;
+                            }
+                        }
+                    }
+                }
             }
             quizAssignVieewModel.usetList = userItems;
             objQuiz = quizRepository.GetQuizByID(id);
@@ -134,9 +153,10 @@ namespace LMSWeb.Controllers
         [HttpPost]
         public ActionResult AssignQuizToUsers(QuizAssignViewModel quizAssignViewModel)
         {
+            var index = quizRepository.DeleteAssignedUser(quizAssignViewModel.quiz.QuizId);
             int assigned = 0;
             int notAssigned = 0;
-            foreach(var userId in quizAssignViewModel.userIds)
+            foreach (var userId in quizAssignViewModel.userIds)
             {
                 var result = quizRepository.AssignQuiz(quizAssignViewModel.quiz.QuizId, userId);
                 if (result > 0)
@@ -147,7 +167,7 @@ namespace LMSWeb.Controllers
             string message = "Quiz Assigned to - " + assigned + " User/s";
             if (notAssigned > 0)
                 message += " And Not Assigned to - " + notAssigned + " User/s";
-            
+
             TempData["Message"] = message;
             return RedirectToAction("Index");
         }

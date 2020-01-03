@@ -34,10 +34,11 @@
         <tbody>
             @foreach (var tenent in Model)
             {
+                var UrlNew = tenent.TenantDomain +"."+ System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
                 <tr>
                     <th>@tenent.TenantId</th>
                     <td>@tenent.TenantName</td>
-                    <td><a style="color:blue;" href="@tenent.DomainUrl" target="_blank">@tenent.TenantDomain</a></td>
+                    <td><a style="color:blue;" href="@UrlNew" target="_blank">@tenent.TenantDomain</a></td>
                     <td>@tenent.ActivationFrom.Value.ToString("dd-MMM-yyyy")</td>
                     <td>@tenent.ActivationTo.Value.ToString("dd-MMM-yyyy")</td>
                     @if (tenent.IsActive == true)

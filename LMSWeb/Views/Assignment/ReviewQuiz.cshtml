@@ -16,7 +16,7 @@
         <div class="row col-12">
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0" style="font-size:20px;color:#00bf6f;">
-                                                                  <b>  @Model.QuizName</b>
+                    <b>  @Model.QuizName</b>
                 </div>
             </div>
             <div class="row col-12">
@@ -26,7 +26,7 @@
             <div class="row col-12">
                 <label class="col-3 p-0">Quiz Score :  </label>
                 @{
-                    var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count) ;
+                    var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count);
 
                     <div class="col-9 ml-0" style="font-size:20px;"><b> @Model.Score/@Model.TblQuestions.Count </b>- <span style="color:#00bf6f;"><b> You scored @ScorePercentage% of the questions correctly</b></span></div>
                 }
@@ -34,6 +34,13 @@
         </div>
 
         <div id="dvQuestions"></div>
+        <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = Model.QuizId })">
+            <button type="button" class="btn btn-secondary pull-right ml-3">
+                <b>Retry</b>
+            </button>
+        </a>
+        @*<button type="submit" id="btnRetry" class="btn btn-secondary pull-right ml-3"><b>Retry</b></button>*@
+        <p>&nbsp;</p>
     </form>
 }
 

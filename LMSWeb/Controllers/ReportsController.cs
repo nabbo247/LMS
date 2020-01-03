@@ -53,5 +53,11 @@ namespace LMSWeb.Controllers
 
         }
 
+        public ActionResult DeleteQuiz(int quizId, int userId, int attempt)
+        {
+            int result = quizRepository.DeleteResponse(quizId, userId, attempt);
+            return RedirectToAction("Index");
+        }
+
     }
 }

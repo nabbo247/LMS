@@ -2,10 +2,13 @@
 var optionCount = 2;
 var quizQueIds = [];
 var currentIndex = 0;
-
+$body = $("body");
 
 $(document).ready(function () {
     $(".textarea-editor").summernote();
+    $('#btnCancel').on("click", function () {
+        location.reload();
+    });  
 
     if ($("#hdnResponseData").val() != null && $("#hdnResponseData").val() != '') {
         SetResponses($("#hdnResponseData").val());
@@ -15,9 +18,7 @@ $(document).ready(function () {
     }
 
     $('#btnAddQuestion').on("click", function () {
-
         AddQuestion();
-
         $(".expandableCollapsibleDiv > img").on("click", function (e) {
             var showElementDescription =
                 $(this).parents(".expandableCollapsibleDiv").find("ul");
@@ -30,7 +31,6 @@ $(document).ready(function () {
                 $(this).attr("src", "/assets/images/down-arrow.jpg");
             }
         });
-
     });
     $('#btnQuizSubmit').on("click", function () {
         var status = SaveQuiz();
@@ -42,7 +42,7 @@ $(document).ready(function () {
         return status;
     });
 
-    
+
     if ($("#hdnEditData").val() != null) {
         //Edit Questions Population
         var QuizData = JSON.parse($("#hdnEditData").val());
@@ -55,7 +55,7 @@ $(document).ready(function () {
         $("#hdnLaunchData").val("");
         LaunchQuiz(QuizLaunchData);
     }
-    
+
     if ($("#hdnViewData").val() != null) {
         //View Quiz for Admin
         var QuizViewData = JSON.parse($("#hdnViewData").val());
@@ -63,7 +63,7 @@ $(document).ready(function () {
         ViewQuiz(QuizViewData);
     }
 
-    if ($("#hdnReviewData").val() != null) {        
+    if ($("#hdnReviewData").val() != null) {
         //Review Quiz after Submit the Responses
         var QuizReviewData = JSON.parse($("#hdnReviewData").val());
         //console.log(QuizReviewData);
@@ -105,7 +105,7 @@ function ChangeType(id) {
         else {
             $('#' + value.id).get(0).type = 'radio';
             var optionIndex = value.id.indexOf("Option");
-            var actualOptionId = value.id.substring(optionIndex + 6, value.id.length);            
+            var actualOptionId = value.id.substring(optionIndex + 6, value.id.length);
             $('#que' + id + 'option' + actualOptionId + 'FeedbackDiv').show();
 
             $('#que' + id + 'CorrectFeedbackDiv').hide();
@@ -120,8 +120,9 @@ function AddQuestion() {
     optionCount = 2;
     var queHTML = "<div class=\"row col-12 que-container \" id=queContainer" + count + ">";
     queHTML += "<div class=\"row col-12\" >";
-    queHTML += "<div class=\"btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + count + ">Question</div>";
-    queHTML += "<div class=\"btn btn-danger offset-10\" onclick=\"deleteQuestion(" + count + ")\" >Delete</div>";
+    queHTML += "<div class=\"col-1 btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + count + ">Question</div>";
+    queHTML += "<div class=\"row col-10\"></div>";
+    queHTML += "<div class=\"btn btn-danger col-1 pull-right\" onclick=\"deleteQuestion(" + count + ")\" >Delete</div>";
     queHTML += "</div>";
     queHTML += "<div class=\"row col-12 collapse show in\" id=dvQues" + count + ">";
     queHTML += "<div class=\"row col-12\" style=margin-top:5px;>";
@@ -221,7 +222,7 @@ function addOption(queCount) {
     }
     newHTML += "<button onclick=\"addOption(" + queCount + ")\" id=que" + queCount + "btnOption" + optionCount + " type=\"button\" class=\"btn pl-4 pr-4 text-center btn-warning pull-right\" style=\"margin-left: 5px; \"> + </button>";
     newHTML += "<button onclick=\"removeOption(" + queCount + "," + optionCount + ")\" id=que" + queCount + "btnOption" + optionCount + " type=\"button\" class=\"btn pl-4 pr-4 text-center btn-warning pull-right\" style=\"margin-left: 5px;\"> - </button>";
-    
+
     newHTML += "<div class=\"col-9 offset-3 p-0\" style=margin-top:5px; id=que" + queCount + "option" + optionCount + "FeedbackDiv>";
     newHTML += "<label class=\"col-3 p-0\">Option Feedback</label>";
     newHTML += "<textarea class=\"col-6 ml-0 form-control\"   id=que" + queCount + "option" + optionCount + "Feedback></textarea>";
@@ -277,7 +278,7 @@ function SaveQuiz() {
     var questionObj = [];
     $.each(IDs, function (index, value) {
         var id = value.id.substring(6, value.id.length);
-        
+
         if ($("#que" + id).val() == null || $("#que" + id).val() == "") {
             alert("Please enter Question Text");
             returnStatus = false;
@@ -287,7 +288,7 @@ function SaveQuiz() {
         item["QuestionTypeId"] = $("#queType" + id + " option:selected").val();
         item["QuestionText"] = $("#que" + id).val();
 
-        if ($("#queType" + id + " option:selected").val() == 2) {           
+        if ($("#queType" + id + " option:selected").val() == 2) {
             console.log($("#que" + id + "CorrectFeedback").val())
             console.log($("#que" + id + "InCorrectFeedback").val())
 
@@ -364,12 +365,12 @@ function SaveResponse() {
                 var actualOptionId = value.id.substring(optionIndex + 6, value.id.length);
                 optionItem["questionId"] = id;
                 optionItem["optionId"] = actualOptionId;
-                optionItem["queFeedback"] = $("#queFeedback" + id).val();
+                optionItem["queFeedback"] = null;
                 OptionCheck = true;
                 optionObj.push(optionItem);
             }
 
-        });        
+        });
         questionObj.push(optionObj);
     });
     $("#hdnResponseData").val(JSON.stringify(questionObj));
@@ -401,17 +402,29 @@ function SetResponses(data) {
 }
 
 function LoadQuestionsForEdit(QuizData) {
+   
     $('#btnQuizSubmit').html("<b>Save</b>");
     console.log(QuizData)
     $.each(QuizData.TblQuestions, function (index, value) {
+        var queFirstLine = "";
+        var queIndex = value.QuestionText.indexOf("?");
+        if (queIndex <= 0) {
+            queIndex = value.QuestionText.indexOf(".");
 
+            if (queIndex <= 0) {
+                queFirstLine = value.QuestionText;
+            }
+        }
+        if (queFirstLine == "") {
+            queFirstLine = value.QuestionText.substring(0, (queIndex+1));
+        }
         var queHTML = "<div class=\"row col-12 que-container\" id=queContainer" + value.QuestionId + ">";
-        queHTML += "<div class=\"row col-12\" >";
-        queHTML += "<div class=\"btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + value.QuestionId + ">Question</div>";
-        //queHTML += "<div class=\"offset-4\">Dinesh</div>";
-        queHTML += "<div class=\"btn btn-danger offset-10\" onclick=\"deleteQuestion(" + value.QuestionId + ")\" >Delete</div>";
+        queHTML += "<div class=\"row col-12\"  >";
+        queHTML += "<div class=\"col-1 btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + value.QuestionId + ">Question</div>";
+        queHTML += "<div class=\"row col-10\"  style=margin-left:5px;>" + queFirstLine + "</div>";
+        queHTML += "<div class=\"btn btn-danger row col-1 pull-right\" onclick=\"deleteQuestion(" + value.QuestionId + ")\" >Delete</div>";
         queHTML += "</div>";
-        
+
         queHTML += "<div class=\"row col-12 collapse\" id=dvQues" + value.QuestionId + ">";
         queHTML += "<div class=\"row col-12\" style=margin-top:5px;>";
         queHTML += "<label class=\"col-3 p-0\">Question Type </label>";
@@ -459,7 +472,7 @@ function LoadQuestionsForEdit(QuizData) {
                     queHTML += "<button onclick=\"addOption(" + value.QuestionId + ")\" id=que" + value.QuestionId + "btnOption" + valueOption.OptionId + " type=\"button\" class=\"btn pl-4 pr-4 text-center btn-warning pull-right\" style=\"margin-left: 5px;\"> + </button>";
                     queHTML += "<button onclick=\"removeOption(" + value.QuestionId + "," + valueOption.OptionId + ")\" id=que" + value.QuestionId + "btnOption" + valueOption.OptionId + " type=\"button\" class=\"btn pl-4 pr-4 text-center btn-warning pull-right\" style=\"margin-left: 5px;\"> - </button>";
                 }
-            }          
+            }
 
             queHTML += "<div class=\"row col-12\" style=margin-top:5px; id=que" + value.QuestionId + "option" + valueOption.OptionId + "FeedbackDiv>";
             queHTML += "<div class=\"col-9 offset-3 p-0\">";
@@ -517,7 +530,7 @@ function LoadQuestionsForEdit(QuizData) {
 
                 $('#que' + value.QuestionId + 'option' + valueOption.OptionId + 'FeedbackDiv').show();
             }
-            else {                
+            else {
                 console.log(value.QuestionId)
                 console.log(valueOption.OptionId)
                 $('#que' + value.QuestionId + 'option' + valueOption.OptionId + 'Feedback').summernote();
@@ -527,13 +540,14 @@ function LoadQuestionsForEdit(QuizData) {
         });
 
         count = value.QuestionId;
-    });
-    
+    });    
 }
 
 
 function LaunchQuiz(QuizLaunchData) {
     console.log('QuizLaunchData : ', QuizLaunchData);
+    $('#btnPrev').hide();
+    $('#btnResponseSubmit').hide();
     var queHTML = `<div class="container-fluid  que-container mt-3">`;
     $.each(QuizLaunchData.TblQuestions, function (index, value) {
         item = {}
@@ -562,10 +576,10 @@ function LaunchQuiz(QuizLaunchData) {
             });
         }
 
-        queHTML += "<div class=\"col-12 border-top que-feedback\">";
-        queHTML += "<label class=\"col-3 p-0\">Question Feedback</label>";
-        queHTML += "<textarea class=\"col-6 ml-0 form-control textarea-editor\"   id=queFeedback" + value.QuestionId + "></textarea>";
-        queHTML += "</div>";
+        //queHTML += "<div class=\"col-12 border-top que-feedback\">";
+        //queHTML += "<label class=\"col-3 p-0\">Question Feedback</label>";
+        //queHTML += "<textarea class=\"col-6 ml-0 form-control textarea-editor\"   id=queFeedback" + value.QuestionId + "></textarea>";
+        //queHTML += "</div>";
         queHTML += "</div>";
 
         // append paginator list
@@ -609,7 +623,14 @@ function LaunchQuiz(QuizLaunchData) {
         if (currentIndex > 0) {
             currentIndex--;
             NextPrevQuestion();
-
+            if (currentIndex == 0) {
+                $('#btnPrev').hide();
+            }
+            if (currentIndex != (quizQueIds.length - 1)) {
+                //$('#btnPrev').hide();
+                $('#btnNext').show();
+                $('#btnResponseSubmit').hide();
+            }
         }
     });
 
@@ -617,12 +638,21 @@ function LaunchQuiz(QuizLaunchData) {
         if (currentIndex != (quizQueIds.length - 1)) {
             currentIndex++;
             NextPrevQuestion();
+            if (currentIndex > 0) {
+                $('#btnPrev').show();
+            }
+        }
+        if (currentIndex == (quizQueIds.length - 1)) {
+            $('#btnNext').hide();
+            $('#btnResponseSubmit').show();
         }
     });
 }
 
 function ViewQuiz(QuizViewData) {
     console.log('QuizLaunchData : ', QuizViewData);
+    $('#btnPrev').hide();
+    $('#btnResponseSubmit').hide();
     var queHTML = `<div class="container-fluid  que-container mt-3">`;
     $.each(QuizViewData.TblQuestions, function (index, value) {
         item = {}
@@ -637,32 +667,41 @@ function ViewQuiz(QuizViewData) {
         if (value.QuestionTypeId == 1) {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
                 queHTML += `<div class="col-12 option-container">`;
-                queHTML += "<input type=\"radio\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+                //if (valueOption.CorrectOption)
+                //    queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
+                //else
+                queHTML += "<input type=\"radio\"  class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
-                queHTML += "<div style=\"margin-left:25px;\"><b>Option Feedback</b> " + valueOption.OptionFeedback+" </div>";
+                //queHTML += "<div style=\"margin-left:25px;\"><b>Option Feedback</b> " + valueOption.OptionFeedback + " </div>";
                 queHTML += "</div>";
+
+
+                //queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
             });
         }
         else {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
                 queHTML += `<div class="col-12 option-container">`;
-                queHTML += "<input type=\"checkbox\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+                //if (valueOption.CorrectOption)
+                //    queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
+                //else
+                    queHTML += "<input type=\"checkbox\"  class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
                 //queHTML += "<div style=\"margin-left:25px;\"><b>Option Feedback</b> " + valueOption.OptionFeedback + " </div>";
                 queHTML += "</div>";
             });
         }
-        if (value.QuestionTypeId == 2) {
-            queHTML += "<div class=\"col-12 option-container\">";            
-            queHTML += "<label><b>Feedback if correctly answered</b></label>";
-            queHTML += "<div>" + value.CorrectFeedback + "</div>";           
-            queHTML += "</div>";
+        //if (value.QuestionTypeId == 2) {
+        //    queHTML += "<div class=\"col-12 option-container\">";
+        //    queHTML += "<label><b>Feedback if correctly answered</b></label>";
+        //    queHTML += "<div>" + value.CorrectFeedback + "</div>";
+        //    queHTML += "</div>";
 
-            queHTML += "<div class=\"col-12 option-container\">";
-            queHTML += "<label><b>Feedback if incorrectly answered</b></label>";
-            queHTML += "<div>" + value.InCorrectFeedback + "</div>";
-            queHTML += "</div>";
-        }
+        //    queHTML += "<div class=\"col-12 option-container\">";
+        //    queHTML += "<label><b>Feedback if incorrectly answered</b></label>";
+        //    queHTML += "<div>" + value.InCorrectFeedback + "</div>";
+        //    queHTML += "</div>";
+        //}
         queHTML += "</div>";
 
         // append paginator list
@@ -706,15 +745,31 @@ function ViewQuiz(QuizViewData) {
         if (currentIndex > 0) {
             currentIndex--;
             NextPrevQuestion();
-
-        }
+            if (currentIndex==0) {
+                $('#btnPrev').hide();
+            }
+            if (currentIndex != (quizQueIds.length - 1)) {
+                //$('#btnPrev').hide();
+                $('#btnNext').show();
+                $('#btnResponseSubmit').hide();
+            }
+        }        
     });
 
     $('#btnNext').on("click", function () {
+        
         if (currentIndex != (quizQueIds.length - 1)) {
             currentIndex++;
             NextPrevQuestion();
+            if (currentIndex > 0) {
+                $('#btnPrev').show();
+            }
         }
+        if (currentIndex == (quizQueIds.length - 1)) {
+            $('#btnNext').hide();
+            $('#btnResponseSubmit').show();
+        }
+        
     });
 }
 
@@ -742,65 +797,71 @@ function NextPrevQuestion() {
 
 
 function ReviewQuiz(QuizReviewData) {
-   
-    var queHTML = `<div class="container-fluid  que-container mt-3">`;
-    
+
+    var queHTML = `<div class="container-fluid mt-3">`;
+
     $.each(QuizReviewData.TblQuestions, function (index, value) {
         var isAttempted = false;
         var response = Object;
-        $.each(QuizReviewData.TblResponses, function (indexRe, valueRe) {           
+        $.each(QuizReviewData.TblResponses, function (indexRe, valueRe) {
             if (valueRe.QuestionId == value.QuestionId) {
                 isAttempted = true;
                 response = valueRe;
             }
         });
-       
+
         item = {}
         item["QuestionId"] = value.QuestionId;
-        quizQueIds.push(item);        
-        queHTML += "<div class=\"row question-div  border-bottom\" style=\"margin-bottom:20px;\" id=dvQue" + value.QuestionId + ">";
+        quizQueIds.push(item);
+        queHTML += "<div class=\"row question-div que-container\" style=\"margin-bottom:20px;\" id=dvQue" + value.QuestionId + ">";
         queHTML += "<div class=\"col-12\" >";
         if (isAttempted)
             queHTML += "<label><p><b>Question " + (index + 1) + "</b></p>" + value.QuestionText + " </label>";
         else
             queHTML += "<label><p><b>Question " + (index + 1) + " - Not Attempted </b></p>" + value.QuestionText + "</label>";
         queHTML += "</div>";
-
+        let isCorrectAns;
         if (value.QuestionTypeId == 1) {
             var attemptedFeedback = "";
             var correctPoint = 0;
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                
+
                 queHTML += `<div class="col-12 option-container">`;
                 if (isAttempted) {
+
                     if (valueOption.OptionId == response.OptionIds) {
-                        //console.log(valueOption);
-                        queHTML += "<input type=\"radio\" checked disabled class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
-                        
+                        //console.log('valueOption : ',valueOption);
+                        // queHTML += "<input type=\"radio\" checked disabled class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+
+                        if (!valueOption.CorrectOption) {
+                            queHTML += `<span class="option-text wrong-answer"> <i class="fa fa-times-circle red-color radio-margin"></i></span>`;
+                        } else {
+                            queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
+                        }
                         attemptedFeedback = valueOption.OptionFeedback;
                     }
                     else
                         queHTML += "<input type=\"radio\" disabled class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+
                 }
                 else
                     queHTML += "<input type=\"radio\" disabled class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 if (valueOption.CorrectOption) {
-                    queHTML += `<span class="option-text"><b> ${valueOption.OptionText}</b> </span>`;
-                    queHTML += `<span class="option-text"> (Correct Answer)</span>`;
+                    queHTML += `<span class="option-text ${valueOption.CorrectOption ? 'right-answer' : ''}"><b> ${valueOption.OptionText}</b> </span>`;
                     if (valueOption.OptionId == response.OptionIds) {
                         correctPoint++;
                     }
                 }
                 else {
-                    queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
+                    queHTML += `<span class="option-text ${valueOption.CorrectOption ? 'right-answer' : ''}"> ${valueOption.OptionText} </span>`;
                 }
                 queHTML += "</div>";
             });
             if (attemptedFeedback != "") {
                 if (correctPoint == 0)
-                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">0/1 point</span></div>";
+                    queHTML += "<div class=\"col-12 mt-2\"><span class=\"option-text\">0/1 point</span></div>";
                 else
-                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">1/1 point</span></div>";
+                    queHTML += "<div class=\"col-12 mt-2\"><span class=\"option-text\">1/1 point</span></div>";
                 queHTML += "<div class=\"col-12\"><span class=\"option-text\">" + attemptedFeedback + " </span></div>";
             }
             else {
@@ -810,27 +871,32 @@ function ReviewQuiz(QuizReviewData) {
                     queHTML += "<div class=\"col-12\"><span class=\"option-text\">1/1 point</span></div>";
             }
             //queHTML += "</div>";
-            
+
         }
         else {
             var correctCount = 0;
             var correctIds = [];
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
+                console.log('valueOption : ', valueOption);
                 queHTML += `<div class="col-12 option-container">`;
                 var isRespondedOption = false;
                 if (isAttempted) {
                     var opnIds = response.OptionIds.split(",");
                     //console.log(opnIds)
-                    $.each(opnIds, function (indexOp, valueOp) {                        
+                    $.each(opnIds, function (indexOp, valueOp) {
                         if (valueOp == valueOption.OptionId) {
-                            isRespondedOption = true;                            
+                            isRespondedOption = true;
                         }
                     });
 
 
-                    if (isRespondedOption)
-                        queHTML += "<input type=\"checkbox\" disabled checked class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
-                    else
+                    if (isRespondedOption) {
+                        if (valueOption.CorrectOption)
+                            queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
+                        else
+                            queHTML += `<span class="option-text wrong-answer"> <i class="fa fa-times-circle red-color radio-margin"></i></span>`;
+                        //queHTML += "<input type=\"checkbox\" disabled checked class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
+                    } else
                         queHTML += "<input type=\"checkbox\" disabled class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 }
                 else
@@ -839,17 +905,20 @@ function ReviewQuiz(QuizReviewData) {
                 if (valueOption.CorrectOption) {
                     correctCount++;
                     correctIds.push(valueOption.OptionId);
-                    queHTML += `<span class="option-text"><b> ${valueOption.OptionText}</b> </span>`;
-                    queHTML += `<span class="option-text"> (Correct Answer)</span>`;
+                    queHTML += `<span class="option-text ${valueOption.CorrectOption ? 'right-answer' : ''}"><b> ${valueOption.OptionText}</b> </span>`;
+                    //queHTML += `<span class="option-text"><b> ${valueOption.OptionText}</b> </span>`;
+                    //queHTML += `<span class="option-text"> (Correct Answer)</span>`;
                 }
                 else {
-                    queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
+                    queHTML += `<span class="option-text ${valueOption.CorrectOption ? 'right-answer' : ''}"> ${valueOption.OptionText} </span>`;
+                    //queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
                 }
 
                 queHTML += "</div>";
             });
             if (response != null && response.OptionIds != null) {
                 var isCorrect = false;
+
                 console.log(response.OptionIds)
                 var optionIds = response.OptionIds.split(",");
                 if (optionIds.length == correctCount) {
@@ -866,33 +935,34 @@ function ReviewQuiz(QuizReviewData) {
                     }
                 }
                 if (isCorrect) {
-                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">1/1 point</span></div>";
+                    queHTML += "<div class=\"col-12 mt-2\"><span class=\"option-text\">1/1 point</span></div>";
                     queHTML += "&nbsp;&nbsp;&nbsp;<span class=\"option-text\">" + value.CorrectFeedback + "</span>";
                 }
                 else {
-                    queHTML += "<div class=\"col-12\"><span class=\"option-text\">0/1 point</span></div>";
+                    queHTML += "<div class=\"col-12 mt-2\"><span class=\"option-text\">0/1 point</span></div>";
                     queHTML += "&nbsp;&nbsp;&nbsp; <span class=\"option-text\">" + value.InCorrectFeedback + "</span>";
-                }                
+                }
             }
             else
-                queHTML += "<div class=\"col-12\"><span class=\"option-text\">0/1 point</span></div>";
+                queHTML += "<div class=\"col-12 mt-2\"><span class=\"option-text\">0/1 point</span></div>";
         }
 
-        
-
-        if (isAttempted) {
-            queHTML += "<div class=\"col-12 que-feedback\">";
-            queHTML += "<label class=\"col-3 p-0\"><b>User Feedback</b></label>";
-            queHTML += "<span class=\"option-text\">" + response.QuestionFeedback +"</span>";
-            queHTML += "</div>";
-        }
+        //if (isAttempted) {
+        //    queHTML += "<div class=\"col-12 que-feedback\">";
+        //    queHTML += "<label class=\"col-3 p-0\"><b>User Feedback</b></label>";
+        //    queHTML += "<span class=\"option-text\">" + response.QuestionFeedback +"</span>";
+        //    queHTML += "</div>";
+        //}
         //queHTML += "<hr class=\"form-divider\">";
         queHTML += "</div>";
-        
+
         // append paginator list
         const paginatorHtml = ` <li data-queid='dvQue${value.QuestionId}'>${index + 1}</li>`;
         $('#paginator-list').append(paginatorHtml);
     });
     queHTML += "</div>";
     $('#dvQuestions').append(queHTML);
+
+    //
+    $('.right-answer').parent().addClass('selected-ans');
 }

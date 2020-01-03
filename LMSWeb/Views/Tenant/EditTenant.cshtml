@@ -1,84 +1,154 @@
 ﻿@model LMSBL.DBModels.TblTenant
 @{
-    ViewBag.Title = "EditTenant";
-    //Layout = "~/Views/_ViewStart.cshtml";
+    ViewBag.Title = "Edit Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>EditActiveTenant</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Edit Tenant</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.TenantId)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.TenantName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantName, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.TenantName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.TenantDomain, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenantDomain, new { htmlAttributes = new { @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.TenantDomain, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ActivationFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivationFrom, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.ActivationFrom, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ActivationTo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivationTo, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.ActivationTo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.NoOfUserAllowed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NoOfUserAllowed, new { htmlAttributes = new { @class = "date-picker" } })
-                    @Html.ValidationMessageFor(model => model.NoOfUserAllowed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default btn-success" />
-                </div>
-            </div>
+@using (Html.BeginForm("AddTenant", "Tenant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="main-container container mt-5">
+        <h4>Add Client</h4>
+        <div class="row col-12">
+            <hr class="form-divider">
         </div>
+        <form class="form-inline">
+            <div class="row col-12">
+                @Html.HiddenFor(model => model.TenantId)
+                @Html.LabelFor(model => model.TenantName, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.TenantName, new { @class = "col-6 ml-0 form-control", @readonly = "readonly" })
+
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                @Html.LabelFor(model => model.TenantDomain, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.TenantDomain, new { @class = "col-6 ml-0 form-control", @readonly = "readonly" })
+
+                <input type="button" id="btnTenantDomainName" style="margin-left:10px;" value="verify" disabled="disabled" class="btn btn-default btn-success" />
+                <label id="lblerrorDomain" style="display:none;margin-left:263px;"></label>
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                @Html.LabelFor(model => model.ActivationFrom, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.ActivationFrom,"{0:MM/dd/yyyy}", new { @class = "col-6 ml-0 form-control", @id = "DtActivitionFrom", @autocomplete = "off" })
+
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                @Html.LabelFor(model => model.ActivationTo, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.ActivationTo,"{0:MM/dd/yyyy}", new { @class = "col-6 ml-0 form-control", @id = "DtActivitionTo", @autocomplete = "off" })
+
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                @Html.LabelFor(model => model.NoOfUserAllowed, new { @class = "col-3 p-0" })
+                @Html.TextBoxFor(model => model.NoOfUserAllowed, new { @class = "col-6 ml-0 form-control" })
+
+                <hr class="form-divider">
+            </div>
+
+            <div class="row col-12">
+                @Html.LabelFor(model => model.Logo, new { @class = "col-3 p-0" })
+                <div class="form-group col-6 pl-0">
+                    <input type="file" name="file" id="file" style="width: 50%;" onchange="show(this)" />
+                    <div>
+                        <small>(File should not exceed 1 MB)</small>
+                    </div>
+                    <p></p>
+                    <div> <img id="user_img" height="100" width="200" src="@Model.Logo" /> </div>
+                </div>
+                <hr class="form-divider">
+            </div>
+
+
+            <div class="row col-12" style="margin-bottom: 34px;">
+                <div class="col-8">
+
+                </div>
+                <div class="col-4">
+                    <button type="submit" onclick="location.href='@Url.Action("Index", "Tenant")';return false;"
+                            class="btn btn-outline-secondary">
+                        <b>Cancel</b>
+                    </button>
+                    <button type="submit" id="btnTenantSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+}
+
+<script src="~/assets/Validations.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log('Ready..!');
+
+        $('#DtActivitionFrom').datepicker({
+            format: 'mm/dd/yyyy',
+            showWeek: true,
+            startDate: new Date()
+        });
+
+        $('#DtActivitionTo').datepicker({
+            format: 'mm/dd/yyyy',
+            showWeek: true,
+            startDate: new Date()
+        });
+
+
+        $("#txtdomainName").keypress(function () {
+            $("#lblerrorDomain").hide()
+        });
+
+        $("#btnTenantDomainName").click(function () {
+            if ($('#TenantDomain').val() == "") {
+                alert("Please enter Client Domain");
+                return false;
+            }
+            else {
+                VerifyTenantDomain($('#TenantDomain').val());
+            }
+        })
+
+
+    });
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('input[type=datetime]').datepicker({
-                dateFormat: "yy-mm-dd",
-                showWeek:true
-            });
+    function VerifyTenantDomain(DominName) {
+        $.ajax({
+            url: "/Tenant/VerifyTenantDomain?Domain=" + DominName,
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                if (result == 1) {
+                    $("#lblerrorDomain").text("Domain Name is not Available !!!");
+                    $("#lblerrorDomain").css("color", "Red");
+                }
+                else {
+                    $("#lblerrorDomain").text("Domain Name is Available !!!");
+                    $("#lblerrorDomain").css("color", "Green");
+                }
+                $("#lblerrorDomain").show();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
         });
-    </script>
-</body>
-</html>
+    }
+</script>

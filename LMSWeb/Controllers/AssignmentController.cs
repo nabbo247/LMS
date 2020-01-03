@@ -58,7 +58,11 @@ namespace LMSWeb.Controllers
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
             TblUser sessionUser = (TblUser)Session["UserSession"];
-
+            
+            if (sessionUser.RoleId == 2)
+            {
+                int result = quizRepository.DeleteResponse(objQuiz.QuizId, sessionUser.UserId,1);
+            }
             List<QueOptions> lstQueOptions = new List<QueOptions>();
             object[] objQueResponse = (object[])json_serializer.DeserializeObject(objQuiz.hdnResponseData);
             var attempt = quizRepository.GetQuizAttemptByUserID(objQuiz.QuizId, sessionUser.UserId);
