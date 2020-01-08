@@ -570,6 +570,7 @@
     <Content Include="CSS\jquery-ui.min.css" />
     <Content Include="CSS\lib\styleold.css" />
     <Content Include="CSS\lib\style.css" />
+    <Content Include="DBScript\LMSDB_Script.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

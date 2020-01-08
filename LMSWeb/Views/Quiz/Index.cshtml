@@ -28,7 +28,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    @*<th scope="col">Quiz Id</th>*@
+                    <th scope="col">Sr No.</th>
                     <th scope="col">Quiz Name</th>
                     <th scope="col">Quiz Description</th>
                     <th scope="col" colspan="2">Actions</th>
@@ -37,10 +37,12 @@
             <tbody>
                 @if (Model != null)
                 {
+                    var index = 0;
                     foreach (var quiz in Model)
                     {
+                        index++;
                         <tr>
-                            @*<th scope="row">@quiz.QuizId</th>*@
+                            <th scope="row">@index</th>
                             <td>@quiz.QuizName</td>
                             <td>@quiz.QuizDescription</td>
 

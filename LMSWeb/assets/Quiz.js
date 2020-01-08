@@ -43,7 +43,7 @@ $(document).ready(function () {
     });
 
 
-    if ($("#hdnEditData").val() != null) {
+    if ($("#hdnEditData").val() != null) {       
         //Edit Questions Population
         var QuizData = JSON.parse($("#hdnEditData").val());
         $("#hdnEditData").val("");

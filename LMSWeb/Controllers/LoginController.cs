@@ -15,44 +15,47 @@ namespace LMSWeb.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            TblUser user = new TblUser();
             var subDomain = Request.Url;
             List<TblTenant> tenantDetails = new List<TblTenant>();
             //tenantDetails = tr.GetTenantById(subDomain);
             try
             {
-                return View();
+                return View(user);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View(user);
             }
         }
 
-        public ActionResult UserAuthentication(string UserName, string Password)
+        public ActionResult UserAuthentication(TblUser loginUser)
         {
+            Response response = new Response();
             try
-            {
-                Response response = new Response();
-                TblUser tblUser = ur.IsValidUser(UserName, Password);
+            {                
+                TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password);
 
                 if (tblUser != null)
                 {
                     response.StatusCode = 1;
                     //set User object to session
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
+                    return RedirectToAction("Index","Home");
                 }
-                else
-                {
-                    response.StatusCode = 0;
-                }
-
-                return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
+                TempData["Message"] = "Wrong UserName or Password";
+                return RedirectToAction("Index");
+                //return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                newException.AddException(ex);
-                return View();
+                //newException.AddException(ex);
+                response.StatusCode = 0;
+                response.Message = ex.Message;
+                //return Json(response, JsonRequestBehavior.AllowGet);
+                TempData["Message"] = "Wrong UserName or Password";
+                return RedirectToAction("Index");
             }
         }
 

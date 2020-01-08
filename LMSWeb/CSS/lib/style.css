@@ -563,3 +563,8 @@ body {
     padding-bottom: 10px;
     display: none;
 }
+
+.required{
+    color:red;
+    padding-left:2px;
+}
