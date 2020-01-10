@@ -19,31 +19,31 @@
         <hr class="form-divider">
     </div>
     <form class="form-inline">
-        <div class="row col-12">
+        <div class="row">
             @Html.HiddenFor(model => model.hdnData, new { @id = "hdnData" })
             @Html.HiddenFor(model => model.QuizId)
-            @Html.LabelFor(model => model.QuizName, new { @class = "col-3 p-0" })
+            @Html.LabelFor(model => model.QuizName, new { @class = "col-3" })
             @Html.TextBoxFor(model => model.QuizName, new { @class = "col-6 ml-0 form-control" })
 
 
             <hr class="form-divider">
         </div>
-        <div class="row col-12">
-            @Html.LabelFor(model => model.QuizDescription, new { @class = "col-3 p-0" })
+        <div class="row">
+            @Html.LabelFor(model => model.QuizDescription, new { @class = "col-3" })
             @Html.TextBoxFor(model => model.QuizDescription, new { @class = "col-6 form-control ml-0" })
 
-            <div class="form-group col-3 col-sm-3 col-md-3">
+            <div class="form-group  col-sm-3 col-md-3">
                 <a><button type="button" id="btnAddQuestion" class="btn pl-4 pr-4 text-center btn-warning pull-right">Add Question</button></a>
             </div>
             <hr class="form-divider">
         </div>
-        <div id="dvQuestions"></div>
+        <div class="row" id="dvQuestions"></div>
 
         <div class="row col-12" style="margin-bottom: 34px;">
             <div class="col-8">
 
             </div>
-            <div class="col-4">
+            <div class="col-md-4 col-xs-12 text-right">
                 <button type="submit" onclick="location.href='@Url.Action("Index", "Quiz")';return false;"
                         class="btn btn-outline-secondary">
                     <b>Cancel</b>
@@ -55,13 +55,13 @@
 }
 
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 <script src="~/assets/Quiz.js"></script>
 

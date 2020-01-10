@@ -82,7 +82,6 @@ $(document).ready(function () {
 
     $('.option-container > input[type="checkbox"]:selected').parent().addClass('selected-ans');
 
-
 });
 
 function ChangeType(id) {
@@ -118,11 +117,11 @@ function ChangeType(id) {
 function AddQuestion() {
     count++;
     optionCount = 2;
-    var queHTML = "<div class=\"row col-12 que-container \" id=queContainer" + count + ">";
+    var queHTML = "<div class=\" col-12 que-container \" id=queContainer" + count + ">";
     queHTML += "<div class=\"row col-12\" >";
-    queHTML += "<div class=\"col-1 btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + count + ">Question</div>";
-    queHTML += "<div class=\"row col-10\"></div>";
-    queHTML += "<div class=\"btn btn-danger col-1 pull-right\" onclick=\"deleteQuestion(" + count + ")\" >Delete</div>";
+    queHTML += "<div class=\"col-md-1 col-xs-5 btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + count + ">Question</div>";
+    queHTML += "<div class=\"row col-md-10 col-xs-2\"></div>";
+    queHTML += "<div class=\"btn btn-danger col-md-1 col-xs-5 pull-right\" onclick=\"deleteQuestion(" + count + ")\" >Delete</div>";
     queHTML += "</div>";
     queHTML += "<div class=\"row col-12 collapse show in\" id=dvQues" + count + ">";
     queHTML += "<div class=\"row col-12\" style=margin-top:5px;>";
@@ -561,18 +560,18 @@ function LaunchQuiz(QuizLaunchData) {
 
         if (value.QuestionTypeId == 1) {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                queHTML += `<div class="col-12 option-container">`;
+                queHTML += `<label class="col-12 option-container">`;
                 queHTML += "<input type=\"radio\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
-                queHTML += "</div>";
+                queHTML += "</label>";
             });
         }
         else {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                queHTML += `<div class="col-12 option-container">`;
+                queHTML += `<label class="col-12 option-container">`;
                 queHTML += "<input type=\"checkbox\" class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
-                queHTML += "</div>";
+                queHTML += "</label>";
             });
         }
 
@@ -666,14 +665,14 @@ function ViewQuiz(QuizViewData) {
 
         if (value.QuestionTypeId == 1) {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                queHTML += `<div class="col-12 option-container">`;
+                queHTML += `<label class="col-12 option-container">`;
                 //if (valueOption.CorrectOption)
                 //    queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
                 //else
                 queHTML += "<input type=\"radio\"  class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
                 //queHTML += "<div style=\"margin-left:25px;\"><b>Option Feedback</b> " + valueOption.OptionFeedback + " </div>";
-                queHTML += "</div>";
+                queHTML += "</label>";
 
 
                 //queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
@@ -681,14 +680,14 @@ function ViewQuiz(QuizViewData) {
         }
         else {
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                queHTML += `<div class="col-12 option-container">`;
+                queHTML += `<label class="col-12 option-container">`;
                 //if (valueOption.CorrectOption)
                 //    queHTML += `<span class="option-text right-answer"> <i class="fa fa-check-circle green-color radio-margin"></i></span>`;
                 //else
                     queHTML += "<input type=\"checkbox\"  class=\"radio-margin\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
                 queHTML += `<span class="option-text"> ${valueOption.OptionText} </span>`;
                 //queHTML += "<div style=\"margin-left:25px;\"><b>Option Feedback</b> " + valueOption.OptionFeedback + " </div>";
-                queHTML += "</div>";
+                queHTML += "</label>";
             });
         }
         //if (value.QuestionTypeId == 2) {

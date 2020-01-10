@@ -163,7 +163,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="assets/Quiz.js">
-      <publishTime>01/03/2020 18:19:48</publishTime>
+      <publishTime>01/10/2020 11:32:55</publishTime>
     </File>
     <File Include="assets/Validations.js">
       <publishTime>01/02/2020 17:12:52</publishTime>
@@ -1333,10 +1333,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/08/2020 10:21:55</publishTime>
     </File>
     <File Include="bin/LMSWeb.dll">
-      <publishTime>01/08/2020 14:49:39</publishTime>
+      <publishTime>01/10/2020 14:50:26</publishTime>
     </File>
     <File Include="bin/LMSWeb.pdb">
-      <publishTime>01/08/2020 14:49:39</publishTime>
+      <publishTime>01/10/2020 14:50:26</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>11/23/2019 10:39:36</publishTime>
@@ -1624,7 +1624,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="CSS/lib/style.css">
-      <publishTime>01/02/2020 16:28:01</publishTime>
+      <publishTime>01/10/2020 11:07:42</publishTime>
     </File>
     <File Include="CSS/lib/styleold.css">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1729,13 +1729,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Assignment/LaunchQuiz.cshtml">
-      <publishTime>01/03/2020 18:28:55</publishTime>
+      <publishTime>01/10/2020 13:30:10</publishTime>
     </File>
     <File Include="Views/Assignment/MyAssignments.cshtml">
-      <publishTime>12/11/2019 13:34:55</publishTime>
+      <publishTime>01/08/2020 18:57:00</publishTime>
     </File>
     <File Include="Views/Assignment/ReviewQuiz.cshtml">
-      <publishTime>01/03/2020 18:23:46</publishTime>
+      <publishTime>01/08/2020 22:07:02</publishTime>
     </File>
     <File Include="Views/Courses/AddCourse.cshtml">
       <publishTime>11/28/2019 18:01:32</publishTime>
@@ -1759,19 +1759,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2019 23:41:54</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>12/31/2019 11:14:20</publishTime>
+      <publishTime>01/08/2020 19:50:04</publishTime>
+    </File>
+    <File Include="Views/Login/ResetPassword.cshtml">
+      <publishTime>01/08/2020 19:52:57</publishTime>
     </File>
     <File Include="Views/Quiz/AddQuiz.cshtml">
-      <publishTime>12/16/2019 15:49:04</publishTime>
+      <publishTime>01/10/2020 14:40:55</publishTime>
     </File>
     <File Include="Views/Quiz/AssignQuiz.cshtml">
-      <publishTime>12/08/2019 22:05:28</publishTime>
+      <publishTime>01/10/2020 14:49:11</publishTime>
     </File>
     <File Include="Views/Quiz/EditQuiz.cshtml">
-      <publishTime>12/20/2019 19:40:01</publishTime>
+      <publishTime>01/10/2020 14:41:05</publishTime>
     </File>
     <File Include="Views/Quiz/Index.cshtml">
-      <publishTime>12/24/2019 15:21:31</publishTime>
+      <publishTime>01/10/2020 14:33:44</publishTime>
     </File>
     <File Include="Views/Quiz/ViewQuiz.cshtml">
       <publishTime>01/03/2020 18:28:27</publishTime>
@@ -1786,7 +1789,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/02/2020 16:28:15</publishTime>
+      <publishTime>01/08/2020 14:56:12</publishTime>
     </File>
     <File Include="Views/Tenant/AddTenant.cshtml">
       <publishTime>01/02/2020 16:44:14</publishTime>
@@ -1804,10 +1807,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Tenant/Index.cshtml">
-      <publishTime>12/30/2019 18:33:02</publishTime>
+      <publishTime>01/08/2020 18:51:50</publishTime>
     </File>
     <File Include="Views/User/AddUser.cshtml">
-      <publishTime>12/20/2019 16:09:41</publishTime>
+      <publishTime>01/08/2020 18:48:42</publishTime>
     </File>
     <File Include="Views/User/DeleteUser.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1822,7 +1825,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>12/18/2019 18:05:17</publishTime>
+      <publishTime>01/08/2020 18:34:07</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/23/2019 10:39:33</publishTime>

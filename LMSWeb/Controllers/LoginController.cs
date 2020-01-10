@@ -34,7 +34,7 @@ namespace LMSWeb.Controllers
         {
             Response response = new Response();
             try
-            {                
+            {
                 TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password);
 
                 if (tblUser != null)
@@ -42,9 +42,9 @@ namespace LMSWeb.Controllers
                     response.StatusCode = 1;
                     //set User object to session
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
-                TempData["Message"] = "Wrong UserName or Password";
+                TempData["Message"] = "Wrong User Name or Password";
                 return RedirectToAction("Index");
                 //return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
@@ -54,7 +54,7 @@ namespace LMSWeb.Controllers
                 response.StatusCode = 0;
                 response.Message = ex.Message;
                 //return Json(response, JsonRequestBehavior.AllowGet);
-                TempData["Message"] = "Wrong UserName or Password";
+                TempData["Message"] = "Wrong User Name or Password";
                 return RedirectToAction("Index");
             }
         }
@@ -72,5 +72,12 @@ namespace LMSWeb.Controllers
                 return View();
             }
         }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+
     }
 }

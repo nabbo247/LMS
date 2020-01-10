@@ -9,39 +9,37 @@
 @using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <form class="form-inline">
-        @Html.HiddenFor(model => model.QuizId)
-        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
-        @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
-        <div class="row col-12">
-            <div class="row col-12">
-                <label class="col-3 p-0">Quiz Name :  </label><div class="col-6 ml-0" style="font-size:20px;color:#00bf6f;">
-                    <b>  @Model.QuizName</b>
-                </div>
-            </div>
-            <div class="row col-12">
-                <label class="col-3 p-0">Quiz Description :  </label>
-                <div class="col-6 ml-0">@Model.QuizDescription</div>
-            </div>
-            <div class="row col-12">
-                <label class="col-3 p-0">Quiz Score :  </label>
-                @{
-                    var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count);
-
-                    <div class="col-9 ml-0" style="font-size:20px;"><b> @Model.Score/@Model.TblQuestions.Count </b>- <span style="color:#00bf6f;"><b> You scored @ScorePercentage% of the questions correctly</b></span></div>
-                }
-            </div>
+<form class="form-inline">
+    @Html.HiddenFor(model => model.QuizId)
+    @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
+    @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
+    <div class="row">
+        <label class="col-3">Quiz Name :  </label><div class="col-6 ml-0" style="font-size:20px;color:#00bf6f;">
+            <b>  @Model.QuizName</b>
         </div>
+    </div>
+    <div class="row">
+        <label class="col-3">Quiz Description :  </label>
+        <div class="col-6 ml-0">@Model.QuizDescription</div>
+        </div>
+    <div class="row">
+        <label class="col-3">Quiz Score :  </label>
+        @{
+            var ScorePercentage = (Model.Score * 100 / Model.TblQuestions.Count);
 
-        <div id="dvQuestions"></div>
-        <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = Model.QuizId })">
-            <button type="button" class="btn btn-secondary pull-right ml-3">
-                <b>Retry</b>
-            </button>
-        </a>
-        @*<button type="submit" id="btnRetry" class="btn btn-secondary pull-right ml-3"><b>Retry</b></button>*@
-        <p>&nbsp;</p>
-    </form>
+            <div class="col-9 ml-0" style="font-size:20px;"><b> @Model.Score/@Model.TblQuestions.Count </b>- <span style="color:#00bf6f;"><b> You scored @ScorePercentage% of the questions correctly</b></span></div>
+        }
+    </div>
+
+    <div id="dvQuestions"></div>
+    <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = Model.QuizId })">
+        <button type="button" class="btn btn-secondary pull-right ml-3">
+            <b>Retry</b>
+        </button>
+    </a>
+    @*<button type="submit" id="btnRetry" class="btn btn-secondary pull-right ml-3"><b>Retry</b></button>*@
+    <p>&nbsp;</p>
+</form>
 }
 
 <!-- include summernote css/js -->
