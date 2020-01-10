@@ -16,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/assets/SweetAlert.js"></script>
 
 </head>
 
@@ -42,6 +43,7 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-user"></i></span>
                             </div>
                             @Html.TextBoxFor(model => model.EmailId, new { @class = "col-6 ml-0 form-control" })
+                            <span class="required">&#10026;</span>
                         </div>
 
                         <div class="input-group">
@@ -49,9 +51,10 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-lock"></i></span>
                             </div>
                             @Html.PasswordFor(model => model.Password, new { @class = "col-6 ml-0 form-control" })
+                            <span class="required">&#10026;</span>
                         </div>
                         <div class="form-group">
-                            <span><small>Forgot password</small></span>
+                            <span><small><a href="@Url.Action("ResetPassword", "Login")">Forgot Password</a></small></span>
                             <span style="float: right;">
                                 <label class="switch">
                                     <input type="checkbox" checked>
@@ -60,11 +63,28 @@
                                 <small>Remember me</small>
                             </span>
                         </div>
-                        <button type="submit" class="btn btn-black">Login</button>
+                        <button type="submit" onclick="return CheckRequired();" class="btn btn-black">Login</button>
                     </form>
                 </div>
             </div>
         </div>
     }
+
+    <script type="text/javascript">
+        function CheckRequired() {
+            if ($("#EmailId").val() == "") {                
+                Swal.fire('Please enter User Name');
+                return false;
+            }
+            if ($("#Password").val() == "") {
+                Swal.fire("Please enter Password");
+                
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
+
+

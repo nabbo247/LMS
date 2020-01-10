@@ -72,6 +72,7 @@
     <Compile Include="DBModels\tblQuestionType.cs" />
     <Compile Include="DBModels\tblQuiz.cs" />
     <Compile Include="DBModels\tblQuizScore.cs" />
+    <Compile Include="DBModels\TblResetPassword.cs" />
     <Compile Include="DBModels\tblRespons.cs" />
     <Compile Include="DBModels\TblStatus.cs" />
     <Compile Include="DBModels\TblTenant.cs" />

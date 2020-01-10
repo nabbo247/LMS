@@ -207,6 +207,7 @@
     <Content Include="assets\libs\js\jvectormap.custom.js" />
     <Content Include="assets\libs\js\main-js.js" />
     <Content Include="assets\Quiz.js" />
+    <Content Include="assets\SweetAlert.js" />
     <Content Include="assets\Validations.js" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.css" />
     <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.min.js" />
@@ -696,6 +697,7 @@
     <Content Include="Views\Courses\EditCourse.cshtml" />
     <Content Include="Views\Assignment\ReviewQuiz.cshtml" />
     <Content Include="Views\Login\ResetPassword.cshtml" />
+    <Content Include="Views\Login\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

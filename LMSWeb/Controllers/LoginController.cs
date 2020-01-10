@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Net.Configuration;
+using System.Net.Mail;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -44,7 +47,7 @@ namespace LMSWeb.Controllers
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
                     return RedirectToAction("Index", "Home");
                 }
-                TempData["Message"] = "Wrong User Name or Password";
+                TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
                 return RedirectToAction("Index");
                 //return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
@@ -54,7 +57,7 @@ namespace LMSWeb.Controllers
                 response.StatusCode = 0;
                 response.Message = ex.Message;
                 //return Json(response, JsonRequestBehavior.AllowGet);
-                TempData["Message"] = "Wrong User Name or Password";
+                TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
                 return RedirectToAction("Index");
             }
         }
@@ -75,9 +78,86 @@ namespace LMSWeb.Controllers
 
         public ActionResult ResetPassword()
         {
-            return View();
+            TblUser loginUser = new TblUser();
+            return View(loginUser);
         }
 
+        public ActionResult SendResetLink(TblUser loginUser)
+        {
+            try
+            {
+                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+                Guid guid = Guid.NewGuid();
+                string token = guid.ToString();
+                var result = ur.AddToken(loginUser.EmailId, token);
+                //send email
+                var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
+                var link = "<a href='" + url + "'>Click here to reset your password</a>";
+                MailMessage email = new MailMessage(section.From, loginUser.EmailId);
+                email.Subject = "Password Recovery Link";
+                email.Body = link;
 
+                email.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = section.Network.Host;
+                smtp.Credentials = new System.Net.NetworkCredential(section.Network.UserName, section.Network.Password);
+
+                smtp.EnableSsl = true;
+                smtp.Send(email);
+
+
+                TempData["Message"] = "Reset Link sent to your registered email. Please check your Inbox";
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+            }
+            return View("ResetPassword", loginUser);
+        }
+
+        public ActionResult ChangePassword(string t)
+        {
+            
+            TblUser loginUser = new TblUser();
+            try
+            {
+                var emailid = ur.VerifyToken(t);
+                if (!string.IsNullOrEmpty(emailid))
+                {
+                    loginUser.EmailId = emailid;
+                }
+                else
+                {
+                    TempData["Message"] = "Link already used or expired";
+                }
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+            }
+            return View(loginUser);
+        }
+
+        public ActionResult SubmitChangePassword(TblUser loginUser)
+        {
+            try
+            {
+                var row = ur.UpdatePAssword(loginUser);
+                if (row != 0)
+                {
+                    TempData["Message"] = "Password Updated Successfully";
+                }
+                else
+                {
+                    TempData["Message"] = "Oops! There is some problem";
+                }
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+            }
+            return View("ChangePassword");
+        }
     }
 }

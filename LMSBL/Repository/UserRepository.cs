@@ -159,5 +159,46 @@ namespace LMSBL.Repository
                 throw;
             }
         }
+
+        public int AddToken(string EmailId, string token)
+        {
+            //int result = 0;
+            db.AddParameter("@emailId", SqlDbType.Text, EmailId);
+            db.AddParameter("@token", SqlDbType.Text, token);
+
+            return db.ExecuteQuery("sp_AddToken");
+            //return result;
+        }
+
+        public string VerifyToken(string token)
+        {
+            string result = string.Empty;
+            
+            db.AddParameter("@token", SqlDbType.Text, token);
+            DataSet ds = db.FillData("sp_VerifyToken");
+            if(ds!=null)
+            {
+                if(ds.Tables.Count>0)
+                {
+                    if(ds.Tables[0].Rows.Count>0)
+                    {
+                        result = Convert.ToString(ds.Tables[0].Rows[0][0]);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public int UpdatePAssword(TblUser obj)
+        {
+            //int result = 0;
+            db.AddParameter("@emailId", SqlDbType.Text, obj.EmailId);
+            db.AddParameter("@password", SqlDbType.Text, obj.Password);
+
+            return db.ExecuteQuery("sp_PasswordUpdate");
+            //return result;
+        }
+
     }
 }
