@@ -38,6 +38,8 @@ namespace LMSBL.DBModels
 
         public bool? IsActive { get; set; }
 
+        [NotMapped]
+        public bool IsMyProfile { get; set; }
         public int CreatedBy { get; set; }
 
         [Column(TypeName = "date")]

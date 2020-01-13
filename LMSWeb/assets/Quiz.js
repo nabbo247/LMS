@@ -284,6 +284,7 @@ function SaveQuiz() {
             return false;
         }
         item = {}
+        item["QuestionId"] = id;
         item["QuestionTypeId"] = $("#queType" + id + " option:selected").val();
         item["QuestionText"] = $("#que" + id).val();
 
@@ -316,6 +317,7 @@ function SaveQuiz() {
                 returnStatus = false;
                 return false;
             }
+            optionItem["OptionId"] = optionId;
             optionItem["CorrectOption"] = $('#' + value.id).is(':checked');
             optionItem["OptionText"] = $('#que' + id + 'optionText' + optionId).val();
             if ($("#queType" + id + " option:selected").val() == 1) {

@@ -32,14 +32,14 @@ function UserValidation() {
         alert("Please enter Password");
         return false;
     }
-    if ($("#dtDOB").val() == "") {
-        alert("Please enter Valid Date Of Birth");
-        return false;
-    }
-    if ($("#ContactNo").val() == "") {
-        alert("Please enter Contact Number");
-        return false;
-    }
+    //if ($("#dtDOB").val() == "") {
+    //    alert("Please enter Valid Date Of Birth");
+    //    return false;
+    //}
+    //if ($("#ContactNo").val() == "") {
+    //    alert("Please enter Contact Number");
+    //    return false;
+    //}
     return true;
 }
 

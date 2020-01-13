@@ -1,5 +1,6 @@
 ﻿using LMSBL.DBModels;
 using LMSBL.Repository;
+using LMSWeb.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -18,12 +19,11 @@ namespace LMSWeb.Controllers
 
         public ActionResult MyAssignments()
         {
-            //Learner's Assigned Courses. 
+            MyLearningViewModel learningViewModel = new MyLearningViewModel();            
             TblUser sessionUser = (TblUser)Session["UserSession"];
-            List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
-            lstAllQuiz = quizRepository.GetQuizByUserID(sessionUser.UserId);
-
-            return View(lstAllQuiz);
+            //Learner's Assigned Quiz. 
+            learningViewModel.lstQuiz = quizRepository.GetQuizByUserID(sessionUser.UserId);
+            return View(learningViewModel);
 
         }
 

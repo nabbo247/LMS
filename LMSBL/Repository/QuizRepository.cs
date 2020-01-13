@@ -70,7 +70,7 @@ namespace LMSBL.Repository
                         QuestionId = Convert.ToInt32(dr["QuestionId"]),
                         OptionText = Convert.ToString(dr["OptionText"]),
                         CorrectOption = Convert.ToBoolean(dr["CorrectOption"]),
-                        OptionFeedback= Convert.ToString(dr["OptionFeedback"])
+                        OptionFeedback = Convert.ToString(dr["OptionFeedback"])
                     }).Where(c => c.QuestionId == question.QuestionId).ToList();
 
                     question.TblQuestionOptions = optionDetails;
@@ -92,10 +92,10 @@ namespace LMSBL.Repository
             {
                 db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
-                DataSet ds = db.FillData("sp_GetAssignedUsers");                
+                DataSet ds = db.FillData("sp_GetAssignedUsers");
                 return ds;
-            } 
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -106,19 +106,54 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
+                List<TblQuiz> lstQuiz = new List<TblQuiz>();
+                if (obj.QuizId != 0)
+                    lstQuiz = GetQuizByID(obj.QuizId);
+
+                if (obj.QuizId > 0)
+                {
+                    db.parameters.Clear();
+                    db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
+                    status = db.ExecuteQuery("sp_QuizDelete");
+                }
                 db.parameters.Clear();
+                db.AddParameter("@OldQuizId", SqlDbType.Int, obj.QuizId);
                 db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                 db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
                 status = db.ExecuteQuery("sp_QuizAdd");
-                if (Convert.ToInt32(db.parameters[3].Value) > 0)
+                if (Convert.ToInt32(db.parameters[4].Value) > 0)
                 {
-                    int quizId = Convert.ToInt32(db.parameters[3].Value);
+                    int quizId = Convert.ToInt32(db.parameters[4].Value);
+
                     foreach (Dictionary<string, object> item in obj.questionObject)
                     {
                         int queId = 0;
                         db.parameters.Clear();
+                        var oldQuestionId = 0;
+                        if (obj.QuizId != 0)
+                        {
+                            oldQuestionId = Convert.ToInt32(item["QuestionId"]);
+                            var isExist = false;
+                            if (lstQuiz.Count > 0)
+                            {
+                                foreach (var question in lstQuiz[0].TblQuestions)
+                                {
+                                    if (oldQuestionId == question.QuestionId)
+                                    {
+                                        isExist = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!isExist)
+                            {
+                                oldQuestionId = 0;
+                            }
+                        }
+
+                        db.AddParameter("@OldQuestionId", SqlDbType.Int, oldQuestionId);
                         db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                         db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
                         db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
@@ -126,23 +161,28 @@ namespace LMSBL.Repository
                         db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
                         db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
                         queId = db.ExecuteQuery("sp_QuestionAdd");
-                        if (Convert.ToInt32(db.parameters[5].Value) > 0)
+                        if (Convert.ToInt32(db.parameters[6].Value) > 0)
                         {
-                            queId = Convert.ToInt32(db.parameters[5].Value);
+
+                            queId = Convert.ToInt32(db.parameters[6].Value);
                             foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
                             {
                                 int optionId = 0;
                                 db.parameters.Clear();
+                                var OldOptionId = Convert.ToInt32(itemNew1["OptionId"]);
+                                db.AddParameter("@OldOptionId", SqlDbType.Int, OldOptionId);
                                 db.AddParameter("@QuestionId", SqlDbType.Int, queId);
                                 db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
                                 db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
                                 db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
                                 db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
-                                optionId = db.ExecuteQuery("sp_OptionAdd");                                
+                                optionId = db.ExecuteQuery("sp_OptionAdd");
                             }
                         }
                     }
                 }
+                else
+                    status = 0;
             }
             catch (Exception ex)
             {
@@ -156,12 +196,7 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
-                db.parameters.Clear();
-                db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);                
-                status = db.ExecuteQuery("sp_QuizDelete");
-
                 status = CreateQuiz(obj);
-
             }
             catch (Exception ex)
             {
@@ -170,7 +205,7 @@ namespace LMSBL.Repository
             return status;
         }
 
-        public int DeleteResponse(int QuizId, int UserId,int Attempt)
+        public int DeleteResponse(int QuizId, int UserId, int Attempt)
         {
             int status = 0;
             try
@@ -179,7 +214,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
                 db.AddParameter("@UserId", SqlDbType.Int, UserId);
                 db.AddParameter("@Attempt", SqlDbType.Int, Attempt);
-                status = db.ExecuteQuery("sp_ResponseDelete");               
+                status = db.ExecuteQuery("sp_ResponseDelete");
 
             }
             catch (Exception ex)
@@ -195,7 +230,7 @@ namespace LMSBL.Repository
             try
             {
                 db.parameters.Clear();
-                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);                
+                db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
                 status = db.ExecuteQuery("sp_DeleteAssignedUsers");
             }
             catch (Exception ex)
@@ -316,7 +351,7 @@ namespace LMSBL.Repository
                     db.AddParameter("@Attempt", SqlDbType.Int, obj.Attempt);
                     status = db.ExecuteQuery("sp_ResponseAdd");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -325,7 +360,7 @@ namespace LMSBL.Repository
             return status;
         }
 
-        public int CaptureScore(int quizId,int userId,int score,int attempt)
+        public int CaptureScore(int quizId, int userId, int score, int attempt)
         {
             int status = 0;
             try
@@ -378,7 +413,7 @@ namespace LMSBL.Repository
 
         }
 
-        public List<TblRespons> GetQuizResponsesByUserID(int quizId,int userId,int attempt)
+        public List<TblRespons> GetQuizResponsesByUserID(int quizId, int userId, int attempt)
         {
             try
             {
@@ -421,7 +456,7 @@ namespace LMSBL.Repository
                 db.AddParameter("@Attempt", SqlDbType.Int, attempt);
 
                 DataSet ds = db.FillData("sp_QuizScoreGet");
-               if(ds.Tables.Count>0)
+                if (ds.Tables.Count > 0)
                 {
                     score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
                 }

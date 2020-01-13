@@ -118,6 +118,11 @@ namespace LMSWeb.Controllers
                             TempData["Message"] = "Quiz Saved Successfully";
                             return RedirectToAction("Index");
                         }
+                        else if(rows == 0)
+                        {
+                            TempData["Message"] = "Quiz Name already Exist";
+                            return View(objQuiz);
+                        }
                         else
                         {
                             return View(objQuiz);

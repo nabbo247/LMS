@@ -103,7 +103,11 @@ namespace LMSWeb.Controllers
                     if (rows != 0)
                     {
                         TempData["Message"] = "Saved Successfully";
-                        return RedirectToAction("Index");
+                        if (objUser.IsMyProfile)
+                            return RedirectToAction("Index","Home");
+                        else
+                            return RedirectToAction("Index");
+
                     }
                     else
                     {

@@ -16,6 +16,7 @@ namespace LMSBL.Repository
         {
             try
             {
+                DateTime? nullDate = null;
                 db.AddParameter("@userId", SqlDbType.Int, userId);
                 DataSet ds = db.FillData("sp_UserGetById");
                 List<TblUser> userDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblUser
@@ -25,7 +26,7 @@ namespace LMSBL.Repository
                     LastName = Convert.ToString(dr["lastName"]),
                     EmailId = Convert.ToString(dr["emailId"]),
                     Password = Convert.ToString(dr["password"]),
-                    DOB = Convert.ToDateTime(dr["DOB"]),
+                    DOB = (Convert.ToString(dr["DOB"]) == null || Convert.ToString(dr["DOB"]) == "") ? nullDate : Convert.ToDateTime(dr["DOB"]),
                     ContactNo = Convert.ToString(dr["contactNo"]),
                     TenantId = Convert.ToInt32(dr["tenantId"]),
                     //TenantName=Convert.ToString(dr["tenantName"]),
@@ -57,8 +58,8 @@ namespace LMSBL.Repository
                     LastName = Convert.ToString(dr["lastName"]),
                     EmailId = Convert.ToString(dr["emailId"]),
                     Password = Convert.ToString(dr["password"]),
-                    DOB = Convert.ToDateTime(dr["DOB"]),
-                    ContactNo = Convert.ToString(dr["contactNo"]),
+                    //DOB = (DBNull.Value.Equals(dr["DOB"])) ? Convert.ToDateTime(dr["DOB"]):,
+                    //ContactNo = Convert.ToString(dr["contactNo"]),
                     TenantId = Convert.ToInt32(dr["tenantId"]),
                     //TenantName = Convert.ToString(dr["tenantName"]),
                     RoleId = Convert.ToInt32(dr["roleId"]),
@@ -173,14 +174,14 @@ namespace LMSBL.Repository
         public string VerifyToken(string token)
         {
             string result = string.Empty;
-            
+
             db.AddParameter("@token", SqlDbType.Text, token);
             DataSet ds = db.FillData("sp_VerifyToken");
-            if(ds!=null)
+            if (ds != null)
             {
-                if(ds.Tables.Count>0)
+                if (ds.Tables.Count > 0)
                 {
-                    if(ds.Tables[0].Rows.Count>0)
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
                         result = Convert.ToString(ds.Tables[0].Rows[0][0]);
                     }

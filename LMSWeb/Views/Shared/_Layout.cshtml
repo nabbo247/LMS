@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS</title>
+    <title>@ViewBag.Title</title>
     @*<link href="~/CSS/jquery-ui.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/CSS/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" />
@@ -30,6 +30,7 @@
 
 
 
+
 </head>
 <body>
     @{
@@ -37,11 +38,12 @@
         LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
         model = (LMSBL.DBModels.TblUser)Session["UserSession"];
         var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+        var firstName = model.FirstName;
     }
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <img class="logo" src="~/assets/images/logo.png" />
+            <img class="logo" src="~/assets/images/rockettechpng-1.png" style="max-width:159px;max-height:70px;" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,8 +54,8 @@
                     <a class="nav-link" href="@baseURL\Home\Index">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
                 @if (model == null)
-                {                    
-                    Response.Redirect(Url.Action("Logout","Login",null));
+                {
+                    Response.Redirect(Url.Action("Logout", "Login", null));
                 }
                 @if (model.RoleId == 1)
                 {
@@ -72,12 +74,12 @@
                             Users
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="@baseURL\Courses\Index">
+                    @*<li class="nav-item ">
+                            <a class="nav-link" href="@baseURL\Courses\Index">
 
-                            Courses
-                        </a>
-                    </li>
+                                Courses
+                            </a>
+                        </li>*@
                     <li class="nav-item ">
                         <a class="nav-link" href="@baseURL\Quiz\Index">
 
@@ -88,9 +90,9 @@
 
                 @if (model.RoleId == 3)
                 {
-                    <li class="nav-item ">
-                        <a class="nav-link" href="@baseURL\Assignment\MyAssignments">                            
-                            Assignments
+                    <li class="nav-item">
+                        <a class="nav-link" href="@baseURL\Assignment\MyAssignments">
+                            My Learning
                         </a>
                     </li>
                 }
@@ -102,14 +104,25 @@
                 </li>
             </ul>
         </div>
-        
-        
-        <a href="@Url.Action("Logout", "Login")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">Logout</button></a>
+
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                    Welcome,  @firstName <b class="caret"></b>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="@Url.Action("MyProfile", "Account")">My Profile</a>
+                    <a class="dropdown-item" href="@Url.Action("ChangePassword", "Account")">Change Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("Logout", "Login")">Logout</a>
+                </div>
+            </li>
+        </ul>
     </nav>
     <div class="main-container container">
         <div id="dvMessage" style="text-align:center;">@TempData["Message"]</div>
-       
-        @RenderBody()       
+
+        @RenderBody()
     </div>
     <div class="dashboard-main-wrapper" style="display:none;">
 
@@ -285,11 +298,11 @@
                                 </li>
                             }
                             @*<li class="nav-item ">
-                                <a class="nav-link active" href="@baseURL\Reports\Index">
-                                    <i class="fa fa-book-open"></i>
-                                    Reports
-                                </a>
-                            </li>*@
+                                    <a class="nav-link active" href="@baseURL\Reports\Index">
+                                        <i class="fa fa-book-open"></i>
+                                        Reports
+                                    </a>
+                                </li>*@
                         </ul>
                     </div>
                     <!--END OLD MENU-->
@@ -300,5 +313,6 @@
     <script src="~/Scripts/slimscroll/jquery.slimscroll.js"></script>
     <script src="~/Scripts/lib/main-js.js"></script>
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
