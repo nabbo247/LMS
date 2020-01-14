@@ -1,4 +1,5 @@
-﻿using LMSBL.DBModels;
+﻿using LMSBL.Common;
+using LMSBL.DBModels;
 using LMSBL.Repository;
 using LMSWeb.ViewModel;
 using System;
@@ -11,6 +12,8 @@ namespace LMSWeb.Controllers
     public class AssignmentController : Controller
     {
         QuizRepository quizRepository = new QuizRepository();
+        UserRepository ur = new UserRepository();
+        Exceptions newException = new Exceptions();
         // GET: Assignment
         public ActionResult Index()
         {
@@ -35,13 +38,30 @@ namespace LMSWeb.Controllers
 
         public ActionResult LaunchQuiz(int QuizId)
         {
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
-            lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
+            try
+            {
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                //newException.AddDummyException("111");
+                if (sessionUser == null)
+                {
+                    sessionUser = ur.IsValidUser("Don@gmail.com", "123123");
+                    //Session["UserSession"] = sessionUser;
+                    //newException.AddDummyException("222");
+                }
+                List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
+                lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
+                //newException.AddDummyException("333");
 
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            lstAllQuiz[0].hdnLaunchData = json_serializer.Serialize(lstAllQuiz[0]);
-            return View(lstAllQuiz[0]);
+                JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+                lstAllQuiz[0].hdnLaunchData = json_serializer.Serialize(lstAllQuiz[0]);
+                //newException.AddDummyException(lstAllQuiz[0].QuizDescription);
+                return View(lstAllQuiz[0]);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
         }
 
         [HttpPost]

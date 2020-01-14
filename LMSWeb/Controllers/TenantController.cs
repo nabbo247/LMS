@@ -16,6 +16,9 @@ namespace LMSWeb.Controllers
     {
         TenantRepository tr = new TenantRepository();
         Exceptions newException = new Exceptions();
+        UserRepository ur = new UserRepository();
+        RolesRepository rr = new RolesRepository();
+
         // GET: Tenant
         public ActionResult Index()
         {
@@ -63,36 +66,36 @@ namespace LMSWeb.Controllers
                         }
                     }
                     if (file != null)
-                        {
-                            var logoURL = System.Configuration.ConfigurationManager.AppSettings["LogoURL"];
-                            var logoPhysicalURL = System.Configuration.ConfigurationManager.AppSettings["logoPhysicalURL"];
-                            string pic = System.IO.Path.GetFileName(file.FileName);
-                            string path = System.IO.Path.Combine(logoURL + "\\" + pic);
-                            string physicalPath = System.IO.Path.Combine(logoPhysicalURL + "\\" + pic);
+                    {
+                        var logoURL = System.Configuration.ConfigurationManager.AppSettings["LogoURL"];
+                        var logoPhysicalURL = System.Configuration.ConfigurationManager.AppSettings["logoPhysicalURL"];
+                        string pic = System.IO.Path.GetFileName(file.FileName);
+                        string path = System.IO.Path.Combine(logoURL + "\\" + pic);
+                        string physicalPath = System.IO.Path.Combine(logoPhysicalURL + "\\" + pic);
 
-                            file.SaveAs(physicalPath);
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                file.InputStream.CopyTo(ms);
-                                byte[] array = ms.GetBuffer();
-                            }
-                            objTenant.Logo = path;
-                        }
-                        //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
-                        int rows = 0;
-                        if (objTenant.TenantId == 0)
-                            rows = tr.AddTenant(objTenant);
-                        else
-                            rows = tr.EditTenants(objTenant);
-                        if (rows != 0)
+                        file.SaveAs(physicalPath);
+                        using (MemoryStream ms = new MemoryStream())
                         {
-                            return RedirectToAction("Index");
+                            file.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
                         }
-                        else
-                        {                            
-                            return View(objTenant);
-                        }
-                    
+                        objTenant.Logo = path;
+                    }
+                    //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
+                    int rows = 0;
+                    if (objTenant.TenantId == 0)
+                        rows = tr.AddTenant(objTenant);
+                    else
+                        rows = tr.EditTenants(objTenant);
+                    if (rows != 0)
+                    {
+                        return RedirectToAction("AddTenantUser", new { @id = objTenant.TenantId });
+                    }
+                    else
+                    {
+                        return View(objTenant);
+                    }
+
                 }
                 return View(objTenant);
             }
@@ -130,7 +133,7 @@ namespace LMSWeb.Controllers
                     int rows = tr.EditTenants(objTenant);
                     if (rows != 0)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("AddTenantUser", new { @id = objTenant.TenantId });
                     }
                     else
                     {
@@ -198,5 +201,59 @@ namespace LMSWeb.Controllers
             }
         }
 
+        public ActionResult AddTenantUser(int id)
+        {
+            try
+            {
+                TblUser objUserData = new TblUser
+                {
+                    UserRoles = rr.GetAllRoles(),
+                    Tenants = tr.GetAllTenants()
+                };
+                objUserData.TenantId = id;
+                return View(objUserData);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SaveTenantUser(TblUser objUser)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    TblUser sessionUser = (TblUser)Session["UserSession"];
+                    objUser.CreatedBy = sessionUser.UserId;
+                    objUser.IsActive = true;
+                    int rows = 0;
+                    if (objUser.UserId == 0)
+                        rows = ur.AddUser(objUser);
+                    else
+                        rows = ur.EditUser(objUser);
+                    if (rows != 0)
+                    {
+                        TempData["Message"] = "Saved Successfully";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Not Saved Successfully";
+                        return View(objUser);
+                    }
+                }
+                return View("AddTenantUser", objUser);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View(objUser);
+            }
+
+        }
     }
 }

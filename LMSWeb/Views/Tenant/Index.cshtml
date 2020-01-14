@@ -35,7 +35,7 @@
             @if (Model != null)
             {
                 var index = 0;
-                @foreach (var tenent in Model)
+                foreach (var tenent in Model)
                 {
                     index++;
                     var UrlNew = tenent.TenantDomain + "." + System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
@@ -63,10 +63,10 @@
                                     class="btn text-center btn-warning">
                                 Edit
                             </button>
-                            @*<button type="button" onclick="location.href='@Url.Action("AddCourse", "Courses",new { id = item.CourseId })';return false;"
-                                        class="btn  text-center btn-warning">
-                                    Delete
-                                </button>*@
+                            <button type="button" onclick="location.href='@Url.Action("AddTenantUser", "Tenant", new { id = tenent.TenantId })';return false;"
+                                    class="btn text-center btn-warning">
+                                Add Admin
+                            </button>
                         </td>
                     </tr>
                 }

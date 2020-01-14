@@ -27,6 +27,14 @@ namespace LMSWeb.Controllers
                     objReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId, sessionUser.UserId);
                 else
                     objReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId, 0);
+
+                if(objReportModel.Count>0)
+                {
+                    foreach(var report in objReportModel)
+                    {
+                        report.QuestionCount = quizRepository.GetQuestionCount(report.quizId);
+                    }
+                }
                 return View(objReportModel);
             }
             catch (Exception ex)
@@ -59,5 +67,9 @@ namespace LMSWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult AllReports()
+        {
+            return View();
+        }
     }
 }

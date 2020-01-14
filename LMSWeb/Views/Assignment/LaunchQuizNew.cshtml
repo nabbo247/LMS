@@ -1,0 +1,55 @@
+﻿@model LMSBL.DBModels.TblQuiz
+@{
+    //ViewBag.Title = "LaunchQuiz";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+}
+
+<h4 class="launch-label">Launch Quiz New</h4>
+
+@using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <form class="form-inline">
+        @Html.HiddenFor(model => model.QuizId)
+        @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
+        @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
+        <div class="row">
+            <label class="col-3">Quiz Name :  </label><div class="col-6 ml-0">
+                @Model.QuizName
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-3">Quiz Description :  </label>
+            <div class="col-6 ml-0">@Model.QuizDescription</div>
+        </div>
+
+
+        <div id="dvQuestions"></div>
+        <div class="row clearfix">
+            <div class="paginator col-md-6 col-xs-12">
+                <ul id="paginator-list">
+                </ul>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <button type="button" id="btnCancel" class="btn btn-secondary pull-right ml-3"><b>Cancel</b></button>
+                <button type="submit" id="btnResponseSubmit" class="btn btn-secondary pull-right ml-3"><b>Submit</b></button>
+                <button type="button" id="btnNext" class="btn btn-secondary pull-right ml-3"><b>Next</b></button>
+                <button type="button" id="btnPrev" class="btn btn-secondary pull-right ml-3"><b>Prev</b></button>
+
+            </div>
+        </div>
+
+        @*<div class="col-12 clearfix mt-5 p-0 text-center">
+                <button type="button" id="btnCancel" class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+                <button type="submit" id="btnResponseSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+            </div>*@
+    </form>
+}
+
+<!-- include summernote css/js -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="~/assets/Quiz.js"></script>

@@ -14,7 +14,9 @@ namespace LMSBL.DBModels
         public string Name { get; set; }
         public string QuizName { get; set; }
 
-       public DateTime AttemptedDate { get; set; }
+        public int QuestionCount { get; set; }
+
+        public DateTime AttemptedDate { get; set; }
         public int Attempt { get; set; }
 
     }

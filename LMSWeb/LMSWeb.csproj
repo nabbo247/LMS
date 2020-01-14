@@ -703,6 +703,10 @@
     <Content Include="Views\Login\ChangePassword.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Assignment\LaunchQuizNew.cshtml" />
+    <Content Include="Views\Tenant\AddTenantUser.cshtml" />
+    <Content Include="Views\Reports\AllReports.cshtml" />
+    <Content Include="Views\User\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

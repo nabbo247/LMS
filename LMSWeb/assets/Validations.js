@@ -4,6 +4,12 @@ $(document).ready(function () {
     if ($("#UserId").val() == 0)
         $("#UserRoles").val(3);
 
+    if ($("#UserId").val() == 0) {
+        $("#TenantUserRoles").val(2);
+        $("#TenantUserRoles").prop("disabled", true);
+        
+    }
+
     $('#btnUserSubmit').on("click", function () {
         var status = UserValidation();
         return status;

@@ -186,6 +186,7 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
@@ -200,6 +201,7 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
@@ -413,6 +415,22 @@ namespace LMSBL.Repository
 
         }
 
+        public int GetQuestionCount(int quizId)
+        {
+            int count = 0;
+            db.parameters.Clear();
+            db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+
+            DataSet ds = db.FillData("sp_GetQuestionCount");
+            if(ds!=null)
+            {
+                if(ds.Tables.Count>0)
+                {
+                    count = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                }
+            }
+            return count;
+        }
         public List<TblRespons> GetQuizResponsesByUserID(int quizId, int userId, int attempt)
         {
             try

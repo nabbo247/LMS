@@ -1,11 +1,24 @@
-﻿using System.Web.Mvc;
+﻿using LMSBL.Common;
+using System;
+using System.Web.Mvc;
 
 namespace LMSWeb.Controllers
 {
     public class HomeController : Controller
     {
+        Exceptions newException = new Exceptions();
         public ActionResult Index()
         {
+            try
+            {
+               
+                return View();
+                
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+            }
             return View();
         }
 

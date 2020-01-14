@@ -7,7 +7,7 @@
     userModel = (LMSBL.DBModels.TblUser)Session["UserSession"];
 }
 
-<h4>Reports</h4>
+<h4>Quiz</h4>
 
 <div class="main-container container">
     <table class="table table-bordered" id="tblReports">
@@ -35,7 +35,7 @@
                         <td>@quiz.QuizName</td>
                         @*<td>@quiz.UserId</td>*@
                         <td>@quiz.Name</td>
-                        <td>@quiz.Score</td>
+                        <td>@Convert.ToInt32(quiz.Score * 100 / quiz.QuestionCount)%</td>
                         <td>@quiz.AttemptedDate</td>
 
                         <td>

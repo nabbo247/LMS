@@ -38,14 +38,18 @@ namespace LMSWeb.Controllers
             Response response = new Response();
             try
             {
+               
                 TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password);
+               
 
                 if (tblUser != null)
                 {
                     response.StatusCode = 1;
                     //set User object to session
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
+                   
                     return RedirectToAction("Index", "Home");
+                    
                 }
                 TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
                 return RedirectToAction("Index");
@@ -53,7 +57,7 @@ namespace LMSWeb.Controllers
             }
             catch (Exception ex)
             {
-                //newException.AddException(ex);
+                newException.AddException(ex);
                 response.StatusCode = 0;
                 response.Message = ex.Message;
                 //return Json(response, JsonRequestBehavior.AllowGet);
