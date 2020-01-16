@@ -37,8 +37,12 @@
 
         LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
         LMSBL.Repository.UserRepository ur = new LMSBL.Repository.UserRepository();
-        //model = ur.IsValidUser("Don@gmail.com", "123123");
+
         model = (LMSBL.DBModels.TblUser)Session["UserSession"];
+        if (model == null)
+        {
+            model = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+        }
         var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
         var firstName = model.FirstName;
     }

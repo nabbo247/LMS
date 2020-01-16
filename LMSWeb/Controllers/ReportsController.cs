@@ -22,6 +22,7 @@ namespace LMSWeb.Controllers
             try
             {
                 TblUser sessionUser = (TblUser)Session["UserSession"];
+                newException.AddDummyException(sessionUser.EmailId);
                 List<ReportModel> objReportModel = new List<ReportModel>();
                 if (sessionUser.RoleId == 3)
                     objReportModel = quizRepository.GetQuizReportByUserID(sessionUser.TenantId, sessionUser.UserId);

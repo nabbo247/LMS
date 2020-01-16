@@ -1,8 +1,54 @@
-﻿
+﻿@model LMSBL.DBModels.TblUser
 @{
     ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Upload</h4>
+@using (Html.BeginForm("UploadUsers", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="main-container container mt-5">
+        <h4>Upload Users</h4>
+        <div class="row col-12">
+            <hr class="form-divider">
+        </div>
+        <form class="form-inline">
+            <div class="row col-12">
+                @Html.HiddenFor(model => model.TenantId)
+                <div class="form-group col-6 pl-0">
+                    <input type="file" name="file" id="file" style="width: 50%;" />
+                    <div>
+                        <small>(File should not exceed 5 MB)</small>
+                    </div>
+                    @*<p></p>
+                    <div> <img id="user_img" height="100" width="200" /> </div>*@
+                </div>
+                <div class="col-6">
+                    <a href="#" target="_blank" onclick="DownloadFile();">Download</a>
+                </div>
+                <hr class="form-divider">
+            </div>
+            <div class="row col-12" style="margin-bottom: 34px;">
+                <div class="col-8">
 
+                </div>
+                <div class="col-4">
+                    <button type="submit" onclick="location.href='@Url.Action("Index", "Tenant")';return false;"
+                            class="btn btn-outline-secondary">
+                        <b>Cancel</b>
+                    </button>
+                    <button type="submit" id="btnTenantSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+}
+
+<script type="text/javascript">
+    function DownloadFile() {
+        var fileName = "../Download/UserUploadTemplate.csv";
+        window.location = fileName;
+    }
+</script>

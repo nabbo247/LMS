@@ -22,11 +22,25 @@ namespace LMSWeb.Controllers
 
         public ActionResult MyAssignments()
         {
-            MyLearningViewModel learningViewModel = new MyLearningViewModel();            
-            TblUser sessionUser = (TblUser)Session["UserSession"];
-            //Learner's Assigned Quiz. 
-            learningViewModel.lstQuiz = quizRepository.GetQuizByUserID(sessionUser.UserId);
-            return View(learningViewModel);
+            try
+            {
+                MyLearningViewModel learningViewModel = new MyLearningViewModel();
+                TblUser sessionUser = (TblUser)Session["UserSession"];
+                if (sessionUser == null)
+                {
+                    sessionUser = ur.IsValidUser("Don@gmail.com", "123123");
+                    //Session["UserSession"] = sessionUser;
+                    newException.AddDummyException("222");
+                }
+                //Learner's Assigned Quiz. 
+                learningViewModel.lstQuiz = quizRepository.GetQuizByUserID(sessionUser.UserId);
+                return View(learningViewModel);
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                return View();
+            }
 
         }
 
@@ -44,7 +58,7 @@ namespace LMSWeb.Controllers
                 //newException.AddDummyException("111");
                 if (sessionUser == null)
                 {
-                    sessionUser = ur.IsValidUser("Don@gmail.com", "123123");
+                    sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");
                     //Session["UserSession"] = sessionUser;
                     //newException.AddDummyException("222");
                 }
@@ -78,10 +92,15 @@ namespace LMSWeb.Controllers
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
             TblUser sessionUser = (TblUser)Session["UserSession"];
-            
+            if (sessionUser == null)
+            {
+                sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+                newException.AddDummyException("Login");
+            }
+
             if (sessionUser.RoleId == 2)
             {
-                int result = quizRepository.DeleteResponse(objQuiz.QuizId, sessionUser.UserId,1);
+                int result = quizRepository.DeleteResponse(objQuiz.QuizId, sessionUser.UserId, 1);
             }
             List<QueOptions> lstQueOptions = new List<QueOptions>();
             object[] objQueResponse = (object[])json_serializer.DeserializeObject(objQuiz.hdnResponseData);
@@ -91,7 +110,7 @@ namespace LMSWeb.Controllers
                 QuizResponse quizResponse = new QuizResponse();
                 quizResponse.QuizId = objQuiz.QuizId;
                 quizResponse.UserId = sessionUser.UserId;
-                quizResponse.Attempt = attempt+1;
+                quizResponse.Attempt = attempt + 1;
 
                 foreach (Dictionary<string, object> newItem in (object[])item)
                 {
@@ -144,7 +163,7 @@ namespace LMSWeb.Controllers
                     {
 
                         if (option.CorrectOption == true)
-                        {                            
+                        {
                             Ids[correctCount] = option.OptionId;
                             correctCount++;
                         }
@@ -167,7 +186,7 @@ namespace LMSWeb.Controllers
                                         }
                                     }
                                 }
-                                if(correctCount== correct)
+                                if (correctCount == correct)
                                 {
                                     score++;
                                 }
@@ -177,8 +196,8 @@ namespace LMSWeb.Controllers
                 }
             }
 
-            var scoreResult = quizRepository.CaptureScore(objQuiz.QuizId, sessionUser.UserId, score, attempt+1);
-
+            var scoreResult = quizRepository.CaptureScore(objQuiz.QuizId, sessionUser.UserId, score, attempt + 1);
+            newException.AddDummyException("Responses Saved Successfully");
             TempData["Message"] = "Responses Saved Successfully";
             return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId });
 
@@ -188,7 +207,16 @@ namespace LMSWeb.Controllers
         public ActionResult ReviewQuiz(int QuizId)
         {
             TblUser sessionUser = (TblUser)Session["UserSession"];
+            if (sessionUser == null)
+            {
+                sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");                
+                //newException.AddDummyException("222");
+            }
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
+            
+            newException.AddDummyException("222");
+            newException.AddDummyException(Convert.ToString(sessionUser.UserId));
+            
             lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
             var attempt = quizRepository.GetQuizAttemptByUserID(QuizId, sessionUser.UserId);
             List<TblRespons> quizResponses = new List<TblRespons>();

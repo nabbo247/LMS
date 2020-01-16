@@ -134,7 +134,11 @@ namespace LMSBL.Repository
                         var oldQuestionId = 0;
                         if (obj.QuizId != 0)
                         {
-                            oldQuestionId = Convert.ToInt32(item["QuestionId"]);
+                            
+                            if (!string.IsNullOrEmpty(Convert.ToString(item["QuestionId"])))
+                            {
+                                oldQuestionId = Convert.ToInt32(item["QuestionId"]);
+                            }
                             var isExist = false;
                             if (lstQuiz.Count > 0)
                             {
@@ -160,7 +164,7 @@ namespace LMSBL.Repository
                         db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
                         db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
                         db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
-                        queId = db.ExecuteQuery("sp_QuestionAdd");
+                        queId = db.ExecuteQuery("sp_QuestionAdd");                        
                         if (Convert.ToInt32(db.parameters[6].Value) > 0)
                         {
 
@@ -168,8 +172,9 @@ namespace LMSBL.Repository
                             foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
                             {
                                 int optionId = 0;
-                                db.parameters.Clear();
+                                db.parameters.Clear();                                
                                 var OldOptionId = Convert.ToInt32(itemNew1["OptionId"]);
+                                
                                 db.AddParameter("@OldOptionId", SqlDbType.Int, OldOptionId);
                                 db.AddParameter("@QuestionId", SqlDbType.Int, queId);
                                 db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
@@ -177,18 +182,24 @@ namespace LMSBL.Repository
                                 db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
                                 db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
                                 optionId = db.ExecuteQuery("sp_OptionAdd");
+                                
                             }
                         }
+                    }
+                    if(quizId>0)
+                    {
+                        status = quizId;
                     }
                 }
                 else
                     status = 0;
             }
             catch (Exception ex)
-            {
+            {                
                 newException.AddException(ex);
-                throw ex;
-            }
+                //throw ex;
+                status = -2;
+            }            
             return status;
         }
 

@@ -4,16 +4,7 @@
     ViewBag.Title = "Quiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
 
-    if (!string.IsNullOrEmpty(Convert.ToString(TempData["Message"])))
-    {
-        <script>
-            $("#dvMessage").show();
-            setTimeout(function () { $("#dvMessage").hide(); }, 3000);
-        </script>
-    }
-}
 
 
 <body>

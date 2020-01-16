@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -18,14 +21,18 @@ namespace LMSWeb.Controllers
         {
             try
             {
+               
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 List<TblUser> lstAllUsers = new List<TblUser>();
+               
                 lstAllUsers = ur.GetAllUsers(sessionUser.TenantId);
+               
 
                 return View(lstAllUsers);
             }
             catch (Exception ex)
             {
+                newException.AddDummyException("111");
                 newException.AddException(ex);
                 return View();
             }
@@ -211,6 +218,41 @@ namespace LMSWeb.Controllers
 
         public ActionResult Upload()
         {
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            return View(sessionUser);
+        }
+
+        public ActionResult UploadUsers(TblUser objUser,HttpPostedFileBase file)
+        {
+            DataTable dt = new DataTable();
+            using (StreamReader sr = new StreamReader(file.InputStream))
+            {
+                string[] headers = sr.ReadLine().Split(',');
+                foreach (string header in headers)
+                {
+                    dt.Columns.Add(header);
+                }
+                while (!sr.EndOfStream)
+                {
+                    string[] rows = sr.ReadLine().Split(',');
+                    if (rows.Length > 1)
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int i = 0; i < headers.Length; i++)
+                        {
+                            dr[i] = rows[i].Trim();
+                        }
+                        dt.Rows.Add(dr);
+                    }
+                }
+                int count = dt.Rows.Count;
+            }
+
+            TblUser sessionUser = (TblUser)Session["UserSession"];
+            objUser.TenantId = sessionUser.TenantId;
+            objUser.CreatedBy = sessionUser.UserId;
+            objUser.IsActive = true;
+
             return View();
         }
     }

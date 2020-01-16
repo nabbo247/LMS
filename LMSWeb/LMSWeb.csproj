@@ -575,6 +575,7 @@
     <Content Include="CSS\lib\styleold.css" />
     <Content Include="CSS\lib\style.css" />
     <Content Include="DBScript\LMSDB_Script.sql" />
+    <Content Include="DBScript\LMSscript_14Jan.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -631,6 +632,8 @@
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.ttf" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.woff" />
     <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
+    <Content Include="Download\UserUploadTemplate.xlsx" />
+    <Content Include="Download\UserUploadTemplate.csv" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap\bootstrap.bundle.js" />

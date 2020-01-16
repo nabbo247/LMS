@@ -20,7 +20,9 @@ namespace LMSWeb.Controllers
         {
             try
             {
+                
                 TblUser sessionUser = (TblUser)Session["UserSession"];
+                
                 List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
                 lstAllQuiz = quizRepository.GetAllQuiz(sessionUser.TenantId);
 
@@ -28,6 +30,7 @@ namespace LMSWeb.Controllers
             }
             catch (Exception ex)
             {
+                //newException.AddDummyException("222222");
                 newException.AddException(ex);
                 return View();
             }
@@ -112,27 +115,32 @@ namespace LMSWeb.Controllers
                         else
                         {
                             rows = quizRepository.UpdateQuiz(objQuiz);
+
                         }
                         if (rows != 0)
                         {
                             TempData["Message"] = "Quiz Saved Successfully";
+                           
                             return RedirectToAction("Index");
                         }
-                        else if(rows == 0)
-                        {
-                            TempData["Message"] = "Quiz Name already Exist";
+                        else if (rows == 0)
+                        {                            
+                            TempData["Message"] = "There is some problem while saving Quiz";
                             return View(objQuiz);
                         }
                         else
-                        {
+                        {                            
                             return View(objQuiz);
                         }
                     }
                 }
-                return View(objQuiz);
+                
+                    return View(objQuiz);
+               
             }
             catch (Exception ex)
             {
+                //newException.AddDummyException("11111");
                 newException.AddException(ex);
                 return View();
             }

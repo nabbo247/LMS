@@ -71,15 +71,18 @@ namespace LMSBL.Repository
                 }).ToList();
                 return userDetails;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                
+                newException.AddException(ex);
+                return null;
             }
 
         }
 
         public int AddUser(TblUser obj)
         {
+            int result = 0;
             try
             {
                 db.AddParameter("@firstName", SqlDbType.Text, obj.FirstName);
@@ -92,12 +95,19 @@ namespace LMSBL.Repository
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
                 //db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
-                return db.ExecuteQuery("sp_UserAdd");
+                db.AddParameter("@UserId", SqlDbType.Int, ParameterDirection.Output);
+                result= db.ExecuteQuery("sp_UserAdd");
+
+                if (Convert.ToInt32(db.parameters[9].Value) > 0)
+                {
+                    result = Convert.ToInt32(db.parameters[9].Value);
+                }
             }
             catch (Exception)
             {
                 throw;
             }
+            return result;
         }
 
         public int EditUser(TblUser obj)
@@ -157,7 +167,7 @@ namespace LMSBL.Repository
             }
             catch (Exception)
             {
-                throw;
+              throw;
             }
         }
 

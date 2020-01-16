@@ -46,20 +46,20 @@ $(document).ready(function () {
     if ($("#hdnEditData").val() != null) {       
         //Edit Questions Population
         var QuizData = JSON.parse($("#hdnEditData").val());
-        $("#hdnEditData").val("");
+        //$("#hdnEditData").val("");
         LoadQuestionsForEdit(QuizData);
     }
     if ($("#hdnLaunchData").val() != null) {
         //Launch Quiz for User to Attempt
         var QuizLaunchData = JSON.parse($("#hdnLaunchData").val());
-        $("#hdnLaunchData").val("");
+        //$("#hdnLaunchData").val("");
         LaunchQuiz(QuizLaunchData);
     }
 
     if ($("#hdnViewData").val() != null) {
         //View Quiz for Admin
         var QuizViewData = JSON.parse($("#hdnViewData").val());
-        $("#hdnViewData").val("");
+        //$("#hdnViewData").val("");
         ViewQuiz(QuizViewData);
     }
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
         //Review Quiz after Submit the Responses
         var QuizReviewData = JSON.parse($("#hdnReviewData").val());
         //console.log(QuizReviewData);
-        $("#hdnReviewData").val("");
+        //$("#hdnReviewData").val("");
         ReviewQuiz(QuizReviewData);
     }
 
