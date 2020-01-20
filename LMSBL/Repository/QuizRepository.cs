@@ -106,6 +106,7 @@ namespace LMSBL.Repository
             int status = 0;
             try
             {
+                int quizId = 0;
                 List<TblQuiz> lstQuiz = new List<TblQuiz>();
                 if (obj.QuizId != 0)
                     lstQuiz = GetQuizByID(obj.QuizId);
@@ -114,92 +115,96 @@ namespace LMSBL.Repository
                 {
                     db.parameters.Clear();
                     db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
-                    status = db.ExecuteQuery("sp_QuizDelete");
-                }
-                db.parameters.Clear();
-                db.AddParameter("@OldQuizId", SqlDbType.Int, obj.QuizId);
-                db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
-                db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
-                db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
-                status = db.ExecuteQuery("sp_QuizAdd");
-                if (Convert.ToInt32(db.parameters[4].Value) > 0)
-                {
-                    int quizId = Convert.ToInt32(db.parameters[4].Value);
-
-                    foreach (Dictionary<string, object> item in obj.questionObject)
-                    {
-                        int queId = 0;
-                        db.parameters.Clear();
-                        var oldQuestionId = 0;
-                        if (obj.QuizId != 0)
-                        {
-                            
-                            if (!string.IsNullOrEmpty(Convert.ToString(item["QuestionId"])))
-                            {
-                                oldQuestionId = Convert.ToInt32(item["QuestionId"]);
-                            }
-                            var isExist = false;
-                            if (lstQuiz.Count > 0)
-                            {
-                                foreach (var question in lstQuiz[0].TblQuestions)
-                                {
-                                    if (oldQuestionId == question.QuestionId)
-                                    {
-                                        isExist = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!isExist)
-                            {
-                                oldQuestionId = 0;
-                            }
-                        }
-
-                        db.AddParameter("@OldQuestionId", SqlDbType.Int, oldQuestionId);
-                        db.AddParameter("@QuizId", SqlDbType.Int, quizId);
-                        db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
-                        db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
-                        db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
-                        db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
-                        db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
-                        queId = db.ExecuteQuery("sp_QuestionAdd");                        
-                        if (Convert.ToInt32(db.parameters[6].Value) > 0)
-                        {
-
-                            queId = Convert.ToInt32(db.parameters[6].Value);
-                            foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
-                            {
-                                int optionId = 0;
-                                db.parameters.Clear();                                
-                                var OldOptionId = Convert.ToInt32(itemNew1["OptionId"]);
-                                
-                                db.AddParameter("@OldOptionId", SqlDbType.Int, OldOptionId);
-                                db.AddParameter("@QuestionId", SqlDbType.Int, queId);
-                                db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
-                                db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
-                                db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
-                                db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
-                                optionId = db.ExecuteQuery("sp_OptionAdd");
-                                
-                            }
-                        }
-                    }
-                    if(quizId>0)
-                    {
-                        status = quizId;
-                    }
+                    db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
+                    db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    status = db.ExecuteQuery("sp_QuizUpdateDelete");
+                    quizId = obj.QuizId;
                 }
                 else
-                    status = 0;
+                {
+                    db.parameters.Clear();
+                    db.AddParameter("@OldQuizId", SqlDbType.Int, obj.QuizId);
+                    db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
+                    db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
+                    db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
+                    status = db.ExecuteQuery("sp_QuizAdd");
+                    if (Convert.ToInt32(db.parameters[4].Value) > 0)
+                    {
+                        quizId = Convert.ToInt32(db.parameters[4].Value);
+                    }
+                }
+                foreach (Dictionary<string, object> item in obj.questionObject)
+                {
+                    int queId = 0;
+                    db.parameters.Clear();
+                    var oldQuestionId = 0;
+                    if (obj.QuizId != 0)
+                    {
+
+                        if (!string.IsNullOrEmpty(Convert.ToString(item["QuestionId"])))
+                        {
+                            oldQuestionId = Convert.ToInt32(item["QuestionId"]);
+                        }
+                        var isExist = false;
+                        if (lstQuiz.Count > 0)
+                        {
+                            foreach (var question in lstQuiz[0].TblQuestions)
+                            {
+                                if (oldQuestionId == question.QuestionId)
+                                {
+                                    isExist = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!isExist)
+                        {
+                            oldQuestionId = 0;
+                        }
+                    }
+
+                    db.AddParameter("@OldQuestionId", SqlDbType.Int, oldQuestionId);
+                    db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                    db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
+                    db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
+                    db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
+                    db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
+                    db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
+                    queId = db.ExecuteQuery("sp_QuestionAdd");
+                    if (Convert.ToInt32(db.parameters[6].Value) > 0)
+                    {
+
+                        queId = Convert.ToInt32(db.parameters[6].Value);
+                        foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
+                        {
+                            int optionId = 0;
+                            db.parameters.Clear();
+                            var OldOptionId = Convert.ToInt32(itemNew1["OptionId"]);
+
+                            db.AddParameter("@OldOptionId", SqlDbType.Int, OldOptionId);
+                            db.AddParameter("@QuestionId", SqlDbType.Int, queId);
+                            db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
+                            db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
+                            db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
+                            db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
+                            optionId = db.ExecuteQuery("sp_OptionAdd");
+
+                        }
+                    }
+
+                }
+                if (quizId > 0)
+                {
+                    status = quizId;
+                }                
             }
             catch (Exception ex)
-            {                
+            {
                 newException.AddException(ex);
                 //throw ex;
                 status = -2;
-            }            
+            }
             return status;
         }
 
@@ -433,9 +438,9 @@ namespace LMSBL.Repository
             db.AddParameter("@QuizId", SqlDbType.Int, quizId);
 
             DataSet ds = db.FillData("sp_GetQuestionCount");
-            if(ds!=null)
+            if (ds != null)
             {
-                if(ds.Tables.Count>0)
+                if (ds.Tables.Count > 0)
                 {
                     count = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
                 }

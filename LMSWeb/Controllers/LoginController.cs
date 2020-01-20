@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
+using LMSWeb.App_Start;
 
 namespace LMSWeb.Controllers
 {
@@ -38,7 +39,8 @@ namespace LMSWeb.Controllers
             Response response = new Response();
             try
             {
-               
+                CommonFunctions common = new CommonFunctions();
+                loginUser.Password = common.GetEncodePassword(loginUser.Password);
                 TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password);
                
 
@@ -47,8 +49,15 @@ namespace LMSWeb.Controllers
                     response.StatusCode = 1;
                     //set User object to session
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
-                   
-                    return RedirectToAction("Index", "Home");
+                    if (tblUser.IsNew)
+                    {
+                        return RedirectToAction("ChangePassword", "Login");
+                    }
+                    else
+                    {                       
+
+                        return RedirectToAction("Index", "Home");
+                    }
                     
                 }
                 TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
@@ -126,7 +135,16 @@ namespace LMSWeb.Controllers
             TblUser loginUser = new TblUser();
             try
             {
-                var emailid = ur.VerifyToken(t);
+                var emailid = string.Empty;
+                var model = (TblUser)Session["UserSession"];
+                if (model != null)
+                {
+                    emailid = model.EmailId;
+                }
+                if (!string.IsNullOrEmpty(t))
+                {
+                    emailid = ur.VerifyToken(t);
+                }
                 if (!string.IsNullOrEmpty(emailid))
                 {
                     loginUser.EmailId = emailid;
@@ -147,14 +165,26 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                var row = ur.UpdatePAssword(loginUser);
+                CommonFunctions common = new CommonFunctions();
+                loginUser.Password = common.GetEncodePassword(loginUser.Password);
+                var row = ur.UpdatePassword(loginUser);
                 if (row != 0)
                 {
                     TempData["Message"] = "Password Updated Successfully";
+                    var model = (TblUser)Session["UserSession"];
+                    if(model==null)
+                    {
+                        return View("Index");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
                     TempData["Message"] = "Oops! There is some problem";
+                    return View("ChangePassword");
                 }
             }
             catch (Exception ex)

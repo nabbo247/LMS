@@ -1,7 +1,7 @@
 ﻿@model LMSBL.DBModels.TblQuiz
 @{
     ViewBag.Title = "ViewQuiz";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";   
 }
 
 <h4 class="launch-label">View Quiz</h4>
@@ -23,7 +23,7 @@
                 <label class="col-3 p-0">Quiz Description :  </label>
                 <div class="col-6 ml-0">@Model.QuizDescription</div>
             </div>
-        </div>        
+        </div>
 
         <div id="dvQuestions"></div>
         <div class="row clearfix">
@@ -32,7 +32,9 @@
                 </ul>
             </div>
             <div class="col">
-                <button type="button" id="btnCancel" class="btn btn-secondary pull-right ml-3"><b>Cancel</b></button>
+                <a href="@Url.Action("Index", "Quiz")">
+                    <button type="button" id="btnCancel" class="btn btn-secondary pull-right ml-3"><b>Cancel</b></button>
+                </a>
                 <button type="submit" id="btnResponseSubmit" class="btn btn-secondary pull-right ml-3"><b>Submit</b></button>
                 <button type="button" id="btnNext" class="btn btn-secondary pull-right ml-3"><b>Next</b></button>
                 <button type="button" id="btnPrev" class="btn btn-secondary pull-right ml-3"><b>Prev</b></button>
@@ -42,10 +44,10 @@
         </div>
 
         @*<div class="col-12 clearfix mt-5 p-0 text-center">
-            <button type="button" id="btnCancel" class="btn btn-outline-secondary">
-                <b>Cancel</b>
-            </button>
-        </div>*@
+                <button type="button" id="btnCancel" class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+            </div>*@
     </form>
 }
 

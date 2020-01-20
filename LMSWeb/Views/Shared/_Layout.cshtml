@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" />
     <script src="~/assets/SweetAlert.js"></script>
 
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -139,7 +139,7 @@
     </nav>
     <div class="main-container container">
         <div id="dvMessage" style="text-align:center;">@TempData["Message"]</div>
-
+        <div id="dvLoading" style="display:none;"><i class="fas fa-spinner"></i></div>
         @RenderBody()
     </div>
 

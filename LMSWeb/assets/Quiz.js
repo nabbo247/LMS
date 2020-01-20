@@ -6,9 +6,7 @@ $body = $("body");
 
 $(document).ready(function () {
     $(".textarea-editor").summernote();
-    $('#btnCancel').on("click", function () {
-        location.reload();
-    });  
+    
 
     if ($("#hdnResponseData").val() != null && $("#hdnResponseData").val() != '') {
         SetResponses($("#hdnResponseData").val());
@@ -43,7 +41,8 @@ $(document).ready(function () {
     });
 
 
-    if ($("#hdnEditData").val() != null) {       
+    if ($("#hdnEditData").val() != null) {  
+        $("#dvLoading").show();
         //Edit Questions Population
         var QuizData = JSON.parse($("#hdnEditData").val());
         //$("#hdnEditData").val("");
@@ -66,7 +65,7 @@ $(document).ready(function () {
     if ($("#hdnReviewData").val() != null) {
         //Review Quiz after Submit the Responses
         var QuizReviewData = JSON.parse($("#hdnReviewData").val());
-        //console.log(QuizReviewData);
+        console.log("Dinesh :- " + QuizReviewData);
         //$("#hdnReviewData").val("");
         ReviewQuiz(QuizReviewData);
     }
@@ -419,6 +418,10 @@ function LoadQuestionsForEdit(QuizData) {
         if (queFirstLine == "") {
             queFirstLine = value.QuestionText.substring(0, (queIndex+1));
         }
+       
+        queFirstLine = queFirstLine.replace("<div>", "");
+        queFirstLine = queFirstLine.replace("</div>", "");
+        
         var queHTML = "<div class=\"row col-12 que-container\" id=queContainer" + value.QuestionId + ">";
         queHTML += "<div class=\"row col-12\"  >";
         queHTML += "<div class=\"col-1 btn pl-4 pr-4 text-center btn-warning\" data-toggle=\"collapse\" data-target=#dvQues" + value.QuestionId + ">Question</div>";
@@ -604,6 +607,25 @@ function LaunchQuiz(QuizLaunchData) {
         $.each(quizQueIds, function (indexQue, valueQue) {
             if (valueQue["QuestionId"] == queId) {
                 currentIndex = indexQue;
+                //alert(quizQueIds.length);
+                //alert(currentIndex);
+                if (quizQueIds.length == (currentIndex + 1)) {                    
+                    $('#btnNext').hide();
+                    $('#btnPrev').show();
+                    $('#btnResponseSubmit').show();
+                }
+                else {
+                    if (currentIndex != 0) {                        
+                        $('#btnPrev').show();
+                        $('#btnNext').show();
+                        $('#btnResponseSubmit').hide();
+                    }
+                    else {
+                        $('#btnPrev').hide();
+                        $('#btnNext').show();
+                        $('#btnResponseSubmit').hide();
+                    }
+                }
             }
         });
     });
@@ -648,6 +670,11 @@ function LaunchQuiz(QuizLaunchData) {
             $('#btnResponseSubmit').show();
         }
     });
+
+    $('#btnCancel').on("click", function () {
+        location.reload();
+        
+    });  
 }
 
 function ViewQuiz(QuizViewData) {
@@ -772,6 +799,7 @@ function ViewQuiz(QuizViewData) {
         }
         
     });
+    
 }
 
 function NextPrevQuestion() {
@@ -802,6 +830,7 @@ function ReviewQuiz(QuizReviewData) {
     var queHTML = `<div class="container-fluid mt-3">`;
 
     $.each(QuizReviewData.TblQuestions, function (index, value) {
+        console.log(value);
         var isAttempted = false;
         var response = Object;
         $.each(QuizReviewData.TblResponses, function (indexRe, valueRe) {
@@ -878,7 +907,7 @@ function ReviewQuiz(QuizReviewData) {
             var correctCount = 0;
             var correctIds = [];
             $.each(value.TblQuestionOptions, function (indexOption, valueOption) {
-                console.log('valueOption : ', valueOption);
+                //console.log('valueOption : ', valueOption);
                 queHTML += `<div class="col-12 option-container">`;
                 var isRespondedOption = false;
                 if (isAttempted) {
@@ -920,7 +949,7 @@ function ReviewQuiz(QuizReviewData) {
             if (response != null && response.OptionIds != null) {
                 var isCorrect = false;
 
-                console.log(response.OptionIds)
+                //console.log(response.OptionIds)
                 var optionIds = response.OptionIds.split(",");
                 if (optionIds.length == correctCount) {
                     var correct = 0;

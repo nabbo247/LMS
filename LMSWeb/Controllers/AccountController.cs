@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
+using LMSWeb.App_Start;
 using LMSWeb.ViewModel;
 
 namespace LMSWeb.Controllers
@@ -46,13 +47,31 @@ namespace LMSWeb.Controllers
         public ActionResult ChangePassword()
         {
             ChangePasswordViewModel CPViewModel = new ChangePasswordViewModel();
+            var model = (LMSBL.DBModels.TblUser)Session["UserSession"];
+            CPViewModel.UserId = model.UserId;
             return View(CPViewModel);
         }
 
-        public ActionResult UpdatePassword()
+        public ActionResult UpdatePassword(ChangePasswordViewModel objPassword)
         {
-            TempData["Message"] = "Not Saved Successfully";
-            return View("ChangePassword");
+            LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
+            CommonFunctions common = new CommonFunctions();
+            model.UserId = objPassword.UserId;
+            model.Password = common.GetEncodePassword(objPassword.OldPassword);
+            objPassword.Password= common.GetEncodePassword(objPassword.Password);
+
+            var result = ur.ChangetePassword(model, objPassword.Password);
+            
+            if (result == 1)
+            {
+                TempData["Message"] = "Password changed Successfully";
+            }
+            else
+            {
+                TempData["Message"] = "Old Password is Incorrect";
+            }
+
+            return View("ChangePassword", objPassword);
         }
     }
 }

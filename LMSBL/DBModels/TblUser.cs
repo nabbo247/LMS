@@ -36,6 +36,8 @@ namespace LMSBL.DBModels
         [StringLength(50)]
         public string ContactNo { get; set; }
 
+        public bool IsNew { get; set; }
+
         public bool? IsActive { get; set; }
 
         [NotMapped]

@@ -36,7 +36,7 @@
                 @Html.HiddenFor(model => model.QuizId)
                 @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
                 @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
-                <div class="row">
+                @*<div class="row">
                     <label class="col-3">Quiz Name :  </label><div class="col-6 ml-0">
                         @Model.QuizName
                     </div>
@@ -44,7 +44,7 @@
                 <div class="row">
                     <label class="col-3">Quiz Description :  </label>
                     <div class="col-6 ml-0">@Model.QuizDescription</div>
-                </div>
+                </div>*@
 
 
                 <div id="dvQuestions"></div>
