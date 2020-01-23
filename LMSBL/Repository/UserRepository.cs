@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using LMSBL.Common;
 using LMSBL.DBModels;
@@ -232,7 +234,7 @@ namespace LMSBL.Repository
             db.AddParameter("@Password", SqlDbType.Text, NewPassword);
             db.AddParameter("@Status", SqlDbType.Int, ParameterDirection.Output);
 
-            result= db.ExecuteQuery("sp_PasswordChange");
+            result = db.ExecuteQuery("sp_PasswordChange");
 
             if (Convert.ToInt32(db.parameters[3].Value) > 0)
             {
@@ -241,5 +243,52 @@ namespace LMSBL.Repository
             return result;
         }
 
+
+        public int InsertEmails(DataTable dt)
+        {
+            int result = 0;
+            string constr = ConfigurationManager.ConnectionStrings["LMSContext"].ConnectionString;
+            SqlConnection con = new SqlConnection(constr);
+            try
+            {
+               
+                SqlBulkCopy objbulk = new SqlBulkCopy(con);
+                objbulk.DestinationTableName = "tblEmails";
+
+                objbulk.ColumnMappings.Add("EmailTo", "EmailTo");
+                objbulk.ColumnMappings.Add("EmailSubject", "EmailSubject");
+                objbulk.ColumnMappings.Add("EmailBody", "EmailBody");
+                objbulk.ColumnMappings.Add("DateCreated", "DateCreated");
+                objbulk.ColumnMappings.Add("isSent", "isSent");
+                objbulk.ColumnMappings.Add("DateSent", "DateSent");
+                objbulk.ColumnMappings.Add("SentStatus", "SentStatus");
+
+                con.Open();
+                //insert bulk Records into DataBase.  
+                objbulk.WriteToServer(dt);
+                con.Close();
+                result = 1;
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                con.Close();               
+
+            }
+            return result;
+        }
+    
+        public int InsertUserEmail(tblEmails objEmail)
+        {
+            int result = 0;
+            db.parameters.Clear();
+            db.AddParameter("@EmailTo", SqlDbType.Text, objEmail.EmailTo);
+            db.AddParameter("@EmailSubject", SqlDbType.Text, objEmail.EmailSubject);
+            db.AddParameter("@EmailBody", SqlDbType.Text, objEmail.EmailBody);  
+            result = db.ExecuteQuery("sp_AddEmail");
+
+            return result;
+        }
+    
     }
 }

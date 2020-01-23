@@ -65,6 +65,7 @@
     <Compile Include="DBModels\ReportModel.cs" />
     <Compile Include="DBModels\TblAssignmentAndTracking.cs" />
     <Compile Include="DBModels\TblCourse.cs" />
+    <Compile Include="DBModels\tblEmails.cs" />
     <Compile Include="DBModels\TblLogin.cs" />
     <Compile Include="DBModels\TblNotificationTemplate.cs" />
     <Compile Include="DBModels\tblQuestion.cs" />

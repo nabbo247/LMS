@@ -1,0 +1,16 @@
+E:\Projects\LMS\EmailService\bin\Debug\EmailService.exe.config
+E:\Projects\LMS\EmailService\bin\Debug\EmailService.exe
+E:\Projects\LMS\EmailService\bin\Debug\EmailService.pdb
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.ProjectInstaller.resources
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.csproj.GenerateResource.cache
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.exe
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.pdb
+E:\Projects\LMS\EmailService\bin\Debug\LMSBL.dll
+E:\Projects\LMS\EmailService\bin\Debug\EntityFramework.dll
+E:\Projects\LMS\EmailService\bin\Debug\System.Web.Mvc.dll
+E:\Projects\LMS\EmailService\bin\Debug\LMSBL.pdb
+E:\Projects\LMS\EmailService\bin\Debug\LMSBL.dll.config
+E:\Projects\LMS\EmailService\bin\Debug\EntityFramework.xml
+E:\Projects\LMS\EmailService\bin\Debug\System.Web.Mvc.xml
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.csprojAssemblyReference.cache
+E:\Projects\LMS\EmailService\obj\Debug\EmailService.csproj.CopyComplete

@@ -118,6 +118,23 @@ namespace LMSWeb.Controllers
                         rows = ur.EditUser(objUser);
                     if (rows != 0)
                     {
+                        Guid guid = Guid.NewGuid();
+                        string token = guid.ToString();
+                        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                        var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
+                        var link = "<a href='" + url + "'>Click Here</a>";
+                        var emailBody = "Welcome To LMS. </br> Please click below link to Login </br>";
+                        emailBody = emailBody + link;
+                        var result = ur.AddToken(objUser.EmailId, token);
+                        
+                        var emailSubject = System.Configuration.ConfigurationManager.AppSettings["emailSubject"];
+                        tblEmails objEmail = new tblEmails();
+                        objEmail.EmailTo = objUser.EmailId;
+                        objEmail.EmailSubject = emailSubject;
+                        objEmail.EmailBody = emailBody;
+
+                        result = ur.InsertUserEmail(objEmail);
+
                         TempData["Message"] = "Saved Successfully";
                         if (objUser.IsMyProfile)
                             return RedirectToAction("Index", "Home");
@@ -269,6 +286,7 @@ namespace LMSWeb.Controllers
                     sb.Append("</br><font color=\"red\"><b>Users below are not imported.</b></font>");
                     int TotalRows = 0;
                     int index = 0;
+                    List<string> lstEmailIds = new List<string>();
                     foreach (DataRow dr in dt.Rows)
                     {
                         index++;
@@ -290,6 +308,7 @@ namespace LMSWeb.Controllers
                                 if (rows > 0)
                                 {
                                     TotalRows++;
+                                    lstEmailIds.Add(objUser.EmailId);
                                 }
                                 if (rows == 0)
                                 {
@@ -330,6 +349,44 @@ namespace LMSWeb.Controllers
                     sb1.AppendLine("</br><font color=\"green\"><b>Number of User/s Imported - " + TotalRows + "</b></font>");
                     sb1.AppendLine("</br>-----------------------------------------------------------------------</br>");
                     ViewBag.Log = sb1.ToString() + sb.ToString();
+
+                    //Insert Emails in DB
+                    DataTable tbl = new DataTable();
+                    tbl.Columns.Add(new DataColumn("EmailTo", typeof(string)));                    
+                    tbl.Columns.Add(new DataColumn("EmailSubject", typeof(string)));
+                    tbl.Columns.Add(new DataColumn("EmailBody", typeof(string)));
+                    tbl.Columns.Add(new DataColumn("DateCreated", typeof(DateTime)));                    
+                    tbl.Columns.Add(new DataColumn("isSent", typeof(bool)));
+                    tbl.Columns.Add(new DataColumn("DateSent", typeof(DateTime)));
+                    tbl.Columns.Add(new DataColumn("SentStatus", typeof(string)));
+
+                    var emailSubject = System.Configuration.ConfigurationManager.AppSettings["emailSubject"];
+
+                    foreach (var email in lstEmailIds)
+                    {
+                        Guid guid = Guid.NewGuid();
+                        string token = guid.ToString();
+                        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                        var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
+                        var link = "<a href='" + url + "'>Click Here</a>";
+                        var emailBody = "Welcome To LMS. </br> Please click below link to Login </br>";
+                        emailBody = emailBody + link;
+                        var result = ur.AddToken(email, token);
+                        DataRow dr = tbl.NewRow();
+                        dr["EmailTo"] = email;
+                        dr["EmailSubject"] = emailSubject;
+                        dr["EmailBody"] = emailBody;
+                        dr["DateCreated"] = DateTime.Now;
+                        dr["isSent"] = 0;
+                        dr["DateSent"] = DBNull.Value;
+                        dr["SentStatus"] = null;
+
+                        tbl.Rows.Add(dr);
+                    }
+
+                    int addedRows = ur.InsertEmails(tbl);
+
+
                 }
             }
             catch(Exception ex)

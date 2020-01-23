@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="yes"?>
+<Path>
+  <DBDetails>
+    <DBServer>DESKTOP-JOLRHRS\SQLEXPRESS</DBServer>
+    <!--<DBServer>3.134.110.68\SQLEXPRESS</DBServer>-->
+    <LMSDBName>LMSDB</LMSDBName>
+    <LMSUserName>sa</LMSUserName>
+    <LMSPassword>Dinesh1981</LMSPassword>    
+  </DBDetails>
+  <SMTPDetails>
+    <Host>smtp.gmail.com</Host>
+    <port>587</port>
+    <from>rockettechinfo@gmail.com</from>
+    <userName>rockettechinfo@gmail.com</userName>
+    <password>Dinesh1981</password>
+    
+  </SMTPDetails>
+</Path>

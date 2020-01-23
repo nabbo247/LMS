@@ -110,7 +110,7 @@ namespace LMSWeb.Controllers
                 MailMessage email = new MailMessage(section.From, loginUser.EmailId);
                 email.Subject = "Password Recovery Link";
                 email.Body = link;
-
+                email.Priority = MailPriority.High;
                 email.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = section.Network.Host;
