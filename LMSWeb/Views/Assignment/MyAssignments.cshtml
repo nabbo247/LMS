@@ -81,11 +81,11 @@
                             index++;
                             <tr>
                                 <th scope="row">@index</th>
-                                <td>@course.CourseName</td>
-                                <td>@course.CourseDetails</td>
+                                <td>@course.ContentModuleName</td>
+                                <td>@course.ContentModuleDescription</td>
 
                                 <td>
-                                    <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = course.CourseId })">
+                                    <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = course.ContentModuleId })">
                                         <button type="button" class="btn text-center btn-warning">
                                             Launch
                                         </button>

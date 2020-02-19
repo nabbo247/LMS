@@ -1,0 +1,95 @@
+﻿@model LMSWeb.ViewModel.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+
+   
+}
+
+    <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+        <div class="row mb-1">
+            <div class="col">
+                <h4>Progress</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('Not Started');">
+                <div class="prog-badge not-started">
+                    <h1>@Model.NotStartedCount</h1>
+                    <span class="status">Not Started</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('InProgress');">
+                <div class="prog-badge in-progress">
+                    <h1>@Model.InProgressCount</h1>
+                    <span class="status">In Progress</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('Completed');">
+                <div class="prog-badge completed">
+                    <h1>@Model.CompletedCount</h1>
+                    <span class="status">Completed</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('Total');">
+                <div class="prog-badge total">
+                    <h1>@Model.TotalCount</h1>
+                    <span class="status">Total</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-1" style="margin-top:20px;">
+            <div class="col">
+                <h4>Recent Activities</h4>
+            </div>
+        </div>
+        <div class="pt-3 pl-3 pr-3 course-list-container">
+            <div class="row">
+                <div class="col search-container">
+                    <i class="fas fa-search"></i>
+                    <input class="search-box" type="text" id="txtSearch" placeholder="Search Course/Quiz by name..." />
+                </div>
+                <div class="col text-right">
+                    <ul class="list-inline progress-list mt-2">
+                        <li class="list-inline-item"><i class="far fa-clock"></i> Not Started</li>
+                        <li class="list-inline-item"><i class="far fa-hourglass orange-color"></i> In Progress</li>
+                        <li class="list-inline-item"><i class="far fa-check-circle green-color"></i> Completed</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mt-3" id="dvActivityData">
+                @Html.Partial("~/Views/Home/_ActivityData.cshtml", Model.lstActivities)
+            </div>
+        </div>
+        <div class="row text-right mt-4">
+            <a href="@Url.Action("MyAssignments", "Assignment")" class="col no-underline"><i class="far fa-eye"></i> View All</a>
+        </div>
+        @*<div><a href="http://localhost:7777/LaunchPlayer.aspx?AID=4&LID=8" target="_blank">Test Course Link4</a></div>
+        <div><a href="http://localhost:7777/LaunchPlayer.aspx?AID=1&LID=8" target="_blank">Test Course Link1</a></div>
+        <div><a href="http://localhost:7777/LaunchPlayer.aspx?AID=5&LID=8" target="_blank">Test Course Link5</a></div>*@
+
+    </div>
+<script>
+
+    function FilterResult(data) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetFilteredData",
+            data: '{status: "' + data + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                console.log(response);                
+                $('#dvActivityData').html(response);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+
+    }
+</script>

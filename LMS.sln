@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMSWeb", "LMSWeb\LMSWeb.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{01356A64-75FC-478A-91C7-4C5A08556AC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScormPlayer", "CoursePLayer\ScormPlayer.csproj", "{5CB6D278-D64C-45E4-B1B0-209965D89D58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{01356A64-75FC-478A-91C7-4C5A08556AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01356A64-75FC-478A-91C7-4C5A08556AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01356A64-75FC-478A-91C7-4C5A08556AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB6D278-D64C-45E4-B1B0-209965D89D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB6D278-D64C-45E4-B1B0-209965D89D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB6D278-D64C-45E4-B1B0-209965D89D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB6D278-D64C-45E4-B1B0-209965D89D58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

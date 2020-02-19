@@ -28,8 +28,10 @@
 
 <body>
     @using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+    {      
+
         <div class="main-container container">
+            <div id="showtime" style="margin-bottom:10px;"></div>
             @*<h4 class="launch-label">Launch Quiz</h4>*@
             @*@Html.AntiForgeryToken()*@
             <form class="form-inline">
@@ -37,14 +39,14 @@
                 @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
                 @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
                 @*<div class="row">
-                    <label class="col-3">Quiz Name :  </label><div class="col-6 ml-0">
-                        @Model.QuizName
+                        <label class="col-3">Quiz Name :  </label><div class="col-6 ml-0">
+                            @Model.QuizName
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label class="col-3">Quiz Description :  </label>
-                    <div class="col-6 ml-0">@Model.QuizDescription</div>
-                </div>*@
+                    <div class="row">
+                        <label class="col-3">Quiz Description :  </label>
+                        <div class="col-6 ml-0">@Model.QuizDescription</div>
+                    </div>*@
 
 
                 <div id="dvQuestions"></div>

@@ -1,0 +1,99 @@
+﻿@model LMSWeb.ViewModel.AdminHomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+    <div class="row mb-1">
+        <div class="col">
+            <h4>Progress</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('1');">
+            @*<a class="login"  href="@Url.Action("UserReport", "Reports", new { isActive = 1})">*@
+            <div class="prog-badge total-users">
+                <h1>@Model.allCounts.TotalUserCount</h1>
+                <span class="status">Total Users</span>
+            </div>
+            @*</a>*@
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('2');">
+            <div class="prog-badge active-users">
+                <h1>@Model.allCounts.ActiveUserCount</h1>
+                <span class="status">Active Users</span>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('3');">
+            <div class="prog-badge learnings">
+                <h1>@Convert.ToInt32(Model.allCounts.TotalQuizCount + Model.allCounts.TotalCourseCount)</h1>
+                <span class="status">Learnings</span>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6" style="cursor:pointer;" onclick="FilterResult('4');">
+            <div class="prog-badge high-score-users">
+                <h1>@Convert.ToInt32(Model.allCounts.TotalHighScoreQuizUserCount + Model.allCounts.TotalHighScoreCourseUserCount)</h1>
+                <span class="status">High Score Users</span>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 pt-3 pl-3 pr-3 course-list-container">
+        <div class="row">
+            <div class="col search-container">
+                <i class="fas fa-search"></i>
+                <input class="search-box" type="text" id="txtSearch" placeholder="Search Course/Quiz by name..." />
+            </div>
+            <div class="col text-right">
+                <ul class="list-inline progress-list mt-2">
+
+                    <li class="list-inline-item"><img src="~/assets/images/shape_AssignedUserLegend.png"> Assigned</li>
+                    <li class="list-inline-item"><img src="~/assets/images/shape_NotAssignedLegend.png"> Not Assigned</li>
+                    <li class="list-inline-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle create-learning-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-plus-circle"></i> Create Learning
+                            </button>
+                            <div class="dropdown-menu create-learning" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="@Url.Action("AddCourse", "Courses")">
+                                    <img src="~/assets/images/course.png" width="20%" />
+                                    Course
+                                </a>
+                                <a class="dropdown-item" href="@Url.Action("AddQuiz", "Quiz")">
+                                    <img src="~/assets/images/quiz.png" width="20%" />
+                                    Quiz
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3" id="dvActivityData">
+            @Html.Partial("~/Views/Home/_AdminHomeList.cshtml", Model.lstActivities)
+        </div>
+    </div>
+    @*<div class="row text-right mt-4">
+        <a href="#" class="col no-underline"><i class="far fa-eye"></i> View All</a>
+    </div>*@
+    @*<div><a href="http://localhost:7777/LaunchPlayer.aspx?AID=4&LID=8" target="_blank">Test Course Link</a></div>*@
+
+</div>
+<script>
+
+    function FilterResult(data) {
+        if (data == 1) {
+            window.location = "@Url.Action("UserReport", "Reports", new { isActive = false })";
+        }
+        if (data == 2) {
+            window.location = "@Url.Action("UserReport", "Reports", new { isActive = true })";
+        }
+        if (data == 3) {
+            window.location = "@Url.Action("LearningCompletionReport", "Reports")";
+        }
+        if (data == 4) {
+            window.location = "@Url.Action("HighScoreUsersReport", "Reports")";
+        }
+    }
+</script>
+

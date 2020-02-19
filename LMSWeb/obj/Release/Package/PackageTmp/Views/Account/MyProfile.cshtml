@@ -1,0 +1,102 @@
+﻿@model LMSBL.DBModels.TblUser
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row col-12">
+
+        <hr class="form-divider">
+    </div>
+    <form class="form-inline">
+        <div class="row col-12">
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.IsMyProfile)
+            @Html.LabelFor(model => model.FirstName, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "col-6 ml-0 form-control" })
+            <span class="required">&#10026;</span>
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.LastName, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.LastName, new { @class = "col-6 ml-0 form-control" })
+            <span class="required">&#10026;</span>
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.EmailId, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.EmailId, new { @class = "col-6 ml-0 form-control" })
+            <span class="required">&#10026;</span>
+            @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        @*<div class="row col-12">
+            @Html.LabelFor(model => model.Password, new { @class = "col-3 p-0" })
+            @Html.PasswordFor(model => model.Password, new { @class = "col-6 ml-0 form-control" })
+            <span class="required">&#10026;</span>
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>*@
+        <div class="row col-12">
+            @Html.LabelFor(model => model.DOB, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.DOB, "{0:MM/dd/yyyy}", new { @class = "col-6 ml-0 form-control datepicker", @id = "dtDOB", @readonly = "readonly", @autocomplete = "off" })
+
+            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.ContactNo, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.ContactNo, new { @class = "col-6 ml-0 form-control" })
+
+            @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.RoleName, new { @class = "col-3 p-0" })
+            @Html.DropDownListFor(x => Model.RoleId, new SelectList(Model.UserRoles, "RoleId", "RoleName"), htmlAttributes: new { @class = "col-6 ml-0 form-control", id = "UserRoles" })
+            <span class="required">&#10026;</span>
+            @Html.ValidationMessageFor(x => Model.UserRoles[0].RoleId, "", new { @class = "text-danger" })
+
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12" style="margin-bottom: 34px;">
+            <div class="col-8">
+                <span class="required">&#10026;</span> Fields are Mandatory
+            </div>
+            <div class="col-4">
+                <button type="submit" onclick="location.href='@Url.Action("Index", "User")';return false;"
+                        class="btn btn-outline-secondary">
+                    <b>Cancel</b>
+                </button>
+                <button type="submit" id="btnUserSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
+            </div>
+        </div>
+    </form>
+
+}
+<script src="~/assets/Validations.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#dtDOB').datepicker({
+            format: 'mm/dd/yyyy',
+            showWeek: true
+        });
+    });
+</script>
+

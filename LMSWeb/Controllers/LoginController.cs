@@ -20,17 +20,17 @@ namespace LMSWeb.Controllers
         public ActionResult Index()
         {
             TblUser user = new TblUser();
-            var subDomain = Request.Url;
+            
             List<TblTenant> tenantDetails = new List<TblTenant>();
             //tenantDetails = tr.GetTenantById(subDomain);
             try
             {
-                return View(user);
+                return View("Login", user);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View(user);
+                return View("Login",user);
             }
         }
 
@@ -54,13 +54,13 @@ namespace LMSWeb.Controllers
                         return RedirectToAction("ChangePassword", "Login");
                     }
                     else
-                    {                       
-
+                    {
+                        ur.AddLoginLog(tblUser.UserId);
                         return RedirectToAction("Index", "Home");
                     }
                     
                 }
-                TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
+                TempData["Message"] = "The Username/Password does not match.";
                 return RedirectToAction("Index");
                 //return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
@@ -70,7 +70,7 @@ namespace LMSWeb.Controllers
                 response.StatusCode = 0;
                 response.Message = ex.Message;
                 //return Json(response, JsonRequestBehavior.AllowGet);
-                TempData["Message"] = "The Username/Password does not match. Please try again or reset the Password.";
+                TempData["Message"] = "The Username/Password does not match.";
                 return RedirectToAction("Index");
             }
         }
@@ -85,7 +85,7 @@ namespace LMSWeb.Controllers
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
@@ -98,27 +98,21 @@ namespace LMSWeb.Controllers
         public ActionResult SendResetLink(TblUser loginUser)
         {
             try
-            {
-                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            {                
                 Guid guid = Guid.NewGuid();
                 string token = guid.ToString();
                 var result = ur.AddToken(loginUser.EmailId, token);
                 //send email
                 var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
                 var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
-                var link = "<a href='" + url + "'>Click here to reset your password</a>";
-                MailMessage email = new MailMessage(section.From, loginUser.EmailId);
-                email.Subject = "Password Recovery Link";
-                email.Body = link;
-                email.Priority = MailPriority.High;
-                email.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = section.Network.Host;
-                smtp.Credentials = new System.Net.NetworkCredential(section.Network.UserName, section.Network.Password);
+                var link = "<a href='" + url + "'>Click here to reset your password</a>";               
 
-                smtp.EnableSsl = true;
-                smtp.Send(email);
-
+                var emailSubject = System.Configuration.ConfigurationManager.AppSettings["PasswordRecovery"];
+                tblEmails objEmail = new tblEmails();
+                objEmail.EmailTo = loginUser.EmailId;
+                objEmail.EmailSubject = emailSubject;
+                objEmail.EmailBody = link;
+                result = ur.InsertEmail(objEmail);
 
                 TempData["Message"] = "Reset Link sent to your registered email. Please check your Inbox";
             }
@@ -174,7 +168,7 @@ namespace LMSWeb.Controllers
                     var model = (TblUser)Session["UserSession"];
                     if(model==null)
                     {
-                        return View("Index");
+                        return RedirectToAction("Index");
                     }
                     else
                     {

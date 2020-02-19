@@ -42,7 +42,7 @@ namespace LMSWeb.Controllers
             objEditData.UserRoles = rr.GetAllRoles();
             objEditData.Tenants = tr.GetAllTenants();
             objEditData.IsMyProfile = true;
-            return View(objEditData);
+            return View("Profile",objEditData);
         }
         public ActionResult ChangePassword()
         {
@@ -57,10 +57,10 @@ namespace LMSWeb.Controllers
             LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
             CommonFunctions common = new CommonFunctions();
             model.UserId = objPassword.UserId;
-            model.Password = common.GetEncodePassword(objPassword.OldPassword);
+            model.OldPassword = common.GetEncodePassword(objPassword.OldPassword);
             objPassword.Password= common.GetEncodePassword(objPassword.Password);
 
-            var result = ur.ChangetePassword(model, objPassword.Password);
+            var result = ur.ChangePassword(model, objPassword.Password);
             
             if (result == 1)
             {

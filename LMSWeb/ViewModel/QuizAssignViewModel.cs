@@ -15,5 +15,14 @@ namespace LMSWeb.ViewModel
         public List<SelectListItem> usetList { get; set; }
         public List<TblUser> lstUsers { get; set; }
         public TblQuiz quiz { get; set; }
+        public DateTime DueDate { get; set; }
+    }
+    public class CourseAssignViewModel
+    {
+        public int[] userIds { get; set; }
+        public List<SelectListItem> usetList { get; set; }
+        public List<TblUser> lstUsers { get; set; }
+        public tblCourse course { get; set; }
+        public DateTime DueDate { get; set; }
     }
 }

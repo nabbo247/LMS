@@ -86,12 +86,12 @@
                             Users
                         </a>
                     </li>
-                    @*<li class="nav-item ">
+                    <li class="nav-item ">
                             <a class="nav-link" href="@baseURL\Courses\Index">
 
                                 Courses
                             </a>
-                        </li>*@
+                        </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="@baseURL\Quiz\Index">
 
@@ -139,7 +139,7 @@
     </nav>
     <div class="main-container container">
         <div id="dvMessage" style="text-align:center;">@TempData["Message"]</div>
-        <div id="dvLoading" style="display:none;"><i class="fas fa-spinner"></i></div>
+        
         @RenderBody()
     </div>
 

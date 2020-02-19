@@ -12,7 +12,7 @@ namespace LMSBL
         public List<TblUser> LstUsers { get; set; }
         public List<TblUserRole> LstUserRoles { get; set; }
         public List<TblStatus> LstStatus { get; set; }
-        public List<TblCourse> LstCourses { get; set; }
+        public List<tblCourse> LstCourses { get; set; }
         public List<TblNotificationTemplate> LstNotificationTemplate { get; set; }
         public List<TblAssignmentAndTracking> LstAssignmentAndTracking { get; set; }        
 

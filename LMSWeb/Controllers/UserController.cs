@@ -25,18 +25,13 @@ namespace LMSWeb.Controllers
         {
             try
             {
-
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 List<TblUser> lstAllUsers = new List<TblUser>();
-
                 lstAllUsers = ur.GetAllUsers(sessionUser.TenantId);
-
-
                 return View(lstAllUsers);
             }
             catch (Exception ex)
             {
-                newException.AddDummyException("111");
                 newException.AddException(ex);
                 return View();
             }
@@ -85,17 +80,18 @@ namespace LMSWeb.Controllers
                     UserRoles = rr.GetAllRoles(),
                     Tenants = tr.GetAllTenants()
                 };
-                return View(objEditData);
+                objEditData.IsMyProfile = false;
+                return View("AddNewUser", objEditData);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewUser");
             }
         }
 
         [HttpPost]
-        public ActionResult AddUser(TblUser objUser)
+        public ActionResult AddUser(TblUser objUser, HttpPostedFileBase file)
         {
             try
             {
@@ -104,10 +100,25 @@ namespace LMSWeb.Controllers
                     TblUser sessionUser = (TblUser)Session["UserSession"];
                     objUser.TenantId = sessionUser.TenantId;
                     objUser.CreatedBy = sessionUser.UserId;
-                    
+
                     // objUser.DOB = objUser.DOB;
                     objUser.IsActive = true;
                     int rows = 0;
+                    if (file != null)
+                    {
+                        var profileURL = System.Configuration.ConfigurationManager.AppSettings["ProfileImages"];
+                        var profilePhysicalURL = System.Configuration.ConfigurationManager.AppSettings["ProfileImagesPhysicalURL"];
+
+                        if (!System.IO.Directory.Exists(profilePhysicalURL + "\\" + objUser.TenantId))
+                        {
+                            System.IO.Directory.CreateDirectory(profilePhysicalURL + "\\" + objUser.TenantId);
+                        }
+
+                        string filePhysicalPath = System.IO.Path.Combine(profilePhysicalURL + "\\" + objUser.TenantId + "\\" + objUser.UserId + ".jpg");
+                        string path = System.IO.Path.Combine(profileURL + "\\" + objUser.TenantId + "\\" + objUser.UserId + ".jpg");
+                        file.SaveAs(filePhysicalPath);
+                        objUser.profileImage = path;
+                    }
                     if (objUser.UserId == 0)
                     {
                         CommonFunctions common = new CommonFunctions();
@@ -115,8 +126,30 @@ namespace LMSWeb.Controllers
                         rows = ur.AddUser(objUser);
                     }
                     else
+                    {
                         rows = ur.EditUser(objUser);
-                    if (rows != 0)
+                        if (objUser.IsMyProfile)
+                        {
+                            if (!string.IsNullOrEmpty(objUser.OldPassword) && !string.IsNullOrEmpty(objUser.Password))
+                            {
+                                CommonFunctions common = new CommonFunctions();
+                                objUser.OldPassword = common.GetEncodePassword(objUser.OldPassword);
+                                objUser.Password = common.GetEncodePassword(objUser.Password);
+                                var result = ur.ChangePassword(objUser, objUser.Password);
+
+                            }
+                        }
+                        if (objUser.IsMyProfile)
+                        {
+                            var userDetails = ur.GetUserById(objUser.UserId);
+                            Session["UserSession"] = userDetails[0];
+                            TempData["Message"] = "User Information Saved Successfully";
+                            return RedirectToAction("MyProfile", "Account");
+                        }
+                        
+
+                    }
+                    if (objUser.UserId == 0 && rows != 0)
                     {
                         Guid guid = Guid.NewGuid();
                         string token = guid.ToString();
@@ -126,14 +159,14 @@ namespace LMSWeb.Controllers
                         var emailBody = "Welcome To LMS. </br> Please click below link to Login </br>";
                         emailBody = emailBody + link;
                         var result = ur.AddToken(objUser.EmailId, token);
-                        
+
                         var emailSubject = System.Configuration.ConfigurationManager.AppSettings["emailSubject"];
                         tblEmails objEmail = new tblEmails();
                         objEmail.EmailTo = objUser.EmailId;
                         objEmail.EmailSubject = emailSubject;
                         objEmail.EmailBody = emailBody;
 
-                        result = ur.InsertUserEmail(objEmail);
+                        result = ur.InsertEmail(objEmail);
 
                         TempData["Message"] = "Saved Successfully";
                         if (objUser.IsMyProfile)
@@ -144,16 +177,24 @@ namespace LMSWeb.Controllers
                     }
                     else
                     {
-                        TempData["Message"] = "Not Saved Successfully";
-                        return View(objUser);
+                        //TempData["Message"] = "Not Saved Successfully";
+                        return RedirectToAction("Index");
                     }
                 }
-                return View(objUser);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View(objUser);
+                if (objUser.IsMyProfile)
+                {
+                    return View("Profile", objUser);
+                }
+                else
+                {
+                    return View("AddNewUser",objUser);
+                }
+
             }
         }
 
@@ -167,12 +208,13 @@ namespace LMSWeb.Controllers
                 objEditData = userDetails[0];
                 objEditData.UserRoles = rr.GetAllRoles();
                 objEditData.Tenants = tr.GetAllTenants();
-                return View("AddUser", objEditData);
+                objEditData.IsMyProfile = false;
+                return View("AddNewUser", objEditData);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewUser");
             }
         }
 
@@ -224,28 +266,28 @@ namespace LMSWeb.Controllers
                     if (rows != 0)
                     {
                         response.StatusCode = 1;
-                        //return RedirectToAction("Index");
+
                     }
                     else
                     {
                         response.StatusCode = 0;
-                        //return View(objUser);
+
                     }
                 }
-                //return View(objTenant);
-                return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Upload()
         {
             TblUser sessionUser = (TblUser)Session["UserSession"];
-            return View(sessionUser);
+            return View("UploadUsers", sessionUser);
         }
 
         public ActionResult UploadUsers(TblUser objUser, HttpPostedFileBase file)
@@ -283,7 +325,7 @@ namespace LMSWeb.Controllers
                     objUser.RoleId = 3;
                     objUser.IsActive = true;
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("</br><font color=\"red\"><b>Users below are not imported.</b></font>");
+                    sb.Append("</br></br><font color=\"red\"><b>Users below are not imported.</b></font>");
                     int TotalRows = 0;
                     int index = 0;
                     List<string> lstEmailIds = new List<string>();
@@ -348,14 +390,18 @@ namespace LMSWeb.Controllers
                     StringBuilder sb1 = new StringBuilder();
                     sb1.AppendLine("</br><font color=\"green\"><b>Number of User/s Imported - " + TotalRows + "</b></font>");
                     sb1.AppendLine("</br>-----------------------------------------------------------------------</br>");
+                    foreach(var email in lstEmailIds)
+                    {
+                        sb1.AppendLine("Email Id - " + email + " -  <b>Added</b>");
+                    }
                     ViewBag.Log = sb1.ToString() + sb.ToString();
 
                     //Insert Emails in DB
                     DataTable tbl = new DataTable();
-                    tbl.Columns.Add(new DataColumn("EmailTo", typeof(string)));                    
+                    tbl.Columns.Add(new DataColumn("EmailTo", typeof(string)));
                     tbl.Columns.Add(new DataColumn("EmailSubject", typeof(string)));
                     tbl.Columns.Add(new DataColumn("EmailBody", typeof(string)));
-                    tbl.Columns.Add(new DataColumn("DateCreated", typeof(DateTime)));                    
+                    tbl.Columns.Add(new DataColumn("DateCreated", typeof(DateTime)));
                     tbl.Columns.Add(new DataColumn("isSent", typeof(bool)));
                     tbl.Columns.Add(new DataColumn("DateSent", typeof(DateTime)));
                     tbl.Columns.Add(new DataColumn("SentStatus", typeof(string)));
@@ -385,18 +431,17 @@ namespace LMSWeb.Controllers
                     }
 
                     int addedRows = ur.InsertEmails(tbl);
-
-
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 newException.AddException(ex);
                 TempData["Message"] = "There is some problem in Importing Users. Please contact Support Administrator";
-                return View("Upload");
+                return View("UploadUsers");
             }
 
-            return View("Upload");
+            return View("UploadUsers");
         }
+
     }
 }

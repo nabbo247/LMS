@@ -1,4 +1,4 @@
-﻿@model LMSBL.DBModels.TblCourse
+﻿@model LMSBL.DBModels.tblCourse
 
 @{
     ViewBag.Title = "AddCourse";
@@ -7,53 +7,59 @@
 @using (Html.BeginForm("AddCourse", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <h1>Add New Course</h1>
+    <h4>Add New Course</h4>
     <div class="row col-12">
         <hr class="form-divider">
     </div>
     <form class="form-inline">
         <div class="row col-12">
-            <div class="form-group col-6 pl-0">
-                @Html.LabelFor(model => model.CourseName, new { @class = "col-3 p-0" })
-                @Html.TextBoxFor(model => model.CourseName, new { @class = "col-6 ml-0 form-control" })
 
-            </div>
-            <div class="form-group col-6 pl-0">
-                @Html.LabelFor(model => model.CourseDetails, new { @class = "col-3 p-0" })
-                @Html.TextBoxFor(model => model.CourseDetails, new { @class = "col-6 form-control ml-0" })
+            @Html.HiddenFor(model => model.ContentModuleId)
+            @Html.HiddenFor(model => model.ContentModuleURL)
+            @Html.LabelFor(model => model.ContentModuleName, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.ContentModuleName, new { @class = "col-6 ml-0 form-control" })
+            <span class="required">&#10026;</span>
+            <hr class="form-divider">
+        </div>
 
-
-            </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.ContentModuleDescription, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.ContentModuleDescription, new { @class = "col-6 ml-0 form-control" })
             <hr class="form-divider">
         </div>
         <div class="row col-12">
-            <div class="form-group col-6 pl-0">
-                @Html.LabelFor(model => model.CourseCategory, new { @class = "col-3 p-0" })
-                @Html.TextBoxFor(model => model.CourseCategory, new { @class = "col-6 ml-0 form-control" })
-
-            </div>
-            <div class="form-group col-6 pl-0">
-                @Html.LabelFor(x => Model.Tenants[0].TenantName, new { @class = "col-3 p-0" })
-                @Html.DropDownListFor(x => Model.Tenants[0].TenantId, new SelectList(Model.Tenants, "TenantId", "TenantName"),
-                new { @class = "col-6 ml-0 form-control", id = "Tenants" })
-
-            </div>
+            @Html.LabelFor(model => model.MasteryScore, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.MasteryScore, new { @class = "col-6 ml-0 form-control" })
             <hr class="form-divider">
         </div>
         <div class="row col-12">
-            <div class="form-group col-6 pl-0">
-                @Html.LabelFor(model => model.ZipFile, htmlAttributes: new { @class = "col-3 p-0" })
-                <label class="btn-bs-file btn btn-lg btn-primary-outline">
-                    Browse @Html.TextBoxFor(m => m.ZipFile, new { type = "file", onchange = "readURL(this)" })
-                </label>
+            @Html.LabelFor(model => model.ContentModuleType, new { @class = "col-3 p-0" })
+            @Html.DropDownListFor(x => Model.ContentModuleType, new SelectList(new List<Object>{
+                       new { value = "Scorm1.2" , text = "Scorm1.2"  }
+                    }, "value", "text"), htmlAttributes: new { @class = "col-6 ml-0 form-control", id = "UserRoles" })
+            <span class="required">&#10026;</span>
 
+            <hr class="form-divider">
+        </div>
+
+        <div class="row col-12">
+            <div class="col-3 p-0">
+                Upload Course
             </div>
-            <div class="col-6 ml-0">
-                <span>File Name: <span id="browse-img-name"> - </span></span> <br>
-                <small>File Size: <span id="browse-img-size"> - </span>KB</small>
+            <div class="form-group col-5 pl-0">
+                <input type="file" name="file" id="file" style="width: 50%;" accept=".zip" />
+                <div>
+                    <small>(File should not exceed 20 MB)</small>
+                </div>
+            </div>
+            <div class="col-3 p-0" id="lnkCourseFile">
+                <a href="#">
+                    @Model.ContentModuleURL
+                </a>
             </div>
             <hr class="form-divider">
         </div>
+
 
         <div class="row col-12" style="margin-bottom: 34px;">
             <div class="col-8">
@@ -64,18 +70,9 @@
                         class="btn btn-outline-secondary">
                     <b>Cancel</b>
                 </button>
-                <button type="submit" class="btn btn-outline-secondary"><b>Submit</b></button>
+                <button type="submit" id="btnCourseSubmit" class="btn btn-outline-secondary"><b>Submit</b></button>
             </div>
         </div>
     </form>
 }
-<script type="text/javascript">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            var filename = input.files[0].name;
-            $('#browse-img-name').text(filename);
-            $('#browse-img-size').text(input.files[0].size);
-        }
-    }
-</script>
+<script src="~/assets/Validations.js"></script>

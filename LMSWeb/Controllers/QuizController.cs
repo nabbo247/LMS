@@ -20,19 +20,19 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                
+
                 TblUser sessionUser = (TblUser)Session["UserSession"];
-                
+
                 List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
                 lstAllQuiz = quizRepository.GetAllQuiz(sessionUser.TenantId);
 
-                return View(lstAllQuiz);
+                return View("QuizList", lstAllQuiz);
             }
             catch (Exception ex)
             {
                 //newException.AddDummyException("222222");
                 newException.AddException(ex);
-                return View();
+                return View("QuizList");
             }
         }
 
@@ -42,12 +42,12 @@ namespace LMSWeb.Controllers
             {
                 TblQuiz objQuiz = new TblQuiz();
 
-                return View(objQuiz);
+                return View("AddNewQuiz", objQuiz);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewQuiz");
             }
         }
 
@@ -120,29 +120,29 @@ namespace LMSWeb.Controllers
                         if (rows != 0)
                         {
                             TempData["Message"] = "Quiz Saved Successfully";
-                           
+
                             return RedirectToAction("Index");
                         }
                         else if (rows == 0)
-                        {                            
+                        {
                             TempData["Message"] = "There is some problem while saving Quiz";
-                            return View(objQuiz);
+                            return View("AddNewQuiz",objQuiz);
                         }
                         else
-                        {                            
-                            return View(objQuiz);
+                        {
+                            return View("AddNewQuiz",objQuiz);
                         }
                     }
                 }
-                
-                    return View(objQuiz);
-               
+
+                return View("AddNewQuiz",objQuiz);
+
             }
             catch (Exception ex)
             {
                 //newException.AddDummyException("11111");
                 newException.AddException(ex);
-                return View();
+                return View("AddNewQuiz");
             }
         }
         public ActionResult EditQuiz(int id)
@@ -155,33 +155,33 @@ namespace LMSWeb.Controllers
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
                 objQuiz[0].hdnEditData = json_serializer.Serialize(objQuiz[0]);
-                return View("EditQuiz", objQuiz[0]);
+                return View("EditNewQuiz", objQuiz[0]);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View("EditQuiz", null);
+                return View("EditNewQuiz", null);
             }
         }
         [HttpPost]
         public ActionResult AssignQuizToUsers(QuizAssignViewModel quizAssignViewModel)
         {
             var index = quizRepository.DeleteAssignedUser(quizAssignViewModel.quiz.QuizId);
-            int assigned = 0;
-            int notAssigned = 0;
+
             foreach (var userId in quizAssignViewModel.userIds)
             {
-                var result = quizRepository.AssignQuiz(quizAssignViewModel.quiz.QuizId, userId);
-                if (result > 0)
-                    assigned++;
-                else
-                    notAssigned++;
-            }
-            string message = "Quiz Assigned to - " + assigned + " User/s";
-            if (notAssigned > 0)
-                message += " And Not Assigned to - " + notAssigned + " User/s";
+                var result = quizRepository.AssignQuiz(quizAssignViewModel.quiz.QuizId, userId, quizAssignViewModel.DueDate);
 
-            TempData["Message"] = message;
+                var emailBody = quizAssignViewModel.quiz.QuizName + " - assigned to you. Please go through it. <br /> Your Due Date is - " + quizAssignViewModel.DueDate;
+                var emailSubject = "Course Assigned - " + quizAssignViewModel.quiz.QuizName;
+                tblEmails objEmail = new tblEmails();
+                var objUser = userRepository.GetUserById(userId);
+                objEmail.EmailTo = objUser[0].EmailId;
+                objEmail.EmailSubject = emailSubject;
+                objEmail.EmailBody = emailBody;
+                var emailResult = userRepository.InsertEmail(objEmail);
+            }
+
             return RedirectToAction("Index");
         }
         public ActionResult ViewQuiz(int id)
@@ -195,12 +195,12 @@ namespace LMSWeb.Controllers
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 lstAllQuiz[0].hdnViewData = json_serializer.Serialize(lstAllQuiz[0]);
 
-                return View(lstAllQuiz[0]);
+                return View("ViewAdminQuiz", lstAllQuiz[0]);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("ViewAdminQuiz");
             }
         }
     }

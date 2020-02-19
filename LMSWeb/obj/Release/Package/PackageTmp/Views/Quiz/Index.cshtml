@@ -4,17 +4,8 @@
     ViewBag.Title = "Quiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
 
-    if (!string.IsNullOrEmpty(Convert.ToString(TempData["Message"])))
-    {
-        <script>
-            $("#dvMessage").show();
-            setTimeout(function () { $("#dvMessage").hide(); }, 3000);
-        </script>
-    }
-}
-<h4>Index</h4>
+
 
 <body>
     <div class="main-container container">
@@ -28,7 +19,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Sr No.</th>
                     <th scope="col">Quiz Name</th>
                     <th scope="col">Quiz Description</th>
                     <th scope="col" colspan="2">Actions</th>
@@ -37,10 +28,12 @@
             <tbody>
                 @if (Model != null)
                 {
+                    var index = 0;
                     foreach (var quiz in Model)
                     {
+                        index++;
                         <tr>
-                            <th scope="row">@quiz.QuizId</th>
+                            <th scope="row">@index</th>
                             <td>@quiz.QuizName</td>
                             <td>@quiz.QuizDescription</td>
 

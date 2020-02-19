@@ -32,6 +32,13 @@
             @Html.LabelFor(model => model.QuizDescription, new { @class = "col-3" })
             @Html.TextBoxFor(model => model.QuizDescription, new { @class = "col-6 form-control ml-0" })
 
+            
+            <hr class="form-divider">
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Duration, new { @class = "col-3" }) 
+            @Html.TextBoxFor(model => model.Duration, new { @class = "col-6 ml-0 form-control ml-0" })
+
             <div class="form-group  col-sm-3 col-md-3">
                 <a><button type="button" id="btnAddQuestion" class="btn pl-4 pr-4 text-center btn-warning pull-right">Add Question</button></a>
             </div>

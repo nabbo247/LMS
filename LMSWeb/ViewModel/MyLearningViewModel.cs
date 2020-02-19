@@ -11,7 +11,7 @@ namespace LMSWeb.ViewModel
     public class MyLearningViewModel
     {
         public List<TblQuiz> lstQuiz { get; set; }
-        public List<TblCourse> lstCourse { get; set; }
+        public List<tblCourse> lstCourse { get; set; }
 
     }
 }

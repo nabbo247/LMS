@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Dinesh\Desktop\LMS_Publish\CoursePlayer</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Browsers/BrowserFile.browser">
+      <publishTime>01/09/2015 15:19:08</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>09/18/2014 20:17:34</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.Web.dll">
+      <publishTime>09/18/2014 20:17:34</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.dll">
+      <publishTime>09/18/2014 20:17:34</publishTime>
+    </File>
+    <File Include="bin/CoursePlayer.dll">
+      <publishTime>02/15/2020 11:17:26</publishTime>
+    </File>
+    <File Include="bin/CoursePlayer.pdb">
+      <publishTime>02/15/2020 11:17:26</publishTime>
+    </File>
+    <File Include="bin/Elmah.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/Mono.Security.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/Npgsql.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="bin/System.Data.SqlServerCe.dll">
+      <publishTime>09/18/2014 20:17:24</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/BLL.dll">
+      <publishTime>01/12/2015 13:25:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/BLL.pdb">
+      <publishTime>01/12/2015 13:25:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/BO.dll">
+      <publishTime>01/12/2015 13:10:00</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/BO.pdb">
+      <publishTime>01/12/2015 13:10:00</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/DAL.dll">
+      <publishTime>01/12/2015 13:25:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/DAL.pdb">
+      <publishTime>01/12/2015 13:25:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/ErrorHandling.dll">
+      <publishTime>01/12/2015 13:25:48</publishTime>
+    </File>
+    <File Include="BLL/bin/Debug/ErrorHandling.pdb">
+      <publishTime>01/12/2015 13:25:48</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/BLL.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/BLL.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/BO.dll">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/BO.pdb">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/DAL.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/DAL.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/ErrorHandling.dll">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="BLL/bin/Release/ErrorHandling.pdb">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="BLL/BLL.csproj">
+      <publishTime>01/27/2020 21:39:56</publishTime>
+    </File>
+    <File Include="BLL/BLL.csproj.user">
+      <publishTime>01/12/2015 16:29:18</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.csproj.CopyComplete">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:39:56</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.csprojAssemblyReference.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.csprojResolveAssemblyReference.cache">
+      <publishTime>08/10/2015 12:26:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.dll">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/BLL.pdb">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/CSC230DAA63E514289AB77D79B3F6C8CE2.TMP">
+      <publishTime>01/12/2015 14:44:22</publishTime>
+    </File>
+    <File Include="BLL/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="BLL/obj/Release/BLL.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:39:56</publishTime>
+    </File>
+    <File Include="BLL/obj/Release/BLL.csprojResolveAssemblyReference.cache">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/obj/Release/BLL.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/obj/Release/BLL.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="BLL/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BO/bin/Debug/BO.dll">
+      <publishTime>01/09/2015 15:22:56</publishTime>
+    </File>
+    <File Include="BO/bin/Debug/BO.pdb">
+      <publishTime>01/09/2015 15:22:54</publishTime>
+    </File>
+    <File Include="BO/bin/Release/BO.dll">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BO/bin/Release/BO.pdb">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BO/BO.csproj">
+      <publishTime>07/12/2015 22:11:46</publishTime>
+    </File>
+    <File Include="BO/BO.csproj.user">
+      <publishTime>01/12/2015 12:05:46</publishTime>
+    </File>
+    <File Include="BO/obj/Debug/BO.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:38:28</publishTime>
+    </File>
+    <File Include="BO/obj/Debug/BO.csprojAssemblyReference.cache">
+      <publishTime>01/27/2020 21:25:12</publishTime>
+    </File>
+    <File Include="BO/obj/Debug/BO.dll">
+      <publishTime>01/27/2020 21:25:16</publishTime>
+    </File>
+    <File Include="BO/obj/Debug/BO.pdb">
+      <publishTime>01/27/2020 21:25:16</publishTime>
+    </File>
+    <File Include="BO/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>01/22/2020 22:41:12</publishTime>
+    </File>
+    <File Include="BO/obj/Release/BO.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:38:28</publishTime>
+    </File>
+    <File Include="BO/obj/Release/BO.dll">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BO/obj/Release/BO.pdb">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="BO/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="browser_os_detect.js">
+      <publishTime>01/09/2015 15:19:00</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/BO.dll">
+      <publishTime>01/09/2015 15:22:56</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/BO.pdb">
+      <publishTime>01/09/2015 15:22:54</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/DAL.dll">
+      <publishTime>01/09/2015 15:22:56</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/DAL.pdb">
+      <publishTime>01/09/2015 15:22:56</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/ErrorHandling.dll">
+      <publishTime>01/08/2015 13:01:10</publishTime>
+    </File>
+    <File Include="DAL/bin/Debug/ErrorHandling.pdb">
+      <publishTime>01/08/2015 13:01:10</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/BO.dll">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/BO.pdb">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/DAL.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/DAL.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/ErrorHandling.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/bin/Release/ErrorHandling.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/DAL.csproj">
+      <publishTime>01/27/2020 21:38:28</publishTime>
+    </File>
+    <File Include="DAL/DAL.csproj.user">
+      <publishTime>01/12/2015 16:29:18</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.csproj.CopyComplete">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:39:55</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.csprojAssemblyReference.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.csprojResolveAssemblyReference.cache">
+      <publishTime>08/10/2015 12:26:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.dll">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DAL.pdb">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="DAL/obj/Release/DAL.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:39:55</publishTime>
+    </File>
+    <File Include="DAL/obj/Release/DAL.csprojResolveAssemblyReference.cache">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/obj/Release/DAL.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/obj/Release/DAL.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="DAL/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="DisplayError.aspx">
+      <publishTime>07/12/2015 17:15:04</publishTime>
+    </File>
+    <File Include="dummy.html">
+      <publishTime>01/09/2015 15:19:02</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Debug/ErrorHandling.dll">
+      <publishTime>01/08/2015 13:01:10</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Debug/ErrorHandling.pdb">
+      <publishTime>01/08/2015 13:01:10</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Release/BO.dll">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Release/BO.pdb">
+      <publishTime>07/12/2015 23:09:40</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Release/ErrorHandling.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="ErrorHandling/bin/Release/ErrorHandling.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="ErrorHandling/ErrorHandling.csproj">
+      <publishTime>01/27/2020 21:38:27</publishTime>
+    </File>
+    <File Include="ErrorHandling/ErrorHandling.csproj.user">
+      <publishTime>01/13/2015 13:06:50</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.csproj.CopyComplete">
+      <publishTime>01/27/2020 21:25:18</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:25:18</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.csprojAssemblyReference.cache">
+      <publishTime>01/27/2020 21:25:20</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.csprojResolveAssemblyReference.cache">
+      <publishTime>08/10/2015 12:26:20</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.dll">
+      <publishTime>01/27/2020 21:25:18</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Debug/ErrorHandling.pdb">
+      <publishTime>01/27/2020 21:25:18</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache">
+      <publishTime>07/12/2015 23:09:52</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Release/ErrorHandling.csproj.FileListAbsolute.txt">
+      <publishTime>01/27/2020 21:38:27</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Release/ErrorHandling.csprojResolveAssemblyReference.cache">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Release/ErrorHandling.dll">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="ErrorHandling/obj/Release/ErrorHandling.pdb">
+      <publishTime>07/12/2015 23:09:54</publishTime>
+    </File>
+    <File Include="ErrorService.asmx">
+      <publishTime>07/12/2015 17:57:06</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>01/09/2015 15:19:00</publishTime>
+    </File>
+    <File Include="HTMLGetSCORM.htm">
+      <publishTime>01/27/2020 22:48:32</publishTime>
+    </File>
+    <File Include="js/jquery.min1.4.2.js">
+      <publishTime>01/09/2015 15:19:56</publishTime>
+    </File>
+    <File Include="js/NewScormJS.js">
+      <publishTime>08/10/2015 09:13:30</publishTime>
+    </File>
+    <File Include="LaunchPlayer.aspx">
+      <publishTime>07/12/2015 22:01:38</publishTime>
+    </File>
+    <File Include="LMSExitPlayer.aspx">
+      <publishTime>07/12/2015 17:57:06</publishTime>
+    </File>
+    <File Include="LMSNewScormDisplaySCO.htm">
+      <publishTime>08/10/2015 09:08:58</publishTime>
+    </File>
+    <File Include="LMSNewScormTopBar.aspx">
+      <publishTime>07/12/2015 17:57:06</publishTime>
+    </File>
+    <File Include="Reconnect.aspx">
+      <publishTime>01/09/2015 15:19:02</publishTime>
+    </File>
+    <File Include="Reports.aspx">
+      <publishTime>08/08/2015 18:24:54</publishTime>
+    </File>
+    <File Include="ScormCourseDefaultPage.aspx">
+      <publishTime>02/03/2020 22:04:24</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/bracket1.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/bracket2.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/sco_next_btn_green.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/sco_next_btn_orange.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/sco_previous_btn_green.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/images/sco_previous_btn_orange.jpg">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/js/ClientScripts.js">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/js/LMSRTEWrapperJS.js">
+      <publishTime>01/27/2015 18:58:42</publishTime>
+    </File>
+    <File Include="ScormLibrary/js/Master.js">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/js/RTEMaster.js">
+      <publishTime>02/03/2020 22:59:58</publishTime>
+    </File>
+    <File Include="ScormLibrary/js/ScormValidations.js">
+      <publishTime>01/09/2015 15:19:58</publishTime>
+    </File>
+    <File Include="SessionPoller.aspx">
+      <publishTime>07/12/2015 17:57:06</publishTime>
+    </File>
+    <File Include="soapclient.js">
+      <publishTime>01/09/2015 15:19:02</publishTime>
+    </File>
+    <File Include="UpdateLMS.aspx">
+      <publishTime>02/03/2020 21:38:39</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/03/2020 21:56:57</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

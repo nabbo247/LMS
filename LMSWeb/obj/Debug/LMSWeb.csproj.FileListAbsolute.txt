@@ -481,6 +481,7 @@ E:\Projects\LMS\LMSWeb\bin\roslyn\vbc.rsp
 E:\Projects\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe
 E:\Projects\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
 E:\Projects\LMS\LMSWeb\bin\Antlr3.Runtime.dll
+E:\Projects\LMS\LMSWeb\bin\itextsharp.dll
 E:\Projects\LMS\LMSWeb\bin\LMSBL.dll
 E:\Projects\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 E:\Projects\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -502,6 +503,7 @@ E:\Projects\LMS\LMSWeb\bin\WebGrease.dll
 E:\Projects\LMS\LMSWeb\bin\EntityFramework.dll
 E:\Projects\LMS\LMSWeb\bin\LMSBL.pdb
 E:\Projects\LMS\LMSWeb\bin\LMSBL.dll.config
+E:\Projects\LMS\LMSWeb\bin\itextsharp.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Helpers.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Mvc.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Optimization.xml

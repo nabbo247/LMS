@@ -12,6 +12,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/images/ajax-loader.gif">
       <publishTime>01/02/2020 16:18:20</publishTime>
     </File>
+    <File Include="assets/images/assign.png">
+      <publishTime>02/11/2020 17:39:00</publishTime>
+    </File>
+    <File Include="assets/images/assigned-to-users.png">
+      <publishTime>01/30/2020 17:27:22</publishTime>
+    </File>
     <File Include="assets/images/avatar-1.jpg">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
@@ -41,6 +47,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/images/card-img.jpg">
       <publishTime>11/23/2019 10:39:33</publishTime>
+    </File>
+    <File Include="assets/images/check-img.png">
+      <publishTime>01/28/2020 16:10:52</publishTime>
+    </File>
+    <File Include="assets/images/course.png">
+      <publishTime>02/10/2020 23:39:45</publishTime>
     </File>
     <File Include="assets/images/down-arrow.jpg">
       <publishTime>12/04/2019 18:23:10</publishTime>
@@ -81,8 +93,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/images/error-img.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="assets/images/eye.png">
+      <publishTime>01/29/2020 09:17:47</publishTime>
+    </File>
+    <File Include="assets/images/favicon.ico">
+      <publishTime>02/06/2020 16:58:31</publishTime>
+    </File>
+    <File Include="assets/images/gettyimages-157318827-2048x2048.jpg">
+      <publishTime>02/16/2020 10:52:05</publishTime>
+    </File>
+    <File Include="assets/images/giphy.gif">
+      <publishTime>02/06/2020 13:22:31</publishTime>
+    </File>
     <File Include="assets/images/github.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
+    </File>
+    <File Include="assets/images/hour-glass.png">
+      <publishTime>01/23/2020 13:30:59</publishTime>
     </File>
     <File Include="assets/images/imagplaceholder.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -90,11 +117,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/images/info-icon.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="assets/images/launch.png">
+      <publishTime>01/27/2020 17:28:33</publishTime>
+    </File>
+    <File Include="assets/images/LearningReport.png">
+      <publishTime>02/12/2020 15:21:34</publishTime>
+    </File>
     <File Include="assets/images/loader.svg">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="assets/images/Login Cognition.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
+    </File>
+    <File Include="assets/images/login-btn-img.png">
+      <publishTime>01/28/2020 16:10:52</publishTime>
     </File>
     <File Include="assets/images/loginpage.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -104,6 +140,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/images/mail_chimp.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
+    </File>
+    <File Include="assets/images/not-assigned.png">
+      <publishTime>01/30/2020 17:27:35</publishTime>
     </File>
     <File Include="assets/images/orange.jpg">
       <publishTime>12/27/2019 13:32:06</publishTime>
@@ -123,6 +162,69 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/images/product-pic.jpg">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="assets/images/quiz.png">
+      <publishTime>02/10/2020 23:39:45</publishTime>
+    </File>
+    <File Include="assets/images/rockettechpng-1.png">
+      <publishTime>01/13/2020 12:41:42</publishTime>
+    </File>
+    <File Include="assets/images/rt_logo.png">
+      <publishTime>01/23/2020 13:30:59</publishTime>
+    </File>
+    <File Include="assets/images/shape%402x.png">
+      <publishTime>01/31/2020 09:33:50</publishTime>
+    </File>
+    <File Include="assets/images/shape.png">
+      <publishTime>01/27/2020 17:24:46</publishTime>
+    </File>
+    <File Include="assets/images/shape1.png">
+      <publishTime>01/27/2020 17:24:46</publishTime>
+    </File>
+    <File Include="assets/images/shape_2.png">
+      <publishTime>01/23/2020 13:30:59</publishTime>
+    </File>
+    <File Include="assets/images/shape_activate.png">
+      <publishTime>01/31/2020 09:50:40</publishTime>
+    </File>
+    <File Include="assets/images/shape_Active.png">
+      <publishTime>01/31/2020 09:27:35</publishTime>
+    </File>
+    <File Include="assets/images/shape_activeBig.png">
+      <publishTime>01/31/2020 09:31:44</publishTime>
+    </File>
+    <File Include="assets/images/shape_ActiveUsers.png">
+      <publishTime>01/31/2020 08:51:55</publishTime>
+    </File>
+    <File Include="assets/images/shape_AssignedUserLegend.png">
+      <publishTime>01/31/2020 09:07:52</publishTime>
+    </File>
+    <File Include="assets/images/shape_deactivate.png">
+      <publishTime>01/31/2020 09:53:54</publishTime>
+    </File>
+    <File Include="assets/images/shape_editUser.png">
+      <publishTime>01/31/2020 09:35:15</publishTime>
+    </File>
+    <File Include="assets/images/shape_HighScoreUsers.png">
+      <publishTime>01/31/2020 08:54:04</publishTime>
+    </File>
+    <File Include="assets/images/shape_inactive.png">
+      <publishTime>01/31/2020 09:28:41</publishTime>
+    </File>
+    <File Include="assets/images/shape_InactiveBig.png">
+      <publishTime>01/31/2020 09:32:28</publishTime>
+    </File>
+    <File Include="assets/images/shape_InactiveUser.png">
+      <publishTime>01/31/2020 09:29:30</publishTime>
+    </File>
+    <File Include="assets/images/shape_Learnings.png">
+      <publishTime>01/31/2020 08:52:53</publishTime>
+    </File>
+    <File Include="assets/images/shape_NotAssignedLegend.png">
+      <publishTime>01/31/2020 09:06:51</publishTime>
+    </File>
+    <File Include="assets/images/shape_TotalUsers.png">
+      <publishTime>01/31/2020 08:46:53</publishTime>
+    </File>
     <File Include="assets/images/slack.png">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
@@ -134,6 +236,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/images/up-arrow.jpg">
       <publishTime>12/04/2019 18:23:05</publishTime>
+    </File>
+    <File Include="assets/images/UserReport.png">
+      <publishTime>02/12/2020 15:28:17</publishTime>
     </File>
     <File Include="assets/libs/css/style.css">
       <publishTime>12/02/2019 16:54:32</publishTime>
@@ -163,10 +268,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="assets/Quiz.js">
-      <publishTime>01/10/2020 11:32:55</publishTime>
+      <publishTime>02/17/2020 15:24:07</publishTime>
+    </File>
+    <File Include="assets/SweetAlert.js">
+      <publishTime>01/10/2020 19:51:59</publishTime>
     </File>
     <File Include="assets/Validations.js">
-      <publishTime>01/02/2020 17:12:52</publishTime>
+      <publishTime>02/12/2020 20:20:23</publishTime>
     </File>
     <File Include="assets/vendor/bootstrap-colorpicker/%40claviska/jquery-minicolors/jquery.minicolors.css">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1323,20 +1431,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/23/2019 10:39:36</publishTime>
     </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>06/20/2019 17:39:40</publishTime>
+    </File>
     <File Include="bin/LMSBL.dll">
-      <publishTime>01/08/2020 10:21:55</publishTime>
+      <publishTime>02/16/2020 13:23:45</publishTime>
     </File>
     <File Include="bin/LMSBL.dll.config">
       <publishTime>11/23/2019 11:45:36</publishTime>
     </File>
     <File Include="bin/LMSBL.pdb">
-      <publishTime>01/08/2020 10:21:55</publishTime>
+      <publishTime>02/16/2020 13:23:45</publishTime>
     </File>
     <File Include="bin/LMSWeb.dll">
-      <publishTime>01/10/2020 14:50:26</publishTime>
+      <publishTime>02/17/2020 16:10:29</publishTime>
     </File>
     <File Include="bin/LMSWeb.pdb">
-      <publishTime>01/10/2020 14:50:26</publishTime>
+      <publishTime>02/17/2020 16:10:29</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>11/23/2019 10:39:36</publishTime>
@@ -1629,8 +1740,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="CSS/lib/styleold.css">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="CSS/style.css">
+      <publishTime>02/16/2020 13:08:28</publishTime>
+    </File>
+    <File Include="DBScript/LMSDB.bak">
+      <publishTime>01/23/2020 22:05:49</publishTime>
+    </File>
     <File Include="DBScript/LMSDB_Script.sql">
       <publishTime>01/04/2020 09:46:03</publishTime>
+    </File>
+    <File Include="DBScript/LMSscript_14Jan.sql">
+      <publishTime>01/14/2020 21:22:20</publishTime>
+    </File>
+    <File Include="DBScript/scormplayertables.txt">
+      <publishTime>01/24/2020 10:38:05</publishTime>
+    </File>
+    <File Include="DBScript/Script24Jan.txt">
+      <publishTime>01/24/2020 12:01:19</publishTime>
+    </File>
+    <File Include="Download/UserUploadTemplate.csv">
+      <publishTime>01/15/2020 13:59:43</publishTime>
+    </File>
+    <File Include="Download/UserUploadTemplate.xlsx">
+      <publishTime>01/15/2020 13:47:50</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>11/23/2019 10:39:36</publishTime>
@@ -1725,74 +1857,179 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/slimscroll/jquery.slimscroll.js">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="Views/Account/ChangePassword.cshtml">
+      <publishTime>01/20/2020 21:57:31</publishTime>
+    </File>
     <File Include="Views/Account/Index.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
+    <File Include="Views/Account/MyProfile.cshtml">
+      <publishTime>01/20/2020 21:23:55</publishTime>
+    </File>
+    <File Include="Views/Account/Profile.cshtml">
+      <publishTime>02/12/2020 19:03:53</publishTime>
+    </File>
     <File Include="Views/Assignment/LaunchQuiz.cshtml">
-      <publishTime>01/10/2020 13:30:10</publishTime>
+      <publishTime>02/10/2020 16:55:18</publishTime>
+    </File>
+    <File Include="Views/Assignment/LaunchQuizNew.cshtml">
+      <publishTime>02/15/2020 23:03:03</publishTime>
     </File>
     <File Include="Views/Assignment/MyAssignments.cshtml">
-      <publishTime>01/08/2020 18:57:00</publishTime>
+      <publishTime>01/28/2020 14:06:04</publishTime>
+    </File>
+    <File Include="Views/Assignment/MyLearning.cshtml">
+      <publishTime>02/17/2020 14:36:05</publishTime>
+    </File>
+    <File Include="Views/Assignment/RatingAndFeedback.cshtml">
+      <publishTime>02/15/2020 23:14:26</publishTime>
     </File>
     <File Include="Views/Assignment/ReviewQuiz.cshtml">
-      <publishTime>01/08/2020 22:07:02</publishTime>
+      <publishTime>01/20/2020 15:53:55</publishTime>
+    </File>
+    <File Include="Views/Assignment/ReviewQuizLearner.cshtml">
+      <publishTime>02/17/2020 16:09:04</publishTime>
     </File>
     <File Include="Views/Courses/AddCourse.cshtml">
-      <publishTime>11/28/2019 18:01:32</publishTime>
+      <publishTime>02/05/2020 19:26:21</publishTime>
+    </File>
+    <File Include="Views/Courses/AddNewCourse.cshtml">
+      <publishTime>02/16/2020 12:24:11</publishTime>
+    </File>
+    <File Include="Views/Courses/AssignCourse.cshtml">
+      <publishTime>02/16/2020 12:37:10</publishTime>
+    </File>
+    <File Include="Views/Courses/CourseList.cshtml">
+      <publishTime>02/15/2020 20:24:12</publishTime>
     </File>
     <File Include="Views/Courses/DeleteCourse.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Courses/EditCourse.cshtml">
-      <publishTime>11/28/2019 18:01:07</publishTime>
+      <publishTime>01/24/2020 21:20:38</publishTime>
     </File>
     <File Include="Views/Courses/Index.cshtml">
-      <publishTime>11/28/2019 14:24:50</publishTime>
+      <publishTime>01/27/2020 15:15:13</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
+    </File>
+    <File Include="Views/Home/AdminHome.cshtml">
+      <publishTime>02/13/2020 18:40:44</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/19/2019 23:41:54</publishTime>
+      <publishTime>01/23/2020 14:43:42</publishTime>
+    </File>
+    <File Include="Views/Home/LearnerHome.cshtml">
+      <publishTime>02/17/2020 14:33:03</publishTime>
+    </File>
+    <File Include="Views/Home/_ActivityData.cshtml">
+      <publishTime>02/17/2020 14:28:47</publishTime>
+    </File>
+    <File Include="Views/Home/_AdminHomeList.cshtml">
+      <publishTime>02/13/2020 18:41:16</publishTime>
+    </File>
+    <File Include="Views/Login/ChangePassword.cshtml">
+      <publishTime>02/06/2020 17:07:12</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>01/08/2020 19:50:04</publishTime>
+      <publishTime>02/06/2020 17:03:43</publishTime>
+    </File>
+    <File Include="Views/Login/Login.cshtml">
+      <publishTime>02/16/2020 11:02:57</publishTime>
     </File>
     <File Include="Views/Login/ResetPassword.cshtml">
-      <publishTime>01/08/2020 19:52:57</publishTime>
+      <publishTime>02/06/2020 17:07:10</publishTime>
+    </File>
+    <File Include="Views/Quiz/AddNewQuiz.cshtml">
+      <publishTime>02/16/2020 12:24:29</publishTime>
     </File>
     <File Include="Views/Quiz/AddQuiz.cshtml">
-      <publishTime>01/10/2020 14:40:55</publishTime>
+      <publishTime>02/07/2020 17:01:59</publishTime>
     </File>
     <File Include="Views/Quiz/AssignQuiz.cshtml">
-      <publishTime>01/10/2020 14:49:11</publishTime>
+      <publishTime>02/16/2020 12:37:05</publishTime>
+    </File>
+    <File Include="Views/Quiz/EditNewQuiz.cshtml">
+      <publishTime>02/16/2020 12:43:24</publishTime>
     </File>
     <File Include="Views/Quiz/EditQuiz.cshtml">
-      <publishTime>01/10/2020 14:41:05</publishTime>
+      <publishTime>02/07/2020 17:01:32</publishTime>
     </File>
     <File Include="Views/Quiz/Index.cshtml">
-      <publishTime>01/10/2020 14:33:44</publishTime>
+      <publishTime>01/16/2020 23:48:21</publishTime>
+    </File>
+    <File Include="Views/Quiz/QuizList.cshtml">
+      <publishTime>02/15/2020 20:21:57</publishTime>
+    </File>
+    <File Include="Views/Quiz/ViewAdminQuiz.cshtml">
+      <publishTime>02/16/2020 15:25:29</publishTime>
     </File>
     <File Include="Views/Quiz/ViewQuiz.cshtml">
-      <publishTime>01/03/2020 18:28:27</publishTime>
+      <publishTime>01/19/2020 20:00:36</publishTime>
+    </File>
+    <File Include="Views/Reports/AllReports.cshtml">
+      <publishTime>01/14/2020 20:50:08</publishTime>
+    </File>
+    <File Include="Views/Reports/AttemptReport.cshtml">
+      <publishTime>02/17/2020 16:09:39</publishTime>
+    </File>
+    <File Include="Views/Reports/DetailReport.cshtml">
+      <publishTime>02/17/2020 13:52:21</publishTime>
+    </File>
+    <File Include="Views/Reports/HighScoreUsersReport.cshtml">
+      <publishTime>02/13/2020 18:32:57</publishTime>
     </File>
     <File Include="Views/Reports/Index.cshtml">
-      <publishTime>01/03/2020 16:23:38</publishTime>
+      <publishTime>01/14/2020 20:51:46</publishTime>
+    </File>
+    <File Include="Views/Reports/LearnerReportMain.cshtml">
+      <publishTime>02/17/2020 13:51:19</publishTime>
+    </File>
+    <File Include="Views/Reports/LearningCompletionReport.cshtml">
+      <publishTime>02/15/2020 23:31:34</publishTime>
+    </File>
+    <File Include="Views/Reports/LearningProgressCompletionReport.cshtml">
+      <publishTime>02/14/2020 17:55:37</publishTime>
+    </File>
+    <File Include="Views/Reports/UserProgressReport.cshtml">
+      <publishTime>02/14/2020 16:17:40</publishTime>
+    </File>
+    <File Include="Views/Reports/UserReport.cshtml">
+      <publishTime>02/15/2020 23:29:24</publishTime>
     </File>
     <File Include="Views/Reports/ViewQuiz.cshtml">
       <publishTime>01/03/2020 18:12:59</publishTime>
+    </File>
+    <File Include="Views/Reports/_LearningCompletionReportList.cshtml">
+      <publishTime>02/14/2020 16:51:59</publishTime>
+    </File>
+    <File Include="Views/Reports/_LearningProgressReportList.cshtml">
+      <publishTime>02/17/2020 12:12:41</publishTime>
+    </File>
+    <File Include="Views/Reports/_UserProgressReportList.cshtml">
+      <publishTime>02/17/2020 12:13:42</publishTime>
+    </File>
+    <File Include="Views/Reports/_UserReportList.cshtml">
+      <publishTime>02/14/2020 13:24:20</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/08/2020 14:56:12</publishTime>
+      <publishTime>02/07/2020 17:02:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutNew.cshtml">
+      <publishTime>02/17/2020 13:25:13</publishTime>
     </File>
     <File Include="Views/Tenant/AddTenant.cshtml">
-      <publishTime>01/02/2020 16:44:14</publishTime>
+      <publishTime>01/24/2020 15:38:16</publishTime>
+    </File>
+    <File Include="Views/Tenant/AddTenantUser.cshtml">
+      <publishTime>01/14/2020 20:46:30</publishTime>
     </File>
     <File Include="Views/Tenant/DeleteTenant.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1807,10 +2044,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/Tenant/Index.cshtml">
-      <publishTime>01/08/2020 18:51:50</publishTime>
+      <publishTime>01/14/2020 20:30:45</publishTime>
+    </File>
+    <File Include="Views/User/AddNewUser.cshtml">
+      <publishTime>02/14/2020 18:18:46</publishTime>
     </File>
     <File Include="Views/User/AddUser.cshtml">
-      <publishTime>01/08/2020 18:48:42</publishTime>
+      <publishTime>01/20/2020 21:09:00</publishTime>
     </File>
     <File Include="Views/User/DeleteUser.cshtml">
       <publishTime>11/23/2019 10:39:33</publishTime>
@@ -1825,16 +2065,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>01/08/2020 18:34:07</publishTime>
+      <publishTime>02/12/2020 17:13:56</publishTime>
+    </File>
+    <File Include="Views/User/Upload.cshtml">
+      <publishTime>02/12/2020 17:27:54</publishTime>
+    </File>
+    <File Include="Views/User/UploadUsers.cshtml">
+      <publishTime>02/16/2020 12:39:09</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/23/2019 10:39:33</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>11/23/2019 10:39:33</publishTime>
+      <publishTime>01/14/2020 01:07:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/02/2020 13:58:20</publishTime>
+      <publishTime>02/13/2020 19:08:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

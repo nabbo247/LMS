@@ -37,7 +37,8 @@ namespace LMSBL.Repository
                     RoleName = Convert.ToInt32(dr["roleId"]) == 2 ? Roles.Admin.ToString() : Roles.Learner.ToString(),//Convert.ToString(dr["roleName"]),
                     IsActive = Convert.ToBoolean(dr["isActive"]),
                     CreatedBy = Convert.ToInt32(dr["createdBy"]),
-                    CreatedOn = Convert.ToDateTime(dr["createdOn"])
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"]),
+                    profileImage = Convert.ToString(dr["profileImage"])
 
                 }).ToList();
                 return userDetails;
@@ -63,7 +64,7 @@ namespace LMSBL.Repository
                     EmailId = Convert.ToString(dr["emailId"]),
                     Password = Convert.ToString(dr["password"]),
                     //DOB = (DBNull.Value.Equals(dr["DOB"])) ? Convert.ToDateTime(dr["DOB"]):,
-                    //ContactNo = Convert.ToString(dr["contactNo"]),
+                    ContactNo = Convert.ToString(dr["contactNo"]),
                     TenantId = Convert.ToInt32(dr["tenantId"]),
                     //TenantName = Convert.ToString(dr["tenantName"]),
                     RoleId = Convert.ToInt32(dr["roleId"]),
@@ -99,22 +100,24 @@ namespace LMSBL.Repository
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
+                db.AddParameter("@profileImage", SqlDbType.Text, obj.profileImage);
                 //db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
                 db.AddParameter("@UserId", SqlDbType.Int, ParameterDirection.Output);
                 result = db.ExecuteQuery("sp_UserAdd");
 
-                if (Convert.ToInt32(db.parameters[9].Value) > 0)
+                if (Convert.ToInt32(db.parameters[10].Value) > 0)
                 {
-                    result = Convert.ToInt32(db.parameters[9].Value);
+                    result = Convert.ToInt32(db.parameters[10].Value);
                 }
-                if (Convert.ToInt32(db.parameters[9].Value) == -2)
+                if (Convert.ToInt32(db.parameters[10].Value) == -2)
                 {
-                    result = Convert.ToInt32(db.parameters[9].Value);
+                    result = Convert.ToInt32(db.parameters[10].Value);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                newException.AddException(ex);                
             }
             return result;
         }
@@ -134,11 +137,10 @@ namespace LMSBL.Repository
                 db.AddParameter("@createdBy", SqlDbType.Int, obj.CreatedBy);
                 db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                 db.AddParameter("@roleId", SqlDbType.Int, obj.RoleId);
+                db.AddParameter("@profileImage", SqlDbType.Text, obj.profileImage);
                 return db.ExecuteQuery("sp_UserUpdate");
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 newException.AddException(ex);
                 throw ex;
@@ -155,9 +157,11 @@ namespace LMSBL.Repository
                 db.AddParameter("@isActive", SqlDbType.Bit, obj.IsActive);
                 return db.ExecuteQuery("sp_UserActivateDeactivate");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                newException.AddException(ex);
+                return 0;
             }
         }
 
@@ -177,21 +181,34 @@ namespace LMSBL.Repository
 
                 return tblUser;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                newException.AddException(ex);
+                return null;
+            }
+        }
+
+        public void AddLoginLog(int UserId)
+        {
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@userId", SqlDbType.Int, UserId);
+                db.ExecuteQuery("sp_AddLoginLog");
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);               
             }
         }
 
         public int AddToken(string EmailId, string token)
-        {
-            //int result = 0;
+        {            
             db.parameters.Clear();
             db.AddParameter("@emailId", SqlDbType.Text, EmailId);
             db.AddParameter("@token", SqlDbType.Text, token);
-
-            return db.ExecuteQuery("sp_AddToken");
-            //return result;
+            return db.ExecuteQuery("sp_AddToken");            
         }
 
         public string VerifyToken(string token)
@@ -225,12 +242,12 @@ namespace LMSBL.Repository
             //return result;
         }
 
-        public int ChangetePassword(TblUser obj, string NewPassword)
+        public int ChangePassword(TblUser obj, string NewPassword)
         {
             int result = 0;
             db.parameters.Clear();
             db.AddParameter("@UserID", SqlDbType.Int, obj.UserId);
-            db.AddParameter("@OldPassword", SqlDbType.Text, obj.Password);
+            db.AddParameter("@OldPassword", SqlDbType.Text, obj.OldPassword);
             db.AddParameter("@Password", SqlDbType.Text, NewPassword);
             db.AddParameter("@Status", SqlDbType.Int, ParameterDirection.Output);
 
@@ -278,7 +295,7 @@ namespace LMSBL.Repository
             return result;
         }
     
-        public int InsertUserEmail(tblEmails objEmail)
+        public int InsertEmail(tblEmails objEmail)
         {
             int result = 0;
             db.parameters.Clear();

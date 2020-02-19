@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4c163738-4799-4364-921c-1ffde677c980" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://vasudhappc/SvcLearnerStatus/GetLearnerStatus.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GetLearnerStatus.xsd" MetadataType="Schema" ID="c05b0c2e-be61-456b-bdc1-23a5dffd81ef" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?xsd=xsd1" />
+    <MetadataFile FileName="GetLearnerStatus1.xsd" MetadataType="Schema" ID="30d0731e-3d5c-495e-995c-12f0f0595aae" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?xsd=xsd0" />
+    <MetadataFile FileName="GetLearnerStatus.wsdl" MetadataType="Wsdl" ID="98770a25-14f9-4a69-a70e-e1bc9eaf7e63" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?wsdl" />
+    <MetadataFile FileName="GetLearnerStatus2.xsd" MetadataType="Schema" ID="b6cda331-be64-41e4-9a37-fdbce6687d02" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?xsd=xsd2" />
+    <MetadataFile FileName="GetLearnerStatus3.xsd" MetadataType="Schema" ID="0d8d6fda-b11a-4a27-b12b-226cf8d5552e" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?xsd=xsd3" />
+    <MetadataFile FileName="GetLearnerStatus.disco" MetadataType="Disco" ID="6586914c-b31b-44ad-b4c7-cc0437fd13dc" SourceId="1" SourceUrl="http://vasudhappc.bvdomain.com/SvcLearnerStatus/GetLearnerStatus.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

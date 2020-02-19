@@ -1,55 +1,176 @@
 ﻿@model List<LMSBL.DBModels.TblUser>
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Users List";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
-<body>
-    <div class="main-container container">
-        <div class="row pt-3" style="float:right;">
-            <div class="form-group col-2 col-sm-2 col-md-2">
-                <a href="@Url.Action("AddUser", "User")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">ADD</button></a>
-                <a href="@Url.Action("Upload", "User")"><button type="button" class="btn pl-5 pr-5 text-center btn-warning pull-right">Upload</button></a>
+
+<div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+    <div class="mt-5 pt-3 pl-3 pr-3 course-list-container">
+        <div class="row">
+            <div class="col search-container">
+                <i class="fas fa-search"></i>
+                <input class="search-box" type="text" id="txtSearch" placeholder="Search User by name..." />
             </div>
-            
+            <div class="col text-right">
+                <ul class="list-inline progress-list mt-2">
+                    <li class="list-inline-item"><img src="~/assets/images/shape_Active.png"> Active</li>
+                    <li class="list-inline-item"><img src="~/assets/images/shape_InactiveUser.png"> Inactive</li>
+                    <li class="list-inline-item">
+                        <a href="@Url.Action("Upload", "User")">
+                            <button class="btn btn-secondary dropdown-toggle create-upload-btn" type="button">
+                                <i class="fas fa-cloud-upload-alt"></i> Bulk Upload
+                            </button>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="@Url.Action("AddUser", "User")">
+                            <button class="btn btn-secondary dropdown-toggle create-learning-btn" type="button">
+                                <i class="fas fa-plus-circle"></i> Add User
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Sr No.</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">User Email</th>
-                    <th scope="col">User Role</th>
-                    <th scope="col" colspan="2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null)
-                {
-                    var index = 0;
-                    foreach (var user in Model)
-                    {
-                        index++;
+        <div class="row mt-3" id="dvActivityData">
+            <div class="table-responsive">
+                <table class="table" id="activityTable">
+                    <thead>
                         <tr>
-                            <th scope="row">@index</th>
-                            <td>@user.FirstName  @user.LastName</td>
-
-                            <td>@user.EmailId</td>
-
-                            <td>@user.RoleName</td>
-                            <td>
-                                <a href="@Url.Action("EditUser", "User", new { id = user.UserId })">
-                                    <button type="button" class="btn text-center btn-warning">
-                                        Edit
-                                    </button>
-                                </a>
-
-                            </td>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email ID</th>
+                            <th scope="col">Phone No</th>
+                            <th scope="col" style="text-align:center;">Role</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col" style="text-align:center;">Status</th>
+                            <th scope="col" style="text-align:center;">Action</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            if (Model.Count > 0)
+                            {
+
+                                foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.FirstName  @user.LastName</td>
+                                        <td>@user.EmailId</td>
+                                        <td style="max-width:150px;">@user.ContactNo</td>
+                                        <td style="text-align:center;">@user.RoleName</td>
+                                        <td>@user.CreatedOn</td>
+                                        @if (user.IsActive == true)
+                                        {
+                                            <td style="text-align:center;"><img src="~/assets/images/shape_activeBig.png" title="Active" alt="Active"></td>
+                                        }
+                                        else
+                                        {
+                                            <td style="text-align:center;"><img src="~/assets/images/shape_InactiveBig.png" title="Inactive" alt="Inactive"></td>
+                                        }
+                                        <td style="text-align:center;">
+                                            @if (user.IsActive == true)
+                                            {
+                                                <a href="#" class="login" title="Deactivate"><img src="~/assets/images/shape_activate.png" onclick="ActivateDeactivate(@user.UserId,false);" /></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="login" title="Activate"><img src="~/assets/images/shape_deactivate.png" onclick="ActivateDeactivate(@user.UserId,true);" /></a>
+                                            }
+                                            <a href="@Url.Action("EditUser", "User", new { id = user.UserId })" class="login" title="Edit"><img src="~/assets/images/shape_editUser.png" /></a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8" align="center">No User Available</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8">No User Available</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#activityTable').DataTable({
+            "aaSorting": [[ 4, "desc" ]],
+            "paging": true,
+            "ordering": true,
+            "info": true,
+            "bFilter": true,
+            "pageLength": 10,
+            "pagingType": "full_numbers",
+            //language: {
+            //    paginate: {
+            //        next: '&#8594;', // or '→'
+            //        previous: '&#8592;' // or '←'
+            //    }
+            //}
+            //oLanguage: {
+            //    sProcessing: "<img src='~/assets/images/giphy.gif'>"
+            //},
+            //processing: true,
+        });
+
+        $('#activityTable_filter').hide();
+
+        $('#txtSearch').on('keyup', function () {
+
+            $.fn.dataTable.ext.search.push(function (settings, searchData) {
+                var term = $('#txtSearch').val().toLowerCase()
+                for (var i = 0; i < searchData.length; i++) {
+                    if (searchData[i].toLowerCase().indexOf(term) == 0) {
+                        return true;
                     }
                 }
-            </tbody>
-        </table>
+                return false;
+            });
+            var table = $('#activityTable').DataTable();
+            table.draw();
+        });
+    });
 
-    </div>
-</body>
+    function ActivateDeactivate(UserId, Status) {
+        if (confirm("Are you sure? Do you want to Activate/Deactivate User?") == true) {
+            $.ajax({
+                type: "POST",
+                url: "/User/DeleteUser",
+                data: '{id: "' + UserId + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    if (Status)
+                        alert("User Activated Successfully !!!");
+                    else
+                        alert("User Deactivated Successfully !!!");
+
+                    location.reload();
+                    //console.log(response);
+                    //$('#dvActivityData').html(response);
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        } else {
+            return false;
+        }
+    }
+
+
+</script>

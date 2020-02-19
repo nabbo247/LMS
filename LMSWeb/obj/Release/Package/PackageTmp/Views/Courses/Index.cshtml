@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LMSBL.DBModels.TblCourse>
+﻿@model List<LMSBL.DBModels.tblCourse>
 
 @{
     ViewBag.Title = "GetAllCourses";
@@ -17,29 +17,23 @@
             class="btn pl-5 pr-5 text-center btn-warning pull-right">Add</button>
     </div>
 </div>
-<table id="Courses" class="table table-responsive table-striped table-bordered">
+<table  class="table table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CourseName)
+                Course Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseDetails)
+                Course Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseCategory)
+                Course Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoursePath)
+                Course URL
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenantId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenantName)
+                Created Date
             </th>
             <th>Actions</th>
         </tr>
@@ -48,49 +42,35 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseDetails)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseCategory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoursePath)
-                </td>
-                @if (item.IsActive == true)
-                {
-                    <td>
-                        <i class="fa fa-check" aria-hidden="true" style="color:lightgreen;"></i>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        <i class="fa fa-times" aria-hidden="true" style="color:red;"></i>
-                    </td>
-                }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentModuleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentModuleDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentModuleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentModuleURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdOn)
+            </td>
+            
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenantId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenantName)
-                </td>
-                <td>
-                    <button type="button" onclick="location.href='@Url.Action("EditCourse", "Courses",new { id = item.CourseId })';return false;"
-                            class="btn text-center btn-warning">
-                        Edit
-                    </button>
-                    @*<button type="button" class="btn  text-center btn-warning"
-                        onclick="ConfirmationAlert('@item.CourseName','@item.CourseId',true)">
-                        Delete
-                    </button>*@
-                </td>
-            </tr>
+            <td>
+                <button type="button" onclick="location.href='@Url.Action("EditCourse", "Courses",new { id = item.ContentModuleId })';return false;"
+                        class="btn text-center btn-warning">
+                    Edit
+                </button>
+                @*<button type="button" class="btn  text-center btn-warning"
+                onclick="ConfirmationAlert('@item.CourseName','@item.CourseId',true)">
+                Delete
+            </button>*@
+            </td>
+        </tr>
         }
     </tbody>
 

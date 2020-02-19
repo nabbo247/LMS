@@ -1,0 +1,60 @@
+﻿@model LMSBL.DBModels.TblQuiz
+@{
+    ViewBag.Title = "AddNewQuiz";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+@using (Html.BeginForm("AddQuiz", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+        
+        <div class="row justify-content-center h-100">
+            <div class="col align-self-center add-user-section add-new-quiz">
+                
+                    <div class="col">
+                        @if (Model.QuizId == 0)
+                        {
+                            <h4 class="mt-3 ml-2 mb-3">New Quiz</h4>
+                        }
+                        else
+                        {
+                            <h4 class="mt-3 ml-2 mb-3">Edit Quiz</h4>
+                        }
+
+                    </div>
+                
+                <div class="row pt-5 pl-4">
+                    <div class="col-sm-6">
+                        @Html.HiddenFor(model => model.hdnData, new { @id = "hdnData" })
+                        @Html.HiddenFor(model => model.QuizId)
+
+                        @Html.TextBoxFor(model => model.QuizName, new { @class = "input200 d-block", placeholder = "Quiz Name" })
+                        @Html.TextBoxFor(model => model.QuizDescription, new { @class = "input200 d-block", placeholder = "Quiz Description" })
+                        @Html.TextBoxFor(model => model.Duration, "{0:#.#}", new { @class = "input200 d-block", placeholder = "Quiz Duration (Mins)" })
+                        <button type="button" id="btnAddQuestion" class="btn btn-primary profle-submit-btn mr-4"><img src="~/assets/images/check-img.png" /> Add Question</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <div></div>
+                        <!--<button type="button" id="btnAddQuestion" class="btn btn-primary profle-submit-btn mr-4"><img src="~/assets/images/check-img.png" /> Add Question</button>-->
+
+                    </div>
+                    <div class="mb-2 mt-2 w-100" id="dvQuestions"></div>
+                </div>
+                <div class="row justify-content-end pr-4">
+                    <button type="submit" id="btnQuizSubmit" class="btn btn-primary profle-submit-btn mr-4"><img src="~/assets/images/check-img.png" /> Save Changes</button>
+                    <button type="submit" onclick="location.href='@Url.Action("Index", "Quiz")';return false;" class="btn btn-outline-primary cancel-btn"><i class="far fa-times-circle"></i> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+<script src="~/assets/Quiz.js"></script>

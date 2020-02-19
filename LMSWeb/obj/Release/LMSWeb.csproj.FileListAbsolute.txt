@@ -86,3 +86,5 @@ E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.csprojAssemblyReference.cache
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.csproj.CopyComplete
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.dll
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.pdb
+E:\Projects\LMS\LMSWeb\bin\itextsharp.dll
+E:\Projects\LMS\LMSWeb\bin\itextsharp.xml

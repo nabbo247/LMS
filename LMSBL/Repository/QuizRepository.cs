@@ -24,15 +24,17 @@ namespace LMSBL.Repository
                 {
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
-                    QuizDescription = Convert.ToString(dr["QuizDescription"])
+                    QuizDescription = Convert.ToString(dr["QuizDescription"]),
+                    NoOfQuestion = Convert.ToInt32(dr["NoOfQuestion"]),
+                    Duration = Convert.ToInt32(dr["Duration"])
+                    
                 }).ToList();
                 return quizDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
         }
 
@@ -48,7 +50,8 @@ namespace LMSBL.Repository
                 {
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
-                    QuizDescription = Convert.ToString(dr["QuizDescription"])
+                    QuizDescription = Convert.ToString(dr["QuizDescription"]),
+                    Duration = dr["Duration"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Duration"])
                 }).ToList();
 
                 List<TblQuestion> questionsDetails = ds.Tables[1].AsEnumerable().Select(dr => new TblQuestion
@@ -58,7 +61,8 @@ namespace LMSBL.Repository
                     QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
                     QuestionText = Convert.ToString(dr["QuestionText"]),
                     CorrectFeedback = Convert.ToString(dr["CorrectFeedback"]),
-                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"])
+                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"]),
+                    isRandomOption = Convert.ToBoolean(dr["isRandomOption"])
                 }).ToList();
                 quizDetails[0].TblQuestions = questionsDetails;
                 foreach (var question in questionsDetails)
@@ -77,11 +81,10 @@ namespace LMSBL.Repository
                 }
                 return quizDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
@@ -97,6 +100,7 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
         }
@@ -117,6 +121,7 @@ namespace LMSBL.Repository
                     db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
                     db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                     db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    db.AddParameter("@Duration", SqlDbType.Int, obj.Duration);
                     status = db.ExecuteQuery("sp_QuizUpdateDelete");
                     quizId = obj.QuizId;
                 }
@@ -126,12 +131,13 @@ namespace LMSBL.Repository
                     db.AddParameter("@OldQuizId", SqlDbType.Int, obj.QuizId);
                     db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
                     db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    db.AddParameter("@Duration", SqlDbType.Int, obj.Duration);
                     db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                     db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
                     status = db.ExecuteQuery("sp_QuizAdd");
-                    if (Convert.ToInt32(db.parameters[4].Value) > 0)
+                    if (Convert.ToInt32(db.parameters[5].Value) > 0)
                     {
-                        quizId = Convert.ToInt32(db.parameters[4].Value);
+                        quizId = Convert.ToInt32(db.parameters[5].Value);
                     }
                 }
                 foreach (Dictionary<string, object> item in obj.questionObject)
@@ -167,15 +173,16 @@ namespace LMSBL.Repository
                     db.AddParameter("@OldQuestionId", SqlDbType.Int, oldQuestionId);
                     db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                     db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
-                    db.AddParameter("@QuestionText", SqlDbType.Text, item["QuestionText"]);
+                    db.AddParameter("@QuestionText", SqlDbType.NText, item["QuestionText"]);
                     db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
                     db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
+                    db.AddParameter("@isRandomOption", SqlDbType.Bit, Convert.ToBoolean(item["isRandomOption"]));
                     db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
                     queId = db.ExecuteQuery("sp_QuestionAdd");
-                    if (Convert.ToInt32(db.parameters[6].Value) > 0)
+                    if (Convert.ToInt32(db.parameters[7].Value) > 0)
                     {
 
-                        queId = Convert.ToInt32(db.parameters[6].Value);
+                        queId = Convert.ToInt32(db.parameters[7].Value);
                         foreach (Dictionary<string, object> itemNew1 in (object[])item["Options"])
                         {
                             int optionId = 0;
@@ -197,7 +204,7 @@ namespace LMSBL.Repository
                 if (quizId > 0)
                 {
                     status = quizId;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -237,6 +244,7 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
@@ -253,11 +261,12 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
         }
-        public int AssignQuiz(int QuizId, int UserId)
+        public int AssignQuiz(int QuizId, int UserId, DateTime DueDate)
         {
             int status = 0;
             try
@@ -265,13 +274,13 @@ namespace LMSBL.Repository
                 db.parameters.Clear();
                 db.AddParameter("@QuizId", SqlDbType.Int, QuizId);
                 db.AddParameter("@UserId", SqlDbType.Int, UserId);
-                db.AddParameter("@status", SqlDbType.Int, ParameterDirection.Output);
-                status = db.ExecuteQuery("sp_QuizAssign");
-                status = Convert.ToInt32(db.parameters[2].Value);
+                db.AddParameter("@DueDate", SqlDbType.DateTime, DueDate);
+                status = db.ExecuteQuery("sp_QuizAssign");                
 
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
@@ -292,11 +301,10 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
@@ -314,7 +322,8 @@ namespace LMSBL.Repository
                 {
                     QuizId = Convert.ToInt32(dr["QuizId"]),
                     QuizName = Convert.ToString(dr["QuizName"]),
-                    QuizDescription = Convert.ToString(dr["QuizDescription"])
+                    QuizDescription = Convert.ToString(dr["QuizDescription"]),
+                    Duration = dr["Duration"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Duration"])
                 }).ToList();
 
                 List<TblQuestion> questionsDetails = ds.Tables[1].AsEnumerable().Select(dr => new TblQuestion
@@ -324,7 +333,8 @@ namespace LMSBL.Repository
                     QuestionTypeId = Convert.ToInt32(dr["QuestionTypeId"]),
                     QuestionText = Convert.ToString(dr["QuestionText"]),
                     CorrectFeedback = Convert.ToString(dr["CorrectFeedback"]),
-                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"])
+                    InCorrectFeedback = Convert.ToString(dr["InCorrectFeedback"]),
+                    isRandomOption = Convert.ToBoolean(dr["isRandomOption"])
                 }).ToList();
                 quizDetails[0].TblQuestions = questionsDetails;
                 foreach (var question in questionsDetails)
@@ -344,11 +354,10 @@ namespace LMSBL.Repository
 
                 return quizDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
@@ -366,33 +375,36 @@ namespace LMSBL.Repository
                     db.AddParameter("@QuestionFeedback", SqlDbType.Text, obj.QuestionFeedback);
                     db.AddParameter("@UserId", SqlDbType.Int, obj.UserId);
                     db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
-                    db.AddParameter("@Attempt", SqlDbType.Int, obj.Attempt);
+                    db.AddParameter("@Attempt", SqlDbType.Int, obj.Attempt);                    
                     status = db.ExecuteQuery("sp_ResponseAdd");
                 }
 
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
         }
 
-        public int CaptureScore(int quizId, int userId, int score, int attempt)
+        public int CaptureScore(TblQuiz objQuiz, int userId, int score, int attempt)
         {
             int status = 0;
             try
             {
                 db.parameters.Clear();
-                db.AddParameter("@QuizId", SqlDbType.Int, quizId);
+                db.AddParameter("@QuizId", SqlDbType.Int, objQuiz.QuizId);
                 db.AddParameter("@UserId", SqlDbType.Int, userId);
                 db.AddParameter("@Score", SqlDbType.Int, score);
                 db.AddParameter("@Attempt", SqlDbType.Int, attempt);
+                db.AddParameter("@completedTime", SqlDbType.Text, objQuiz.completeTime);
                 status = db.ExecuteQuery("sp_QuizScoreAdd");
 
             }
             catch (Exception ex)
             {
+                newException.AddException(ex);
                 throw ex;
             }
             return status;
@@ -469,19 +481,18 @@ namespace LMSBL.Repository
                 }).ToList();
                 return quizResponseDetails;
             }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
 
 
-        public int GetQuizScoreByUserID(int quizId, int userId, int attempt)
+        public TblQuizScore GetQuizScoreByUserID(int quizId, int userId, int attempt)
         {
-            int score = 0;
+            TblQuizScore objQuizScore = new TblQuizScore();            
             try
             {
                 db.parameters.Clear();
@@ -492,13 +503,15 @@ namespace LMSBL.Repository
                 DataSet ds = db.FillData("sp_QuizScoreGet");
                 if (ds.Tables.Count > 0)
                 {
-                    score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                    objQuizScore.Score = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                    objQuizScore.completedTime = Convert.ToString(ds.Tables[0].Rows[0][1]);
                 }
-                return score;
+                return objQuizScore;
             }
             catch (Exception ex)
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
@@ -526,9 +539,39 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                throw;
+                newException.AddException(ex);
+                throw ex;
             }
 
         }
+
+        public int CaptureRatings(tblRatings objRatings)
+        {
+            int status = 0;
+
+            try
+            {
+                db.parameters.Clear();
+                db.AddParameter("@ActivityId", SqlDbType.Int, objRatings.ActivityId);
+                db.AddParameter("@UserId", SqlDbType.Int, objRatings.UserId);
+                db.AddParameter("@Attempt", SqlDbType.Int, objRatings.Attempt);
+                db.AddParameter("@ActivityType", SqlDbType.Text, objRatings.ActivityType);
+                db.AddParameter("@Rating", SqlDbType.Decimal, objRatings.Rating);
+                db.AddParameter("@Comment", SqlDbType.NText, objRatings.Comment);
+                db.AddParameter("@TenantId", SqlDbType.Int, objRatings.TenantId);
+
+                status = db.ExecuteQuery("sp_RatingsAdd");
+
+            }
+            catch (Exception ex)
+            {
+                newException.AddException(ex);
+                throw ex;
+            }
+            return status;
+
+        }
+
+
     }
 }

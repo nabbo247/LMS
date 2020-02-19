@@ -22,5 +22,7 @@ namespace LMSBL.DBModels
 
         [Column(Order = 3)]
         public DateTime AttemptedDate { get; set; }
+
+        public string completedTime { get; set; }
     }
 }

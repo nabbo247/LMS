@@ -1,0 +1,8 @@
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\BO\bin\Release\dll
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\BO\bin\Release\pdb
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\BO\obj\Release\dll
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\BO\obj\Release\pdb
+E:\BAS\ScormPlayer\sample\BO\bin\Release\dll
+E:\BAS\ScormPlayer\sample\BO\bin\Release\pdb
+E:\BAS\ScormPlayer\sample\BO\obj\Release\dll
+E:\BAS\ScormPlayer\sample\BO\obj\Release\pdb

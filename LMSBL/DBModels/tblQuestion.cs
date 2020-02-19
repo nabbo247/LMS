@@ -35,6 +35,8 @@ namespace LMSBL.DBModels
 
         [Column(TypeName = "ntext")]
         public string InCorrectFeedback { get; set; }
+        
+        public bool isRandomOption { get; set; }
 
         public virtual TblQuiz TblQuiz { get; set; }
 

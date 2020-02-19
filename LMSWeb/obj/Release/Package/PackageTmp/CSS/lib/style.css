@@ -11,7 +11,52 @@ body {
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 10px;
-    margin-left: 5px !important;
+}
+
+.option-container {
+    /*border-top: 1px solid #e9e9e9;*/
+    padding: 8px 15px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+.option-container input {
+    cursor: pointer;
+}
+.option-container:hover {
+    background-color: #dee2e6;
+}
+.border-top {
+    border-top: 1px solid #e9e9e9;
+}
+.selected-ans {
+    background-color: #dee2e6;
+}
+.green-color {
+    color: #00bf6f;
+}
+.red-color {
+    color: red;
+}
+
+
+.que-feedback {
+    padding-top: 10px;
+}
+#paginator-list {
+    padding-left: 0;
+}
+#paginator-list li {
+    list-style: none;
+    display: inline-block;
+    padding: 3px 12px;
+    background-color: #e2e2e2;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.active-paginator {
+    background-color: #999 !important;
+    color: #fff;
 }
 
 a#example_previous, a#example_next {
@@ -65,6 +110,7 @@ i.col-2 {
 .main-container {
     background: #fff;
     margin-bottom: 34px;
+    padding-top: 15px;
 }
 
     .main-container > h1 {
@@ -79,8 +125,9 @@ hr.form-divider {
     height: 1px;
 }
 
-.main-container label {
-    font-size: 13px;
+.launch-label {
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 15px;
 }
 
 .btn-bs-file {
@@ -518,3 +565,7 @@ body {
     display: none;
 }
 
+.required{
+    color:red;
+    padding-left:2px;
+}

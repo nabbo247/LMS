@@ -1,4 +1,4 @@
-﻿
+﻿@model LMSBL.DBModels.TblUser
 @{
     Layout = null;
 }
@@ -7,77 +7,56 @@
 
 <html>
 <head>
-
-    <title>Index</title>
-
-    @* <meta name="viewport" content="width=device-width" />
-            <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-        <link href="~/CSS/lib/styleNew.css" rel="stylesheet" />
-        <link href="~/assets/vendor/fonts/circular-std/style.css" rel="stylesheet" />
-        <link href="~/CSS/fontawesome/css/fontawesome-all.css" rel="stylesheet" />*@
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/CSS/lib/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/assets/SweetAlert.js"></script>
 
-
-    @*<style>
-            html,
-            body {
-                height: 100%;
-            }
-
-            body {
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-align: center;
-                align-items: center;
-                padding-top: 40px;
-                padding-bottom: 40px;
-            }
-        </style>*@
 </head>
 
 <body>
 
-    @*@using (Html.BeginForm("UserAuthentication", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {*@
+    @using (Html.BeginForm("UserAuthentication", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
         <!------ Include the above in your HEAD tag ---------->
 
         <div class="sidenav">
-            <!--  <div class="login-main-text">
-                <h2>Application<br> Login Page</h2>
-                <p>Login or register from here to access.</p>
-             </div> -->
         </div>
         <div class="main">
             <div class="corner-logo">
-                <img src="~/assets/images/logo.png" />
+                <img src="~/assets/images/rockettechpng-1.png" style="max-width:159px;max-height:70px;" />
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="login-form">
                     <h1 class="main-h">LOGIN</h1>
                     <h1 class="main-h3">GET STARTED WITH US</h1>
                     <form>
+                        <div id="dvMessage" style="color:red; margin-bottom:10px;">@TempData["Message"]</div>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            @Html.TextBoxFor(model => model.EmailId, new { @class = "col-6 ml-0 form-control" })
+                            <span class="required">&#10026;</span>
                         </div>
 
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa fa-lock"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="password" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                            @Html.PasswordFor(model => model.Password, new { @class = "col-6 ml-0 form-control" })
+                            <span class="required">&#10026;</span>
                         </div>
                         <div class="form-group">
-                            <span><small>Forgot password</small></span>
-                            <span style="    float: right;">
+                            <span><small><a href="@Url.Action("ResetPassword", "Login")">Forgot Password</a></small></span>
+                            <span style="float: right;">
                                 <label class="switch">
                                     <input type="checkbox" checked>
                                     <span class="slider round"></span>
@@ -85,81 +64,28 @@
                                 <small>Remember me</small>
                             </span>
                         </div>
-                        <button type="button" onclick="VerifyUser()" class="btn btn-black">Login</button>
+                        <button type="submit" onclick="return CheckRequired();" class="btn btn-black">Login</button>
                     </form>
                 </div>
             </div>
         </div>
-    //}
-    </body>
+    }
 
-
-<!-- OLD BODY-->
-<div style="display:none;">
-    <div class="splash-container">
-        <div class="card ">
-            <div class="card-header text-center">
-                <a href="#">LMS</a>
-                <span class="splash-description">Please enter your user information.</span>
-            </div>
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <input class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control form-control-lg" id="password" type="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
-                        </label>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="VerifyUser()">Sign in</button>
-                </form>
-            </div>
-            <div class="card-footer bg-white p-0  ">
-                <div class="card-footer-item card-footer-item-bordered">
-                    <a href="#" class="footer-link">Forgot Password</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/bootstrap/bootstrap.bundle.js"></script>
-
-    <script>
-        function VerifyUser() {
-            $.ajax({
-                url: '@Url.Action("UserAuthentication","Login")',
-                data: { 
-                          UserName: $('#username').val(), 
-                          Password: $('#password').val()
-                      },
-                //data: "{UserName:'" + $('#username').val() + "',Password=" + $('#password').val()+"}",
-                //url: "/Login/UserAuthentication?UserName=" + $('#username').val() + "&Password=" + $('#password').val(),
-                type: "GET",
-                contentType: "application/json;charset=UTF-8",
-                dataType: "json",
-                success: function (result) {
-                    var baseUrl="/Home/Index";
-                    if (result == 1)
-                    {
-                        window.location.href = baseUrl
-                    }
-                    else
-                    {
-                        alert('wrong info');
-                    }
-                },
-                error: function (errormessage) {
-                    alert(errormessage.responseText);
-                }
-            });
+    <script type="text/javascript">
+        function CheckRequired() {
+            if ($("#EmailId").val() == "") {                
+                Swal.fire('Please enter User Name');
+                return false;
+            }
+            if ($("#Password").val() == "") {
+                Swal.fire("Please enter Password");
+                
+                return false;
+            }
+            return true;
         }
     </script>
-</div>
-
-<!-- END OLD BODY-->
+</body>
 </html>
+
+

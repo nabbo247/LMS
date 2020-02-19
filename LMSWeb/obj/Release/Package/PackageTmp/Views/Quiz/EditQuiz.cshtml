@@ -4,10 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>EditQuiz</h4>
+<h4>Edit Quiz</h4>
 
 @using (Html.BeginForm("AddQuiz", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+
     <div class="row col-12">
         <hr class="form-divider">
     </div>
@@ -19,14 +20,19 @@
             @Html.LabelFor(model => model.QuizName, new { @class = "col-3 p-0" })
             @Html.TextBoxFor(model => model.QuizName, new { @class = "col-6 ml-0 form-control" })
 
-
             <hr class="form-divider">
         </div>
         <div class="row col-12">
             @Html.LabelFor(model => model.QuizDescription, new { @class = "col-3 p-0" })
-            @Html.TextBoxFor(model => model.QuizDescription, new { @class = "col-6 form-control ml-0" })
+            @Html.TextBoxFor(model => model.QuizDescription, new { @class = "col-6 form-control ml-0" })     
+            
+            <hr class="form-divider">
+        </div>
+        <div class="row col-12">
+            @Html.LabelFor(model => model.Duration, new { @class = "col-3 p-0" })
+            @Html.TextBoxFor(model => model.Duration, new { @class = "col-6 ml-0 form-control ml-0" })
 
-            <div class="form-group col-3 col-sm-3 col-md-3">
+            <div class="form-group  col-sm-3 col-md-3">
                 <a><button type="button" id="btnAddQuestion" class="btn pl-4 pr-4 text-center btn-warning pull-right">Add Question</button></a>
             </div>
             <hr class="form-divider">
@@ -34,6 +40,7 @@
         <div id="dvQuestions"></div>
 
         <div class="row col-12" style="margin-bottom: 34px;">
+            <hr class="form-divider">
             <div class="col-8">
 
             </div>
@@ -49,11 +56,11 @@
 }
 
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
-    <!-- include summernote css/js -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-    <script src="~/assets/Quiz.js"></script>
+<!-- include summernote css/js -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<script src="~/assets/Quiz.js"></script>

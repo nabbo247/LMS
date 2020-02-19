@@ -26,9 +26,9 @@ namespace LMSBL.DBModels
 
         [DisplayName("Quiz Description")]
         [Column(TypeName = "ntext")]
-        public string QuizDescription { get; set; }
+        public string QuizDescription { get; set; }      
 
-        
+
         [AllowHtml]
         [NotMapped]
         public string hdnData { get; set; }
@@ -40,6 +40,11 @@ namespace LMSBL.DBModels
         [AllowHtml]
         [NotMapped]
         public string hdnResponseData { get; set; }
+
+        [NotMapped]
+        public int NoOfQuestion { get; set; }
+        
+        public int? Duration { get; set; }
 
         [AllowHtml]
         [NotMapped]
@@ -59,6 +64,8 @@ namespace LMSBL.DBModels
         [NotMapped]
         public int Score { get; set; }
         public int TenantId { get; set; }
+
+        public string completeTime { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblQuestion> TblQuestions { get; set; }

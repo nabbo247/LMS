@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5CB6D278-D64C-45E4-B1B0-209965D89D58}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BVLMS.CoursePlayer</RootNamespace>
+    <AssemblyName>CoursePlayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>References\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Web">
+      <HintPath>References\Autofac.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>References\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>References\ELMAH\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BLL\bin\Debug\BLL.dll" />
+    <Content Include="BLL\bin\Debug\BLL.pdb" />
+    <Content Include="BLL\bin\Debug\BO.dll" />
+    <Content Include="BLL\bin\Debug\BO.pdb" />
+    <Content Include="BLL\bin\Debug\DAL.dll" />
+    <Content Include="BLL\bin\Debug\DAL.pdb" />
+    <Content Include="BLL\bin\Debug\ErrorHandling.dll" />
+    <Content Include="BLL\bin\Debug\ErrorHandling.pdb" />
+    <Content Include="BLL\bin\Release\BLL.dll" />
+    <Content Include="BLL\bin\Release\BLL.pdb" />
+    <Content Include="BLL\bin\Release\BO.dll" />
+    <Content Include="BLL\bin\Release\BO.pdb" />
+    <Content Include="BLL\bin\Release\DAL.dll" />
+    <Content Include="BLL\bin\Release\DAL.pdb" />
+    <Content Include="BLL\bin\Release\ErrorHandling.dll" />
+    <Content Include="BLL\bin\Release\ErrorHandling.pdb" />
+    <Content Include="BLL\BLL.csproj" />
+    <Content Include="BLL\BLL.csproj.user" />
+    <Content Include="BLL\obj\Debug\BLL.csproj.FileListAbsolute.txt" />
+    <Content Include="BLL\obj\Debug\BLL.dll" />
+    <Content Include="BLL\obj\Debug\BLL.pdb" />
+    <Content Include="BLL\obj\Release\BLL.csproj.FileListAbsolute.txt" />
+    <Content Include="BLL\obj\Release\BLL.dll" />
+    <Content Include="BLL\obj\Release\BLL.pdb" />
+    <Content Include="BO\bin\Debug\BO.dll" />
+    <Content Include="BO\bin\Debug\BO.pdb" />
+    <Content Include="BO\bin\Release\BO.dll" />
+    <Content Include="BO\bin\Release\BO.pdb" />
+    <Content Include="BO\BO.csproj" />
+    <Content Include="BO\BO.csproj.user" />
+    <Content Include="BO\obj\Debug\BO.csproj.FileListAbsolute.txt" />
+    <Content Include="BO\obj\Debug\BO.dll" />
+    <Content Include="BO\obj\Debug\BO.pdb" />
+    <Content Include="BO\obj\Release\BO.csproj.FileListAbsolute.txt" />
+    <Content Include="BO\obj\Release\BO.dll" />
+    <Content Include="BO\obj\Release\BO.pdb" />
+    <Content Include="browser_os_detect.js" />
+    <Content Include="DAL\bin\Debug\BO.dll" />
+    <Content Include="DAL\bin\Debug\BO.pdb" />
+    <Content Include="DAL\bin\Debug\DAL.dll" />
+    <Content Include="DAL\bin\Debug\DAL.pdb" />
+    <Content Include="DAL\bin\Debug\ErrorHandling.dll" />
+    <Content Include="DAL\bin\Debug\ErrorHandling.pdb" />
+    <Content Include="DAL\bin\Release\BO.dll" />
+    <Content Include="DAL\bin\Release\BO.pdb" />
+    <Content Include="DAL\bin\Release\DAL.dll" />
+    <Content Include="DAL\bin\Release\DAL.pdb" />
+    <Content Include="DAL\bin\Release\ErrorHandling.dll" />
+    <Content Include="DAL\bin\Release\ErrorHandling.pdb" />
+    <Content Include="DAL\DAL.csproj" />
+    <Content Include="DAL\DAL.csproj.user" />
+    <Content Include="DAL\obj\Debug\DAL.csproj.FileListAbsolute.txt" />
+    <Content Include="DAL\obj\Debug\DAL.dll" />
+    <Content Include="DAL\obj\Debug\DAL.pdb" />
+    <Content Include="DAL\obj\Release\DAL.csproj.FileListAbsolute.txt" />
+    <Content Include="DAL\obj\Release\DAL.dll" />
+    <Content Include="DAL\obj\Release\DAL.pdb" />
+    <Content Include="ErrorHandling\bin\Debug\ErrorHandling.dll" />
+    <Content Include="ErrorHandling\bin\Debug\ErrorHandling.pdb" />
+    <Content Include="ErrorHandling\bin\Release\BO.dll" />
+    <Content Include="ErrorHandling\bin\Release\BO.pdb" />
+    <Content Include="ErrorHandling\bin\Release\ErrorHandling.dll" />
+    <Content Include="ErrorHandling\bin\Release\ErrorHandling.pdb" />
+    <Content Include="ErrorHandling\ErrorHandling.csproj" />
+    <Content Include="ErrorHandling\ErrorHandling.csproj.user" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.csproj.FileListAbsolute.txt" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.dll" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.pdb" />
+    <Content Include="ErrorHandling\obj\Release\ErrorHandling.csproj.FileListAbsolute.txt" />
+    <Content Include="ErrorHandling\obj\Release\ErrorHandling.dll" />
+    <Content Include="ErrorHandling\obj\Release\ErrorHandling.pdb" />
+    <Content Include="Reports.aspx" />
+    <Content Include="UpdateLMS.aspx" />
+    <Content Include="ErrorService.asmx" />
+    <Content Include="js\jquery.min1.4.2.js" />
+    <Content Include="Reconnect.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="DisplayError.aspx" />
+    <Content Include="dummy.html" />
+    <Content Include="js\NewScormJS.js" />
+    <Content Include="HTMLGetSCORM.htm" />
+    <Content Include="LaunchPlayer.aspx" />
+    <Content Include="LMSExitPlayer.aspx" />
+    <Content Include="LMSNewScormDisplaySCO.htm" />
+    <Content Include="LMSNewScormTopBar.aspx" />
+    <Content Include="ScormCourseDefaultPage.aspx" />
+    <Content Include="ScormLibrary\images\bracket1.jpg" />
+    <Content Include="ScormLibrary\images\bracket2.jpg" />
+    <Content Include="ScormLibrary\images\sco_next_btn_green.jpg" />
+    <Content Include="ScormLibrary\images\sco_next_btn_orange.jpg" />
+    <Content Include="ScormLibrary\images\sco_previous_btn_green.jpg" />
+    <Content Include="ScormLibrary\images\sco_previous_btn_orange.jpg" />
+    <Content Include="ScormLibrary\js\ClientScripts.js" />
+    <Content Include="ScormLibrary\js\LMSRTEWrapperJS.js" />
+    <Content Include="ScormLibrary\js\Master.js" />
+    <Content Include="ScormLibrary\js\RTEMaster.js" />
+    <Content Include="ScormLibrary\js\ScormValidations.js" />
+    <Content Include="App_Browsers\BrowserFile.browser" />
+    <Content Include="BO\obj\Debug\BO.csprojAssemblyReference.cache" />
+    <Content Include="BO\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="BO\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="DAL\obj\Debug\DAL.csproj.CopyComplete" />
+    <Content Include="DAL\obj\Debug\DAL.csprojAssemblyReference.cache" />
+    <Content Include="DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache" />
+    <Content Include="DAL\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache" />
+    <Content Include="DAL\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="ErrorHandling\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.csproj.CopyComplete" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.csprojAssemblyReference.cache" />
+    <Content Include="ErrorHandling\obj\Debug\ErrorHandling.csprojResolveAssemblyReference.cache" />
+    <Content Include="ErrorHandling\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="ErrorHandling\obj\Release\ErrorHandling.csprojResolveAssemblyReference.cache" />
+    <Content Include="BLL\obj\Debug\BLL.csproj.CopyComplete" />
+    <Content Include="BLL\obj\Debug\BLL.csprojAssemblyReference.cache" />
+    <Content Include="BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache" />
+    <Content Include="BLL\obj\Debug\CSC230DAA63E514289AB77D79B3F6C8CE2.TMP" />
+    <Content Include="BLL\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="BLL\obj\Release\BLL.csprojResolveAssemblyReference.cache" />
+    <Content Include="BLL\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IGSLMSCoursePlayer.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <Content Include="SessionPoller.aspx" />
+    <Content Include="soapclient.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\UPS Freight Course Player.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\ContentModule.cs" />
+    <Compile Include="BLL\ContentModuleManager.cs" />
+    <Compile Include="BLL\ContentModuleSessionManager.cs" />
+    <Compile Include="BLL\ContentModuleTracker.cs" />
+    <Compile Include="BLL\ContentModuleTrackingManager.cs" />
+    <Compile Include="BLL\CoursePlayerAssignmentManager.cs" />
+    <Compile Include="BLL\CourseTrackingUpdater.cs" />
+    <Compile Include="BLL\CurriculumGeneral.cs" />
+    <Compile Include="BLL\FilesystemContentModuleRetriever.cs" />
+    <Compile Include="BLL\FilesystemContentModuleTrackingManager.cs" />
+    <Compile Include="BLL\IContentModuleRetriever.cs" />
+    <Compile Include="BLL\IContentModuleSessionRepository.cs" />
+    <Compile Include="BLL\IContentModuleTrackingManager.cs" />
+    <Compile Include="BLL\IContentModuleTrackingRepository.cs" />
+    <Compile Include="BLL\IManager.cs" />
+    <Compile Include="BLL\LearnerManager.cs" />
+    <Compile Include="BLL\LMSSession.cs" />
+    <Compile Include="BLL\Login.cs" />
+    <Compile Include="BLL\Tracking.cs" />
+    <Compile Include="BLL\TrackingSessionMetaData.cs" />
+    <Compile Include="BO\ActivityAssignment.cs" />
+    <Compile Include="BO\AiccTime.cs" />
+    <Compile Include="BO\Au.cs" />
+    <Compile Include="BO\AuTracking.cs" />
+    <Compile Include="BO\AVPathSetting.cs" />
+    <Compile Include="BO\BaseEntity.cs" />
+    <Compile Include="BO\ContentModule.cs" />
+    <Compile Include="BO\ContentModuleSession.cs" />
+    <Compile Include="BO\ContentModuleTracking.cs" />
+    <Compile Include="BO\Course.cs" />
+    <Compile Include="BO\CourseConfiguration.cs" />
+    <Compile Include="BO\CourseSection.cs" />
+    <Compile Include="BO\CurriculumGeneral.cs" />
+    <Compile Include="BO\DictionaryExtensions.cs" />
+    <Compile Include="BO\Learner.cs" />
+    <Compile Include="BO\Lesson.cs" />
+    <Compile Include="BO\LessonTracking.cs" />
+    <Compile Include="BO\LiveSession.cs" />
+    <Compile Include="BO\ObjectiveTracking.cs" />
+    <Compile Include="BO\Sco.cs" />
+    <Compile Include="BO\ScormResource.cs" />
+    <Compile Include="BO\Tracking.cs" />
+    <Compile Include="DAL\ActivityAssignmentAdaptor.cs" />
+    <Compile Include="DAL\AuReader.cs" />
+    <Compile Include="DAL\Config.cs" />
+    <Compile Include="DAL\ContentModuleAdaptor.cs" />
+    <Compile Include="DAL\ContentModuleSessionDAM.cs" />
+    <Compile Include="DAL\ContentModuleTrackingAdaptor.cs" />
+    <Compile Include="DAL\CourseConfigurationAdaptor.cs" />
+    <Compile Include="DAL\CourseDAL.cs" />
+    <Compile Include="DAL\CurriculumGeneral.cs" />
+    <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="DAL\FileHandler.cs" />
+    <Compile Include="DAL\IDataManager.cs" />
+    <Compile Include="DAL\ILessonTrackingSerializer.cs" />
+    <Compile Include="DAL\LearnerDAM.cs" />
+    <Compile Include="DAL\LearnerLogin.cs" />
+    <Compile Include="DAL\LessonReader.cs" />
+    <Compile Include="DAL\LessonReaderFactory.cs" />
+    <Compile Include="DAL\LessonTrackingSerializerFactory.cs" />
+    <Compile Include="DAL\Schema.cs" />
+    <Compile Include="DAL\ScoReader.cs" />
+    <Compile Include="DAL\ScoTrackingSerializer.cs" />
+    <Compile Include="DAL\SqlDataReaderExtensions.cs" />
+    <Compile Include="DAL\SQLHelper.cs" />
+    <Compile Include="DAL\SQLObject.cs" />
+    <Compile Include="DAL\Tracking.cs" />
+    <Compile Include="ErrorHandling\clsErrorhandling.cs" />
+    <Compile Include="ErrorHandling\Converter.cs" />
+    <Compile Include="ErrorHandling\EncryptionManager.cs" />
+    <Compile Include="ErrorHandling\ExceptionAndLogManager.cs" />
+    <Compile Include="ErrorHandling\HttpContextCacheProvider.cs" />
+    <Compile Include="ErrorHandling\ICacheProvider.cs" />
+    <Compile Include="ErrorHandling\IDGenerator.cs" />
+    <Compile Include="ErrorHandling\StringExtensions.cs" />
+    <Compile Include="ErrorHandling\ValidationManager.cs" />
+    <Compile Include="ErrorHandling\XMLLib.cs" />
+    <Compile Include="Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateLMS.aspx.cs">
+      <DependentUpon>UpdateLMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateLMS.aspx.designer.cs">
+      <DependentUpon>UpdateLMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorService.asmx.cs">
+      <DependentUpon>ErrorService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DisplayError.aspx.cs">
+      <DependentUpon>DisplayError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DisplayError.aspx.designer.cs">
+      <DependentUpon>DisplayError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchPlayer.aspx.cs">
+      <DependentUpon>LaunchPlayer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaunchPlayer.aspx.designer.cs">
+      <DependentUpon>LaunchPlayer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LMSExitPlayer.aspx.cs">
+      <DependentUpon>LMSExitPlayer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LMSExitPlayer.aspx.designer.cs">
+      <DependentUpon>LMSExitPlayer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LMSNewScormTopBar.aspx.cs">
+      <DependentUpon>LMSNewScormTopBar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LMSNewScormTopBar.aspx.designer.cs">
+      <DependentUpon>LMSNewScormTopBar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScormCourseDefaultPage.aspx.cs">
+      <DependentUpon>ScormCourseDefaultPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScormCourseDefaultPage.aspx.designer.cs">
+      <DependentUpon>ScormCourseDefaultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionPoller.aspx.cs">
+      <DependentUpon>SessionPoller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionPoller.aspx.designer.cs">
+      <DependentUpon>SessionPoller.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\CommonKeys.cs" />
+    <Compile Include="Shared\CommonManager.cs" />
+    <Compile Include="Shared\CourseTracking.cs" />
+    <Compile Include="Shared\ManifestReader.cs" />
+    <Compile Include="Shared\SessionManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="BLL\obj\Debug\TempPE\" />
+    <Folder Include="BLL\obj\Release\TempPE\" />
+    <Folder Include="BLL\Properties\" />
+    <Folder Include="BO\obj\Debug\TempPE\" />
+    <Folder Include="BO\obj\Release\TempPE\" />
+    <Folder Include="BO\Properties\" />
+    <Folder Include="DAL\obj\Debug\TempPE\" />
+    <Folder Include="DAL\obj\Release\TempPE\" />
+    <Folder Include="DAL\Properties\" />
+    <Folder Include="ErrorHandling\obj\Debug\TempPE\" />
+    <Folder Include="ErrorHandling\obj\Release\TempPE\" />
+    <Folder Include="ErrorHandling\Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>7777</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:7777/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

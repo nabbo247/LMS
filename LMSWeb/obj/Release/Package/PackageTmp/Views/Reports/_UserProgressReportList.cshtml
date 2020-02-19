@@ -1,0 +1,201 @@
+﻿@model List<LMSBL.DBModels.UserProgressReportModel>
+
+<div class="mt-5 pt-3 pl-3 pr-3 course-list-container">
+    <div class="row">
+        <div class="col search-container">
+            <i class="fas fa-search"></i>
+            <input class="search-box" type="text" id="txtSearch" placeholder="Search Course/Quiz by name..." />
+        </div>
+        <div class="col text-right">
+            <ul class="list-inline progress-list mt-2">
+                <li class="list-inline-item"><i class="far fa-clock"></i> Not Started</li>
+                <li class="list-inline-item"><i class="far fa-hourglass orange-color"></i> In Progress</li>
+                <li class="list-inline-item"><i class="far fa-check-circle green-color"></i> Completed</li>
+                <li class="list-inline-item">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle create-learning-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-file-export"></i> Export
+                        </button>
+                        <div class="dropdown-menu create-learning" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("ExportToExcel", "Reports", new {ReportName="User Progress Report", UserId=Context.Request.QueryString["UserId"]})">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                Excel
+                            </a>
+                            <a class="dropdown-item" href="@Url.Action("ExportToPdf", "Reports", new {ReportName="User Progress Report", UserId=Context.Request.QueryString["UserId"]})">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                PDF
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-3" id="dvActivityData">
+        <div class="table-responsive">
+            <table class="table" id="activityTable">
+                <thead>
+                    <tr>
+                        <th scope="col" style="text-align:center;">Sr. No.</th>
+                        <th scope="col">Learning</th>
+                        <th scope="col" style="text-align:center;">Type</th>
+                        <th scope="col" style="text-align:center;">Status</th>
+                        <th scope="col" style="text-align:center;">Duration (Mins)</th>
+                        <th scope="col" style="text-align:center;">Completion Time</th>
+                        <th scope="col" style="text-align:center;">Attempts</th>
+                        <th scope="col" style="text-align:center;">Score</th>
+                        <th scope="col">Attempted On</th>
+                        <th scope="col" style="text-align:center;">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+
+                        if (Model.Count > 0)
+                        {
+                            int count = 0;
+                            foreach (var user in Model)
+                            {
+                                count++;
+                                var commentNew = user.Comments.Replace("#;;# ", ";").Split(';');
+                                var actualComment = "Commets:\n";
+                                int commentCount = 0;
+                                foreach (var c in commentNew)
+                                {
+                                    commentCount++;
+                                    actualComment += commentCount + ") " + c + "\n";
+                                }
+                                decimal rating = 0;
+                                var ratingPercentage = string.Empty;
+                                if (!string.IsNullOrEmpty(user.Rating))
+                                {
+                                    rating = Convert.ToDecimal(user.Rating) * 20;
+                                    ratingPercentage = rating + "%";
+                                }
+                                else
+                                {
+                                    ratingPercentage = "0%";
+                                }
+                                decimal score = 0;
+                                if (!string.IsNullOrEmpty(user.Score))
+                                {
+                                    if (user.LearningType == "Quiz")
+                                    {
+                                        score = (Convert.ToDecimal(user.Score) * 100) / user.QuestionCount;
+                                    }
+                                    else
+                                    {
+                                        score = Convert.ToDecimal(user.Score);
+                                    }
+                                }
+
+                                <tr>
+                                    <td style="text-align:center;">@count</td>
+                                    <td>@user.LearningName</td>
+                                    <td style="text-align:center;">@user.LearningType</td>
+                                    @if (user.ActivityStatus == "Completed")
+                                    {
+                                        <td style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
+                                    }
+                                    @if (user.ActivityStatus == "InProgress")
+                                    {
+                                        <td style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
+                                    }
+                                    @if (user.ActivityStatus == "Not Started")
+                                    {
+                                        <td style="text-align:center;"><i class="far fa-clock"></i></td>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(user.Duration))
+                                    {
+                                        <td style="text-align:center;">@user.Duration</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:center;">-</td>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(user.CompletionTime) && user.CompletionTime != "-")
+                                    {
+                                        <td style="text-align:center;">@user.CompletionTime</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:center;">-</td>
+                                    }
+
+                                    <td style="text-align:center;">@user.Attempts</td>
+                                    @if (score == 0)
+                                    {
+                                        <td style="text-align:center;">-</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:center;">@score%</td>
+                                    }
+                                    <td>@user.AttemptedOn</td>
+                                    <td>
+                                        <div class="stars-outer">
+                                            <div class="stars-inner" title="@Html.Raw(actualComment)" style="width:@ratingPercentage"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" align="center">No Activity Available</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">No Activity Available</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#activityTable').DataTable({
+            //"aaSorting": [[ 3, "desc" ]],
+            "paging": true,
+            "ordering": true,
+            "info": true,
+            "bFilter": true,
+            "pageLength": 10,
+            "pagingType": "full_numbers",
+            //language: {
+            //    paginate: {
+            //        next: '&#8594;', // or '→'
+            //        previous: '&#8592;' // or '←'
+            //    }
+            //}
+        });
+
+        $('#activityTable_filter').hide();
+
+        $('#txtSearch').on('keyup', function () {
+
+            $.fn.dataTable.ext.search.push(function (settings, searchData) {
+                var term = $('#txtSearch').val().toLowerCase()
+                for (var i = 0; i < searchData.length; i++) {
+                    if (searchData[i].toLowerCase().indexOf(term) == 0) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            var table = $('#activityTable').DataTable();
+            table.draw();
+        });
+    });
+</script>

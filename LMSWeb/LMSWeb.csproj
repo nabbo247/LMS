@@ -45,7 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\ExcelPackage.1.0.0\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
@@ -138,6 +145,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\CommonFunctions.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MenuHelper.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssignmentController.cs" />
@@ -153,12 +161,15 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MyLearningViewModel.cs" />
     <Compile Include="ViewModel\QuizAssignViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\ajax-loader.gif" />
+    <Content Include="assets\images\assign.png" />
+    <Content Include="assets\images\assigned-to-users.png" />
     <Content Include="assets\images\avatar-1.jpg" />
     <Content Include="assets\images\avatar-2.jpg" />
     <Content Include="assets\images\avatar-3.jpg" />
@@ -169,6 +180,14 @@
     <Content Include="assets\images\card-img-2.jpg" />
     <Content Include="assets\images\card-img-3.jpg" />
     <Content Include="assets\images\card-img.jpg" />
+    <Content Include="assets\images\check-img.png" />
+    <Content Include="assets\images\course.png" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\gettyimages-157318827-2048x2048.jpg" />
+    <Content Include="assets\images\giphy.gif" />
+    <Content Include="assets\images\LearningReport.png" />
+    <Content Include="assets\images\quiz.png" />
+    <Content Include="assets\images\shape_activate.png" />
     <Content Include="assets\images\down-arrow.jpg" />
     <Content Include="assets\images\down-arrow.png" />
     <Content Include="assets\images\drag-indicator.png" />
@@ -182,14 +201,19 @@
     <Content Include="assets\images\eco-slider-img-2.png" />
     <Content Include="assets\images\eco-slider-img-3.png" />
     <Content Include="assets\images\error-img.png" />
+    <Content Include="assets\images\eye.png" />
     <Content Include="assets\images\github.png" />
+    <Content Include="assets\images\hour-glass.png" />
     <Content Include="assets\images\imagplaceholder.png" />
     <Content Include="assets\images\info-icon.png" />
+    <Content Include="assets\images\launch.png" />
     <Content Include="assets\images\loader.svg" />
     <Content Include="assets\images\Login Cognition.png" />
+    <Content Include="assets\images\login-btn-img.png" />
     <Content Include="assets\images\loginpage.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\mail_chimp.png" />
+    <Content Include="assets\images\not-assigned.png" />
     <Content Include="assets\images\orange.jpg" />
     <Content Include="assets\images\orange1.jpg" />
     <Content Include="assets\images\product-pic-2.jpg" />
@@ -197,10 +221,29 @@
     <Content Include="assets\images\product-pic-4.jpg" />
     <Content Include="assets\images\product-pic.jpg" />
     <Content Include="assets\images\rockettechpng-1.png" />
+    <Content Include="assets\images\rt_logo.png" />
+    <Content Include="assets\images\shape%402x.png" />
+    <Content Include="assets\images\shape.png" />
+    <Content Include="assets\images\shape1.png" />
+    <Content Include="assets\images\shape_2.png" />
+    <Content Include="assets\images\shape_Active.png" />
+    <Content Include="assets\images\shape_activeBig.png" />
+    <Content Include="assets\images\shape_ActiveUsers.png" />
+    <Content Include="assets\images\shape_AssignedUserLegend.png" />
+    <Content Include="assets\images\shape_deactivate.png" />
+    <Content Include="assets\images\shape_editUser.png" />
+    <Content Include="assets\images\shape_HighScoreUsers.png" />
+    <Content Include="assets\images\shape_inactive.png" />
+    <Content Include="assets\images\shape_InactiveBig.png" />
+    <Content Include="assets\images\shape_InactiveUser.png" />
+    <Content Include="assets\images\shape_Learnings.png" />
+    <Content Include="assets\images\shape_NotAssignedLegend.png" />
+    <Content Include="assets\images\shape_TotalUsers.png" />
     <Content Include="assets\images\slack.png" />
     <Content Include="assets\images\switch.png" />
     <Content Include="assets\images\trash.png" />
     <Content Include="assets\images\up-arrow.jpg" />
+    <Content Include="assets\images\UserReport.png" />
     <Content Include="assets\libs\css\style.css" />
     <Content Include="assets\libs\js\dashboard-ecommerce.js" />
     <Content Include="assets\libs\js\dashboard-finance.js" />
@@ -575,8 +618,11 @@
     <Content Include="CSS\jquery-ui.min.css" />
     <Content Include="CSS\lib\styleold.css" />
     <Content Include="CSS\lib\style.css" />
+    <Content Include="CSS\style.css" />
     <Content Include="DBScript\LMSDB_Script.sql" />
     <Content Include="DBScript\LMSscript_14Jan.sql" />
+    <Content Include="DBScript\scormplayertables.txt" />
+    <Content Include="DBScript\Script24Jan.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -635,6 +681,7 @@
     <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
     <Content Include="Download\UserUploadTemplate.xlsx" />
     <Content Include="Download\UserUploadTemplate.csv" />
+    <Content Include="DBScript\LMSDB.bak" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap\bootstrap.bundle.js" />
@@ -711,6 +758,37 @@
     <Content Include="Views\Tenant\AddTenantUser.cshtml" />
     <Content Include="Views\Reports\AllReports.cshtml" />
     <Content Include="Views\User\Upload.cshtml" />
+    <Content Include="Views\Shared\_LayoutNew.cshtml" />
+    <Content Include="Views\Home\LearnerHome.cshtml" />
+    <Content Include="Views\Home\_ActivityData.cshtml" />
+    <Content Include="Views\Assignment\MyLearning.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Reports\LearnerReportMain.cshtml" />
+    <Content Include="Views\Reports\DetailReport.cshtml" />
+    <Content Include="Views\Reports\AttemptReport.cshtml" />
+    <Content Include="Views\Home\AdminHome.cshtml" />
+    <Content Include="Views\Home\_AdminHomeList.cshtml" />
+    <Content Include="Views\Reports\UserReport.cshtml" />
+    <Content Include="Views\Reports\UserProgressReport.cshtml" />
+    <Content Include="Views\Reports\LearningCompletionReport.cshtml" />
+    <Content Include="Views\Reports\LearningProgressCompletionReport.cshtml" />
+    <Content Include="Views\Quiz\QuizList.cshtml" />
+    <Content Include="Views\Courses\CourseList.cshtml" />
+    <Content Include="Views\Assignment\RatingAndFeedback.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Assignment\ReviewQuizLearner.cshtml" />
+    <Content Include="Views\User\AddNewUser.cshtml" />
+    <Content Include="Views\Courses\AddNewCourse.cshtml" />
+    <Content Include="Views\Courses\AssignCourse.cshtml" />
+    <Content Include="Views\Quiz\ViewAdminQuiz.cshtml" />
+    <Content Include="Views\Quiz\AddNewQuiz.cshtml" />
+    <Content Include="Views\User\UploadUsers.cshtml" />
+    <Content Include="Views\Reports\HighScoreUsersReport.cshtml" />
+    <Content Include="Views\Reports\_UserReportList.cshtml" />
+    <Content Include="Views\Reports\_UserProgressReportList.cshtml" />
+    <Content Include="Views\Reports\_LearningCompletionReportList.cshtml" />
+    <Content Include="Views\Reports\_LearningProgressReportList.cshtml" />
+    <Content Include="Views\Quiz\EditNewQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

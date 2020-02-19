@@ -1,0 +1,12 @@
+﻿
+alter table tblAllCourses
+alter column IsActive bit
+
+alter table tblAllCourses
+add createdBy int
+
+alter table tblAllCourses
+add createdOn datetime
+
+alter table tblAllCourses
+add tenantId int

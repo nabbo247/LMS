@@ -42,6 +42,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -60,11 +62,12 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Exceptions.cs" />
     <Compile Include="Common\Response.cs" />
+    <Compile Include="DBModels\HomeModel.cs" />
     <Compile Include="DBModels\LMSContext.cs" />
     <Compile Include="DBModels\QuizResponse.cs" />
     <Compile Include="DBModels\ReportModel.cs" />
     <Compile Include="DBModels\TblAssignmentAndTracking.cs" />
-    <Compile Include="DBModels\TblCourse.cs" />
+    <Compile Include="DBModels\tblCourse.cs" />
     <Compile Include="DBModels\tblEmails.cs" />
     <Compile Include="DBModels\TblLogin.cs" />
     <Compile Include="DBModels\TblNotificationTemplate.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="DBModels\tblQuestionType.cs" />
     <Compile Include="DBModels\tblQuiz.cs" />
     <Compile Include="DBModels\tblQuizScore.cs" />
+    <Compile Include="DBModels\tblRatings.cs" />
     <Compile Include="DBModels\TblResetPassword.cs" />
     <Compile Include="DBModels\tblRespons.cs" />
     <Compile Include="DBModels\TblStatus.cs" />
@@ -80,12 +84,15 @@
     <Compile Include="DBModels\TblUser.cs" />
     <Compile Include="DBModels\TblUserRole.cs" />
     <Compile Include="DBModels\Param.cs" />
+    <Compile Include="DBModels\UserReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DBModels\Response.cs" />
     <Compile Include="Repository\CoursesRepository.cs" />
     <Compile Include="Repository\DataRepository.cs" />
+    <Compile Include="Repository\HomeRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\QuizRepository.cs" />
+    <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\RolesRepository.cs" />
     <Compile Include="Repository\TenantRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />

@@ -1,19 +1,19 @@
-﻿@model List<LMSBL.DBModels.TblQuiz>
+﻿@model LMSWeb.ViewModel.MyLearningViewModel
 @{
     ViewBag.Title = "MyAssignments";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>My Assignments</h4>
+
 
 <body>
     <div class="main-container container">
-        
+        <h4>Quiz</h4>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="tblQuiz">
             <thead>
                 <tr>
-                    <th scope="col">Quiz Id</th>
+                    <th scope="col">Sr No.</th>
                     <th scope="col">Quiz Name</th>
                     <th scope="col">Quiz Description</th>
                     <th scope="col" colspan="2">Actions</th>
@@ -22,25 +22,90 @@
             <tbody>
                 @if (Model != null)
                 {
-                    foreach (var quiz in Model)
+                    if (Model.lstQuiz != null)
                     {
-                        <tr>
-                            <th scope="row">@quiz.QuizId</th>
-                            <td>@quiz.QuizName</td>
-                            <td>@quiz.QuizDescription</td>
+                        var index = 0;
+                        foreach (var quiz in Model.lstQuiz)
+                        {
+                            index++;
+                            <tr>
+                                <th scope="row">@index</th>
+                                <td>@quiz.QuizName</td>
+                                <td>@quiz.QuizDescription</td>
 
-                            <td>                               
-                                <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = quiz.QuizId })">
-                                    <button type="button" class="btn text-center btn-warning">
-                                        Launch
-                                    </button>
-                                </a>                                
-                            </td>
-                        </tr>
+                                <td>
+                                    <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = quiz.QuizId })">
+                                        <button type="button" class="btn text-center btn-warning">
+                                            Launch
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
+                    else
+                    {
+                        <tr><td colspan="4" style="text-align:center;">No Data Found</td></tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="4" style="text-align:center;">No Data Found</td></tr>
                 }
             </tbody>
         </table>
 
     </div>
+
+
+    <div class="main-container container">
+        <h4>Courses</h4>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Sr No.</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Details</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    if (Model.lstCourse != null)
+                    {
+                        var index = 0;
+                        foreach (var course in Model.lstCourse)
+                        {
+                            index++;
+                            <tr>
+                                <th scope="row">@index</th>
+                                <td>@course.ContentModuleName</td>
+                                <td>@course.ContentModuleDescription</td>
+
+                                <td>
+                                    <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = course.ContentModuleId })">
+                                        <button type="button" class="btn text-center btn-warning">
+                                            Launch
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="4" style="text-align:center;">No Data Found</td></tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="4" style="text-align:center;">No Data Found</td></tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
 </body>

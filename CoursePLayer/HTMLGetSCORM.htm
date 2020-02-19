@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Content Player</title>
+    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+    <script src="js/jquery.min1.4.2.js" type="text/javascript"></script>
+           <script src="soapclient.js" type="text/javascript"></script>
+    <script language='Javascript'  type="text/javascript" >
+
+        window.opener = null; // Keep courseware GetAPI() recursive calls from trying to access portal domain and erroring out.
+        function ChangeURL(sReLoadURL)
+        {
+            window.location.replace(sReLoadURL);
+        }
+
+        function getContentFrameUrl() {
+            
+            return "ScormCourseDefaultPage.aspx" + window.location.search;
+        }
+
+        var timer=-1;
+        function setTimer()
+        {            
+            var sPageName="scormcoursedefaultpage.aspx";
+            var sConUrl= parent.DefaultContentFrame.location.href;
+            sConUrl = sConUrl.substring(0,(sConUrl.toLowerCase().indexOf(sPageName)));
+            parent.ContentSrvFrame.mainFrame.location.href =sConUrl+ "dummy.html";
+            timer = window.setInterval("sendRequest()", 2000);
+        }
+
+        function stop_timer() {
+            if (timer !== -1) {
+                window.clearInterval(timer);
+                timer = -1;
+            }
+        }
+
+        function sendRequest()
+        {
+            parent.DefaultContentFrame.location.reload(true);
+            parent.DefaultContentFrame.location.href = getContentFrameUrl();
+            parent.document.getElementById("frmsetLaunch").rows="0,*,0,0";
+            stop_timer();
+        }
+        var   blnLaunchSco= false ;
+        function SetLaunchSco(blnSetLaunch)
+        {
+            blnLaunchSco= blnSetLaunch;
+
+        }
+        function IsSingleLaunchSco()
+        {
+            return  blnLaunchSco;
+        }
+        function hideFrame()
+        {
+            var frameset = parent.document.getElementById("frmsetLaunch");
+            if (window.parent.name=="course")
+            {
+                frameset.rows = "0,*,0,0";
+            }
+            else
+            {
+                frameset.rows = "0,*,0,0";
+            }
+        }
+        function fnExitFrame()
+        {
+            try{
+                if (parent.DefaultContentFrame.API != null)
+                    parent.DefaultContentFrame.LMSFinish("");
+            }catch (e){}
+        }
+
+        function setHrefs() {
+            parent.DefaultContentFrame.location.href = getContentFrameUrl();
+            parent.ExitServerFrame.location.href = "LMSExitPlayer.aspx?ExitType=server&" + window.location.search.substring(1);
+            parent.ExitClientFrame.location.href = "LMSExitPlayer.aspx?ExitType=client&" + window.location.search.substring(1);
+        }
+
+
+
+        var xmlhttpIC;
+        function ConnectToNet() {
+            //alert('i am in - con check function');
+            //alert('Connection Check');
+            xmlhttpIC = null;
+            try {
+                netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
+            } catch (e) {
+                //alert("Permission UniversalBrowserRead denied.");
+            }
+            // code for Mozilla, etc.
+            if (window.XMLHttpRequest) {
+                xmlhttpIC = new XMLHttpRequest()
+            }
+                // code for IE
+            else if (window.ActiveXObject) {
+                xmlhttpIC = new ActiveXObject("Microsoft.XMLHTTP")
+            }
+            if (xmlhttpIC != null) {
+                var url = "Reconnect.aspx?id" + Math.random();
+                try {
+                    //alert(url);
+                    //xmlhttpIC.onreadystatechange=state_Change
+                    xmlhttpIC.open("GET", url, false);
+                    xmlhttpIC.send(null)
+
+                    if (xmlhttpIC.readyState == 4) {
+                        try {
+
+                            if (xmlhttpIC.status == 200) {
+                                //alert("your internet connectivityi s working good.");
+                                return "connected";
+                            }
+                            else {
+
+                                alert(msg);
+                                //alert("There is an issue with your internet connection. Please re-launch the assessment once your internet connection has been restored.");
+                                return "NOTconnected";
+                            }
+                        }
+                        catch (err) {
+                            alert(msg);
+                           // alert("There is an issue with your internet connection. Please re-launch the assessment once your internet connection has been restored.");
+                            return "NOTconnected";
+                        }
+                    }
+                }
+                catch (err) {
+
+                    alert(msg);
+                    //alert("There is an issue with your internet connection. Please re-launch the assessment once your internet connection has been restored.");
+                    return "NOTconnected";
+                }
+            }
+            else {
+                alert("Your browser does not support XMLHTTP.")
+            }
+        }
+
+        var gTimerNet;
+        function checkConnection() {
+            if (ConnectToNet() == 'NOTconnected') {
+                clearInterval(gTimerNet);
+                top.close();
+            }
+        }
+        ////gTimerNet = window.setInterval("checkConnection()", 5000);
+
+        ////var msg = ShowErrorMsg();
+
+        function ShowErrorMsg() {
+            var e = "";
+            try {
+            var ClientId = getParameterByName("clientId");
+            var langId = getParameterByName("LangId");
+
+            if (langId == '')
+            { langId = 'en-US' }
+
+            //Calls Hello World Web Method.
+            var url = location.href.substring(0, location.href.indexOf("?"));
+            url = url.replace("HTMLGetSCORM.htm", "ErrorService.asmx");
+            var pl = new SOAPClientParameters();
+
+            pl.add("LangId", langId);
+            pl.add("ClientId", ClientId);
+
+            e = SOAPClient.invoke(url, "GetError", pl, false);
+            } catch (err) { }
+            return e;
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+    </script>
+
+</head>
+
+    <frameset rows="0,*,0,0" name="frmsetLaunch" id="frmsetLaunch" frameborder="NO" border="0" framespacing="0" scroll="no" onload="setHrefs()">
+        <frame src="" name="ExitServerFrame" title="TOPBAR" frameborder="NO" scrolling="NO" />
+        <frame src="" name="DefaultContentFrame" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" frameborder="0" border="0" />
+        <frame src="" name="ExitClientFrame" title="TOPBAR" frameborder="NO" scrolling="NO" />
+        <frame src="dummy.html" name="ContentSrvFrame" title="TOPBAR" frameborder="NO" scrolling="NO" />
+    </frameset>
+
+</html>

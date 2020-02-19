@@ -68,20 +68,13 @@ namespace LMSWeb.Controllers
                     if (file != null)
                     {
                         var logoURL = System.Configuration.ConfigurationManager.AppSettings["LogoURL"];
-                        var logoPhysicalURL = System.Configuration.ConfigurationManager.AppSettings["logoPhysicalURL"];
-                        string pic = System.IO.Path.GetFileName(file.FileName);
-                        string path = System.IO.Path.Combine(logoURL + "\\" + pic);
-                        string physicalPath = System.IO.Path.Combine(logoPhysicalURL + "\\" + pic);
-
-                        file.SaveAs(physicalPath);
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            file.InputStream.CopyTo(ms);
-                            byte[] array = ms.GetBuffer();
-                        }
+                        var logoPhysicalURL = System.Configuration.ConfigurationManager.AppSettings["logoPhysicalURL"];                        
+                        string filePhysicalPath = System.IO.Path.Combine(logoPhysicalURL + "\\" + objTenant.TenantName + ".jpg");
+                        string path = System.IO.Path.Combine(logoURL + "\\" + objTenant.TenantName + ".jpg");
+                        file.SaveAs(filePhysicalPath);                        
                         objTenant.Logo = path;
                     }
-                    //objTenant.TenantDomain = "http://" + objTenant.TenantDomain + "." + Request.Url.Host;
+                    
                     int rows = 0;
                     if (objTenant.TenantId == 0)
                         rows = tr.AddTenant(objTenant);

@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Web;
 using System.Web.Mvc;
 using LMSBL.Common;
 using LMSBL.DBModels;
 using LMSBL.Repository;
+using LMSWeb.ViewModel;
 
 
 namespace LMSWeb.Controllers
 {
     public class CoursesController : Controller
     {
+        UserRepository userRepository = new UserRepository();
         CoursesRepository cc = new CoursesRepository();
         TenantRepository tr = new TenantRepository();
         Exceptions newException = new Exceptions();
@@ -18,34 +22,16 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                List<TblCourse> listInActiveCourses = new List<TblCourse>();
+                List<tblCourse> listInActiveCourses = new List<tblCourse>();
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 listInActiveCourses = cc.GetAllCourses(sessionUser.TenantId);
 
-                return View(listInActiveCourses);
+                return View("CourseList", listInActiveCourses);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
-            }
-        }
-
-
-        public ActionResult GetCourseDetails()
-        {
-            try
-            {
-                List<TblCourse> courseDetails = new List<TblCourse>();
-                TblUser sessionUser = (TblUser)Session["UserSession"];
-                courseDetails = cc.GetCourseById(1);
-
-                return View(courseDetails);
-            }
-            catch (Exception ex)
-            {
-                newException.AddException(ex);
-                return View();
+                return View("CourseList");
             }
         }
 
@@ -53,44 +39,55 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                TblCourse objEditData = new TblCourse
-                {
-                    Tenants = tr.GetAllTenants()
-                };
-                return View(objEditData);
+                tblCourse objEditData = new tblCourse();
+
+                return View("AddNewCourse", objEditData);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewCourse");
             }
         }
 
         [HttpPost]
-        public ActionResult AddCourse(TblCourse objCourse)
+        public ActionResult AddCourse(tblCourse objCourse, HttpPostedFileBase file)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    int rows = 0;
                     TblUser sessionUser = (TblUser)Session["UserSession"];
-                    objCourse.CreatedBy = sessionUser.UserId;
-                    int rows = cc.AddCourse(objCourse);
+                    objCourse.createdBy = sessionUser.UserId;
+                    objCourse.tenantId = sessionUser.TenantId;
+                    objCourse.ZipFile = file;
+                    if (objCourse.ContentModuleId > 0)
+                    {
+                        rows = cc.EditCourse(objCourse);
+                    }
+                    else
+                    {
+                        rows = cc.AddCourse(objCourse);
+                    }
+
+
                     if (rows != 0)
                     {
+                        TempData["Message"] = "Course Saved Successfully";
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        return View(objCourse);
+                        return View("AddNewCourse", objCourse);
                     }
                 }
-                return View(objCourse);
+                return View("AddNewCourse", objCourse);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewCourse");
             }
         }
 
@@ -98,55 +95,17 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                List<TblCourse> CourseDetails = new List<TblCourse>();
+                List<tblCourse> CourseDetails = new List<tblCourse>();
                 CourseDetails = cc.GetCourseById(id);
-                TblCourse objEditData = new TblCourse
-                {
-                    Tenants = tr.GetAllTenants()
-                };
-                CourseDetails[0].Tenants = objEditData.Tenants;
-                objEditData = CourseDetails[0];
-                if (CourseDetails[0].CoursePath != null)
-                {
-                    ViewBag.JavaScriptFunction = string.Format("showFileName('{0}');", CourseDetails[0].CoursePath);
-                }
 
-                return View(objEditData);
+                return View("AddNewCourse", CourseDetails[0]);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View();
+                return View("AddNewCourse");
             }
 
-        }
-
-        [HttpPost]
-        public ActionResult EditCourse(TblCourse objCourse)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    TblUser sessionUser = (TblUser)Session["UserSession"];
-                    objCourse.CreatedBy = sessionUser.UserId;
-                    int rows = cc.EditCourse(objCourse);
-                    if (rows != 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        return View(objCourse);
-                    }
-                }
-                return View(objCourse);
-            }
-            catch (Exception ex)
-            {
-                newException.AddException(ex);
-                return View();
-            }
         }
 
         [HttpPost, ActionName("DeleteCourse")]
@@ -155,8 +114,8 @@ namespace LMSWeb.Controllers
             try
             {
                 Response response = new Response();
-                List<TblCourse> objCourseList = cc.GetCourseById(id);
-                TblCourse objCourse = objCourseList[0];
+                List<tblCourse> objCourseList = cc.GetCourseById(id);
+                tblCourse objCourse = objCourseList[0];
                 if (ModelState.IsValid)
                 {
                     if (objCourse.IsActive == true)
@@ -189,6 +148,79 @@ namespace LMSWeb.Controllers
             }
         }
 
+        public ActionResult AssignCourse(int id)
+        {
+            List<SelectListItem> userItems = new List<SelectListItem>();
+            List<tblCourse> objCourse = new List<tblCourse>();
+            CourseAssignViewModel courseAssignVieewModel = new CourseAssignViewModel();
+            TblUser sessionUser = (TblUser)Session["UserSession"];
 
+            var Users = userRepository.GetAllUsers(sessionUser.TenantId);
+
+            foreach (var user in Users)
+            {
+                userItems.Add(new SelectListItem
+                {
+                    Text = Convert.ToString(user.FirstName + " " + user.LastName),
+                    Value = Convert.ToString(user.UserId)
+                });
+            }
+
+            DataSet ds = cc.GetAssignedCourseUsers(id);
+            bool isDueDate = false;
+            if (ds != null)
+            {
+                if (ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (var item in userItems)
+                        {
+                            DataRow[] foundUsers = ds.Tables[0].Select("LearnerId = " + item.Value + "");
+                            if (foundUsers.Length != 0)
+                            {
+                                item.Selected = true;
+                                isDueDate = true;
+                            }
+                        }
+                    }
+                }
+            }
+            courseAssignVieewModel.usetList = userItems;
+            if (isDueDate)
+                if (ds != null)
+                {
+                    if (ds.Tables[0] != null)
+                    {
+                        if (!string.IsNullOrEmpty(Convert.ToString(ds.Tables[0].Rows[0][1])))
+                            courseAssignVieewModel.DueDate = Convert.ToDateTime(ds.Tables[0].Rows[0][1]);
+                    }
+                }
+            objCourse = cc.GetCourseById(id);
+            
+            courseAssignVieewModel.course = objCourse[0];
+            return View(courseAssignVieewModel);
+        }
+
+        public ActionResult AssignCourseToUsers(CourseAssignViewModel courseAssignViewModel)
+        {
+            var index = cc.DeleteAssignedUserForCourse(courseAssignViewModel.course.ContentModuleId);           
+
+            foreach (var userId in courseAssignViewModel.userIds)
+            {
+                var result = cc.AssignCourse(courseAssignViewModel.course.ContentModuleId, userId, courseAssignViewModel.DueDate);
+
+                var emailBody = courseAssignViewModel.course.ContentModuleName + " - assigned to you. Please go through it. <br /> Your Due Date is - " + courseAssignViewModel.DueDate;
+                var emailSubject = "Course Assigned - " + courseAssignViewModel.course.ContentModuleName;
+                tblEmails objEmail = new tblEmails();
+                var objUser = userRepository.GetUserById(userId);
+                objEmail.EmailTo = objUser[0].EmailId;
+                objEmail.EmailSubject = emailSubject;
+                objEmail.EmailBody = emailBody;
+                var emailResult = userRepository.InsertEmail(objEmail);
+            }          
+
+            return RedirectToAction("Index");
+        }
     }
 }

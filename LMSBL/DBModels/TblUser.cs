@@ -59,5 +59,10 @@ namespace LMSBL.DBModels
         public List<TblUserRole> UserRoles { get; set; }
 
         public List<TblTenant> Tenants { get; set; }
+        
+        public string OldPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+
+        public string profileImage { get; set; }
     }
 }

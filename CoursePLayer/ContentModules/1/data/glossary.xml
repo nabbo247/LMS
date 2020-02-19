@@ -1,0 +1,28 @@
+<glosssaryData>
+	<alpha char="A">
+		<word>
+		  <term><![CDATA[A]]></term> 
+		  <description><![CDATA[Description of A]]></description> 
+		</word>
+	</alpha>
+	<alpha char="B">
+		<word>
+		  <term><![CDATA[B]]></term> 
+		  <description><![CDATA[Description of B]]></description> 
+		</word>
+	</alpha>
+	<alpha char="C">
+		<word>
+		  <term><![CDATA[C]]></term> 
+		  <description><![CDATA[Description of C]]></description> 
+		</word>			
+	</alpha>
+	
+	<alpha char="D">
+		<word>
+		  <term><![CDATA[D]]></term> 
+		  <description><![CDATA[Description of D]]></description> 
+		</word>
+	</alpha>
+	
+</glosssaryData>

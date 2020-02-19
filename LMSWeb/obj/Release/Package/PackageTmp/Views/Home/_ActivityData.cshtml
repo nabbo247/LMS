@@ -1,0 +1,127 @@
+﻿@model List<LMSBL.DBModels.HomeModel>
+
+@{
+    LMSBL.DBModels.TblUser objUser = new LMSBL.DBModels.TblUser();
+    objUser = (LMSBL.DBModels.TblUser)Session["UserSession"];
+    var baseURL = System.Configuration.ConfigurationManager.AppSettings["CourseBaseURL"];
+}
+<div class="table-responsive">
+    <table class="table" id="activityTable">
+        <thead>
+            <tr>
+                <th scope="col">Course Name</th>
+                <th scope="col" style="text-align:center;">Type</th>
+                @*<th scope="col">Description</th>*@
+                <th scope="col" style="text-align:center;">Duration (Mins)</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Completion Date</th>
+                <th scope="col" style="text-align:center;">Status</th>
+                <th scope="col" style="text-align:center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                if (Model.Count > 0)
+                {
+                    var rowCount = 0;
+                    foreach (var activity in Model)
+                    {
+
+                        if (rowCount < 5)
+                        {
+                            <tr>
+                                <td>@activity.ActivityName</td>
+                                <td style="text-align:center;">@activity.ActivityType</td>
+                                @*<td style="max-width:150px;">@activity.ActivityDescription</td>*@
+                                @if (activity.ActivityDuration == "0")
+                                {
+                                    <td style="text-align:center;">-</td>
+                                }
+                                else
+                                {
+                                    var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
+                                    TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
+                                    var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
+                                    <td style="text-align:center;">@duration</td>
+                                }
+                                <td>@activity.ActivityStartDate</td>
+                                @if (activity.ActivityCompletionDate == "")
+                                {
+                                    <td style="text-align:center;">-</td>
+                                }
+                                else
+                                {
+                                    <td>@activity.ActivityCompletionDate</td>
+                                }
+                                @if (activity.ActivityStatus == "Completed")
+                                {
+                                    <td style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
+                                }
+                                @if (activity.ActivityStatus == "InProgress")
+                                {
+                                    <td style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
+                                }
+                                @if (activity.ActivityStatus == "Not Started")
+                                {
+                                    <td style="text-align:center;"><i class="far fa-clock"></i></td>
+                                }
+                                @if (activity.ActivityType == "Quiz")
+                                {
+                                    <td style="text-align:center;"><a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = activity.ActivityId })" class="login" title="Launch Quiz"><img src="~/assets/images/launch.png" /></a></td>
+                                }
+                                @if (activity.ActivityType == "Course")
+                                {
+                                    <td style="text-align:center;"><a href="@baseURL?AID=@activity.ActivityId&LID=@objUser.UserId" class="login" title="Launch Course" target="_blank"><img src="~/assets/images/launch.png" /></a></td>
+                                }
+                            </tr>
+                        }
+                        rowCount++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" align="center">No Activity Available</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">No Activity Available</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#activityTable').DataTable({
+            "aaSorting": [3, "desc"],
+            "paging": false,
+            "ordering": true,
+            "info": false,
+            "bFilter": true
+        });
+
+        $('#activityTable_filter').hide();
+
+        $('#txtSearch').on('keyup', function () {
+
+            $.fn.dataTable.ext.search.push(function (settings, searchData) {
+                var term = $('#txtSearch').val().toLowerCase()
+                for (var i = 0; i < searchData.length; i++) {
+                    if (searchData[i].toLowerCase().indexOf(term) == 0) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            var table = $('#activityTable').DataTable();
+            table.draw();
+        });
+    });
+
+
+</script>

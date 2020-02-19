@@ -1,0 +1,14 @@
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\bin\Release\ErrorHandling.dll
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\bin\Release\ErrorHandling.pdb
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\bin\Release\dll
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\bin\Release\pdb
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\obj\Release\ErrorHandling.csprojResolveAssemblyReference.cache
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\obj\Release\ErrorHandling.dll
+D:\Projects\TFS_CODE\UPS\Main\UPSFreight_Microsite\Source\ErrorHandling\obj\Release\ErrorHandling.pdb
+E:\BAS\ScormPlayer\sample\ErrorHandling\bin\Release\ErrorHandling.dll
+E:\BAS\ScormPlayer\sample\ErrorHandling\bin\Release\ErrorHandling.pdb
+E:\BAS\ScormPlayer\sample\ErrorHandling\bin\Release\dll
+E:\BAS\ScormPlayer\sample\ErrorHandling\bin\Release\pdb
+E:\BAS\ScormPlayer\sample\ErrorHandling\obj\Release\ErrorHandling.csprojResolveAssemblyReference.cache
+E:\BAS\ScormPlayer\sample\ErrorHandling\obj\Release\ErrorHandling.dll
+E:\BAS\ScormPlayer\sample\ErrorHandling\obj\Release\ErrorHandling.pdb

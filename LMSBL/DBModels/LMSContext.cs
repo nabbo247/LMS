@@ -13,7 +13,7 @@ namespace LMSBL.DBModels
         }
 
         public virtual DbSet<TblAssignmentAndTracking> TblAssignmentAndTrackings { get; set; }
-        public virtual DbSet<TblCourse> TblCourses { get; set; }
+        public virtual DbSet<tblCourse> TblCourses { get; set; }
         public virtual DbSet<TblNotificationTemplate> TblNotificationTemplates { get; set; }
         public virtual DbSet<TblStatus> TblStatus { get; set; }
         public virtual DbSet<TblTenant> tblTenants { get; set; }

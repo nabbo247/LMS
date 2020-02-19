@@ -1,0 +1,71 @@
+﻿@model List<LMSBL.DBModels.UserReportModel>
+@{
+    ViewBag.Title = "UserReport";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+    <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+        <div class="row mb-1">
+            <div class="col">
+                <h4>User Report</h4>
+            </div>
+        </div>
+        <div class="row user-quiz-top-section mb-2 mt-3 p-2 user-report" >
+            <div class="col-12">
+                <span class="grey-color"></span>
+                <div class="float-right">
+                    <div class="grey-color" style="margin-top:10px;">
+                        Date Range: &nbsp;&nbsp;
+                        <input class="input50 datepicker" type="text" id="fDate" readonly name="fDate" placeholder="Select From Date">&nbsp;&nbsp;
+                        <input class="input50 datepicker" type="text" id="tDate" readonly name="tDate" placeholder="Select To Date">&nbsp;&nbsp;
+                        <button type="submit" id="btnFilter" class="btn btn-primary create-learning-btn mr-4" onclick="FilterResult();"><img src="~/assets/images/check-img.png" width="20" height="20" /> Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-4 mb-4 pl-4 pr-4" id="dvActivityData">
+            @Html.Partial("~/Views/Reports/_UserReportList.cshtml", Model)
+
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {       
+
+         $('#fDate').datepicker({
+                format: 'mm/dd/yyyy',
+                showWeek: true
+         });
+
+        $('#tDate').datepicker({
+                format: 'mm/dd/yyyy',
+                showWeek: true
+            });
+    });
+
+    function FilterResult() {
+        var params = new URLSearchParams(window.location.search);
+        var isActive = params.get('isActive');        
+        var fDate = $('#fDate').val();
+        var tDate = $('#tDate').val();
+        
+        $.ajax({
+            type: "POST",
+            url: "/Reports/GetFilteredData",
+            data: '{isActive: "' + isActive + '",fDate: "' + fDate + '",tDate: "' + tDate + '",ReportName: "UserReport" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                console.log(response);                
+                $('#dvActivityData').html(response);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
+</script>

@@ -23,6 +23,7 @@ namespace LMSBL.Common
             tbluser.RoleId= Convert.ToInt16(ds.Tables[0].Rows[0]["roleId"]);
             tbluser.TenantId= Convert.ToInt16(ds.Tables[0].Rows[0]["tenantId"]);
             tbluser.IsNew = Convert.ToBoolean(ds.Tables[0].Rows[0]["isNew"]);
+            tbluser.profileImage = Convert.ToString(ds.Tables[0].Rows[0]["profileImage"]);
             return tbluser;
         }
     }

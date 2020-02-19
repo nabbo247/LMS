@@ -1,0 +1,59 @@
+﻿@model LMSBL.DBModels.tblRatings
+@{
+    ViewBag.Title = "RatingAndFeedback";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+@using (Html.BeginForm("SubmitRating", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+        <div class="mt-5 pt-3 pl-3 pr-3 course-list-container w-75 m-auto rating-feedback-container">
+
+            <div class="row mt-6 p-2">
+                @Html.HiddenFor(model => model.ActivityId)
+                @Html.HiddenFor(model => model.Attempt)
+                @Html.HiddenFor(model => model.Rating)
+
+
+                <div class="stars">
+
+                    <input class="star star-5" id="star-5" type="radio" name="star" onclick="captureRating(5);" />
+                    <label class="star star-5" for="star-5"></label>
+                    <input class="star star-4" id="star-4" type="radio" name="star" onclick="captureRating(4);" />
+                    <label class="star star-4" for="star-4"></label>
+                    <input class="star star-3" id="star-3" type="radio" name="star" onclick="captureRating(3);" />
+                    <label class="star star-3" for="star-3"></label>
+                    <input class="star star-2" id="star-2" type="radio" name="star" onclick="captureRating(2);" />
+                    <label class="star star-2" for="star-2"></label>
+                    <input class="star star-1" id="star-1" type="radio" name="star" onclick="captureRating(1);" />
+                    <label class="star star-1" for="star-1"></label>
+
+                </div>
+            </div>
+            <div class="row mt-6 p-2" style="text-align:center;">
+                <div>
+                    @Html.TextAreaFor(model => model.Comment, new { @class = "input200", @rows=3, placeholder = "Comment" })
+                </div>
+            </div>
+
+            <div class="col mt-3">
+                <div class="row pb-5">
+                    <div class="col-sm-8">
+                        <ul class="list-inline que-pagination" id="paginator-list">
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <button type="submit" id="btnCancel" onclick="location.href='@Url.Action("ReviewQuiz", "Assignment", new { QuizId = Model.ActivityId })';return false;" class="btn btn-primary prev-btn">Skip</button>
+                        <button type="submit" id="btnResponseSubmit" class="btn btn-primary prev-btn">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function captureRating(rating) {
+        $("#Rating").val(rating);
+    }
+
+</script>
