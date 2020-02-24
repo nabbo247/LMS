@@ -14,6 +14,11 @@ html, body {
     position: relative;
 }
 
+.user-menu {
+    max-width: 200px;
+}
+
+
     .user-menu a, .notification-menu a, .create-learning a {
         border-bottom: 1px solid #eeecec;
         padding-top: 10px;
@@ -103,10 +108,16 @@ html, body {
         display: block;
     }
 
-    .user-details .user-name {
-        font-size: 12px;
-        margin-top: 10px;
-    }
+.user-details {
+    font-size: 12px;
+    margin-top: 10px;
+    color:rgba(0,0,0,.5)
+}
+
+.user-name {
+    font-size: 15px;
+    color: rgba(0,0,0,.5)
+}
 
     .user-details .user-role {
         font-size: 10px;
@@ -205,6 +216,7 @@ html, body {
 
 .progress-list .list-inline-item {
     margin-right: 15px;
+    margin-bottom: 15px;
     color: #565656;
 }
 
@@ -367,6 +379,8 @@ html, body {
     margin: auto;
 }
 
+
+
 @media (max-width: 991px) {
 
     .col-1 {
@@ -442,8 +456,11 @@ html, body {
         width: 100px !important;
     }
 
-    .course-img, .quiz-image {
-        width: 3%;
+    .quiz-image {
+        width: 15%;
+    }
+    .course-img {
+        width: 15%;
     }
     .rating-feedback-container {
         width: 100% !important;
@@ -469,6 +486,13 @@ html, body {
     .notification-menu::after {
         left: 1%;
     }
+}
+
+@media (max-width: 640px) {
+    .mobile-hide {
+        display: none;
+    }
+
 }
 
 @media (max-width: 300px) {
@@ -667,6 +691,7 @@ label.star:before {
     text-decoration: none;
     cursor: pointer;
     padding: 1px 14px !important;
+    margin-bottom:5px;
 }
 
     .que-pagination li.active-page {
@@ -681,6 +706,7 @@ label.star:before {
     border-radius: 20px;
     background-color: #fb6300;
     border-color: #fb6300;
+    margin-bottom:5px;
 }
 
     .prev-btn:hover, .next-btn:hover {
@@ -837,6 +863,7 @@ label.star:before {
 
 .create-learning {
     /*top: 15px !important; */
+    width: 200px;
 }
 
     .create-learning img {

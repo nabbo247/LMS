@@ -106,3 +106,4 @@ E:\Projects\LMS\CoursePLayer\bin\Elmah.xml
 E:\Projects\LMS\CoursePLayer\obj\Debug\ScormPlayer.csproj.CopyComplete
 E:\Projects\LMS\CoursePLayer\obj\Debug\CoursePlayer.dll
 E:\Projects\LMS\CoursePLayer\obj\Debug\CoursePlayer.pdb
+E:\Projects\LMS\CoursePLayer\obj\Debug\ScormPlayer.csprojAssemblyReference.cache

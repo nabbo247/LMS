@@ -14,6 +14,8 @@ using System.Data;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace LMSWeb.Controllers
 {
@@ -157,15 +159,7 @@ namespace LMSWeb.Controllers
             try
             {
                 TblUser sessionUser = (TblUser)Session["UserSession"];
-                Microsoft.Office.Interop.Excel.Application excel;
-                Microsoft.Office.Interop.Excel.Workbook excelworkBook;
-                Microsoft.Office.Interop.Excel.Worksheet excelSheet;
-
-                excel = new Microsoft.Office.Interop.Excel.Application();
-                excel.Visible = false;
-                excel.DisplayAlerts = false;
-                excelworkBook = excel.Workbooks.Add(XlSheetType.xlWorksheet);
-                excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelworkBook.ActiveSheet;
+                
                 System.Data.DataTable table = new System.Data.DataTable();
 
                 if (!string.IsNullOrEmpty(isActive))
@@ -174,12 +168,12 @@ namespace LMSWeb.Controllers
                     objUserList = rpt.GetUserReportForAdmin(sessionUser.TenantId, Convert.ToBoolean(isActive));
                     if (isActive == "True")
                     {
-                        excelSheet.Name = "Active User Report";
+                        //excelSheet.Name = "Active User Report";
                         ReportName = "Active User Report";
                     }
                     else
                     {
-                        excelSheet.Name = "Total User Report";
+                        //excelSheet.Name = "Total User Report";
                         ReportName = "Total User Report";
                     }
 
@@ -196,6 +190,7 @@ namespace LMSWeb.Controllers
                         table.Rows.Add(row);
                     }
                     table.Columns.Remove("UserId");
+                    
                 }
                 if (ReportName == "User Progress Report")
                 {
@@ -268,23 +263,40 @@ namespace LMSWeb.Controllers
                     }
                 }
 
-                for (int i = 1; i < table.Columns.Count + 1; i++)
+
+                if (ReportName == "High Score Users Report")
                 {
-                    excelSheet.Cells[1, i] = table.Columns[i - 1].ColumnName;
+                    List<HighScoreUsersReportModel> objUserList = new List<HighScoreUsersReportModel>();
+                    var objReportData = rpt.GetHighScoreUsersReportForAdmin(sessionUser.TenantId);
+
+                    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(HighScoreUsersReportModel));
+                    foreach (PropertyDescriptor prop in properties)
+                        table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+
+                    foreach (HighScoreUsersReportModel item in objReportData)
+                    {
+                        DataRow row = table.NewRow();
+                        foreach (PropertyDescriptor prop in properties)
+                            row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+
+                        table.Rows.Add(row);
+                    }
+                    table.Columns.Remove("TotalQuestion");
                 }
 
-                for (int j = 0; j < table.Rows.Count; j++)
+                string fileName = ReportName + ".xlsx";
+                using (XLWorkbook wb = new XLWorkbook())
                 {
-                    for (int k = 0; k < table.Columns.Count; k++)
+
+                    //excelSheet.Name
+                    table.TableName = ReportName;
+                    wb.Worksheets.Add(table);
+                    using (MemoryStream stream = new MemoryStream())
                     {
-                        excelSheet.Cells[j + 2, k + 1] = table.Rows[j].ItemArray[k].ToString();
+                        wb.SaveAs(stream);
+                        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
                     }
                 }
-                string fileName = ReportName + ".xlsx";
-                excelworkBook.SaveAs("C:\\Download\\" + fileName);
-                excelworkBook.Close();
-                excel.Quit();
-                return File("D:\\Download\\" + fileName, "application/vnd.ms-excel", fileName);
             }
             catch (Exception ex)
             {
@@ -395,6 +407,26 @@ namespace LMSWeb.Controllers
                         dr["Comments"] = dr["Comments"].ToString().Replace("#;;#", "\n");
                     }
                 }
+            }
+
+            if (ReportName == "High Score Users Report")
+            {
+                List<HighScoreUsersReportModel> objUserList = new List<HighScoreUsersReportModel>();
+                var objReportData = rpt.GetHighScoreUsersReportForAdmin(sessionUser.TenantId);
+
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(HighScoreUsersReportModel));
+                foreach (PropertyDescriptor prop in properties)
+                    table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+
+                foreach (HighScoreUsersReportModel item in objReportData)
+                {
+                    DataRow row = table.NewRow();
+                    foreach (PropertyDescriptor prop in properties)
+                        row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+
+                    table.Rows.Add(row);
+                }
+                table.Columns.Remove("TotalQuestion");
             }
 
             // creating document object  

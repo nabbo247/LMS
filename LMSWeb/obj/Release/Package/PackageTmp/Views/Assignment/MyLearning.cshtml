@@ -29,12 +29,12 @@
                 <table class="table" id="activityTable">
                     <thead>
                         <tr>
-                            <th scope="col">Course Name</th>
+                            <th scope="col">Learning</th>
                             <th scope="col" style="text-align:center;">Type</th>
                             @*<th scope="col">Description</th>*@
                             <th scope="col" style="text-align:center;">Duration (Mins)</th>
                             <th scope="col">Start Date</th>
-                            <th scope="col">Completion Date</th>
+                            <th scope="col">Attempted Date</th>
                             <th scope="col" style="text-align:center;">Status</th>
                             <th scope="col" style="text-align:center;">Action</th>
                         </tr>
@@ -58,9 +58,18 @@
                                         }
                                         else
                                         {
-                                            var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
-                                            TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
-                                            var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
+                                            var durationInSeconds = 0;
+                                            var duration = "0";
+                                            if (Convert.ToInt32(activity.ActivityDuration) >= 60)
+                                            {
+                                                duration = activity.ActivityDuration+":00";
+                                            }
+                                            else
+                                            {
+                                                durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
+                                                TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
+                                                duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
+                                            }
                                             <td style="text-align:center;">@duration</td>
                                         }
                                         <td>@activity.ActivityStartDate</td>
@@ -86,11 +95,33 @@
                                         }
                                         @if (activity.ActivityType == "Quiz")
                                         {
-                                            <td style="text-align:center;"><a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = activity.ActivityId })" class="login" title="Launch Quiz"><img src="~/assets/images/launch.png" /></a></td>
+                                            <td style="text-align:center;">
+                                                <a href="@Url.Action("LaunchQuiz", "Assignment", new { QuizId = activity.ActivityId })" class="login" title="Launch Quiz"><img src="~/assets/images/launch.png" /></a>&nbsp;&nbsp;
+                                                @if (activity.ActivityRating == "0" && activity.ActivityStatus == "Completed")
+                                                {
+                                                    <a href="@Url.Action("RatingAndFeedback", "Assignment", new { ActivityId = activity.ActivityId, LearningType = "Quiz" })" class="login" title="Give Rating"><i class="fas fa-star"></i></a>
+
+                                                }
+                                                else
+                                                {
+                                                    <a><i class="fas fa-star"></i></a>
+                                                }
+                                            </td>
                                         }
                                         @if (activity.ActivityType == "Course")
                                         {
-                                            <td style="text-align:center;"><a href="@baseURL?AID=@activity.ActivityId&LID=@objUser.UserId" class="login" title="Launch Course" target="_blank"><img src="~/assets/images/launch.png" /></a></td>
+                                            <td style="text-align:center;">
+                                                <a href="@baseURL?AID=@activity.ActivityId&LID=@objUser.UserId" class="login" title="Launch Course" target="_blank"><img src="~/assets/images/launch.png" /></a>&nbsp;&nbsp;
+
+                                                @if (activity.ActivityRating == "0" && activity.ActivityStatus == "Completed")
+                                                {
+                                                    <a href="@Url.Action("RatingAndFeedback", "Assignment", new { ActivityId = activity.ActivityId, LearningType = "Course" })" class="login" title="Give Rating"><i class="fas fa-star"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a><i class="fas fa-star"></i></a>
+                                                }
+                                            </td>
                                         }
                                     </tr>
 
@@ -118,7 +149,7 @@
 <script>
     $(document).ready(function () {
         $('#activityTable').DataTable({
-            "aaSorting": [ 3, "desc" ],
+            "aaSorting": [3, "desc"],
             "paging": true,
             "ordering": true,
             "info": true,

@@ -71,7 +71,9 @@ namespace LMSWeb.Controllers
                 //newException.AddDummyException("111");
                 if (sessionUser == null)
                 {
-                    sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+                    CommonFunctions common = new CommonFunctions();
+                    var password = common.GetEncodePassword("123456");
+                    sessionUser = ur.IsValidUser("Don@gmail.com", password);
                     //Session["UserSession"] = sessionUser;
                     //newException.AddDummyException("222");
                 }
@@ -107,7 +109,9 @@ namespace LMSWeb.Controllers
             TblUser sessionUser = (TblUser)Session["UserSession"];
             if (sessionUser == null)
             {
-                sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+                CommonFunctions common = new CommonFunctions();
+                var password = common.GetEncodePassword("123456");
+                sessionUser = ur.IsValidUser("Don@gmail.com", password);
                 newException.AddDummyException("Login");
             }
             if (sessionUser.RoleId == 2)
@@ -245,14 +249,15 @@ namespace LMSWeb.Controllers
 
             newException.AddDummyException("Responses Saved Successfully");
             TempData["Message"] = "Responses Saved Successfully";
-            return RedirectToAction("RatingAndFeedback", new { @QuizId = objQuiz.QuizId, @attempt = attempt });
+            return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId});
         }
 
-        public ActionResult RatingAndFeedback(int QuizId, int attempt)
+        public ActionResult RatingAndFeedback(int ActivityId, string LearningType)
         {
             tblRatings objRating = new tblRatings();
-            objRating.ActivityId = QuizId;
-            objRating.Attempt = attempt;
+            objRating.ActivityId = ActivityId;
+            objRating.ActivityType = LearningType;
+            //objRating.Attempt = attempt;
             return View(objRating);
         }
 
@@ -261,9 +266,9 @@ namespace LMSWeb.Controllers
             TblUser sessionUser = (TblUser)Session["UserSession"];
             objRating.UserId = sessionUser.UserId;
             objRating.TenantId = sessionUser.TenantId;
-            objRating.ActivityType = "Quiz";
+            //objRating.ActivityType = "Quiz";
             var result = quizRepository.CaptureRatings(objRating);
-            return RedirectToAction("ReviewQuiz", new { @QuizId = objRating.ActivityId });
+            return RedirectToAction("MyAssignments");
         }
        
         public ActionResult ReviewQuiz(int QuizId)
@@ -271,7 +276,9 @@ namespace LMSWeb.Controllers
             TblUser sessionUser = (TblUser)Session["UserSession"];
             if (sessionUser == null)
             {
-                sessionUser = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+                CommonFunctions common = new CommonFunctions();
+                var password = common.GetEncodePassword("123456");
+                sessionUser = ur.IsValidUser("Don@gmail.com", password);
                 //newException.AddDummyException("222");
             }
             List<TblQuiz> lstAllQuiz = new List<TblQuiz>();

@@ -884,7 +884,7 @@ function ViewQuiz(QuizViewData) {
         queHTML += "<div class=\"col-8 que-text font-weight-bold\" >";
         queHTML += "<label>" + value.QuestionText + " </label>";
         queHTML += "</div>";
-        queHTML += "<div class=\"col-4 blue-color text-right\">Weightage Point: 1</div>";
+        queHTML += "<div class=\"col-2 blue-color text-right\">Weightage Point: 1</div>";
         queHTML += "<div class=\"options-container col-12 mt-3\">";
         queHTML += "<h6 class=\"font-weight-bold\">Options</h6>";
         queHTML += "<ul class=\"option-list list-unstyled\">";
@@ -1052,7 +1052,7 @@ function ReviewQuiz(QuizReviewData) {
         item["QuestionId"] = value.QuestionId;
         quizQueIds.push(item);
         queHTML += "<div class=\"que-container row mt-4 pt-2 pb-2\" style=\"margin-bottom:20px;\" id=dvQue" + value.QuestionId + ">";
-        queHTML += "<div class=\"col-8 que-text\" >";
+        queHTML += "<div class=\"col-10 que-text\" >";
         if (isAttempted)
             queHTML += "<label class=\" font-weight-bold\"><p><b>Question " + (index + 1) + "</b></p>" + value.QuestionText + "</label>";
         else

@@ -16,6 +16,7 @@ namespace LMSBL.DBModels
         public string ActivityStartDate { get; set; }
         public string ActivityCompletionDate { get; set; }
         public string ActivityStatus { get; set; }
+        public string ActivityRating { get; set; }
     }
     public class AdminHomeListModel
     {

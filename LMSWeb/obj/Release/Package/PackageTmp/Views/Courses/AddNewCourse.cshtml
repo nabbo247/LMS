@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "New Course";
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
+
+    LMSBL.DBModels.TblUser objUser = new LMSBL.DBModels.TblUser();
+    objUser = (LMSBL.DBModels.TblUser)Session["UserSession"];
+    var baseURL = System.Configuration.ConfigurationManager.AppSettings["CourseBaseURL"];
 }
 
 @using (Html.BeginForm("AddCourse", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -31,13 +35,7 @@
                         @Html.TextBoxFor(model => model.MasteryScore, "{0:#.#}", new { @class = "input100", placeholder = "Course Mastery Score" })
                         @Html.TextBoxFor(model => model.Duration, "{0:#.#}", new { @class = "input100", placeholder = "Course Duration (Mins)" })
 
-                        @if (Model != null)
-                        {
-                            if (!string.IsNullOrEmpty(Model.ContentModuleURL))
-                            {
-                                Model.ContentModuleURL = Model.ContentModuleURL + "\\" + Model.ContentModuleId + ".zip";
-                            }
-                        }
+                        
 
                     </div>
                     <div class="col-sm-6">
@@ -52,11 +50,16 @@
                         <div>
                             <small>(File should not exceed 20 MB)</small>
                         </div>
-
-                        <div class="col-3 p-0" id="lnkCourseFile">
-                            <a href="#">
-                                @Model.ContentModuleURL
-                            </a>
+                        <br />
+                        <div id="lnkCourseFile">
+                            @if (Model != null)
+                            {
+                                if (!string.IsNullOrEmpty(Model.ContentModuleURL))
+                                {
+                                    Model.ContentModuleURL = Model.ContentModuleURL + "\\" + Model.ContentModuleId + ".zip";
+                                    <a href="@baseURL?AID=@Model.ContentModuleId&LID=@objUser.UserId" class="login" title="Launch Course" target="_blank">Test Course</a>
+                                }
+                            }
                         </div>
                         @*@Html.TextBoxFor(model => model.LastName, new { @class = "input100", placeholder = "Last Name" })
                 @Html.TextBoxFor(model => model.DOB, "{0:MM/dd/yyyy}", new { @class = "input100 datepicker", @id = "dtDOB", @readonly = "readonly", @autocomplete = "off", placeholder = "Date of Birth" })

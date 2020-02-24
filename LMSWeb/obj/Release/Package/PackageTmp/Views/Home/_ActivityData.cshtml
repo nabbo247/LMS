@@ -9,13 +9,13 @@
     <table class="table" id="activityTable">
         <thead>
             <tr>
-                <th scope="col">Course Name</th>
-                <th scope="col" style="text-align:center;">Type</th>
+                <th scope="col">Learning</th>
+                <th scope="col"  style="text-align:center;">Type</th>
                 @*<th scope="col">Description</th>*@
-                <th scope="col" style="text-align:center;">Duration (Mins)</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">Completion Date</th>
-                <th scope="col" style="text-align:center;">Status</th>
+                <th scope="col" style="text-align:center;" class="mobile-hide">Duration (Mins)</th>
+                <th scope="col" class="mobile-hide">Start Date</th>
+                <th scope="col" class="mobile-hide">Attempted Date</th>
+                <th scope="col" class="mobile-hide" style="text-align:center;">Status</th>
                 <th scope="col" style="text-align:center;">Action</th>
             </tr>
         </thead>
@@ -32,39 +32,48 @@
                         {
                             <tr>
                                 <td>@activity.ActivityName</td>
-                                <td style="text-align:center;">@activity.ActivityType</td>
+                                <td  style="text-align:center;">@activity.ActivityType</td>
                                 @*<td style="max-width:150px;">@activity.ActivityDescription</td>*@
                                 @if (activity.ActivityDuration == "0")
                                 {
-                                    <td style="text-align:center;">-</td>
+                                    <td class="mobile-hide" style="text-align:center;">-</td>
                                 }
                                 else
                                 {
-                                    var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
-                                    TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
-                                    var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                                    <td style="text-align:center;">@duration</td>
+                                    var durationInSeconds = 0;
+                                    var duration = "0";
+                                    if (Convert.ToInt32(activity.ActivityDuration) >= 60)
+                                    {
+                                        duration = activity.ActivityDuration+":00";
+                                    }
+                                    else
+                                    {
+                                        durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
+                                        TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
+                                        duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
+                                    }
+                                    <td class="mobile-hide" style="text-align:center;">@duration</td>
                                 }
-                                <td>@activity.ActivityStartDate</td>
+                                <td class="mobile-hide">@activity.ActivityStartDate</td>
                                 @if (activity.ActivityCompletionDate == "")
                                 {
-                                    <td style="text-align:center;">-</td>
+                                    <td class="mobile-hide" style="text-align:center;">-</td>
                                 }
                                 else
                                 {
-                                    <td>@activity.ActivityCompletionDate</td>
+                                    <td class="mobile-hide">@activity.ActivityCompletionDate</td>
                                 }
                                 @if (activity.ActivityStatus == "Completed")
                                 {
-                                    <td style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
+                                    <td class="mobile-hide" style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
                                 }
                                 @if (activity.ActivityStatus == "InProgress")
                                 {
-                                    <td style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
+                                    <td class="mobile-hide" style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
                                 }
                                 @if (activity.ActivityStatus == "Not Started")
                                 {
-                                    <td style="text-align:center;"><i class="far fa-clock"></i></td>
+                                    <td class="mobile-hide" style="text-align:center;"><i class="far fa-clock"></i></td>
                                 }
                                 @if (activity.ActivityType == "Quiz")
                                 {

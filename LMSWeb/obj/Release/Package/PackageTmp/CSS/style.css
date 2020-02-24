@@ -14,6 +14,11 @@ html, body {
     position: relative;
 }
 
+.user-menu {
+    max-width: 200px;
+}
+
+
     .user-menu a, .notification-menu a, .create-learning a {
         border-bottom: 1px solid #eeecec;
         padding-top: 10px;
@@ -103,10 +108,15 @@ html, body {
         display: block;
     }
 
-    .user-details .user-name {
+    .user-details {
         font-size: 12px;
         margin-top: 10px;
     }
+
+.user-name {
+    font-size: 15px;
+    
+}
 
     .user-details .user-role {
         font-size: 10px;
@@ -205,6 +215,7 @@ html, body {
 
 .progress-list .list-inline-item {
     margin-right: 15px;
+    margin-bottom: 15px;
     color: #565656;
 }
 
@@ -367,7 +378,58 @@ html, body {
     margin: auto;
 }
 
+
+
 @media (max-width: 991px) {
+
+    .col-1 {
+        width: 8.33%;
+    }
+
+    .col-2 {
+        width: 16.66%;
+    }
+
+    .col-3 {
+        width: 25%;
+    }
+
+    .col-4 {
+        width: 33.33%;
+    }
+
+    .col-5 {
+        width: 41.66%;
+    }
+
+    .col-6 {
+        width: 50%;
+    }
+
+    .col-7 {
+        width: 58.33%;
+    }
+
+    .col-8 {
+        width: 66.66%;
+    }
+
+    .col-9 {
+        width: 75%;
+    }
+
+    .col-10 {
+        width: 83.33%;
+    }
+
+    .col-11 {
+        width: 91.66%;
+    }
+
+    .col-12 {
+        width: 100%;
+    }
+
     .user-report, .learning-completion {
         width: 93%;
         margin: auto;
@@ -393,8 +455,11 @@ html, body {
         width: 100px !important;
     }
 
-    .course-img, .quiz-image {
-        width: 3%;
+    .quiz-image {
+        width: 15%;
+    }
+    .course-img {
+        width: 15%;
     }
     .rating-feedback-container {
         width: 100% !important;
@@ -422,7 +487,64 @@ html, body {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+    .mobile-hide {
+        display: none;
+    }
+
+}
+
+@media (max-width: 300px) {
+
+    .col-s-1 {
+        width: 8.33%;
+    }
+
+    .col-s-2 {
+        width: 16.66%;
+    }
+
+    .col-s-3 {
+        width: 25%;
+    }
+
+    .col-s-4 {
+        width: 33.33%;
+    }
+
+    .col-s-5 {
+        width: 41.66%;
+    }
+
+    .col-s-6 {
+        width: 50%;
+    }
+
+    .col-s-7 {
+        width: 58.33%;
+    }
+
+    .col-s-8 {
+        width: 66.66%;
+    }
+
+    .col-s-9 {
+        width: 75%;
+    }
+
+    .col-s-10 {
+        width: 83.33%;
+    }
+
+    .col-s-11 {
+        width: 91.66%;
+    }
+
+    .col-s-12 {
+        width: 100%;
+    }
+
+
     .footer {
         height: auto;
         line-height: normal;
@@ -568,6 +690,7 @@ label.star:before {
     text-decoration: none;
     cursor: pointer;
     padding: 1px 14px !important;
+    margin-bottom:5px;
 }
 
     .que-pagination li.active-page {
@@ -582,6 +705,7 @@ label.star:before {
     border-radius: 20px;
     background-color: #fb6300;
     border-color: #fb6300;
+    margin-bottom:5px;
 }
 
     .prev-btn:hover, .next-btn:hover {
@@ -738,6 +862,7 @@ label.star:before {
 
 .create-learning {
     /*top: 15px !important; */
+    width: 200px;
 }
 
     .create-learning img {

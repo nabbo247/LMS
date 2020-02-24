@@ -60,8 +60,8 @@ namespace LMSBL.Repository
                 List<MainReportModel> mainRpt = ds.Tables[0].AsEnumerable().Select(dr => new MainReportModel
                 {
                     ActivityId = Convert.ToInt32(dr["ActivityId"]),
-                    //ActivityName = Convert.ToString(dr["ActivityName"]),
-                    //ActivityType = Convert.ToString(dr["ActivityType"]),
+                    ActivityName = Convert.ToString(dr["ActivityName"]),
+                    ActivityType = Convert.ToString(dr["ActivityType"]),
                     ActivityDuration = Convert.ToString(dr["ActivityDuration"]),
                     ActivityAttemptedDate = Convert.ToString(dr["ActivityAttemptedDate"]),
                     ActivityAttempts = Convert.ToString(dr["ActivityAttempts"]),

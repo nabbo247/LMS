@@ -18,7 +18,7 @@
             <div class="col-md-4 profile-image p-2">
                 <div class="row text-center h-100">
                     <div class="col align-self-center">
-                         <img style="font-size: 150px" id="user_img" class="fas fa-user-circle mb-4" src="@Model.profileImage" />
+                         <img style="font-size: 150px" id="user_img" class="fas fa-user-circle mb-4" width="140" height="140" src="@Model.profileImage" />
                         <div>
                             <div class="form-group col-6 pl-0">
                                 <input type="file" name="file" id="file" style="width: 50%;" onchange="show(this)" hidden />                                
@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-8 profile-details">
                 <div class="row pt-5 pl-4">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12 col-lg-6">
                         <h4 class="mb-4">Personal Info</h4>
                         @Html.HiddenFor(model => model.UserId)
                         @Html.HiddenFor(model => model.RoleId)
@@ -42,7 +42,7 @@
                         @Html.TextBoxFor(model => model.ContactNo, new { @class = "input100", placeholder = "Contact No" })
 
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12 col-lg-6">
                         <h4 class="mb-4">Password Settings</h4>
                         @Html.PasswordFor(model => model.OldPassword, new { @class = "input100", placeholder = "Current Password" })
                         @Html.PasswordFor(model => model.Password, new { @class = "input100", placeholder = "New Password" })

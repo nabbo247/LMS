@@ -34,7 +34,8 @@ namespace LMSBL.Repository
                     ActivityDuration = Convert.ToString(dr["ActivityDuration"]),
                     ActivityStartDate = Convert.ToString(dr["ActivityStartDate"]),
                     ActivityCompletionDate = Convert.ToString(dr["ActivityCompletionDate"]),
-                    ActivityStatus = Convert.ToString(dr["ActivityStatus"])
+                    ActivityStatus = Convert.ToString(dr["ActivityStatus"]),
+                    ActivityRating = Convert.ToString(dr["ActivityRating"])
 
                 }).ToList();
                 return activityDetails;

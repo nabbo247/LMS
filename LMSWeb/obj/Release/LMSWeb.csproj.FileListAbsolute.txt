@@ -48,6 +48,11 @@ E:\Projects\LMS\LMSWeb\bin\roslyn\vbc.rsp
 E:\Projects\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe
 E:\Projects\LMS\LMSWeb\bin\roslyn\VBCSCompiler.exe.config
 E:\Projects\LMS\LMSWeb\bin\Antlr3.Runtime.dll
+E:\Projects\LMS\LMSWeb\bin\ClosedXML.dll
+E:\Projects\LMS\LMSWeb\bin\DocumentFormat.OpenXml.dll
+E:\Projects\LMS\LMSWeb\bin\ExcelNumberFormat.dll
+E:\Projects\LMS\LMSWeb\bin\FastMember.dll
+E:\Projects\LMS\LMSWeb\bin\itextsharp.dll
 E:\Projects\LMS\LMSWeb\bin\LMSBL.dll
 E:\Projects\LMS\LMSWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 E:\Projects\LMS\LMSWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -57,6 +62,8 @@ E:\Projects\LMS\LMSWeb\bin\Newtonsoft.Json.dll
 E:\Projects\LMS\LMSWeb\bin\System.Diagnostics.DiagnosticSource.dll
 E:\Projects\LMS\LMSWeb\bin\System.IO.Compression.dll
 E:\Projects\LMS\LMSWeb\bin\System.IO.Compression.FileSystem.dll
+E:\Projects\LMS\LMSWeb\bin\System.IO.FileSystem.Primitives.dll
+E:\Projects\LMS\LMSWeb\bin\System.IO.Packaging.dll
 E:\Projects\LMS\LMSWeb\bin\System.Shim.dll
 E:\Projects\LMS\LMSWeb\bin\System.Web.Helpers.dll
 E:\Projects\LMS\LMSWeb\bin\System.Web.Mvc.dll
@@ -69,6 +76,11 @@ E:\Projects\LMS\LMSWeb\bin\WebGrease.dll
 E:\Projects\LMS\LMSWeb\bin\EntityFramework.dll
 E:\Projects\LMS\LMSWeb\bin\LMSBL.pdb
 E:\Projects\LMS\LMSWeb\bin\LMSBL.dll.config
+E:\Projects\LMS\LMSWeb\bin\ClosedXML.pdb
+E:\Projects\LMS\LMSWeb\bin\ClosedXML.xml
+E:\Projects\LMS\LMSWeb\bin\DocumentFormat.OpenXml.xml
+E:\Projects\LMS\LMSWeb\bin\ExcelNumberFormat.xml
+E:\Projects\LMS\LMSWeb\bin\itextsharp.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Helpers.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Mvc.xml
 E:\Projects\LMS\LMSWeb\bin\System.Web.Optimization.xml
@@ -86,5 +98,3 @@ E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.csprojAssemblyReference.cache
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.csproj.CopyComplete
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.dll
 E:\Projects\LMS\LMSWeb\obj\Release\LMSWeb.pdb
-E:\Projects\LMS\LMSWeb\bin\itextsharp.dll
-E:\Projects\LMS\LMSWeb\bin\itextsharp.xml

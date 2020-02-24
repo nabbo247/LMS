@@ -25,13 +25,13 @@
                 <table class="table" id="activityTable">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
+                            <th scope="col">Learning</th>
                             <th scope="col" style="text-align:center;">Type</th>
-                            <th scope="col" style="text-align:center;">Duration (Mins)</th>
-                            <th scope="col">Date Attempted</th>
-                            <th scope="col" style="text-align:center;">Attempts</th>
-                            <th scope="col" style="text-align:center;">Score</th>
-                            <th scope="col" style="text-align:center;">Time Spent</th>
+                            <th scope="col" class="mobile-hide" style="text-align:center;">Duration (Mins)</th>
+                            <th scope="col" class="mobile-hide">Attempted Date</th>
+                            <th scope="col" class="mobile-hide" style="text-align:center;">Attempts</th>
+                            <th scope="col" class="mobile-hide" style="text-align:center;">Score</th>
+                            <th scope="col" class="mobile-hide" style="text-align:center;">Time Spent</th>
                             <th scope="col" style="text-align:center;">Action</th>
                         </tr>
                     </thead>
@@ -50,24 +50,24 @@
                                         <td style="text-align:center;">@activity.ActivityType</td>
                                         @if (activity.ActivityDuration == "0")
                                         {
-                                            <td style="text-align:center;">-</td>
+                                            <td class="mobile-hide" style="text-align:center;">-</td>
                                         }
                                         else
                                         {
                                             var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
                                             TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                                             var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                                            <td style="text-align:center;">@duration</td>
+                                            <td class="mobile-hide" style="text-align:center;">@duration</td>
                                         }
                                         @if (activity.ActivityAttemptedDate == "")
                                         {
-                                            <td style="text-align:center;">-</td>
+                                            <td class="mobile-hide" style="text-align:center;">-</td>
                                         }
                                         else
                                         {
-                                            <td>@activity.ActivityAttemptedDate</td>
+                                            <td class="mobile-hide">@activity.ActivityAttemptedDate</td>
                                         }
-                                        <td style="text-align:center;">@activity.ActivityAttempts</td>
+                                        <td class="mobile-hide" style="text-align:center;">@activity.ActivityAttempts</td>
                                         @if (activity.ActivityType == "Quiz")
                                         {
                                             if (!string.IsNullOrEmpty(activity.ActivityScore))
@@ -79,8 +79,8 @@
                                         {
                                             score = activity.ActivityScore + "%";
                                         }
-                                        <td style="text-align:center;">@score</td>
-                                        <td style="text-align:center;">@activity.ActivityCompletionTime</td>
+                                        <td class="mobile-hide" style="text-align:center;">@score</td>
+                                        <td class="mobile-hide" style="text-align:center;">@activity.ActivityCompletionTime</td>
                                         @if (activity.ActivityType == "Quiz")
                                         {
                                             <td style="text-align:center;"><a href="@Url.Action("DetailReport", "Reports", new { activityId = activity.ActivityId })" class="login" title="View Detail"><img src="~/assets/images/eye.png" /></a></td>

@@ -20,16 +20,15 @@
             @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
             @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
             <div class="user-quiz-top-section mb-2 mt-3 p-2">
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <h4>Review Quiz</h4>
-
                     Name: <span class="grey-color">@Model.QuizName</span>
                     @if (Model.Duration != 0)
                     {
                         var durationInSeconds = Convert.ToInt32(Model.Duration) * 60;
                         TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                         var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                        <div class="blue-color float-right" id="showtime" style="margin-bottom:10px;">Quiz Duration : <b>@duration </b>Mins. </div>
+                        <div class="blue-color float-right" id="showtime">Duration : <b>@duration </b>Mins. </div>
                     }
                 </div>
                 <div class="col-12">

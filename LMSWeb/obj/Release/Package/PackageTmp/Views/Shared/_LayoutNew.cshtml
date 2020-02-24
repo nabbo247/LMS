@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Rocket Technologies</title>
     <title>Rocket Technologies</title>
 
     <link rel="icon" href="~/assets/images/favicon.ico" type="image/gif" sizes="16x16">
@@ -32,21 +32,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" />
 
-
-
-
-
+         
 </head>
 <body>
     @{
 
         LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
         LMSBL.Repository.UserRepository ur = new LMSBL.Repository.UserRepository();
+        LMSWeb.App_Start.CommonFunctions common = new LMSWeb.App_Start.CommonFunctions();
 
         model = (LMSBL.DBModels.TblUser)Session["UserSession"];
         if (model == null)
         {
-            model = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+
+            var password = common.GetEncodePassword("123456");
+            model = ur.IsValidUser("Don@gmail.com", password);
+            //model = ur.IsValidUser("don@gmail.com", "123456");
         }
         if (model == null)
         {
@@ -54,12 +55,13 @@
         }
         var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
         var fullname = model.FirstName + " " + model.LastName;
-        var helpDetails = "support@rockettech.co.nz \n Phone No: 9834545425";
+        var helpDetails = "support@rockettech.co.nz \n Phone No: +919834545425";
         var profileImage = model.profileImage;
     }
 
     <nav class="navbar navbar-expand-lg navbar-light main-nav">
-        <a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" class="rt-logo"></a>
+        @*<a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" class="rt-logo"></a>*@
+        <a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" width="246" height="61"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -87,25 +89,25 @@
                 @if (model.RoleId == 2)
                 {
 
-                    <li class="nav-item @Html.IsSelected(controller:"User",action: "Index")">
+                    <li class="nav-item @Html.IsSelected(controller:"User",action: "Index,AddUser,Upload")">
                         <i class="fas fa-users"></i>
-                        <a class="nav-link @Html.IsSelected(controller:"User",action: "Index")" href="@baseURL\User\Index">Users</a>
+                        <a class="nav-link @Html.IsSelected(controller:"User",action: "Index,AddUser,Upload")" href="@baseURL\User\Index">Users</a>
                     </li>
                     <li class="dropdown mr-4">
                         <a class="nav-link @Html.IsSelected(controller:"Courses,Quiz",action: "Index")" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-book-open"></i> Learning</a>
-                            <div class="dropdown-menu create-learning" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="@Url.Action("Index", "Courses")">
-                                    <img class="course-img" src="~/assets/images/course.png" width="20%" />
-                                    Course
-                                </a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "Quiz")">
-                                    <img class="quiz-image" src="~/assets/images/quiz.png" width="20%" />
-                                    Quiz
-                                </a>
-                            </div>
+                        <div class="dropdown-menu create-learning" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("Index", "Courses")">
+                                <img class="course-img" src="~/assets/images/course.png" width="20%" />
+                                Course
+                            </a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Quiz")">
+                                <img class="quiz-image" src="~/assets/images/quiz.png" width="20%" />
+                                Quiz
+                            </a>
+                        </div>
                     </li>
                     <li class="dropdown mr-4">
-                        <a class="nav-link @Html.IsSelected(controller:"Reports",action: "LearningCompletionReport,UserReport,UserProgressReport,LearningProgressCompletionReport")" href="#" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-poll"></i> Reports</a>
+                        <a class="nav-link @Html.IsSelected(controller:"Reports",action: "LearningCompletionReport,UserReport,UserProgressReport,LearningProgressCompletionReport,HighScoreUsersReport")" href="#" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-poll"></i> Reports</a>
                         <div class="dropdown-menu create-learning" aria-labelledby="dropdownMenuButton1">
                             <a class="dropdown-item" href="@Url.Action("LearningCompletionReport", "Reports")">
                                 <i class="fas fa-book-open"></i>
@@ -129,7 +131,7 @@
                         <i class="far fa-question-circle"></i>
                     </a>
                 </li>
-                <li class="dropdown mr-3">
+                @*<li class="dropdown mr-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownnotification" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-bell"></i>
@@ -143,7 +145,7 @@
                         <a class="dropdown-item" href="#"> <span class="blue-dot"></span>  <span> This is another Dummy Notification </span></a>
                         <a href="#" class="dropdown-item view-all">View All <i class="fas fa-chevron-right"></i></a>
                     </div>
-                </li>
+                </li>*@
                 @*<li class="nav-item">
                         <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
                     </li>*@
@@ -179,7 +181,7 @@
     </div>
     <footer class="footer">
         <div class="container-fluid">
-            <span class="text-muted">&copy; 2019 - 2020 Rocket Technologies</span>
+            <span class="text-muted">&copy; 2019 - 2020 Cognition Education Group</span>
             <div class="terms-policy">
                 <ul class="list-inline mb-0">
                     @*<li class="list-inline-item"> <a href="#">Privacy Policy</a></li>*@
@@ -188,7 +190,7 @@
                     @*<li class="list-inline-item"><a href="#">Help</a></li>*@
                 </ul>
 
-            </div>            
+            </div>
         </div>
     </footer>
     <script src="~/Scripts/slimscroll/jquery.slimscroll.js"></script>
@@ -197,24 +199,24 @@
     @RenderSection("scripts", required: false)
 
     <script>
-            $(document).ready(function () {
-                var current_page_link = document.location.href;
-                console.log(current_page_link)
-                //Search your menu for a linkURL that is similar to the active pageURL
-                $(".navbar-nav a").each(function () {
-                    var link_loop = $(this).attr("href");
-                    //console.log(link_loop)
-                    //console.log(current_page_link.indexOf("User"))
-                    if (current_page_link.indexOf("User")>0) {
-                        var found_url = $(this).attr("href");
-                        //  console.log(link_loop);
-                        console.log($('.navbar-nav a[href="' + link_loop + '"]').parent("li").parent("li"))
-                        $('.navbar-nav a[href="' + link_loop + '"]').parent("li").parent("li").addClass('active');
-                    }
-                });
+        $(document).ready(function () {
+            var current_page_link = document.location.href;
+            console.log(current_page_link)
+            //Search your menu for a linkURL that is similar to the active pageURL
+            $(".navbar-nav a").each(function () {
+                var link_loop = $(this).attr("href");
+                //console.log(link_loop)
+                //console.log(current_page_link.indexOf("User"))
+                if (current_page_link.indexOf("User") > 0) {
+                    var found_url = $(this).attr("href");
+                    //  console.log(link_loop);
+                    console.log($('.navbar-nav a[href="' + link_loop + '"]').parent("li").parent("li"))
+                    $('.navbar-nav a[href="' + link_loop + '"]').parent("li").parent("li").addClass('active');
+                }
             });
+        });
 
 
-        </script>
+    </script>
 </body>
 </html>
