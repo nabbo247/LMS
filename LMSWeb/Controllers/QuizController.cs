@@ -63,10 +63,9 @@ namespace LMSWeb.Controllers
             {
                 userItems.Add(new SelectListItem
                 {
-                    Text = Convert.ToString(user.FirstName),
+                    Text = Convert.ToString(user.FirstName + " " + user.LastName),
                     Value = Convert.ToString(user.UserId)
                 });
-
             }
             DataSet ds = quizRepository.GetAssignedQuizUsers(id);
             if (ds != null)

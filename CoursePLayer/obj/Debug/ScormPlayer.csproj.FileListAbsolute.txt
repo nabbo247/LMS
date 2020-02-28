@@ -103,7 +103,7 @@ E:\Projects\LMS\CoursePLayer\bin\System.Data.SqlServerCe.dll
 E:\Projects\LMS\CoursePLayer\bin\System.Data.SQLite.dll
 E:\Projects\LMS\CoursePLayer\bin\Mono.Security.dll
 E:\Projects\LMS\CoursePLayer\bin\Elmah.xml
+E:\Projects\LMS\CoursePLayer\obj\Debug\ScormPlayer.csprojAssemblyReference.cache
 E:\Projects\LMS\CoursePLayer\obj\Debug\ScormPlayer.csproj.CopyComplete
 E:\Projects\LMS\CoursePLayer\obj\Debug\CoursePlayer.dll
 E:\Projects\LMS\CoursePLayer\obj\Debug\CoursePlayer.pdb
-E:\Projects\LMS\CoursePLayer\obj\Debug\ScormPlayer.csprojAssemblyReference.cache

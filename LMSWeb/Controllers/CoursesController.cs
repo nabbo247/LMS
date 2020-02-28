@@ -61,6 +61,7 @@ namespace LMSWeb.Controllers
                     TblUser sessionUser = (TblUser)Session["UserSession"];
                     objCourse.createdBy = sessionUser.UserId;
                     objCourse.tenantId = sessionUser.TenantId;
+                    newException.AddDummyException(":- " + objCourse.tenantId);
                     objCourse.ZipFile = file;
                     if (objCourse.ContentModuleId > 0)
                     {

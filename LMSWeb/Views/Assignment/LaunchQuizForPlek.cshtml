@@ -1,0 +1,104 @@
+﻿@model LMSBL.DBModels.TblQuiz
+@{
+    ViewBag.Title = "LaunchQuizForPlek";
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Rocket Technologies</title>
+    <title>Rocket Technologies</title>
+
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    @*<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/CSS/style.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" />
+
+
+</head>
+<body>
+
+    @using (Html.BeginForm("SubmitQuiz", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
+            <div class="row">
+                <div class="col">
+                    <h4 class="mt-3 ml-2 mb-3"></h4>
+                </div>
+            </div>
+
+            <div>
+                @Html.HiddenFor(model => model.QuizId)
+                @Html.HiddenFor(model => model.completeTime)
+                @Html.HiddenFor(model => model.Duration)
+                @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
+                @Html.HiddenFor(model => model.hdnLaunchData, new { @id = "hdnLaunchData" })
+                <div class="container-fluid user-quiz-top-section mb-2 mt-3 p-2">
+                    <div class="col-12">
+                        <h4>Quiz</h4>
+                    </div>
+                    <div class="col-12">
+                        Name: <span class="grey-color">@Model.QuizName</span>
+                        @if (Model.Duration != 0)
+                        {
+                            <div class="float-right"><div class="blue-color" id="showtime" style="margin-bottom:10px;">@Model.Duration</div></div>
+                        }
+                    </div>
+                    <div class="col-12">
+                        Description: <span class="grey-color">@Model.QuizDescription</span>
+                    </div>
+                </div>
+                @*<div id="dvQuestions"></div>*@
+                <div id="dvQuestions"></div>
+                <div class="col mt-3">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="list-inline que-pagination" id="paginator-list">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+
+                            <button type="button" id="btnPrev" class="btn btn-primary prev-btn"><i class="fas fa-chevron-left"></i> Prev</button>
+                            <button type="button" id="btnNext" class="btn btn-primary next-btn">Next <i class="fas fa-chevron-right"></i></button>
+                            <button type="submit" id="btnResponseSubmit" class="btn btn-primary prev-btn">Submit</button>
+                            <button type="button" id="btnCancel" class="btn btn-primary prev-btn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+    <!-- include summernote css/js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    <script src="~/assets/Quiz.js"></script>
+
+</body>
+</html>

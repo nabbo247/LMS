@@ -65,15 +65,18 @@ namespace LMSWeb.Controllers
 
         public ActionResult LaunchQuiz(int QuizId)
         {
+            bool isPlek = false;
             try
             {
+
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 //newException.AddDummyException("111");
                 if (sessionUser == null)
                 {
                     CommonFunctions common = new CommonFunctions();
                     var password = common.GetEncodePassword("123456");
-                    sessionUser = ur.IsValidUser("Don@gmail.com", password);
+                    sessionUser = ur.IsValidUser("j.panhuis@chello.nl", password, Request.Url.Host);
+                    isPlek = true;
                     //Session["UserSession"] = sessionUser;
                     //newException.AddDummyException("222");
                 }
@@ -84,12 +87,18 @@ namespace LMSWeb.Controllers
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 lstAllQuiz[0].hdnLaunchData = json_serializer.Serialize(lstAllQuiz[0]);
                 //newException.AddDummyException(lstAllQuiz[0].QuizDescription);
-                return View("LaunchQuizNew", lstAllQuiz[0]);
+                if (isPlek)
+                    return View("LaunchQuizForPlek", lstAllQuiz[0]);
+                else
+                    return View("LaunchQuizNew", lstAllQuiz[0]);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View("LaunchQuizNew");
+                if (isPlek)
+                    return View("LaunchQuizForPlek");
+                else
+                    return View("LaunchQuizNew");
             }
         }
 
@@ -111,8 +120,7 @@ namespace LMSWeb.Controllers
             {
                 CommonFunctions common = new CommonFunctions();
                 var password = common.GetEncodePassword("123456");
-                sessionUser = ur.IsValidUser("Don@gmail.com", password);
-                newException.AddDummyException("Login");
+                sessionUser = ur.IsValidUser("j.panhuis@chello.nl", password, Request.Url.Host);                
             }
             if (sessionUser.RoleId == 2)
             {
@@ -123,7 +131,7 @@ namespace LMSWeb.Controllers
             var attempt = quizRepository.GetQuizAttemptByUserID(objQuiz.QuizId, sessionUser.UserId);
             attempt = attempt + 1;
 
-            if (objQuiz.completeTime == "0")
+            if (objQuiz.completeTime == "0" || string.IsNullOrEmpty(objQuiz.completeTime))
             {
                 var durationInSeconds = Convert.ToInt32(objQuiz.Duration) * 60;
                 TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
@@ -244,12 +252,13 @@ namespace LMSWeb.Controllers
             objEmail.EmailTo = sessionUser.EmailId;
             objEmail.EmailSubject = emailSubject;
             objEmail.EmailBody = emailBody;
-
-            var emailResult = ur.InsertEmail(objEmail);
-
+            if (sessionUser.TenantId != 6)
+            {
+                var emailResult = ur.InsertEmail(objEmail);
+            }            
             newException.AddDummyException("Responses Saved Successfully");
             TempData["Message"] = "Responses Saved Successfully";
-            return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId});
+            return RedirectToAction("ReviewQuiz", new { @QuizId = objQuiz.QuizId });
         }
 
         public ActionResult RatingAndFeedback(int ActivityId, string LearningType)
@@ -270,21 +279,19 @@ namespace LMSWeb.Controllers
             var result = quizRepository.CaptureRatings(objRating);
             return RedirectToAction("MyAssignments");
         }
-       
+
         public ActionResult ReviewQuiz(int QuizId)
         {
+            bool isPlek = false;
             TblUser sessionUser = (TblUser)Session["UserSession"];
             if (sessionUser == null)
             {
                 CommonFunctions common = new CommonFunctions();
                 var password = common.GetEncodePassword("123456");
-                sessionUser = ur.IsValidUser("Don@gmail.com", password);
-                //newException.AddDummyException("222");
+                sessionUser = ur.IsValidUser("j.panhuis@chello.nl", password, Request.Url.Host);
+                isPlek = true;                
             }
-            List<TblQuiz> lstAllQuiz = new List<TblQuiz>();
-
-            newException.AddDummyException("222");
-            newException.AddDummyException(Convert.ToString(sessionUser.UserId));
+            List<TblQuiz> lstAllQuiz = new List<TblQuiz>();                       
 
             lstAllQuiz = quizRepository.GetQuizForLaunch(QuizId, sessionUser.UserId);
             var attempt = quizRepository.GetQuizAttemptByUserID(QuizId, sessionUser.UserId);
@@ -297,7 +304,11 @@ namespace LMSWeb.Controllers
 
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
             lstAllQuiz[0].hdnReviewData = json_serializer.Serialize(lstAllQuiz[0]);
-            return View("ReviewQuizLearner", lstAllQuiz[0]);
+
+            if (isPlek)
+                return View("ReviewQuizLearnerForPlek", lstAllQuiz[0]);
+            else
+                return View("ReviewQuizLearner", lstAllQuiz[0]);
         }
     }
 }

@@ -13,12 +13,12 @@
     </div>
     <div class="mt-5 pt-3 pl-3 pr-3 course-list-container">
         <div class="row">            
-            <div class="col search-container">
+            @*<div class="col search-container">
                 <i class="fas fa-search"></i>
-                <input class="search-box" type="text" id="txtSearch" placeholder="Search Course/Quiz by name..." />
-            </div>
+                <input class="search-box" type="text" id="txtSearch" placeholder="Search activity..." />
+            </div>*@
 
-            <div class="col blue-color text-right">
+            <div class="col blue-color">
                 <b> Learning - </b> @Model[0].ActivityName <br /><b> Type</b> - @Model[0].ActivityType
             </div>
         </div>
@@ -27,11 +27,11 @@
                 <table class="table" id="activityTable">
                     <thead>
                         <tr>
-                            <th scope="col" style="text-align:center;">Attempts</th>
-                            <th scope="col" class="mobile-hide" style="text-align:center;">Duration (Mins)</th>
-                            <th scope="col"  class="mobile-hide" style="text-align:center;">Time Spent</th>
+                            <th scope="col" >Attempts</th>
+                            <th scope="col" class="mobile-hide" >Duration (Mins)</th>
+                            <th scope="col"  class="mobile-hide" >Time Spent</th>
                             <th scope="col" class="mobile-hide">Attempted Date</th>
-                            <th scope="col" style="text-align:center;">Score</th>
+                            <th scope="col" >Score</th>
                             <th scope="col" style="text-align:center;">Action</th>
                         </tr>
                     </thead>
@@ -47,26 +47,26 @@
                                     var score = "-";
                                     <tr>
 
-                                        <td style="text-align:center;">@activity.ActivityAttempts</td>
+                                        <td class="add-column-padding"> @activity.ActivityAttempts</td>
                                         @if (activity.ActivityDuration == "0")
                                         {
-                                            <td class="mobile-hide" style="text-align:center;">-</td>
+                                            <td class="mobile-hide add-column-padding">-</td>
                                         }
                                         else
                                         {
                                             var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
                                             TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                                             var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                                            <td class="mobile-hide" style="text-align:center;">@duration</td>
+                                            <td class="mobile-hide add-column-padding">@duration</td>
                                         }
-                                        <td class="mobile-hide" style="text-align:center;">@activity.ActivityCompletionTime</td>
+                                        <td class="mobile-hide add-column-padding" >@activity.ActivityCompletionTime</td>
                                         @if (activity.ActivityAttemptedDate == "")
                                         {
-                                            <td class="mobile-hide" style="text-align:center;">-</td>
+                                            <td class="mobile-hide add-column-padding" >-</td>
                                         }
                                         else
                                         {
-                                            <td class="mobile-hide" >@activity.ActivityAttemptedDate</td>
+                                            <td class="mobile-hide " >@activity.ActivityAttemptedDate</td>
                                         }
 
 
@@ -74,7 +74,7 @@
                                         {
                                             score = Convert.ToString((Convert.ToInt32(activity.ActivityScore) * 100) / Convert.ToInt32(activity.ActivityQuestionCount)) + "%";
                                         }
-                                        <td style="text-align:center;">@score</td>
+                                        <td class="add-column-padding">@score</td>
 
                                         <td style="text-align:center;"><a href="@Url.Action("AttemptReport", "Reports", new { activityId = activity.ActivityId, attempt = activity.ActivityAttempts  })" class="login" title="View Detail"><img src="~/assets/images/eye.png" /></a></td>
                                     </tr>
@@ -112,6 +112,12 @@
             "bFilter": true,
             "pageLength": 10,
             "pagingType": "full_numbers",
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
             //language: {
             //    paginate: {
             //        next: '&#8594;', // or '→'
@@ -141,3 +147,16 @@
 
 </script>
 
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>

@@ -112,13 +112,19 @@
 <script>
     $(document).ready(function () {
         $('#activityTable').DataTable({
-            //"aaSorting": [[ 3, "desc" ]],
+            "aaSorting": [[ 0, "asc" ]],
             "paging": true,
             "ordering": true,
             "info": true,
             "bFilter": true,
             "pageLength": 10,
             "pagingType": "full_numbers",
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
             //language: {
             //    paginate: {
             //        next: '&#8594;', // or '→'
@@ -146,3 +152,17 @@
     });
 
 </script>
+
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>

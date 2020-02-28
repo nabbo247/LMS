@@ -393,7 +393,8 @@ function SaveResponse() {
     var returnStatus = true;
     var IDs = $("#dvQuestions div[id^='dvQue']");
     var questionObj = [];
-    if ($("#completeTime").val() != "0") {
+    console.log($("#completeTime").val());
+    if ($("#completeTime").val() != "0" && $("#completeTime").val() != "") {
         $("#completeTime").val(document.getElementById("showtime").innerHTML);
     }
     $.each(IDs, function (index, value) {
@@ -421,7 +422,7 @@ function SaveResponse() {
         questionObj.push(optionObj);
     });
     $("#hdnResponseData").val(JSON.stringify(questionObj));
-
+    console.log(questionObj);
     return returnStatus;
 }
 
@@ -741,11 +742,11 @@ function LaunchQuizNew(QuizLaunchData) {
 
         quizQueIds.push(item);
         queHTML += "<div class=\"que-container row mt-4 pt-2 pb-2\" id=dvQue" + value.QuestionId + ">";
-        queHTML += "<div class=\"col-8 que-text\" >";
+        queHTML += "<div class=\"col-12 que-text remove-padding\" >";
         queHTML += "<label class=\"font-weight-bold\">" + value.QuestionText + " </label>";
         
         queHTML += "<h6 class=\"font-weight-bold\">Options</h6>";
-        queHTML += "<ul class=\"option-list list-unstyled\">";
+        queHTML += "<ul class=\"option-list list-unstyled add-padding\">";
 
         if (value.isRandomOption)
             value.TblQuestionOptions = shuffle(value.TblQuestionOptions);
@@ -771,7 +772,7 @@ function LaunchQuizNew(QuizLaunchData) {
         }
         queHTML += "</ul>";
         queHTML += "</div>";
-        queHTML += "<div class=\"col-4 blue-color text-right\">Weightage Point: 1</div>";
+        //queHTML += "<div class=\"col-4 blue-color text-right\">Weightage Point: 1</div>";
         queHTML += "<div class=\"options-container col-12 mt-3\">";
         queHTML += "</div>";
         queHTML += "</div>";
@@ -881,10 +882,10 @@ function ViewQuiz(QuizViewData) {
 
         quizQueIds.push(item);
         queHTML += "<div class=\"que-container row mt-4 pt-2 pb-2\" id=dvQue" + value.QuestionId + ">";
-        queHTML += "<div class=\"col-8 que-text font-weight-bold\" >";
+        queHTML += "<div class=\"col-12 que-text font-weight-bold\" >";
         queHTML += "<label>" + value.QuestionText + " </label>";
         queHTML += "</div>";
-        queHTML += "<div class=\"col-2 blue-color text-right\">Weightage Point: 1</div>";
+        //queHTML += "<div class=\"col-2 blue-color text-right\">Weightage Point: 1</div>";
         queHTML += "<div class=\"options-container col-12 mt-3\">";
         queHTML += "<h6 class=\"font-weight-bold\">Options</h6>";
         queHTML += "<ul class=\"option-list list-unstyled\">";
@@ -894,7 +895,7 @@ function ViewQuiz(QuizViewData) {
                 queHTML += "<li>";
                 queHTML += "<label>";
                 queHTML += "<input type=\"radio\" value=1 name=Options" + value.QuestionId + " id=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " name=que" + value.QuestionId + "rbtnOption" + valueOption.OptionId + " />";
-                queHTML += "<span class=\"ml-2\"> "+valueOption.OptionText+"} </span>";
+                queHTML += "<span class=\"ml-2\"> "+valueOption.OptionText+" </span>";
                 queHTML += "</label>";
                 queHTML += "</li>";
                 
@@ -1052,7 +1053,7 @@ function ReviewQuiz(QuizReviewData) {
         item["QuestionId"] = value.QuestionId;
         quizQueIds.push(item);
         queHTML += "<div class=\"que-container row mt-4 pt-2 pb-2\" style=\"margin-bottom:20px;\" id=dvQue" + value.QuestionId + ">";
-        queHTML += "<div class=\"col-10 que-text\" >";
+        queHTML += "<div class=\"col-12 que-text remove-padding\" >";
         if (isAttempted)
             queHTML += "<label class=\" font-weight-bold\"><p><b>Question " + (index + 1) + "</b></p>" + value.QuestionText + "</label>";
         else

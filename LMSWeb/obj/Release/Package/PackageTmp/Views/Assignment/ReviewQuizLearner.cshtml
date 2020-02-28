@@ -36,32 +36,33 @@
             </div>
         </div>
 
-        <div class="container">
+        <div>
             @Html.HiddenFor(model => model.QuizId)
             @Html.HiddenFor(model => model.hdnResponseData, new { @id = "hdnResponseData" })
             @Html.HiddenFor(model => model.hdnReviewData, new { @id = "hdnReviewData" })
-            <div class="user-quiz-top-section mb-2 mt-3 p-2">
-                <div class="col-12 mb-2">
+            <div class="container-fluid user-quiz-top-section mb-2 mt-3 p-2 remove-padding">
+                <div class="col-12 mb-2 remove-padding">
                     <h4>Review Quiz</h4>
-                    Name: <span class="grey-color">@Model.QuizName</span>
+                    Name: <span class="grey-color">@Model.QuizName</span><br />
+                    Description: <span class="grey-color">@Model.QuizDescription</span>
+                    
+                </div>
+                <div class="col-12 remove-padding">
                     @if (Model.Duration != 0)
                     {
                         var durationInSeconds = Convert.ToInt32(Model.Duration) * 60;
                         TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                         var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                        <div class="blue-color float-right" id="showtime">Duration : @duration Mins</div>
+                        <div class="blue-color " id="showtime">Duration : @duration Mins</div>
                     }
-                </div>
-                <div class="col-12">
-                    Description: <span class="grey-color">@Model.QuizDescription</span>
                     @if (Model.Score == 0)
                     {
-                        <div class="blue-color float-right" id="showtime" style="margin-bottom:10px;"><b>Score: @Model.Score%</b></div>
+                        <div class="blue-color" id="showtime" style="margin-bottom:10px;"><b>Score: @Model.Score%</b></div>
                     }
                     else
                     {
                         var score = Convert.ToString((Convert.ToInt32(Model.Score) * 100) / Convert.ToInt32(Model.TblQuestions.Count)) + "%";
-                        <div class="blue-color float-right" id="showtime" style="margin-bottom:10px;"><b>Score: @score</b></div>
+                        <div class="blue-color" id="showtime" style="margin-bottom:10px;"><b>Score: @score</b></div>
                     }
                 </div>
             </div>

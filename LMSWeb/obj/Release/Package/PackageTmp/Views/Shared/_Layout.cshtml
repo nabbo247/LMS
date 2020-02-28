@@ -41,9 +41,9 @@
         model = (LMSBL.DBModels.TblUser)Session["UserSession"];
         if (model == null)
         {
-            model = ur.IsValidUser("jeanihp@hotmail.com", "123456");
+            model = ur.IsValidUser("jeanihp@hotmail.com", "123456", Request.Url.Host);
         }
-        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+        var baseURL = Request.Url.Host;
         var firstName = model.FirstName;
     }
 

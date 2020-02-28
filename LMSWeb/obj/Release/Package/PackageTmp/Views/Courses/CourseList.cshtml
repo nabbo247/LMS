@@ -18,9 +18,7 @@
                 <input class="search-box" type="text" id="txtSearch" placeholder="Search Quiz by name..." />
             </div>
             <div class="col-lg-6 col-md-12 text-right">
-                <ul class="list-inline progress-list mt-2">
-                    @*<li class="list-inline-item"><img src="~/assets/images/shape_Active.png"> Active</li>
-                        <li class="list-inline-item"><img src="~/assets/images/shape_InactiveUser.png"> Inactive</li>*@
+                <ul class="list-inline progress-list mt-2">                    
                     <li class="list-inline-item">
                         <a href="@Url.Action("AddCourse", "Courses")">
                             <button class="btn btn-secondary dropdown-toggle create-learning-btn" type="button">
@@ -36,12 +34,12 @@
                 <table class="table" id="activityTable">
                     <thead>
                         <tr>
-                            <th scope="col" style="text-align:center;">Sr No.</th>
+                            <th scope="col">Sr No.</th>
                             <th scope="col">Course Name</th>
                             <th scope="col">Course Description</th>
-                            <th scope="col" style="text-align:center;">Course Type</th>
+                            <th scope="col" >Course Type</th>
                             <th scope="col">Date Added</th>
-                            <th scope="col" style="text-align:center;">Duration (Mins)</th>
+                            <th scope="col">Duration (Mins)</th>
                             <th scope="col" style="text-align:center;" class="action-column">Actions</th>
                         </tr>
                     </thead>
@@ -56,18 +54,18 @@
                                 {
                                     index++;
                                     <tr>
-                                        <td style="text-align:center;">@index</td>
+                                        <td class="add-column-padding">@index</td>
                                         <td>@course.ContentModuleName</td>
                                         <td style="max-width:200px;">@course.ContentModuleDescription</td>
-                                        <td style="text-align:center;">@course.ContentModuleType</td>
+                                        <td >@course.ContentModuleType</td>
                                         <td>@course.createdOn</td>
                                         @if (course.Duration > 0)
                                         {
-                                            <td style="text-align:center;">@course.Duration</td>
+                                            <td class="add-column-padding">@course.Duration</td>
                                         }
                                         else
                                         {
-                                            <td style="text-align:center;">-</td>
+                                            <td class="add-column-padding">-</td>
                                         }
 
 
@@ -109,6 +107,12 @@
             "bFilter": true,
             "pageLength": 10,
             "pagingType": "full_numbers",
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
             //language: {
             //    paginate: {
             //        next: '&#8594;', // or '→'
@@ -135,8 +139,18 @@
         });
     });
 
-
 </script>
 
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
 
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
 
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>

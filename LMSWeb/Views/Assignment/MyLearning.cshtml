@@ -11,15 +11,15 @@
 <div class="container-fluid mt-4 mb-4 pl-4 pr-4">
     <div class="mt-5 pt-3 pl-3 pr-3 course-list-container">
         <div class="row">
-            <div class="col-md-12 col-lg-6 search-container">
+            <div class="col search-container">
                 <i class="fas fa-search"></i>
-                <input class="search-box" type="text" id="txtSearch" placeholder="Search Course/Quiz by name..." />
+                <input class="search-box" type="text" id="txtSearch" placeholder="Search activity..." />
             </div>
-            <div class="col-md-12 col-lg-6 text-right">
+            <div class="col text-right">
                 <ul class="list-inline progress-list mt-2">
-                    <li class="list-inline-item"><i class="far fa-check-circle green-color"></i> Completed</li>
-                    <li class="list-inline-item"><i class="far fa-hourglass orange-color"></i> In Progress</li>
                     <li class="list-inline-item"><i class="far fa-clock"></i> Not Started</li>
+                    <li class="list-inline-item"><i class="far fa-hourglass orange-color"></i> In Progress</li>
+                    <li class="list-inline-item"><i class="far fa-check-circle green-color"></i> Completed</li>
                 </ul>
             </div>
         </div>
@@ -30,9 +30,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Learning</th>
-                            <th scope="col" style="text-align:center;">Type</th>
+                            <th scope="col">Type</th>
                             @*<th scope="col">Description</th>*@
-                            <th scope="col" class="mobile-hide" style="text-align:center;">Duration (Mins)</th>
+                            <th scope="col" class="mobile-hide">Duration (Mins)</th>
                             <th scope="col" class="mobile-hide">Start Date</th>
                             <th scope="col" class="mobile-hide">Attempted Date</th>
                             <th scope="col" class="mobile-hide" style="text-align:center;">Status</th>
@@ -50,11 +50,11 @@
 
                                     <tr>
                                         <td>@activity.ActivityName</td>
-                                        <td style="text-align:center;">@activity.ActivityType</td>
+                                        <td>@activity.ActivityType</td>
                                         @*<td style="max-width:150px;">@activity.ActivityDescription</td>*@
                                         @if (activity.ActivityDuration == "0")
                                         {
-                                            <td class="mobile-hide" style="text-align:center;">-</td>
+                                            <td class="mobile-hide add-column-padding" >-</td>
                                         }
                                         else
                                         {
@@ -62,7 +62,7 @@
                                             var duration = "0";
                                             if (Convert.ToInt32(activity.ActivityDuration) >= 60)
                                             {
-                                                duration = activity.ActivityDuration+":00";
+                                                duration = activity.ActivityDuration + ":00";
                                             }
                                             else
                                             {
@@ -70,12 +70,12 @@
                                                 TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                                                 duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
                                             }
-                                            <td class="mobile-hide" style="text-align:center;">@duration</td>
+                                            <td class="mobile-hide add-column-padding">@duration</td>
                                         }
                                         <td class="mobile-hide">@activity.ActivityStartDate</td>
                                         @if (activity.ActivityCompletionDate == "")
                                         {
-                                            <td class="mobile-hide" style="text-align:center;">-</td>
+                                            <td class="mobile-hide add-column-padding " >-</td>
                                         }
                                         else
                                         {
@@ -162,6 +162,12 @@
             //        previous: '&#8592;' // or '←'
             //    }
             //}
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1,-2]
+                }
+            ]
         });
 
         $('#activityTable_filter').hide();
@@ -180,9 +186,24 @@
             var table = $('#activityTable').DataTable();
             table.draw();
         });
+
+
     });
 
 
 </script>
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>
 
 

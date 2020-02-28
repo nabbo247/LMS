@@ -38,7 +38,7 @@
             </div>
             @using (Html.BeginForm("UserAuthentication", "Login", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center mt-4" }))
             {
-                @*<div id="dvMessage" style="color:red;">@TempData["Message"]</div>*@
+                <div id="dvMessage" style="color:red;">@TempData["LogoutMessage"]</div>                
                 @Html.TextBoxFor(model => model.EmailId, new { @class = "input100", placeholder = "Login ID" })
 
                 @Html.PasswordFor(model => model.Password, new { @class = "input100", placeholder = "Password" })

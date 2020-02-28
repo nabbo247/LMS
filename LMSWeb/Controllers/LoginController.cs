@@ -20,17 +20,32 @@ namespace LMSWeb.Controllers
         public ActionResult Index()
         {
             TblUser user = new TblUser();
-            
+
             List<TblTenant> tenantDetails = new List<TblTenant>();
             //tenantDetails = tr.GetTenantById(subDomain);
             try
             {
-                return View("Login", user);
+                string host = Request.Url.Host;
+                var tenantId = tr.VerifyTenantDomain(host);
+                if (tenantId > 0)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(RouteData.Values["LogoutMessage"])))
+                    {
+                        TempData["LogoutMessage"] = RouteData.Values["LogoutMessage"];
+                    }
+                    return View("Login", user);
+                }
+                else
+                {
+                    return View("NoClientAvailable");
+                }
+
+                //return View("Login", user);
             }
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                return View("Login",user);
+                return View("Login", user);
             }
         }
 
@@ -41,11 +56,11 @@ namespace LMSWeb.Controllers
             {
                 CommonFunctions common = new CommonFunctions();
                 loginUser.Password = common.GetEncodePassword(loginUser.Password);
-                TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password);
-               
+                TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password, Request.Url.Host);
 
-                if (tblUser != null)
-                {
+
+                if (tblUser.UserId > 0)
+                {                    
                     response.StatusCode = 1;
                     //set User object to session
                     Session["UserSession"] = tblUser; //use in layout.cshtml to hide show menus.
@@ -58,9 +73,11 @@ namespace LMSWeb.Controllers
                         ur.AddLoginLog(tblUser.UserId);
                         return RedirectToAction("Index", "Home");
                     }
-                    
+
                 }
-                TempData["Message"] = "The Username/Password does not match.";
+                 
+                TempData["LogoutMessage"] = "The Username/Password does not match.";
+
                 return RedirectToAction("Index");
                 //return Json(response.StatusCode, JsonRequestBehavior.AllowGet);
             }
@@ -70,7 +87,7 @@ namespace LMSWeb.Controllers
                 response.StatusCode = 0;
                 response.Message = ex.Message;
                 //return Json(response, JsonRequestBehavior.AllowGet);
-                TempData["Message"] = "The Username/Password does not match.";
+                TempData["LogoutMessage"] = "The Username/Password does not match.";
                 return RedirectToAction("Index");
             }
         }
@@ -98,14 +115,14 @@ namespace LMSWeb.Controllers
         public ActionResult SendResetLink(TblUser loginUser)
         {
             try
-            {                
+            {
                 Guid guid = Guid.NewGuid();
                 string token = guid.ToString();
                 var result = ur.AddToken(loginUser.EmailId, token);
                 //send email
-                var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
-                var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
-                var link = "<a href='" + url + "'>Click here to reset your password</a>";               
+                var baseURL = Request.Url.Host;
+                var url = Request.Url.Host + @Url.Action("ChangePassword", "Login", new { t = token });
+                var link = "<a href='" + url + "'>Click here to reset your password</a>";
 
                 var emailSubject = System.Configuration.ConfigurationManager.AppSettings["PasswordRecovery"];
                 tblEmails objEmail = new tblEmails();
@@ -125,7 +142,7 @@ namespace LMSWeb.Controllers
 
         public ActionResult ChangePassword(string t)
         {
-            
+
             TblUser loginUser = new TblUser();
             try
             {
@@ -166,7 +183,7 @@ namespace LMSWeb.Controllers
                 {
                     TempData["Message"] = "Password Updated Successfully";
                     var model = (TblUser)Session["UserSession"];
-                    if(model==null)
+                    if (model == null)
                     {
                         return RedirectToAction("Index");
                     }

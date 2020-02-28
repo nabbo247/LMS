@@ -20,7 +20,7 @@ namespace LMSWeb.Controllers
         public ActionResult Index()
         {
             try
-            {
+            {                
                 var model = (TblUser)Session["UserSession"];
                 if (model.RoleId == 1)
                 {
@@ -34,13 +34,14 @@ namespace LMSWeb.Controllers
                     return View("AdminHome", adminHomeViewModel);
                 }
                 if (model.RoleId == 3)
-                {
+                {                   
                     HomeViewModel homeViewModel = new HomeViewModel();
                     homeViewModel.lstActivities = hm.GetAllLearnerActivities(model.TenantId, model.UserId, "Total");
                     homeViewModel.TotalCount = homeViewModel.lstActivities.Count;                    
                     homeViewModel.CompletedCount = homeViewModel.lstActivities.Count(p => p.ActivityStatus== "Completed");
                     homeViewModel.InProgressCount = homeViewModel.lstActivities.Count(p => p.ActivityStatus == "InProgress");
                     homeViewModel.NotStartedCount = homeViewModel.lstActivities.Count(p => p.ActivityStatus == "Not Started");
+                     
                     return View("LearnerHome", homeViewModel);
                 }                
             }

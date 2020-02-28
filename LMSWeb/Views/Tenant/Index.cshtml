@@ -38,7 +38,7 @@
                 foreach (var tenent in Model)
                 {
                     index++;
-                    var UrlNew = tenent.TenantDomain + "." + System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                    var UrlNew = tenent.TenantDomain + "." + Request.Url.Host;
                     <tr>
                         <th>@index</th>
                         <td>@tenent.TenantName</td>

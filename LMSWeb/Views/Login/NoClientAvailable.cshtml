@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "No Client Available";
+    Layout = null;
+    // Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @*<title>Rocket Technologies</title>*@
+    <title>Login - Rocket Technologies</title>
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/CSS/style.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="~/assets/SweetAlert.js"></script>
+
+</head>
+
+<div class="login-container container-fluid">
+    <div class="row justify-content-center h-100">
+        <div class="col align-self-center login-section">
+            <div class="mt-5 text-center">
+                @*<img src="~/assets/images/rt_logo.png" width="55%">*@
+                <img src="~/assets/images/rt_logo.png" width="55%">
+            </div>
+            <br /><br />
+            <div class="mt-5 text-center">
+                <div id="dvMessage" style="color:red;">This Client is Not Available.<br /> Please contact your Administrator</div>
+            </div>
+        </div>
+    </div>
+</div>

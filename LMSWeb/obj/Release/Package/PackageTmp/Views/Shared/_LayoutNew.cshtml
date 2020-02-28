@@ -40,28 +40,31 @@
         LMSBL.DBModels.TblUser model = new LMSBL.DBModels.TblUser();
         LMSBL.Repository.UserRepository ur = new LMSBL.Repository.UserRepository();
         LMSWeb.App_Start.CommonFunctions common = new LMSWeb.App_Start.CommonFunctions();
+        LMSBL.Common.Exceptions newException = new LMSBL.Common.Exceptions();        
 
         model = (LMSBL.DBModels.TblUser)Session["UserSession"];
         if (model == null)
         {
 
             var password = common.GetEncodePassword("123456");
-            model = ur.IsValidUser("Don@gmail.com", password);
+            model = ur.IsValidUser("j.panhuis@chello.nl", password, Request.Url.Host);
             //model = ur.IsValidUser("don@gmail.com", "123456");
         }
+        
         if (model == null)
         {
             Response.Redirect(Url.Action("Logout", "Login", null));
         }
-        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+        var baseURL = Request.Url.Host;
         var fullname = model.FirstName + " " + model.LastName;
         var helpDetails = "support@rockettech.co.nz \n Phone No: +919834545425";
         var profileImage = model.profileImage;
+        
     }
 
     <nav class="navbar navbar-expand-lg navbar-light main-nav">
         @*<a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" class="rt-logo"></a>*@
-        <a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" width="246" height="61"></a>
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/assets/images/rt_logo.png" width="246" height="61"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -73,17 +76,17 @@
             <ul class="nav navbar-nav navbar-right mt-lg-3">
                 <li class="nav-item @Html.IsSelected(controller:"Home",action: "Index")">
                     <i class="fas fa-home"></i>
-                    <a class="nav-link @Html.IsSelected(controller:"Home",action: "Index")" href="@baseURL\Home\Index">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link @Html.IsSelected(controller:"Home",action: "Index")" href="@Url.Action("Index", "Home")">Home <span class="sr-only">(current)</span></a>
                 </li>
                 @if (model.RoleId == 3)
                 {
                     <li class="nav-item @Html.IsSelected(controller:"Assignment",action: "MyAssignments")">
                         <i class="fas fa-book-open"></i>
-                        <a class="nav-link @Html.IsSelected(controller:"Assignment",action: "MyAssignments")" href="@baseURL\Assignment\MyAssignments">My Learning</a>
+                        <a class="nav-link @Html.IsSelected(controller:"Assignment",action: "MyAssignments")" href="@Url.Action("MyAssignments", "Assignment")">My Learning</a>
                     </li>
                     <li class="nav-item @Html.IsSelected(controller:"Reports",action: "Index,DetailReport,AttemptReport")">
                         <i class="fas fa-poll"></i>
-                        <a class="nav-link @Html.IsSelected(controller:"Reports",action: "Index,DetailReport,AttemptReport")" href="@baseURL\Reports\Index">Reports</a>
+                        <a class="nav-link @Html.IsSelected(controller:"Reports",action: "Index,DetailReport,AttemptReport")" href="@Url.Action("Index", "Reports")">Reports</a>
                     </li>
                 }
                 @if (model.RoleId == 2)
@@ -91,7 +94,7 @@
 
                     <li class="nav-item @Html.IsSelected(controller:"User",action: "Index,AddUser,Upload")">
                         <i class="fas fa-users"></i>
-                        <a class="nav-link @Html.IsSelected(controller:"User",action: "Index,AddUser,Upload")" href="@baseURL\User\Index">Users</a>
+                        <a class="nav-link @Html.IsSelected(controller:"User",action: "Index,AddUser,Upload")" href="@Url.Action("Index", "User")">Users</a>
                     </li>
                     <li class="dropdown mr-4">
                         <a class="nav-link @Html.IsSelected(controller:"Courses,Quiz",action: "Index")" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-book-open"></i> Learning</a>
@@ -123,7 +126,7 @@
                 @if (model.RoleId == 1)
                 {
                 }
-                <li class="nav-item">
+                <li class="nav-item mobile-hide">
                     <a class="nav-link" href="#"
                        data-toggle="tooltip"
                        data-placement="bottom"

@@ -40,7 +40,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email ID</th>
                             <th scope="col">Phone No</th>
-                            <th scope="col" style="text-align:center;">Role</th>
+                            <th scope="col">Role</th>
                             <th scope="col">Date Added</th>
                             <th scope="col" style="text-align:center;">Status</th>
                             <th scope="col" style="text-align:center;">Action</th>
@@ -58,7 +58,7 @@
                                         <td>@user.FirstName  @user.LastName</td>
                                         <td>@user.EmailId</td>
                                         <td style="max-width:150px;">@user.ContactNo</td>
-                                        <td style="text-align:center;">@user.RoleName</td>
+                                        <td>@user.RoleName</td>
                                         <td>@user.CreatedOn</td>
                                         @if (user.IsActive == true)
                                         {
@@ -112,6 +112,12 @@
             "bFilter": true,
             "pageLength": 10,
             "pagingType": "full_numbers",
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1,-2]
+                }
+            ]
             //language: {
             //    paginate: {
             //        next: '&#8594;', // or '→'
@@ -174,3 +180,16 @@
 
 
 </script>
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>

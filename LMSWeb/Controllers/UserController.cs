@@ -153,7 +153,7 @@ namespace LMSWeb.Controllers
                     {
                         Guid guid = Guid.NewGuid();
                         string token = guid.ToString();
-                        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                        var baseURL = Request.Url.Host;
                         var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
                         var link = "<a href='" + url + "'>Click Here</a>";
                         var emailBody = "Welcome To LMS. </br> Please click below link to Login </br>";
@@ -412,7 +412,7 @@ namespace LMSWeb.Controllers
                     {
                         Guid guid = Guid.NewGuid();
                         string token = guid.ToString();
-                        var baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"];
+                        var baseURL = Request.Url.Host;
                         var url = baseURL + @Url.Action("ChangePassword", "Login", new { t = token });
                         var link = "<a href='" + url + "'>Click Here</a>";
                         var emailBody = "Welcome To LMS. </br> Please click below link to Login </br>";

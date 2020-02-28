@@ -117,7 +117,7 @@ namespace LMSBL.Repository
             catch (Exception ex)
             {
 
-                newException.AddException(ex);                
+                newException.AddException(ex);
             }
             return result;
         }
@@ -165,19 +165,29 @@ namespace LMSBL.Repository
             }
         }
 
-        public TblUser IsValidUser(string Username, string Password)
+        public TblUser IsValidUser(string Username, string Password, string DomainName)
         {
             try
             {
                 db.parameters.Clear();
                 common = new Commonfunctions();
-
+                TblUser tblUser = new TblUser();
                 DataSet ds = new DataSet();
                 db = new DataRepository();
                 db.AddParameter("@EmailId", SqlDbType.NVarChar, Username);
                 db.AddParameter("@Password", SqlDbType.NVarChar, Password);
+                db.AddParameter("@DomainName", SqlDbType.NVarChar, DomainName);
                 ds = db.FillData("sp_Login");
-                var tblUser = common.UserMapping(ds);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            tblUser = common.UserMapping(ds);
+                        }
+                    }
+                }
 
                 return tblUser;
             }
@@ -199,16 +209,16 @@ namespace LMSBL.Repository
             }
             catch (Exception ex)
             {
-                newException.AddException(ex);               
+                newException.AddException(ex);
             }
         }
 
         public int AddToken(string EmailId, string token)
-        {            
+        {
             db.parameters.Clear();
             db.AddParameter("@emailId", SqlDbType.Text, EmailId);
             db.AddParameter("@token", SqlDbType.Text, token);
-            return db.ExecuteQuery("sp_AddToken");            
+            return db.ExecuteQuery("sp_AddToken");
         }
 
         public string VerifyToken(string token)
@@ -268,7 +278,7 @@ namespace LMSBL.Repository
             SqlConnection con = new SqlConnection(constr);
             try
             {
-               
+
                 SqlBulkCopy objbulk = new SqlBulkCopy(con);
                 objbulk.DestinationTableName = "tblEmails";
 
@@ -289,23 +299,23 @@ namespace LMSBL.Repository
             catch (Exception ex)
             {
                 newException.AddException(ex);
-                con.Close();               
+                con.Close();
 
             }
             return result;
         }
-    
+
         public int InsertEmail(tblEmails objEmail)
         {
             int result = 0;
             db.parameters.Clear();
             db.AddParameter("@EmailTo", SqlDbType.Text, objEmail.EmailTo);
             db.AddParameter("@EmailSubject", SqlDbType.Text, objEmail.EmailSubject);
-            db.AddParameter("@EmailBody", SqlDbType.Text, objEmail.EmailBody);  
+            db.AddParameter("@EmailBody", SqlDbType.Text, objEmail.EmailBody);
             result = db.ExecuteQuery("sp_AddEmail");
 
             return result;
         }
-    
+
     }
 }

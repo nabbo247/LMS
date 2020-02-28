@@ -65,7 +65,7 @@ E:\Projects\LMS\LMSBL\bin\Debug\System.Web.Mvc.dll
 E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.xml
 E:\Projects\LMS\LMSBL\bin\Debug\EntityFramework.SqlServer.xml
 E:\Projects\LMS\LMSBL\bin\Debug\System.Web.Mvc.xml
+E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache
 E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.csproj.CopyComplete
 E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.dll
 E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.pdb
-E:\Projects\LMS\LMSBL\obj\Debug\LMSBL.csprojAssemblyReference.cache

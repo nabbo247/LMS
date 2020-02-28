@@ -31,11 +31,11 @@
                 <table class="table" id="activityTable">
                     <thead>
                         <tr>
-                            <th scope="col" style="text-align:center;">Sr No.</th>
+                            <th scope="col" >Sr No.</th>
                             <th scope="col">Quiz Name</th>
                             <th scope="col">Quiz Description</th>
-                            <th scope="col" style="text-align:center;">No of Questions</th>
-                            <th scope="col" style="text-align:center;">Duration (Mins)</th>
+                            <th scope="col" >No of Questions</th>
+                            <th scope="col" >Duration (Mins)</th>
                             <th scope="col" style="text-align:center;" class="action-column">Actions</th>
                         </tr>
                     </thead>
@@ -50,17 +50,17 @@
                                 {
                                     index++;
                                     <tr>
-                                        <td style="text-align:center;">@index</td>
+                                        <td class="add-column-padding">@index</td>
                                         <td>@quiz.QuizName</td>
                                         <td style="max-width:200px;">@quiz.QuizDescription</td>
-                                        <td style="text-align:center;">@quiz.NoOfQuestion</td>
+                                        <td class="add-column-padding">@quiz.NoOfQuestion</td>
                                         @if (quiz.Duration > 0)
                                         {
-                                            <td style="text-align:center;">@quiz.Duration</td>
+                                            <td class="add-column-padding">@quiz.Duration</td>
                                         }
                                         else
                                         {
-                                            <td style="text-align:center;">-</td>
+                                            <td class="add-column-padding">-</td>
                                         }
 
 
@@ -96,13 +96,19 @@
 <script>
     $(document).ready(function () {
         $('#activityTable').DataTable({
-            //"aaSorting": [[ 3, "desc" ]],
+            "aaSorting": [[ 0, "desc" ]],
             "paging": true,
             "ordering": true,
             "info": true,
             "bFilter": true,
             "pageLength": 10,
             "pagingType": "full_numbers",
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
             //language: {
             //    paginate: {
             //        next: '&#8594;', // or '→'
@@ -133,3 +139,16 @@
 </script>
 
 
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>

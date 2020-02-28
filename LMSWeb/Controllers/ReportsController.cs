@@ -45,12 +45,15 @@ namespace LMSWeb.Controllers
         {
             try
             {
+                newException.AddDummyException("entered");
                 TblUser sessionUser = (TblUser)Session["UserSession"];
                 var attemptList = rpt.GetDetailReportForLearner(sessionUser.UserId, sessionUser.TenantId, activityId);
+                newException.AddDummyException("after");
                 return View(attemptList);
             }
             catch (Exception ex)
             {
+                newException.AddDummyException("error");
                 newException.AddException(ex);
                 return View();
             }

@@ -6,11 +6,11 @@
         <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col" style="text-align:center;">Type</th>
+                <th scope="col" >Type</th>
                 <th scope="col">Description</th>
-                <th scope="col" style="text-align:center;">Duration</th>
+                <th scope="col" >Duration</th>
                 <th scope="col">Creation Date</th>
-                <th scope="col" style="text-align:center;">Users</th>
+                <th scope="col" >Users</th>
                 <th scope="col" style="text-align:center;">Status</th>
 
             </tr>
@@ -28,28 +28,28 @@
                         {
                             <tr>
                                 <td>@activity.ActivityName</td>
-                                <td style="text-align:center;">@activity.ActivityType</td>
+                                <td  >@activity.ActivityType</td>
                                 <td style="max-width:150px;">@activity.ActivityDescription</td>
                                 @if (!string.IsNullOrEmpty(activity.ActivityDuration))
                                 {
-                                    <td style="text-align:center;">@activity.ActivityDuration</td>
+                                    <td class="add-column-padding">@activity.ActivityDuration</td>
                                 }
                                 else
                                 {
-                                    <td style="text-align:center;">-</td>
+                                    <td class="add-column-padding">-</td>
                                 }
 
                                 
                                 <td>@activity.ActivityCreationDate</td>
                                 @if (activity.ActivityAssignedUsers > 0)
                                 {
-                                    <td style="text-align:center;">@activity.ActivityAssignedUsers</td>
+                                    <td class="add-column-padding">@activity.ActivityAssignedUsers</td>
                                     <td style="text-align:center;"><img src="~/assets/images/assigned-to-users.png"></td>
 
                                 }
                                 else
                                 {
-                                    <td style="text-align:center;">-</td>
+                                    <td class="add-column-padding">-</td>
                                     <td style="text-align:center;"><img src="~/assets/images/not-assigned.png"></td>
                                 }
 
@@ -81,7 +81,13 @@
             "paging": false,
             "ordering": true,
             "info": false,
-            "bFilter": true
+            "bFilter": true,
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
         });
 
         $('#activityTable_filter').hide();
@@ -105,3 +111,16 @@
 
 </script>
 
+<style>
+    table.dataTable thead .sorting_asc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center left;
+    }
+
+    table.dataTable thead .sorting {
+        background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center left;
+    }
+</style>
