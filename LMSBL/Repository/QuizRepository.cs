@@ -119,8 +119,8 @@ namespace LMSBL.Repository
                 {
                     db.parameters.Clear();
                     db.AddParameter("@QuizId", SqlDbType.Int, obj.QuizId);
-                    db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                    db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    db.AddParameter("@QuizName", SqlDbType.NText, obj.QuizName);
+                    db.AddParameter("@QuizDescription", SqlDbType.NText, obj.QuizDescription);
                     db.AddParameter("@Duration", SqlDbType.Int, obj.Duration);
                     status = db.ExecuteQuery("sp_QuizUpdateDelete");
                     quizId = obj.QuizId;
@@ -129,8 +129,8 @@ namespace LMSBL.Repository
                 {
                     db.parameters.Clear();
                     db.AddParameter("@OldQuizId", SqlDbType.Int, obj.QuizId);
-                    db.AddParameter("@QuizName", SqlDbType.Text, obj.QuizName);
-                    db.AddParameter("@QuizDescription", SqlDbType.Text, obj.QuizDescription);
+                    db.AddParameter("@QuizName", SqlDbType.NText, obj.QuizName);
+                    db.AddParameter("@QuizDescription", SqlDbType.NText, obj.QuizDescription);
                     db.AddParameter("@Duration", SqlDbType.Int, obj.Duration);
                     db.AddParameter("@tenantId", SqlDbType.Int, obj.TenantId);
                     db.AddParameter("@QuizId", SqlDbType.Int, ParameterDirection.Output);
@@ -174,8 +174,8 @@ namespace LMSBL.Repository
                     db.AddParameter("@QuizId", SqlDbType.Int, quizId);
                     db.AddParameter("@QuestionTypeId", SqlDbType.Int, Convert.ToInt32(item["QuestionTypeId"]));
                     db.AddParameter("@QuestionText", SqlDbType.NText, item["QuestionText"]);
-                    db.AddParameter("@CorrectFeedback", SqlDbType.Text, item["CorrectFeedback"]);
-                    db.AddParameter("@InCorrectFeedback", SqlDbType.Text, item["InCorrectFeedback"]);
+                    db.AddParameter("@CorrectFeedback", SqlDbType.NText, item["CorrectFeedback"]);
+                    db.AddParameter("@InCorrectFeedback", SqlDbType.NText, item["InCorrectFeedback"]);
                     db.AddParameter("@isRandomOption", SqlDbType.Bit, Convert.ToBoolean(item["isRandomOption"]));
                     db.AddParameter("@QuestionId", SqlDbType.Int, ParameterDirection.Output);
                     queId = db.ExecuteQuery("sp_QuestionAdd");
@@ -191,11 +191,12 @@ namespace LMSBL.Repository
 
                             db.AddParameter("@OldOptionId", SqlDbType.Int, OldOptionId);
                             db.AddParameter("@QuestionId", SqlDbType.Int, queId);
-                            db.AddParameter("@OptionText", SqlDbType.Text, itemNew1["OptionText"]);
+                            db.AddParameter("@OptionText", SqlDbType.NText, itemNew1["OptionText"]);
                             db.AddParameter("@CorrectOption", SqlDbType.Bit, Convert.ToBoolean(itemNew1["CorrectOption"]));
-                            db.AddParameter("@OptionFeedback", SqlDbType.Text, itemNew1["OptionFeedback"]);
+                            db.AddParameter("@OptionFeedback", SqlDbType.NText, itemNew1["OptionFeedback"]);
                             db.AddParameter("@OptionId", SqlDbType.Int, ParameterDirection.Output);
                             optionId = db.ExecuteQuery("sp_OptionAdd");
+                            
 
                         }
                     }

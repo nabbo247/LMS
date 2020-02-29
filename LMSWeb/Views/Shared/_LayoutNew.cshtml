@@ -55,7 +55,7 @@
         {
             Response.Redirect(Url.Action("Logout", "Login", null));
         }
-        var baseURL = Request.Url.Host;
+        var baseURL = model.TenantURL;
         var fullname = model.FirstName + " " + model.LastName;
         var helpDetails = "support@rockettech.co.nz \n Phone No: +919834545425";
         var profileImage = model.profileImage;
@@ -64,6 +64,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light main-nav">
         @*<a class="navbar-brand" href="@baseURL\Home\Index"><img src="~/assets/images/rt_logo.png" class="rt-logo"></a>*@
+        @*<a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/assets/images/rt_logo.png" width="246" height="61"></a>*@
         <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/assets/images/rt_logo.png" width="246" height="61"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,8 +151,8 @@
                     </div>
                 </li>*@
                 @*<li class="nav-item">
-                        <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
-                    </li>*@
+                    <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
+                </li>*@
                 <li class="nav-item user-details">
                     <span class="user-name">@fullname</span>
                     @*<p class="user-role">Student</p>*@
@@ -184,7 +185,7 @@
     </div>
     <footer class="footer">
         <div class="container-fluid">
-            <span class="text-muted">&copy; 2019 - 2020 Cognition Education Group</span>
+            <span class="text-muted">&copy; 2019 - 2020 Rocket Technologies Limited</span>
             <div class="terms-policy">
                 <ul class="list-inline mb-0">
                     @*<li class="list-inline-item"> <a href="#">Privacy Policy</a></li>*@

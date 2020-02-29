@@ -64,5 +64,7 @@ namespace LMSBL.DBModels
         public string ConfirmPassword { get; set; }
 
         public string profileImage { get; set; }
+
+        public string TenantURL { get; set; }
     }
 }

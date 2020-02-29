@@ -25,7 +25,15 @@ namespace LMSWeb.Controllers
             //tenantDetails = tr.GetTenantById(subDomain);
             try
             {
-                string host = Request.Url.Host;
+                string host = string.Empty;
+                //if (Request.Url.Host != "localhost")
+                //{
+                //    host = "https://" + Request.Url.Host;
+                //}
+                //else
+                //{
+                    host = Request.Url.Host;
+                //}
                 var tenantId = tr.VerifyTenantDomain(host);
                 if (tenantId > 0)
                 {
@@ -56,6 +64,15 @@ namespace LMSWeb.Controllers
             {
                 CommonFunctions common = new CommonFunctions();
                 loginUser.Password = common.GetEncodePassword(loginUser.Password);
+                //string host = string.Empty;
+                //if (Request.Url.Host != "localhost")
+                //{
+                //    host = "https://" + Request.Url.Host;
+                //}
+                //else
+                //{
+                //    host = Request.Url.Host;
+                //}
                 TblUser tblUser = ur.IsValidUser(loginUser.EmailId, loginUser.Password, Request.Url.Host);
 
 

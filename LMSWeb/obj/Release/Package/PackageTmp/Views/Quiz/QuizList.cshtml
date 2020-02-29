@@ -51,7 +51,7 @@
                                     index++;
                                     <tr>
                                         <td class="add-column-padding">@index</td>
-                                        <td>@quiz.QuizName</td>
+                                        <td style="max-width:200px;">@quiz.QuizName</td>
                                         <td style="max-width:200px;">@quiz.QuizDescription</td>
                                         <td class="add-column-padding">@quiz.NoOfQuestion</td>
                                         @if (quiz.Duration > 0)
@@ -102,7 +102,7 @@
             "info": true,
             "bFilter": true,
             "pageLength": 10,
-            "pagingType": "full_numbers",
+            "pagingType": "simple_numbers",
             aoColumnDefs: [
                 {
                     bSortable: false,

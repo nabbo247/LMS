@@ -393,8 +393,8 @@ function SaveResponse() {
     var returnStatus = true;
     var IDs = $("#dvQuestions div[id^='dvQue']");
     var questionObj = [];
-    console.log($("#completeTime").val());
-    if ($("#completeTime").val() != "0" && $("#completeTime").val() != "") {
+    console.log($("#Duration").val());
+    if ($("#Duration").val() != "0" && $("#Duration").val() != "") {
         $("#completeTime").val(document.getElementById("showtime").innerHTML);
     }
     $.each(IDs, function (index, value) {
@@ -455,9 +455,9 @@ function LoadQuestionsForEdit(QuizData) {
     console.log(QuizData)
     $.each(QuizData.TblQuestions, function (index, value) {
         var queFirstLine = "";
-        var queIndex = value.QuestionText.indexOf("?");
-        if (queIndex <= 0) {
-            queIndex = value.QuestionText.indexOf(".");
+        var queIndex = value.QuestionText.indexOf(".");
+        if (queIndex <= 0 || queIndex>200) {
+            queIndex = value.QuestionText.indexOf("?");
 
             if (queIndex <= 0) {
                 queFirstLine = value.QuestionText;
