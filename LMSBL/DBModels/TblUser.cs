@@ -66,5 +66,6 @@ namespace LMSBL.DBModels
         public string profileImage { get; set; }
 
         public string TenantURL { get; set; }
+        public string TenantLogo { get; set; }
     }
 }

@@ -34,14 +34,23 @@ namespace LMSWeb.Controllers
                 //{
                     host = Request.Url.Host;
                 //}
-                var tenantId = tr.VerifyTenantDomain(host);
-                if (tenantId > 0)
+                var tenantList = tr.VerifyTenantDomain(host);
+                if (tenantList.Count > 0)
                 {
-                    if (!string.IsNullOrEmpty(Convert.ToString(RouteData.Values["LogoutMessage"])))
+                    if (tenantList[0].TenantId > 0)
                     {
-                        TempData["LogoutMessage"] = RouteData.Values["LogoutMessage"];
+                        if (!string.IsNullOrEmpty(Convert.ToString(RouteData.Values["LogoutMessage"])))
+                        {
+                            TempData["LogoutMessage"] = RouteData.Values["LogoutMessage"];
+                        }
+                        user.TenantLogo = tenantList[0].Logo;
+                        Session["Logo"] = tenantList[0].Logo;
+                        return View("Login", user);
                     }
-                    return View("Login", user);
+                    else
+                    {
+                        return View("NoClientAvailable");
+                    }
                 }
                 else
                 {

@@ -455,9 +455,9 @@ function LoadQuestionsForEdit(QuizData) {
     console.log(QuizData)
     $.each(QuizData.TblQuestions, function (index, value) {
         var queFirstLine = "";
-        var queIndex = value.QuestionText.indexOf(".");
+        var queIndex = value.QuestionText.indexOf("?");
         if (queIndex <= 0 || queIndex>200) {
-            queIndex = value.QuestionText.indexOf("?");
+            queIndex = value.QuestionText.indexOf(".");
 
             if (queIndex <= 0) {
                 queFirstLine = value.QuestionText;

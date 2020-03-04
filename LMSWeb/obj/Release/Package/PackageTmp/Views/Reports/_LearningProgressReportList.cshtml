@@ -86,7 +86,7 @@
                                     }
                                     else
                                     {
-                                        <td >-</td>
+                                        <td>-</td>
                                     }
 
                                     <td>@user.DueDate</td>
@@ -102,8 +102,15 @@
                                     {
                                         <td class="add-column-padding"><i class="far fa-clock"></i></td>
                                     }
+                                    @if (!string.IsNullOrEmpty(user.ActivityDuration))
+                                    {
+                                        <td class="add-column-padding">@user.ActivityDuration :00</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="add-column-padding">-</td>
+                                    }
 
-                                    <td class="add-column-padding">@user.ActivityDuration</td>
                                     @if (!string.IsNullOrEmpty(user.TimeSpent))
                                     {
                                         <td class="add-column-padding">@user.TimeSpent</td>
@@ -152,7 +159,7 @@
 <script>
     $(document).ready(function () {
         $('#activityTable').DataTable({
-            "aaSorting": [[ 0, "desc" ]],
+            "aaSorting": [[0, "desc"]],
             "paging": true,
             "ordering": true,
             "info": true,
@@ -162,7 +169,7 @@
             aoColumnDefs: [
                 {
                     bSortable: false,
-                    aTargets: [-1,-2]
+                    aTargets: [-1, -2]
                 }
             ]
             //language: {

@@ -29,6 +29,7 @@ namespace LMSBL.Common
                     tbluser.IsNew = Convert.ToBoolean(ds.Tables[0].Rows[0]["isNew"]);
                     tbluser.profileImage = Convert.ToString(ds.Tables[0].Rows[0]["profileImage"]);
                     tbluser.TenantURL = Convert.ToString(ds.Tables[0].Rows[0]["tenantDomain"]);
+                    tbluser.TenantLogo = Convert.ToString(ds.Tables[0].Rows[0]["Logo"]);
                 }
             }
             return tbluser;

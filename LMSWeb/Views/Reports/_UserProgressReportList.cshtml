@@ -41,11 +41,12 @@
                         <th scope="col" style="text-align:center;">Type</th>
                         <th scope="col" style="text-align:center;">Status</th>
                         <th scope="col" style="text-align:center;">Duration (Mins)</th>
-                        <th scope="col" style="text-align:center;">Completion Time</th>
+                        <th scope="col" style="text-align:center;">Time Spent</th>
                         <th scope="col" style="text-align:center;">Attempts</th>
                         <th scope="col" style="text-align:center;">Score</th>
                         <th scope="col">Attempted On</th>
                         <th scope="col" style="text-align:center;">Rating</th>
+                        <th scope="col" style="text-align:center;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +83,7 @@
                                 {
                                     if (user.LearningType == "Quiz")
                                     {
-                                        score = (Convert.ToDecimal(user.Score) * 100) / user.QuestionCount;
+                                        score = Math.Round(((Convert.ToDecimal(user.Score) * 100) / user.QuestionCount),2);
                                     }
                                     else
                                     {
@@ -90,57 +91,66 @@
                                     }
                                 }
 
-                                <tr>
-                                    <td style="text-align:center;">@count</td>
-                                    <td>@user.LearningName</td>
-                                    <td style="text-align:center;">@user.LearningType</td>
-                                    @if (user.ActivityStatus == "Completed")
-                                    {
-                                        <td style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
-                                    }
-                                    @if (user.ActivityStatus == "InProgress")
-                                    {
-                                        <td style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
-                                    }
-                                    @if (user.ActivityStatus == "Not Started")
-                                    {
-                                        <td style="text-align:center;"><i class="far fa-clock"></i></td>
-                                    }
+                    <tr>
+                        <td style="text-align:center;">@count</td>
+                        <td>@user.LearningName</td>
+                        <td style="text-align:center;">@user.LearningType</td>
+                        @if (user.ActivityStatus == "Completed")
+                        {
+                            <td style="text-align:center;"><i class="far fa-check-circle green-color"></i></td>
+                        }
+                        @if (user.ActivityStatus == "InProgress")
+                        {
+                            <td style="text-align:center;"><i class="far fa-hourglass orange-color"></i></td>
+                        }
+                        @if (user.ActivityStatus == "Not Started")
+                        {
+                            <td style="text-align:center;"><i class="far fa-clock"></i></td>
+                        }
 
-                                    @if (!string.IsNullOrEmpty(user.Duration))
-                                    {
-                                        <td style="text-align:center;">@user.Duration</td>
-                                    }
-                                    else
-                                    {
-                                        <td style="text-align:center;">-</td>
-                                    }
+                        @if (!string.IsNullOrEmpty(user.Duration))
+                        {
+                            <td style="text-align:center;">@user.Duration:00</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;">-</td>
+                        }
 
-                                    @if (!string.IsNullOrEmpty(user.CompletionTime) && user.CompletionTime != "-")
-                                    {
-                                        <td style="text-align:center;">@user.CompletionTime</td>
-                                    }
-                                    else
-                                    {
-                                        <td style="text-align:center;">-</td>
-                                    }
+                        @if (!string.IsNullOrEmpty(user.CompletionTime) && user.CompletionTime != "-")
+                        {
+                            <td style="text-align:center;">@user.CompletionTime</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;">-</td>
+                        }
 
-                                    <td style="text-align:center;">@user.Attempts</td>
-                                    @if (score == 0)
-                                    {
-                                        <td style="text-align:center;">-</td>
-                                    }
-                                    else
-                                    {
-                                        <td style="text-align:center;">@score%</td>
-                                    }
-                                    <td>@user.AttemptedOn</td>
-                                    <td>
-                                        <div class="stars-outer">
-                                            <div class="stars-inner" title="@Html.Raw(actualComment)" style="width:@ratingPercentage"></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <td style="text-align:center;">@user.Attempts</td>
+                        @if (score == 0)
+                        {
+                            <td style="text-align:center;">-</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center;">@score%</td>
+                        }
+                        <td>@user.AttemptedOn</td>
+                        <td>
+                            <div class="stars-outer">
+                                <div class="stars-inner" title="@Html.Raw(actualComment)" style="width:@ratingPercentage"></div>
+                            </div>
+                        </td>
+                        @if (user.LearningType == "Quiz" && user.Attempts != "")
+                        {
+                            <td style="text-align:center;"><a href="@Url.Action("DetailReport", "Reports", new { activityId = user.ActivityId, UserId= Context.Request.QueryString["UserId"]})" class="login" title="View Detail"> View Progress</a></td>
+
+                        }
+                        else
+                        {
+                            <td style="text-align:center;"></td>
+                        }
+                    </tr>
                             }
                         }
                         else

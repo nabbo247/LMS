@@ -50,24 +50,24 @@
                                         <td>@activity.ActivityType</td>
                                         @if (activity.ActivityDuration == "0")
                                         {
-                                            <td class="mobile-hide add-column-padding"  >-</td>
+                                            <td class="mobile-hide add-column-padding">-</td>
                                         }
                                         else
                                         {
                                             var durationInSeconds = Convert.ToInt32(activity.ActivityDuration) * 60;
                                             TimeSpan t = TimeSpan.FromSeconds(durationInSeconds);
                                             var duration = string.Format("{0:D2}:{1:D2}", (int)t.Minutes, t.Seconds);
-                                            <td class="mobile-hide add-column-padding"  >@duration</td>
+                                            <td class="mobile-hide add-column-padding">@duration</td>
                                         }
                                         @if (activity.ActivityAttemptedDate == "")
                                         {
-                                            <td class="mobile-hide add-column-padding" >-</td>
+                                            <td class="mobile-hide add-column-padding">-</td>
                                         }
                                         else
                                         {
                                             <td class="mobile-hide ">@activity.ActivityAttemptedDate</td>
                                         }
-                                        <td class="mobile-hide add-column-padding" >@activity.ActivityAttempts</td>
+                                        <td class="mobile-hide add-column-padding">@activity.ActivityAttempts</td>
                                         @if (activity.ActivityType == "Quiz")
                                         {
                                             if (!string.IsNullOrEmpty(activity.ActivityScore))
@@ -80,7 +80,30 @@
                                             score = activity.ActivityScore + "%";
                                         }
                                         <td class="mobile-hide add-column-padding">@score</td>
-                                        <td class="mobile-hide add-column-padding">@activity.ActivityCompletionTime</td>
+
+                                        @if (activity.ActivityType == "Course")
+                                        {
+                                            if (!string.IsNullOrEmpty(activity.ActivityCompletionTime) && activity.ActivityCompletionTime != "0")
+                                            {
+                                                <td class="add-column-padding">@activity.ActivityCompletionTime:00</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="add-column-padding">-</td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!string.IsNullOrEmpty(activity.ActivityCompletionTime))
+                                            {
+                                                <td class="add-column-padding">@activity.ActivityCompletionTime</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="add-column-padding">-</td>
+                                            }
+                                        }
+                                        @*<td class="mobile-hide add-column-padding">@activity.ActivityCompletionTime</td>*@
                                         @if (activity.ActivityType == "Quiz" && !string.IsNullOrEmpty(activity.ActivityAttempts))
                                         {
                                             <td style="text-align:center;"><a href="@Url.Action("DetailReport", "Reports", new { activityId = activity.ActivityId })" class="login" title="View Detail"><img src="~/assets/images/eye.png" /></a></td>
@@ -117,7 +140,7 @@
 <script>
     $(document).ready(function () {
         $('#activityTable').DataTable({
-            "aaSorting": [[ 3, "desc" ]],
+            "aaSorting": [[0, "desc"]],
             "paging": true,
             "ordering": true,
             "info": true,

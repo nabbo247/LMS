@@ -140,6 +140,16 @@ namespace LMSBL.Repository
 
 
                 }).ToList();
+
+                List<UserReportModel> mainUserDetails = ds.Tables[1].AsEnumerable().Select(dr => new UserReportModel
+                {
+                    FullName = Convert.ToString(dr["FullName"])
+
+                }).ToList();
+
+                if (mainUserProgressRpt.Count > 0)
+                    mainUserProgressRpt[0].userReportModel = mainUserDetails[0];
+
                 return mainUserProgressRpt;
             }
             catch (Exception ex)
@@ -201,6 +211,16 @@ namespace LMSBL.Repository
                     Comments = Convert.ToString(dr["Comments"])
 
                 }).ToList();
+
+                List<LearningCompletionReportModel> learningDetailsRpt = ds.Tables[1].AsEnumerable().Select(dr => new LearningCompletionReportModel
+                {
+                    ActivityName = Convert.ToString(dr["ActivityName"]),
+                    ActivityDescription = Convert.ToString(dr["ActivityDescription"]),
+                    ActivityType = Convert.ToString(dr["ActivityType"])
+
+                }).ToList();
+                if (mainLearningCompletionProgressRpt.Count > 0)
+                    mainLearningCompletionProgressRpt[0].learningCompletionReportModel = learningDetailsRpt[0];
                 return mainLearningCompletionProgressRpt;
             }
             catch (Exception ex)

@@ -34,6 +34,8 @@ namespace LMSBL.DBModels
         public string Duration { get; set; }
         public string CompletionTime { get; set; }
 
+        public UserReportModel userReportModel { get; set; }
+
     }
 
     public class LearningCompletionReportModel
@@ -57,6 +59,8 @@ namespace LMSBL.DBModels
         public string TimeSpent { get; set; }
         public string Rating { get; set; }
         public string Comments { get; set; }
+
+        public LearningCompletionReportModel learningCompletionReportModel { get; set; }
     }
 
     public class HighScoreUsersReportModel

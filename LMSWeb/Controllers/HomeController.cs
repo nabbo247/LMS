@@ -65,6 +65,10 @@ namespace LMSWeb.Controllers
 
             return View();
         }
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult GetFilteredData(string status)

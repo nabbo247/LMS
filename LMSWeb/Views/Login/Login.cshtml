@@ -1,6 +1,11 @@
 ﻿@model LMSBL.DBModels.TblUser
 @{
     Layout = null;
+    var logo = "../assets/images/rt_logo.png";
+    if (!string.IsNullOrEmpty(Model.TenantLogo))
+    {
+        logo = Model.TenantLogo;
+    }
 }
 
 <head>
@@ -8,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @*<title>Rocket Technologies</title>*@
-    <title>Login - Rocket Technologies</title>
+    <title>Login</title>
     <link rel="icon" href="~/assets/images/favicon.ico" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -34,11 +39,11 @@
         <div class="col align-self-center login-section">
             <div class="mt-5 text-center">
                 @*<img src="~/assets/images/rt_logo.png" width="55%">*@
-                <img src="~/assets/images/rt_logo.png" width="55%">
+                <img src="@logo" width="55%" height="16%">
             </div>
             @using (Html.BeginForm("UserAuthentication", "Login", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center mt-4" }))
             {
-                <div id="dvMessage" style="color:red;">@TempData["LogoutMessage"]</div>                
+                <div id="dvMessage" style="color:red;">@TempData["LogoutMessage"]</div>
                 @Html.TextBoxFor(model => model.EmailId, new { @class = "input100", placeholder = "Login ID" })
 
                 @Html.PasswordFor(model => model.Password, new { @class = "input100", placeholder = "Password" })

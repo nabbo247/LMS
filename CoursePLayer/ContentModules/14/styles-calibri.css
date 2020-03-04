@@ -1,0 +1,37 @@
+
+
+@font-face {
+  font-family: 'Calibri';
+  src: url('Calibri.eot') format('embedded-opentype');
+  src: url('Calibri.eot?#iefix') format('embedded-opentype'),
+       url('Calibri.woff') format('woff'),
+       url('Calibri.ttf') format('truetype'),
+       url('Calibri.svg#latoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibri-Italic';
+  src: url('Calibri-Italic.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Calibri-Bold';
+  src: url('Calibri-Bold.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibri-BoldItalic';
+  src: url('Calibri-BoldItalic.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+

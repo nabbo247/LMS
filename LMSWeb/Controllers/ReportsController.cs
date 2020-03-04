@@ -41,12 +41,18 @@ namespace LMSWeb.Controllers
             }
         }
 
-        public ActionResult DetailReport(int activityId)
+        public ActionResult DetailReport(int activityId, string UserId)
         {
             try
             {
                 newException.AddDummyException("entered");
-                TblUser sessionUser = (TblUser)Session["UserSession"];
+                TblUser sessionUser = new TblUser();
+                sessionUser = (TblUser)Session["UserSession"];
+                if (!string.IsNullOrEmpty(UserId))
+                {
+                    sessionUser.UserId = Convert.ToInt32(UserId);
+                }
+                
                 var attemptList = rpt.GetDetailReportForLearner(sessionUser.UserId, sessionUser.TenantId, activityId);
                 newException.AddDummyException("after");
                 return View(attemptList);

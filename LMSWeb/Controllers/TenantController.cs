@@ -184,7 +184,7 @@ namespace LMSWeb.Controllers
         {
             try
             {
-                int isAvailable = tr.VerifyTenantDomain(Domain);
+                int isAvailable = 0;//Need to change this tr.VerifyTenantDomain(Domain);
                 return Json(isAvailable, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

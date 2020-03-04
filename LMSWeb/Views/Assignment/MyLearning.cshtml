@@ -57,7 +57,7 @@
                                             <td>@activity.ActivityName</td>
                                             <td>@activity.ActivityType</td>
                                             @*<td style="max-width:150px;">@activity.ActivityDescription</td>*@
-                                            @if (activity.ActivityDuration == "0")
+                                            @if (activity.ActivityDuration == "0" || activity.ActivityDuration=="")
                                             {
                                                 <td class="mobile-hide add-column-padding">-</td>
                                             }

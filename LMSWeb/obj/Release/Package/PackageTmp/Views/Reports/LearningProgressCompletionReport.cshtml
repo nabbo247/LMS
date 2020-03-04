@@ -14,6 +14,21 @@
     <div class="row user-quiz-top-section learning-completion mb-2 mt-3 p-2">
         <div class="col-12">
             <span class="grey-color"></span>
+            @if (Model != null)
+            {
+                if (Model.Count > 0)
+                {
+                    if (Model[0].learningCompletionReportModel != null)
+                    {
+                        <div class="float-left blue-color" style="padding-top:20px;">
+                            <b>Learning Name - </b> @Model[0].learningCompletionReportModel.ActivityName <br />                            
+                            <b>Learning Type - </b>@Model[0].learningCompletionReportModel.ActivityType <br />
+
+                        </div>
+                    }
+                }
+            }
+
             <div class="float-right">
                 <div class="grey-color" style="margin-top:10px;">
                     Date Range: &nbsp;&nbsp;
@@ -44,9 +59,9 @@
     });
 
     function FilterResult() {
-         var params = new URLSearchParams(window.location.search);
-        var ActivityId = params.get('ActivityId');          
-        var type = params.get('Type'); 
+        var params = new URLSearchParams(window.location.search);
+        var ActivityId = params.get('ActivityId');
+        var type = params.get('Type');
         var fDate = $('#fDate').val();
         var tDate = $('#tDate').val();
 

@@ -813,6 +813,7 @@
     <Content Include="Views\Login\NoClientAvailable.cshtml" />
     <Content Include="Views\Assignment\LaunchQuizForPlek.cshtml" />
     <Content Include="Views\Assignment\ReviewQuizLearnerForPlek.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,10 +18,17 @@
             <div class="col-md-4 profile-image p-2">
                 <div class="row text-center h-100">
                     <div class="col align-self-center">
-                         <img style="font-size: 150px" id="user_img" class="fas fa-user-circle mb-4" width="140" height="140" src="@Model.profileImage" />
+                        @if (!string.IsNullOrEmpty(Model.profileImage))
+                        {
+                            <img style="font-size: 150px" id="user_img" class="fas fa-user-circle mb-4" width="140" height="140" src="@Model.profileImage" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-user-circle mb-4" style="font-size: 150px"></i>                            
+                        }
                         <div>
                             <div class="form-group col-6 pl-0">
-                                <input type="file" name="file" id="file" style="width: 50%;" onchange="show(this)" hidden />                                
+                                <input type="file" name="file" id="file" style="width: 50%;" onchange="show(this)" hidden />
                             </div>
                             <button type="button" id="btnProfilePic" class="btn btn-primary change-profile-btn"><i class="fas fa-camera"></i> Change Picture</button>
                         </div>

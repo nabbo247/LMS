@@ -171,13 +171,30 @@ namespace LMSBL.Repository
             }
         }
 
-        public int VerifyTenantDomain(string DomainName)
+        public List<TblTenant> VerifyTenantDomain(string DomainName)
         {
             try
             {
                 db = new DataRepository();
                 db.AddParameter("@tenantDomain", SqlDbType.VarChar, DomainName);
-                return db.ExecuteReader("sp_TenantVerify");
+                
+                DataSet ds = db.FillData("sp_TenantVerify");
+                List<TblTenant> tanentDetails = ds.Tables[0].AsEnumerable().Select(dr => new TblTenant
+                {
+                    TenantId = Convert.ToInt32(dr["tenantId"]),
+                    TenantName = Convert.ToString(dr["tenantName"]),
+                    TenantDomain = Convert.ToString(dr["tenantDomain"]),
+                    //DomainUrl = Convert.ToString(dr["domainUrl"]),
+                    ActivationFrom = Convert.ToDateTime(dr["activationFrom"]),
+                    ActivationTo = Convert.ToDateTime(dr["activationTo"]),
+                    IsActive = Convert.ToBoolean(dr["isActive"]),
+                    CreatedBy = Convert.ToInt32(dr["createdBy"]),
+                    CreatedOn = Convert.ToDateTime(dr["createdOn"]),
+                    NoOfUserAllowed = Convert.ToInt32(dr["noOfUserAllowed"]),
+                    Logo = Convert.ToString(dr["Logo"])
+
+                }).ToList();
+                return tanentDetails;
             }
             catch (Exception)
             {
